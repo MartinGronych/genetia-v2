@@ -1,0 +1,9 @@
+{
+  "home": {
+    "kicker": "Genetia v2",
+    "title": "Template homepage",
+    "lead": "Tento template slouží pro refaktor Genetia v1 → v2. Vše je nalinkované a připravené pro dark/light + i18n.",
+    "ctaUiKit": "Open UI Kit",
+    "ctaContact": "Go to Contact"
+  }
+}

@@ -1,0 +1,186 @@
+/* ==================================================
+   BADGES / CHIPS / PILLS (v2 component)
+   Global UI component
+
+   Supported classes:
+   - .badge
+   - .badge--accent
+   - .badge--star
+   - .chip
+   - .pill
+
+   Rules:
+   - No layout / positioning
+   - Visual style aligned with v1
+================================================== */
+
+/* =========================================
+   Base: Badge
+========================================= */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 999px;
+
+  font-weight: 750;
+  font-size: 0.82rem;
+  letter-spacing: 0.2px;
+
+  color:var(--color-surface-2);
+  background: var(--brand-500);
+  border: 1px solid rgba(150, 170, 70, 0.18);
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.08);
+
+  white-space: nowrap;
+}
+
+.badge svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* =========================================
+   Modifiers
+========================================= */
+
+/* Accent variant (visual only) */
+.badge--accent {
+  background: var(--gene-light-90);
+  color:var(--brand-black);
+}
+
+/* Star / Unikát */
+.badge--star {
+  background: rgba(245, 159, 11, 0.801);
+  border-color: rgba(245, 158, 11, 0.35);
+  color: rgb(120, 68, 0);
+  animation: certBadgePulse 2.6s ease-in-out infinite;
+  gap: 8px;
+  animation: badgePulse 2.6s ease-in-out infinite;
+}
+
+.badge--star::before {
+  content: "★";
+  color:rgb(229, 255, 0);
+  font-size: 1.15em;
+  opacity: 0.92;
+}
+
+/* =========================================
+   Animation
+========================================= */
+@keyframes badgePulse {
+  0% {
+    opacity: 0.75;
+    box-shadow: 0 0 0 rgba(245, 158, 11, 0);
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 1;
+    box-shadow: 0 0 18px rgba(222, 245, 11, 0.87);
+    transform: scale(1.13);
+  }
+
+  100% {
+    opacity: 0.78;
+    box-shadow: 0 0 0 rgba(245, 158, 11, 0);
+    transform: scale(1);
+  }
+}
+
+/* =========================================
+   Chip (compact variant)
+========================================= */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 999px;
+
+  font-weight: 700;
+  font-size: 0.78rem;
+  letter-spacing: 0.2px;
+
+  color: rgba(22, 26, 18, 0.84);
+  background: var(--brand-500);
+  border: 1px solid rgba(150, 170, 70, 0.18);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.07);
+
+  white-space: nowrap;
+}
+
+.chip svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Reuse modifiers */
+.chip.badge--accent {
+  background: var(--color-surface-2);
+  border-color: 5px soolid rgba(245, 159, 11, 0.897);
+  color: rgba(120, 68, 0, 0.95);
+}
+
+.chip.badge--star::before {
+  content: "★";
+  font-size: 0.95em;
+  opacity: 0.92;
+}
+
+.chip.badge--star {
+  animation: badgePulse 2.6s ease-in-out infinite;
+}
+
+/* =========================================
+   Pill (roomier variant)
+========================================= */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: 999px;
+
+  font-weight: 750;
+  font-size: 0.84rem;
+  letter-spacing: 0.2px;
+
+  color: rgba(22, 26, 18, 0.84);
+  background: var(--brand-500);
+  border: 1px solid rgba(150, 170, 70, 0.18);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.09);
+
+  white-space: nowrap;
+}
+
+.pill svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* Reuse modifiers */
+.pill.badge--accent {
+  background: var(--color-surface-3);
+  border-color: rgba(245, 158, 11, 0.35);
+  color: rgba(120, 68, 0, 0.95);
+}
+
+.pill.badge--star::before {
+  content: "★";
+  font-size: 0.95em;
+  opacity: 0.92;
+}
+
+.pill.badge--star {
+  animation: badgePulse 2.6s ease-in-out infinite;
+}

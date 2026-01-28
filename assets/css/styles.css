@@ -1,0 +1,39 @@
+/*  Genetia Production
+    vyvinul - Gronych Martin 
+    assets/css/styles.css - Global entry (NO pages imports) */
+
+/* 1) TOKENS */
+@import url("./tokens/_colors.brand.css");
+@import url("./tokens/_colors.semantic.css");
+@import url("./tokens/_typography.css");
+@import url("./tokens/_spacing.css");
+@import url("./tokens/_zindex.css");
+@import url("./tokens/_layout.css");
+
+/* 2) BASE */
+@import url("./base/_reset.css");
+@import url("./base/_breakpoints.css");
+@import url("./base/_base.css");
+@import url("./base/_typography-render.css");
+@import url("./base/_layout.css");
+
+/* 3) COMPONENTS */
+@import url("./components/_nav.css");
+@import url("./components/_mobile-nav.css");
+
+@import url("./components/_buttons.css");
+@import url("./components/_badges.css");
+@import url("./components/_cards.css");
+
+@import url("./components/_tabs.css");
+@import url("./components/_accordion.css");
+@import url("./components/_carousel.css");
+
+@import url("./components/_forms.css");
+@import url("./components/_modal.css");
+
+@import url("./components/_footer.css");
+@import url("./components/_theme-switch.css");
+
+/* 4) THEMES */
+@import url("./themes/_theme.css");

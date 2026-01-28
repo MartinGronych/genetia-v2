@@ -1,0 +1,6 @@
+.carousel__track{display:flex;gap:var(--space-4);overflow:hidden;scroll-behavior:smooth;}
+.carousel__slide{flex:0 0 min(380px,80%);}
+.carousel__controls{display:flex;justify-content:space-between;margin-top:var(--space-3);}
+.carousel__dots{display:flex;gap:var(--space-2);margin-top:var(--space-3);}
+.carousel__dot{width:10px;height:10px;border-radius:999px;border:1px solid var(--color-border);background:transparent;cursor:pointer;}
+.carousel__dot--active{background:color-mix(in oklab,var(--color-brand) 55%,transparent);}

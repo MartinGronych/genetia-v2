@@ -1,0 +1,114 @@
+html,
+body {
+  background-color: var(--color-bg);
+  background-image: var(--color-bg-gradient);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+/* ==================================================
+   Global header offset (prevents content underlap)
+   - safe across pages
+   - tuned per breakpoint
+================================================== */
+:root {
+  /* default header height (0–1439) */
+  --header-offset: 70px;
+}
+
+/* you reported the issue starts at 1440 where header becomes taller */
+@media (min-width: 1440px) {
+  :root {
+    --header-offset: 102px;
+  }
+}
+
+body {
+  padding-top: var(--header-offset);
+}
+
+html {
+  scroll-padding-top: var(--header-offset);
+}
+
+.container {
+  width: min(1120px, calc(100% - 2 * var(--space-6)));
+  margin-inline: auto;
+}
+
+.section {
+  padding: var(--space-12) 0;
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+.stack--md {
+  gap: var(--space-5);
+}
+.stack--lg {
+  gap: var(--space-6);
+}
+
+.cluster {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.grid {
+  display: grid;
+  gap: var(--space-6);
+}
+
+.grid--3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+/* NOTE: v tvém původním souboru bylo (min-width: 768px) nastaveno na 2 sloupce,
+   ale podle názvu .grid--3 nechávám beze změny, ať neděláme mimo-scope zásahy. */
+@media (min-width: 768px) {
+  .grid--3 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (min-width: 1024px) {
+  .grid--3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* Header is sticky in v2 */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-header);
+  background: var(--bg);
+  border-bottom: 0;
+}
+
+.site-header__inner {
+  padding: var(--space-4) 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.site-main {
+  min-height: 60vh;
+}
+
+.site-footer {
+  border-top: 0;
+  padding: var(--space-8) 0;
+}
+
+.site-footer__inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

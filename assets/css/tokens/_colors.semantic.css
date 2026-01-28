@@ -1,0 +1,277 @@
+/* Semantic color tokens (API for the whole web)
+   Components use ONLY --color-* tokens.
+   Mapped to Genetia v1 palette from _colors.brand.css.
+*/
+:root {
+  /* Base (default: dark) */
+  /* Global background */
+--color-bg-gradient: linear-gradient(
+  45deg,
+  color-mix(in oklab, var(--gene-dark-50) 35%, var(--gene-dark-30)) 0%,
+  color-mix(in oklab, var(--gene-dark-10) 70%, var(--gene-dark-20)) 72%
+);
+
+  /* Nav (component semantic) */
+  --color-nav-bg: color-mix(in oklab, var(--color-surface) 72%, transparent);
+  --color-nav-border: color-mix(in oklab, var(--color-border) 85%, transparent);
+  --color-nav-link: var(--color-text);
+  --color-nav-link-idle: var(--color-muted);
+  --color-nav-link-accent: var(--color-brand-hover);
+
+  /* Surface levels */
+  --color-surface: var(--gene-dark-80);
+  --color-surface-2: var(--gene-dark-70);
+  --color-surface-3: var(--gene-dark-30);
+
+  /* Text */
+  --color-text: var(--gene-light-100);
+  --color-muted: color-mix(
+    in oklab,
+    var(--gene-light-80) 70%,
+    var(--gene-dark-20)
+  );
+
+  /* Borders */
+  --color-border: color-mix(in oklab, var(--gene-light-10) 22%, transparent);
+
+  /* Accents */
+  --color-brand: var(--brand-800);
+  --color-brand-hover: var(--brand-600);
+  --color-on-brand: #fff;
+  --color-on-brand-hover: var(--brand-black);
+  --color-accent: var(--brand-secondary);
+
+  /* Status base colors */
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-danger: var(--danger);
+
+  /* Status scale (used by components) */
+  --color-danger-600: color-mix(
+    in oklab,
+    var(--color-danger) 88%,
+    var(--gene-dark-100)
+  );
+  --color-danger-700: color-mix(
+    in oklab,
+    var(--color-danger) 76%,
+    var(--gene-dark-100)
+  );
+  --color-danger-800: color-mix(
+    in oklab,
+    var(--color-danger) 64%,
+    var(--gene-dark-100)
+  );
+
+  /* Focus ring */
+  --focus-ring: color-mix(
+    in oklab,
+    var(--brand-600) 65%,
+    var(--gene-light-100)
+  );
+
+  /* Button tokens (system button API) */
+  --color-btn-bg: var(--color-brand);
+  --color-btn-bg-hover: var(--color-brand-hover);
+  --color-btn-text: var(--color-on-brand);
+  --color-btn-text-hover: var(--color-on-brand-hover);
+
+  /* Button secondary (neutral, high contrast on green background) */
+  --color-btn-secondary-bg: var(--gene-dark-50);
+  --color-btn-secondary-text: var(--color-text);
+  --color-btn-secondary-bg-hover: color-mix(
+    in oklab,
+    var(--color-brand) 12%,
+    var(--color-surface-2)
+  );
+  --color-btn-secondary-text-hover: var(--color-text);
+
+  /* Button danger (critical modal action) */
+  --color-btn-danger-bg: var(--color-danger-700);
+  --color-btn-danger-text: #fff;
+  --color-btn-danger-bg-hover: var(--color-danger-600);
+  --color-btn-danger-text-hover: #fff;
+
+  /* Tabs (component semantic) */
+  --color-tabs-tab-bg: linear-gradient(
+    145deg,
+    color-mix(in oklab, var(--color-surface) 88%, transparent) 0%,
+    color-mix(in oklab, var(--color-surface-2) 92%, transparent) 100%
+  );
+  --color-tabs-tab-border: color-mix(
+    in oklab,
+    var(--color-border) 85%,
+    transparent
+  );
+  --color-tabs-tab-text: var(--color-brand-hover);
+
+  --color-tabs-tab-bg-hover: var(--gene-dark-50);
+  --color-tabs-tab-border-hover: color-mix(
+    in oklab,
+    var(--color-brand-hover) 55%,
+    var(--color-border)
+  );
+  --color-tabs-tab-text-hover: var(--color-text);
+  --color-tabs-tab-shadow-hover:
+    0 10px 26px rgba(0, 0, 0, 0.38), inset 0 1px 2px rgba(255, 255, 255, 0.08);
+
+  --color-tabs-tab-bg-active: var(--gene-dark-50);
+  --color-tabs-tab-border-active: color-mix(
+    in oklab,
+    var(--color-brand) 70%,
+    transparent
+  );
+  --color-tabs-tab-text-active: var(--color-on-brand);
+  --color-tabs-tab-shadow-active:
+    0 14px 36px rgba(0, 0, 0, 0.45), inset 0 1px 3px rgba(255, 255, 255, 0.12);
+
+  --color-tabs-tab-shadow:
+    0 10px 26px rgba(0, 0, 0, 0.32), inset 0 1px 2px rgba(255, 255, 255, 0.06);
+
+  --color-tabs-tab-glow: radial-gradient(
+    circle,
+    color-mix(in oklab, var(--color-brand-hover) 30%, transparent) 0%,
+    transparent 65%
+  );
+  /* Accordion (component semantic) */
+  --color-accordion-item-bg: color-mix(
+    in oklab,
+    var(--color-surface) 86%,
+    transparent
+  );
+  --color-accordion-item-shadow: 0 14px 34px rgba(0, 0, 0, 0.42);
+  --color-accordion-item-shadow-hover: 0 18px 40px rgba(0, 0, 0, 0.52);
+
+  --color-accordion-trigger-text: var(--color-brand-hover);
+  --color-accordion-trigger-text-hover: var(--color-text);
+  --color-accordion-trigger-hover-bg: linear-gradient(
+    180deg,
+    color-mix(in oklab, var(--color-brand-hover) 18%, transparent),
+    transparent
+  );
+}
+/* Light theme override */
+:root[data-theme="light"] {
+  /* Base */
+  /* Global background */
+  --color-bg-gradient: linear-gradient(
+    45deg,
+    var(--brand-bg-start) 0%,
+    var(--brand-bg-end) 78%
+  );
+  /* Nav (component semantic) */
+  --color-nav-bg: var(--bg);
+  --color-nav-border: var(--border);
+  --color-nav-link: var(--text);
+  --color-nav-link-idle: var(--text);
+  --color-nav-link-accent: var(--brand-600);
+
+  /* Accordion (component semantic) */
+  --color-accordion-item-bg: #ffffff;
+  --color-accordion-item-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
+  --color-accordion-item-shadow-hover: 0 16px 32px rgba(0, 0, 0, 0.08);
+
+  --color-accordion-trigger-text: var(--brand-800);
+  --color-accordion-trigger-text-hover: var(--brand-900);
+  --color-accordion-trigger-hover-bg: linear-gradient(
+    180deg,
+    rgba(145, 175, 92, 0.1),
+    rgba(145, 175, 92, 0)
+  );
+
+  --color-accordion-chevron: var(--brand-600);
+  --color-accordion-chevron-open: var(--brand-700);
+
+  --color-accordion-body-text: var(--text-700);
+
+  /* Surface levels */
+  --color-surface: var(--surface);
+  --color-surface-2: var(--brand-800);
+  --color-surface-3: color-mix(in oklab, var(--surface) 78%, var(--bg));
+
+  /* Text */
+  --color-text: var(--text);
+  --color-muted: var(--text-muted);
+
+  /* Borders */
+  --color-border: var(--border);
+
+  /* Accents */
+  --color-brand: var(--brand-800);
+  --color-brand-hover: var(--brand-600);
+  --color-on-brand: #fff;
+  --color-on-brand-hover: var(--brand-black);
+  --color-accent: var(--brand-secondary);
+
+  /* Status base colors */
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-danger: var(--danger);
+
+  /* Status scale (keep stable contrast in light theme) */
+  --color-danger-600: color-mix(
+    in oklab,
+    var(--color-danger) 88%,
+    var(--gene-dark-100)
+  );
+  --color-danger-700: color-mix(
+    in oklab,
+    var(--color-danger) 76%,
+    var(--gene-dark-100)
+  );
+  --color-danger-800: color-mix(
+    in oklab,
+    var(--color-danger) 64%,
+    var(--gene-dark-100)
+  );
+
+  /* Focus ring */
+  --focus-ring: color-mix(in oklab, var(--brand-600) 60%, black);
+
+  /* Button tokens */
+  --color-btn-bg: var(--color-brand);
+  --color-btn-bg-hover: var(--color-brand-hover);
+  --color-btn-text: var(--color-on-brand);
+  --color-btn-text-hover: var(--color-on-brand-hover);
+
+  --color-btn-secondary-bg: var(--color-surface-3);
+  --color-btn-secondary-text: var(--color-text);
+  --color-btn-secondary-bg-hover: color-mix(
+    in oklab,
+    var(--color-brand) 20%,
+    var(--color-surface-3)
+  );
+  --color-btn-secondary-text-hover: var(--color-text);
+
+  --color-btn-danger-bg: var(--color-danger-700);
+  --color-btn-danger-text: #fff;
+  --color-btn-danger-bg-hover: var(--color-danger-600);
+  --color-btn-danger-text-hover: #fff;
+
+  /* Tabs (component semantic) */
+  --color-tabs-tab-bg: linear-gradient(145deg, #ffffff 0%, #f6f8f3 100%);
+  --color-tabs-tab-border: rgba(145, 175, 92, 0.25);
+  --color-tabs-tab-text: var(--brand-700);
+
+  --color-tabs-tab-bg-hover: linear-gradient(145deg, #f8faf2 0%, #eef3e2 100%);
+  --color-tabs-tab-border-hover: var(--brand-300);
+  --color-tabs-tab-text-hover: var(--brand-800);
+  --color-tabs-tab-shadow-hover:
+    0 6px 20px rgba(90, 120, 40, 0.12), inset 0 1px 2px rgba(255, 255, 255, 0.8);
+
+  --color-tabs-tab-bg-active: linear-gradient(135deg, #9ccc3a 0%, #7fae29 100%);
+  --color-tabs-tab-border-active: rgba(120, 160, 50, 0.8);
+  --color-tabs-tab-text-active: #ffffff;
+  --color-tabs-tab-shadow-active:
+    0 6px 22px rgba(114, 168, 26, 0.28),
+    inset 0 1px 3px rgba(255, 255, 255, 0.35);
+
+  --color-tabs-tab-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.05), inset 0 1px 2px rgba(255, 255, 255, 0.7);
+
+  --color-tabs-tab-glow: radial-gradient(
+    circle,
+    rgba(201, 211, 163, 0.2) 0%,
+    rgba(201, 211, 163, 0) 65%
+  );
+}

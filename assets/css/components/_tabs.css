@@ -1,0 +1,119 @@
+/* ==================================================
+   TABS (v2 component)
+   Classes:
+   - .tabs
+   - .tabs__list
+   - .tabs__tab (role="tab", aria-selected="true|false")
+   - .tabs__pane (role="tabpanel", [hidden])
+
+   Visual parity with v1 products tabs:
+   - same background / hover / active
+   - same radius (20px)
+   - active glow via ::before
+   - no page layout spacing
+   Breakpoints: min-width only
+================================================== */
+
+
+
+.tabs__list {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  border: none;
+}
+
+/* BASE (mobile-first sizing from v1 mobile) */
+.tabs__tab {
+  appearance: none;
+  border: none;
+  margin: 0;
+  font: inherit;
+  cursor: pointer;
+  text-align: center;
+
+  position: relative;
+  z-index: 0;
+
+  font-size: 1.15rem;
+  padding: 0.85rem 2rem;
+
+  /* v1 computed */
+  border-radius: var(--r-md);
+
+  font-weight: 600;
+  letter-spacing: 0.2px;
+
+  background: var(--color-tabs-tab-bg);
+  border: 1px solid var(--color-tabs-tab-border);
+  color: var(--color-tabs-tab-text);
+
+  box-shadow:
+    var(--color-tabs-tab-shadow);
+
+  backdrop-filter: blur(6px);
+  transition: all 0.25s ease;
+}
+
+/* HOVER (jen když není active) — v1 */
+.tabs__tab:hover:not([aria-selected="true"]) {
+  background: var(--color-tabs-tab-bg-hover);
+  border-color: var(--color-tabs-tab-border-hover);
+  color: var(--color-tabs-tab-text-hover);
+
+  box-shadow:
+    var(--color-tabs-tab-shadow-hover);
+
+  transform: translateY(-4px);
+}
+
+/* ACTIVE — v1 */
+.tabs__tab[aria-selected="true"] {
+  background: var(--color-tabs-tab-bg-active);
+  color: var(--color-tabs-tab-text-active);
+  border: 1px solid var(--color-tabs-tab-border-active);
+
+  box-shadow:
+    var(--color-tabs-tab-shadow-active);
+
+  transform: translateY(-2px);
+}
+
+/* ACTIVE glow layer (v1 ::before concept) */
+.tabs__tab[aria-selected="true"]::before {
+  content: "";
+  position: absolute;
+  inset: -10px -14px;
+  border-radius: 20px;
+  z-index: -1;
+  pointer-events: none;
+
+  background: var(--color-tabs-tab-glow);
+}
+
+/* FOCUS (a11y, bez změny v1 look) */
+.tabs__tab:focus {
+  outline: none;
+}
+
+.tabs__tab:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 3px;
+}
+
+/* PANES */
+.tabs__pane[hidden] {
+  display: none;
+}
+
+/* Desktop sizing (v1 base) */
+@media (min-width: 601px) {
+  .tabs__list {
+    gap: 1.7rem;
+  }
+
+  .tabs__tab {
+    font-size: 1.35rem;
+    padding: 1rem 2.8rem;
+  }
+}

@@ -1,0 +1,8 @@
+/* UI Kit page layout only */
+.ui-actions{margin-top:1rem;}
+
+html[data-page="ui-kit"] .accordion {
+  width: 30%;
+  margin-inline: auto;
+}
+

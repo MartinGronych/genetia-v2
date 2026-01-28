@@ -1,0 +1,8 @@
+/* assets/css/tokens/_zindex.css */
+:root{
+  --z-base: 0;
+  --z-header: 50;
+  --z-overlay: 80;
+  --z-modal: 90;
+  --z-toast: 100;
+}

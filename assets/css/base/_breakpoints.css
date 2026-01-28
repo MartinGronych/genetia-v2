@@ -1,0 +1,43 @@
+/* GENETIA – Breakpoint system
+   Mobile-first, min-width only */
+
+/*
+  XS (default)
+  0 – 424px
+  - mobile base
+*/
+
+/*
+  SM
+  ≥ 425px
+  - large mobile
+*/
+@media (min-width: 425px) {}
+
+/*
+  MD
+  ≥ 768px
+  - tablet
+*/
+@media (min-width: 768px) {}
+
+/*
+  LG
+  ≥ 1024px
+  - desktop (UX switch)
+*/
+@media (min-width: 1024px) {}
+
+/*
+  XL
+  ≥ 1440px
+  - wide desktop
+*/
+@media (min-width: 1440px) {}
+
+/*
+  4K
+  ≥ 1920px
+  - ultra wide (spacing only)
+*/
+@media (min-width: 1920px) {}

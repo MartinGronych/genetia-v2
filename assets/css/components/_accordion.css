@@ -1,0 +1,113 @@
+/* ITEM (obal jedné položky) */
+.accordion.section-kicker {
+  font-size: var();
+}
+
+.accordion__item {
+  /* align s .accordion > li – když používáš div-based markup */
+  background: var(--color-accordion-item-bg);
+  border-radius: var(--radius-lg, 16px);
+  box-shadow: var(--elevation-card, var(--color-accordion-item-shadow));
+  overflow: hidden;
+  margin-bottom: var(--space-3, 12px);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.35s ease;
+}
+
+.accordion__item:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--elevation-card-hover, var(--color-accordion-item-shadow-hover));
+}
+
+/* Open state – pokud používáš vlastní JS a class .open */
+.accordion__item.open {
+  box-shadow: var(--elevation-card-hover, var(--color-accordion-item-shadow-hover));
+}
+
+/* TRIGGER (klikací hlavička) */
+.accordion__trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.9rem;
+
+  padding: 1.4rem 1.6rem;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: var(--color-accordion-trigger-text);
+  text-decoration: none;
+  text-align: left;
+  position: relative;
+
+  transition:
+    color 0.2s ease,
+    background 0.2s ease;
+}
+
+/* Jemný hover – Genetia v2 feel */
+.accordion__trigger:hover {
+  color: var(--color-accordion-trigger-text-hover);
+  background: var(--color-accordion-trigger-hover-bg);
+}
+
+/* Focus ring (accessibility) */
+.accordion__trigger:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 3px;
+  border-radius: calc(var(--radius-lg, 16px) - 6px);
+}
+
+/* Volitelná šipka (pokud ji máš v markup jako element) */
+.accordion__chevron {
+  flex: 0 0 auto;
+  font-size: 1.35rem;
+  color: var(--color-accordion-chevron);
+  transform: rotate(0deg);
+  transition:
+    transform 0.25s ease,
+    color 0.25s ease;
+}
+
+/* když je item open, otoč šipku */
+.accordion__item.open .accordion__chevron {
+  transform: rotate(90deg);
+  color: var(--color-accordion-chevron-open);
+}
+
+/* PANEL (obsahová část) */
+.accordion__panel {
+  overflow: hidden;
+  max-height: 0;
+  padding: 0 1.6rem;
+  text-align: center;
+  color: var(--color-accordion-body-text);
+  transition:
+    max-height 0.45s ease,
+    padding 0.45s ease;
+}
+
+/* když chceš animovat “collapse” i bez UIkitu */
+.accordion__panel.is-collapsed {
+  display: none;
+}
+
+/* TEXT v kartě (v2 varianta pro copy) */
+.card-text {
+  margin: 1rem 0 0;
+  font-size: 0.95rem;
+  color: var(--color-accordion-body-text);
+  line-height: 1.6;
+  padding-bottom: 1rem;
+}
+
+/* OPEN STATE – klíčové */
+.accordion__item.open .accordion__panel {
+  max-height: 999px; /* bezpečný strop */
+  opacity: 1;
+}

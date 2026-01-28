@@ -1,0 +1,16 @@
+/* assets/css/components/_mobile-nav.css
+   Visibility only — styling is in _nav.css
+*/
+
+/* Mobile-first */
+.nav-toggle{ display: inline-flex; }
+.site-nav{ display: none; }
+
+
+
+/* Desktop switch */
+@media (min-width: 1024px){
+  .nav-toggle{ display: none !important; }
+  .site-nav{ display: block; }
+  
+}

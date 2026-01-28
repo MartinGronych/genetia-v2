@@ -1,0 +1,44 @@
+:root {
+  --container-max: 1200px;
+  --section-padding-y: 3.5rem;
+  --grid-gap: 1.25rem;
+}
+
+/* 425+ */
+@media (min-width: 425px) {
+  :root {
+    --section-padding-y: 4rem;
+  }
+}
+
+/* 768+ */
+@media (min-width: 768px) {
+  :root {
+    --container-max: 1280px;
+    --grid-gap: 2rem;
+  }
+}
+
+/* 1024+ */
+@media (min-width: 1024px) {
+  :root {
+    --container-max: 1360px;
+    --section-padding-y: 5rem;
+  }
+}
+
+/* 1440+ */
+@media (min-width: 1440px) {
+  :root {
+    --container-max: 1480px;
+  }
+}
+
+/* 4K */
+@media (min-width: 1920px) {
+  :root {
+    --container-max: 1680px;
+    --section-padding-y: 7rem;
+    --grid-gap: 3rem;
+  }
+}

@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="cs" data-page="certifications">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Certifikace – Genetia v2</title>
+
+    <!-- Theme bootstrap (FOUC-free) -->
+    <script>
+(() => {
+  const saved = localStorage.getItem("theme"); // "light" | "dark" | null
+  const systemDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+  const theme = saved || (systemDark ? "dark" : "light");
+  document.documentElement.dataset.theme = theme;
+})();
+</script>
+
+    <link rel="stylesheet" href="../assets/css/styles.css" />
+    <link rel="stylesheet" href="../assets/css/pages/certifikace.css" />
+  </head>
+
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header">
+      <div class="container site-header__inner">
+        <a class="site-brand" href="../">Genetia</a>
+
+        <nav class="site-nav" aria-label="Primary">
+          <ul class="nav-list">
+            <li><a class="nav-link" href="../o-spolecnosti/">O společnosti</a></li>
+            <li><a class="nav-link" href="../analyticke-sluzby/">Analytické služby</a></li>
+            <li><a class="nav-link" href="../vyvoj-a-vyzkum/">Vývoj a výzkum</a></li>
+            <li><a class="nav-link" href="../produkty/">Produkty</a></li>
+            <li><a class="nav-link" href="../certifikace/">Certifikace</a></li>
+            <li><a class="nav-link" href="../kontakt/">Kontakt</a></li>
+          </ul>
+        </nav>
+
+        <button class="nav-toggle btn btn--ghost" type="button" data-nav-toggle aria-label="Open menu">
+          Menu
+        </button>
+      </div>
+    </header>
+
+    <main id="main" class="site-main">
+      <section class="section certifications">
+        <div class="container">
+          <p class="page-kicker">Genetia</p>
+          <h1 class="page-title">Certifikace</h1>
+          <p class="page-lead">Certifikace (v2 template). Detail řešíme sjednoceným modalem.</p>
+
+          <div class="card">
+            <div class="card__body stack">
+              <h2 class="section-title">Placeholder</h2>
+              <p class="section-intro">Tady bude přepis sekcí z Genetia v1 → v2.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <div class="mobile-nav" data-mobile-nav aria-hidden="true">
+      <div class="mobile-nav__overlay" data-nav-close></div>
+      <div class="mobile-nav__panel" role="dialog" aria-modal="true" aria-label="Menu">
+        <div class="mobile-nav__header">
+          <span class="mobile-nav__title">Genetia</span>
+          <button class="btn btn--ghost" type="button" data-nav-close aria-label="Close menu">Close</button>
+        </div>
+
+        <nav class="mobile-nav__links" aria-label="Mobile">
+          <a class="nav-link" href="../o-spolecnosti/">O společnosti</a>
+          <a class="nav-link" href="../analyticke-sluzby/">Analytické služby</a>
+          <a class="nav-link" href="../vyvoj-a-vyzkum/">Vývoj a výzkum</a>
+          <a class="nav-link" href="../produkty/">Produkty</a>
+          <a class="nav-link" href="../certifikace/">Certifikace</a>
+          <a class="nav-link" href="../kontakt/">Kontakt</a>
+        </nav>
+
+        <div class="mobile-nav__footer">
+          <button class="btn btn--ghost" type="button" data-theme-toggle>Theme</button>
+        </div>
+      </div>
+    </div>
+
+    <footer class="site-footer">
+      <div class="container site-footer__inner">
+        <div class="site-footer__bottom">
+          <p class="meta">Genetia v2 template (internal)</p>
+        </div>
+
+        <div class="cluster">
+          <a class="btn btn--link" href="../legal/">Legal</a>
+          <a class="btn btn--link" href="../ui-kit/">UI Kit</a>
+          <button class="btn btn--ghost theme-switch" type="button" data-theme-toggle aria-label="Toggle theme">
+            Theme
+          </button>
+        </div>
+      </div>
+    </footer>
+
+    <script type="module" src="../assets/js/app.js"></script>
+  </body>
+</html>

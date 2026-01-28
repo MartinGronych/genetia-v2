@@ -1,0 +1,10 @@
+{
+  "items": [
+    { "label": "O společnosti", "href": "/o-spolecnosti/" },
+    { "label": "Analytické služby", "href": "/analyticke-sluzby/" },
+    { "label": "Vývoj a výzkum", "href": "/vyvoj-a-vyzkum/" },
+    { "label": "Produkty", "href": "/produkty/" },
+    { "label": "Certifikace", "href": "/certifikace/" },
+    { "label": "Kontakt", "href": "/kontakt/" }
+  ]
+}

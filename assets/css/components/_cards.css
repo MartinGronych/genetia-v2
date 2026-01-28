@@ -1,0 +1,87 @@
+/* Cards component (shell + glow + hover/focus) */
+
+.card{
+  position: relative;
+  isolation: isolate;
+  border-radius: var(--r-lg);
+  border: 1px solid color-mix(in oklab, var(--color-border) 82%, transparent);
+  background: color-mix(in oklab, var(--color-surface-3) 78%, transparent);
+  box-shadow: var(--shadow-card);
+  transition:
+    transform .35s ease,
+    box-shadow .35s ease,
+    background-color .35s ease,
+    border-color .35s ease;
+}
+
+/* Content above glow */
+.card > *{
+  position: relative;
+  z-index: 1;
+}
+
+/* Default inner spacing */
+.card__body{
+  padding: var(--space-6);
+}
+
+/* Subtle inner highlight (adds “card depth” without changing layout) */
+.card::after{
+  content:"";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  z-index: 0;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.55),
+    inset 0 -1px 0 rgba(0,0,0,.06);
+  opacity: .9;
+}
+
+/* Glow layer driven by JS (pointer position) */
+.card::before{
+  content:"";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  z-index: 0;
+  background: radial-gradient(
+    circle at var(--x, 50%) var(--y, 50%),
+    color-mix(in oklab, var(--color-brand) 26%, transparent),
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity .25s ease;
+}
+
+/* Hover / keyboard focus (focus-within supports links/buttons inside card) */
+.card:hover,
+.card:focus-within{
+  transform: translateY(-3px) scale(1.02);
+  transform-origin: center;
+  background: color-mix(in oklab, var(--color-surface-2) 72%, transparent);
+  border-color: color-mix(in oklab, var(--color-brand) 24%, var(--color-border));
+  box-shadow: var(--shadow-card-hover);
+}
+
+/* Show glow on interaction */
+.card:hover::before,
+.card:focus-within::before{
+  opacity: 1;
+}
+
+/* Stronger focus clarity (does not change hover behavior) */
+.card:focus-within{
+  outline: 3px solid color-mix(in oklab, var(--color-brand) 30%, transparent);
+  outline-offset: 2px;
+}
+
+/* Motion accessibility */
+@media (prefers-reduced-motion: reduce){
+  .card{ transition: none; }
+  .card:hover,
+  .card:focus-within{ transform: none; }
+  .card::before{ transition: none; }
+}

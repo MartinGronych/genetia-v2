@@ -1,0 +1,57 @@
+:root {
+  --font-sans:
+    ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial,
+    "Apple Color Emoji", "Segoe UI Emoji";
+  --font-mono:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    "Courier New", monospace;
+
+  --ts-page-title: clamp(2.25rem, 4vw, 3.25rem);
+  --tw-page-title: 600;
+  --tlh-page-title: 1.12;
+
+  --ts-page-lead: 1.1rem;
+  --tw-page-lead: 450;
+  --tlh-page-lead: 1.6;
+
+  --ts-section-title: clamp(1.6rem, 2.5vw, 2.25rem);
+  --tw-section-title: 600;
+  --tlh-section-title: 1.2;
+
+  --ts-section-intro: 1.02rem;
+  --tw-section-intro: 420;
+  --tlh-section-intro: 1.65;
+
+  --ts-card-title: 1.2rem;
+  --tw-card-title: 600;
+  --tlh-card-title: 1.3;
+
+  --ts-body: 1rem;
+  --tw-body: 400;
+  --tlh-body: 1.65;
+
+  --ts-meta: 0.92rem;
+  --tw-meta: 450;
+  --tlh-meta: 1.45;
+
+  --ts-caption: 0.85rem;
+  --tw-caption: 450;
+  --tlh-caption: 1.4;
+
+  /* Typography override API (page-level optional overrides) */
+  --page-title-size: var(--ts-page-title);
+  --page-title-weight: var(--tw-page-title);
+  --page-title-lh: var(--tlh-page-title);
+
+  --page-lead-size: var(--ts-page-lead);
+  --page-lead-weight: var(--tw-page-lead);
+  --page-lead-lh: var(--tlh-page-lead);
+
+  --section-title-size: var(--ts-section-title);
+  --section-title-weight: var(--tw-section-title);
+  --section-title-lh: var(--tlh-section-title);
+
+  --section-intro-size: var(--ts-section-intro);
+  --section-intro-weight: var(--tw-section-intro);
+  --section-intro-lh: var(--tlh-section-intro);
+}

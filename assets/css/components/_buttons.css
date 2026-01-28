@@ -1,0 +1,121 @@
+/* ==========================================================================
+   Button
+   Single global button component (Genetia v2)
+   Migrated visually from Genetia v1 hero button
+   ========================================================================== */
+
+.btn{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  line-height: 1;
+
+  padding: 0.7rem 1.3rem;
+  border-radius: var(--r-sm);
+  border: 0;
+
+  background: var(--color-btn-bg);
+  color: var(--color-btn-text);
+
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(4px);
+
+  transition:
+    background 0.35s ease,
+    color 0.35s ease,
+    box-shadow 0.35s ease,
+    transform 0.25s ease;
+
+  will-change: transform;
+}
+
+/* Hover – pouze na zařízeních, kde dává smysl */
+@media (hover: hover){
+  .btn:hover{
+    background: var(--color-btn-bg-hover);
+    color: var(--color-btn-text-hover);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+    transform: scale(1.06);
+  }
+}
+
+/* Active */
+.btn:active{
+  transform: scale(0.79);
+}
+
+/* Focus (A11Y) */
+.btn:focus{
+  outline: none;
+}
+
+.btn:focus-visible{
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+/* Disabled */
+.btn[disabled],
+.btn[aria-disabled="true"]{
+  opacity: 0.55;
+  cursor: not-allowed;
+  pointer-events: none;
+  transform: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .btn{
+    transition: none;
+  }
+  .btn:hover,
+  .btn:active{
+    transform: none;
+  }
+}
+
+/* Secondary – neutral action */
+.btn--secondary{
+  background: var(--color-btn-secondary-bg);
+  color: var(--color-btn-secondary-text);
+  box-shadow: none;
+  backdrop-filter: none;
+}
+
+@media (hover: hover){
+  .btn--secondary:hover{
+    background: var(--color-btn-secondary-bg-hover);
+    color: var(--color-btn-secondary-text-hover);
+    box-shadow: 0 2px 8px rgba(0,0,0,.15);
+    transform: scale(1.06);
+  }
+}
+.btn--secondary:active{
+  transform: scale(0.79);
+}
+
+/* Danger – critical approval (modal only) */
+.btn--danger{
+  background: var(--color-btn-danger-bg);
+  color: var(--color-btn-danger-text);
+}
+
+@media (hover: hover){
+  .btn--danger:hover{
+    background: var(--color-btn-danger-bg-hover);
+    color: var(--color-btn-danger-text-hover);
+  }
+}

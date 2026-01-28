@@ -1,0 +1,84 @@
+.page-kicker {
+  font-size: var(--ts-meta);
+  font-weight: var(--tw-meta);
+  line-height: var(--tlh-meta);
+  color: var(--color-muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0 0 var(--space-2);
+}
+.page-title {
+  font-size: var(--page-title-size, var(--ts-page-title));
+  font-weight: var(--page-title-weight, var(--tw-page-title));
+  line-height: var(--page-title-lh, var(--tlh-page-title));
+  margin: 0 0 var(--space-3);
+}
+.page-lead {
+  font-size: var(--page-lead-size, var(--ts-page-lead));
+  font-weight: var(--page-lead-weight, var(--tw-page-lead));
+  line-height: var(--page-lead-lh, var(--tlh-page-lead));
+  color: var(--color-muted);
+  max-width: 70ch;
+  margin: 0 0 var(--space-6);
+}
+.section-kicker {
+  font-size: var(--ts-meta);
+  font-weight: var(--tw-meta);
+  line-height: var(--tlh-meta);
+  color: var(--color-muted);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin: 0 0 var(--space-2);
+}
+.section-title {
+  font-size: var(--section-title-size, var(--ts-section-title));
+  font-weight: var(--section-title-weight, var(--tw-section-title));
+  line-height: var(--section-title-lh, var(--tlh-section-title));
+  margin: 0 0 var(--space-2);
+}
+.section-intro {
+  font-size: var(--section-intro-size, var(--ts-section-intro));
+  font-weight: var(--section-intro-weight, var(--tw-section-intro));
+  line-height: var(--section-intro-lh, var(--tlh-section-intro));
+  color: var(--color-muted);
+  max-width: 75ch;
+  margin: 0 0 var(--space-6);
+}
+.card-title {
+  font-size: var(--ts-card-title);
+  font-weight: var(--tw-card-title);
+  line-height: var(--tlh-card-title);
+  margin: 0;
+}
+.card-text {
+  margin: 0;
+  color: var(--text);
+}
+.meta {
+  font-size: var(--ts-meta);
+  font-weight: var(--tw-meta);
+  line-height: var(--tlh-meta);
+  color: var(--color-muted);
+}
+.caption {
+  font-size: var(--ts-caption);
+  font-weight: var(--tw-caption);
+  line-height: var(--tlh-caption);
+  color: var(--color-muted);
+}
+.note {
+  font-size: var(--ts-meta);
+  color: var(--color-muted);
+  border-left: 3px solid var(--color-border);
+  padding-left: var(--space-3);
+  margin: 0;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0 0 var(--space-2);
+  line-height: 1.2;
+}
