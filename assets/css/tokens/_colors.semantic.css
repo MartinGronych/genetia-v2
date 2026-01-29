@@ -24,7 +24,7 @@
   --color-surface-3: var(--gene-dark-30);
 
   /* Text */
-  --color-text: var(--gene-light-100);
+  --color-text: var(--gene-light-80);
   --color-muted: color-mix(
     in oklab,
     var(--gene-light-80) 70%,

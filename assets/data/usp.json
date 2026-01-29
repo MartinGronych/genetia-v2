@@ -1,0 +1,28 @@
+{
+  "items": [
+    {
+      "id": "gmp",
+      "title": "GMP certifikovaná laboratoř",
+      "icon": "award",
+      "href": "#benefit-gmp"
+    },
+    {
+      "id": "instruments",
+      "title": "Špičkové analytické přístroje",
+      "icon": "microscope",
+      "href": "#benefit-instruments"
+    },
+    {
+      "id": "spectrum",
+      "title": "Široké spektrum testů",
+      "icon": "clipboard-check",
+      "href": "#benefit-spectrum"
+    },
+    {
+      "id": "validated",
+      "title": "Lékopisné i naše vlastní metody",
+      "icon": "flask-conical",
+      "href": "#benefit-validated"
+    }
+  ]
+}

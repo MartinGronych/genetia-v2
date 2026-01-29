@@ -1,0 +1,331 @@
+/* ==================================================
+   HOME – USP / PROČ GENETIA PRODUCTION
+   Vzhled dle v1, s úpravami:
+   - levé a pravé sekční nadpisy větší + barva přes var()
+   - levé nadpisy/subtitle opticky centrované
+   - odstraněné “hrany” (stín/border) na levé kartě
+   - větší vnitřní nadpisy (aby nebyly stejné jako subtitle)
+   Scope: [data-usp-production]
+================================================== */
+
+[data-usp-production] {
+  position: relative;
+  padding-block: clamp(3rem, 6vw, 5rem);
+
+}
+
+/* ==================================================
+   LAYOUT
+================================================== */
+
+[data-usp-production] .usp-prod_layout {
+  display: grid;
+  gap: clamp(2rem, 4vw, 4rem);
+  align-items: start;
+}
+
+@media (min-width: 1024px) {
+  [data-usp-production] .usp-prod_layout {
+    grid-template-columns: 1.1fr 0.9fr;
+  }
+
+  [data-usp-production] .usp-prod_how {
+    margin-top: 10.4rem;
+  }
+}
+
+@media (min-width: 1440px) {
+  [data-usp-production] .usp-prod_layout {
+    gap: clamp(2.5rem, 4vw, 5rem);
+  }
+}
+
+/* ==================================================
+   TYPO – SECTION TITLES (LEFT + RIGHT)
+   - větší
+   - obarvené přes var()
+================================================== */
+
+[data-usp-production] .usp-prod_why > h2 {
+  /* sekční nadpis vlevo */
+  font-size: clamp(1.9rem, 2.2vw, 2.6rem);
+  line-height: 1.12;
+  font-weight: 750;
+  color: var(--brand-black);
+  margin: 0 0 0.75rem;
+}
+
+[data-usp-production] .usp-prod_how-title {
+  /* sekční nadpis vpravo */
+  font-size: clamp(1.85rem, 1.6vw, 2.3rem);
+  line-height: 1.18;
+  font-weight: 650;
+  color: var(--brand-black);
+  margin: 0 0 0.5rem;
+  text-align: center;
+}
+
+/* subtitle / intro – menší než nadpisy */
+[data-usp-production] .section-intro,
+[data-usp-production] .usp-prod_how-intro {
+  font-size: 1rem;
+  line-height: 1.55;
+  opacity: 0.88;
+  margin: 0 0 1.5rem;
+  max-width: 68ch;
+  text-align: center;
+}
+
+/* ==================================================
+   LEFT (WHY) – centrování nadpis + subtitle
+   "na střed řádku" = opticky zarovnat do středu sloupce
+================================================== */
+
+[data-usp-production] .usp-prod_why {
+  /* opticky centrovat hlavu sloupce */
+  text-align: center;
+}
+
+[data-usp-production] .usp-prod_why .section-intro {
+  margin-inline: auto;
+}
+
+/* ==================================================
+   WHY CARD – odstranit “vrchní a levou čáru / stín”
+================================================== */
+
+[data-usp-production] .usp-prod_why-card {
+  border-radius: var(--r-md);
+
+  border: 0;
+  box-shadow: none;
+
+  /* ponecháme jemné pozadí, aby karta nezmizela v gradientu */
+  background: rgba(255, 255, 255, 0.35);
+
+  overflow: hidden;
+}
+
+[data-usp-production] .usp-prod_why-item {
+  position: relative;
+  margin: 0;
+  padding: 18px 18px;
+
+  display: grid;
+  grid-template-columns: 1fr; /* ikona pryč */
+  gap: 0;
+  align-items: start;
+
+  background: transparent;
+
+  /* jemnější dělení položek, bez „tvrdé čáry“ */
+  border-top: 1px solid rgba(16, 48, 34, 0.08);
+
+  transition: transform 220ms ease;
+}
+
+[data-usp-production] .usp-prod_why-item:first-child {
+  border-top: none;
+}
+
+/* vnitřní nadpisy – větší, aby nebyly jako subtitle */
+[data-usp-production] .usp-prod_why-title {
+  margin: 0;
+  line-height: 1.2;
+  font-weight: 800;
+  color: var(--brand-900);
+  font-size: 1.125rem;
+}
+
+[data-usp-production] .usp-prod_why-text {
+  margin: 0.4rem 0 0;
+  opacity: 0.88;
+  line-height: 1.55;
+  font-size: 1rem;
+}
+
+/* hover overlay (zachované chování) */
+[data-usp-production] .usp-prod_why-item::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.22);
+  opacity: 0;
+  transition: opacity 220ms ease;
+  pointer-events: none;
+}
+
+[data-usp-production] .usp-prod_why-item:first-child::before {
+  border-top-left-radius: 22px;
+  border-top-right-radius: 22px;
+}
+
+[data-usp-production] .usp-prod_why-item:last-child::before {
+  border-bottom-left-radius: 22px;
+  border-bottom-right-radius: 22px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  [data-usp-production] .usp-prod_why-item:hover {
+    transform: translateY(-1px);
+  }
+  [data-usp-production] .usp-prod_why-item:hover::before {
+    opacity: 1;
+  }
+}
+
+/* ==================================================
+   RIGHT (HOW) – timeline
+================================================== */
+
+[data-usp-production] .usp-prod_how-intro {
+  margin-bottom: 1.5rem;
+}
+
+[data-usp-production] .usp-prod_step {
+  position: relative;
+
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  gap: 1rem;
+  padding-block: 1rem;
+
+  border-bottom: 1px solid rgba(16, 48, 34, 0.08);
+}
+
+[data-usp-production] .usp-prod_step:last-child {
+  border-bottom: none;
+}
+
+[data-usp-production] .usp-prod_step-badge {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  align-content: start;
+  grid-auto-rows: min-content;
+  padding-top: 2px;
+}
+
+[data-usp-production] .usp-prod_step-num {
+  font-weight: 900;
+  color: var(--brand-black);
+  opacity: 0.9;
+  letter-spacing: 0.02em;
+  line-height: 1;
+}
+
+[data-usp-production] .usp-prod_step-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  margin-top: 12px;
+
+  background: rgba(16, 48, 34, 0.18);
+  border: 1px solid rgba(16, 48, 34, 0.26);
+  box-shadow: 0 0 0 8px rgba(16, 48, 34, 0.06);
+}
+
+[data-usp-production] .usp-prod_step-badge::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 32px;
+  transform: translateX(-50%) scaleY(0);
+  transform-origin: top;
+
+  height: calc(100% - 16px);
+  border-left: 2px dashed rgba(16, 48, 34, 0.24);
+
+  opacity: 0;
+  transition: transform 680ms cubic-bezier(0.2, 0.9, 0.2, 1), opacity 480ms ease;
+}
+
+[data-usp-production] .usp-prod_step:last-child .usp-prod_step-badge::after {
+  display: none;
+}
+
+/* head bez ikon */
+[data-usp-production] .usp-prod_step-head {
+  display: block;
+}
+
+/* vnitřní nadpisy v timeline – zvětšit */
+[data-usp-production] .usp-prod_step-content h5 {
+  margin: 0;
+  font-weight: 800;
+  color: var(--brand-900);
+  font-size: 1.125rem;
+}
+
+[data-usp-production] .usp-prod_step-content p {
+  margin: 0.35rem 0 0;
+  opacity: 0.85;
+  line-height: 1.55;
+  font-size: 1rem;
+}
+
+/* ==================================================
+   REVEAL / HIDE (JS .is-visible) – zachováno
+================================================== */
+
+[data-usp-production] .usp-prod_step {
+  opacity: 0;
+  transform: translateY(18px);
+  filter: blur(8px);
+
+  transition: opacity 520ms ease,
+    transform 720ms cubic-bezier(0.2, 0.9, 0.2, 1),
+    filter 720ms ease;
+  will-change: opacity, transform, filter;
+}
+
+[data-usp-production] .usp-prod_step.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
+[data-usp-production] .usp-prod_step.is-visible .usp-prod_step-badge::after {
+  transform: translateX(-50%) scaleY(1);
+  opacity: 1;
+}
+
+[data-usp-production] .usp-prod_step-num,
+[data-usp-production] .usp-prod_step-dot {
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 520ms ease,
+    transform 720ms cubic-bezier(0.2, 0.9, 0.2, 1);
+}
+
+[data-usp-production] .usp-prod_step.is-visible .usp-prod_step-num,
+[data-usp-production] .usp-prod_step.is-visible .usp-prod_step-dot {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  [data-usp-production] .usp-prod_step:hover .usp-prod_step-dot {
+    background: rgba(16, 48, 34, 0.26);
+    border-color: rgba(16, 48, 34, 0.34);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-usp-production] .usp-prod_step,
+  [data-usp-production] .usp-prod_step-badge::after,
+  [data-usp-production] .usp-prod_step-num,
+  [data-usp-production] .usp-prod_step-dot {
+    transition: none !important;
+    transform: none !important;
+    filter: none !important;
+    opacity: 1 !important;
+  }
+}
+
+/* A11Y focus */
+[data-usp-production] .usp-prod_why-card:focus-within,
+[data-usp-production] .usp-prod_step:focus-within {
+  outline: 2px solid rgba(16, 48, 34, 0.28);
+  outline-offset: 4px;
+}

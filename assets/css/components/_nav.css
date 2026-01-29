@@ -25,7 +25,7 @@
     border-color 0.4s ease;
 }
 
-/* Light: white navbar background (v1 readability) */
+
 :root[data-theme="light"] .site-header {
   background: #fff;
   border-bottom-color: color-mix(in oklab, black 10%, transparent);
@@ -371,12 +371,12 @@
 /* Back-to-top button (injected by JS) */
 .scroll-top-btn {
   position: fixed;
-  right: 16px;
-  bottom: 16px;
+  right: 40px;
+  bottom: 40px;
   z-index: var(--z-overlay);
 
-  width: 44px;
-  height: 44px;
+  width: 65px;
+  height: 65px;
   border-radius: 999px;
 
   border: 1px solid color-mix(in oklab, var(--color-border) 70%, transparent);
@@ -403,6 +403,8 @@
   opacity: 1;
   pointer-events: auto;
   transform: translateY(0);
+  backdrop-filter: blur(28px) saturate(220%);
+  -webkit-backdrop-filter: blur(28px) saturate(220%);
 }
 
 .scroll-top-btn:hover {

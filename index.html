@@ -3,17 +3,19 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Genetia v2 – Template</title>
+    <title>Genetia Production</title>
 
     <!-- Theme bootstrap (FOUC-free) -->
     <script>
-(() => {
-  const saved = localStorage.getItem("theme"); // "light" | "dark" | null
-  const systemDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
-  const theme = saved || (systemDark ? "dark" : "light");
-  document.documentElement.dataset.theme = theme;
-})();
-</script>
+      (() => {
+        const saved = localStorage.getItem("theme"); // "light" | "dark" | null
+        const systemDark =
+          window.matchMedia &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches;
+        const theme = saved || (systemDark ? "dark" : "light");
+        document.documentElement.dataset.theme = theme;
+      })();
+    </script>
 
     <link rel="stylesheet" href="assets/css/styles.css" />
     <link rel="stylesheet" href="assets/css/pages/home.css" />
@@ -29,62 +31,241 @@
         <nav class="site-nav" aria-label="Primary">
           <ul class="nav-list">
             <li><a class="nav-link" href="o-spolecnosti/">O společnosti</a></li>
-            <li><a class="nav-link" href="analyticke-sluzby/">Analytické služby</a></li>
-            <li><a class="nav-link" href="vyvoj-a-vyzkum/">Vývoj a výzkum</a></li>
+            <li>
+              <a class="nav-link" href="analyticke-sluzby/"
+                >Analytické služby</a
+              >
+            </li>
+            <li>
+              <a class="nav-link" href="vyvoj-a-vyzkum/">Vývoj a výzkum</a>
+            </li>
             <li><a class="nav-link" href="produkty/">Produkty</a></li>
             <li><a class="nav-link" href="certifikace/">Certifikace</a></li>
             <li><a class="nav-link" href="kontakt/">Kontakt</a></li>
           </ul>
         </nav>
 
-        <button class="nav-toggle btn btn--ghost" type="button" data-nav-toggle aria-label="Open menu">
-        </button>
+        <button
+          class="nav-toggle btn btn--ghost"
+          type="button"
+          data-nav-toggle
+          aria-label="Open menu"
+        ></button>
       </div>
     </header>
 
     <main id="main" class="site-main">
-      <section class="section hero">
-        <div class="container">
-          <p class="page-kicker" data-i18n="home.kicker">Genetia v2</p>
-          <h1 class="page-title" data-i18n="home.title">Template homepage</h1>
-          <p class="page-lead" data-i18n="home.lead">
-            Tento template slouží pro refaktor Genetia v1 → v2. Vše je nalinkované a připravené pro dark/light + i18n.
-          </p>
+      <!-- ====== HERO SEKCE ====== -->
+      <section class="section hero" aria-labelledby="hero-title">
+        <div class="hero__video-wrapper" aria-hidden="true">
+          <video
+            class="hero__video"
+            src="assets/video/Genetia_home.webm"
+            autoplay
+            muted
+            loop
+            playsinline
+            preload="metadata"
+          ></video>
+        </div>
 
-          <div class="cluster">
-            <a class="btn btn--primary" href="ui-kit/" data-i18n="home.ctaUiKit">Open UI Kit</a>
-            <a class="btn btn--secondary" href="kontakt/" data-i18n="home.ctaContact">Go to Contact</a>
-            <button class="btn btn--ghost" type="button" data-open-modal="demo-modal">Open modal</button>
+        <div class="container">
+          <div class="hero__content">
+            <h1 class="page-title" id="hero-title" data-i18n="home.hero.title">
+              Farmaceutická kvalita<br class="hero__br" />
+              v oblasti léčebného konopí
+            </h1>
+
+            <p class="page-lead hero__lead" data-i18n="home.hero.lead">
+              Jsme spolehlivý partner v oblasti výzkumu, výroby a analýz
+              účinných látek pro léčebné účely. Naše procesy splňují standardy
+              EU-GMP.
+            </p>
           </div>
         </div>
       </section>
 
-      
+      <!-- SEKCE – SLUŽBY -->
+      <section class="section home-services" aria-labelledby="services-title">
+        <div class="container text-center">
+          <div class="services-grid">
+            <article class="card service-card" data-hover-card>
+              <div class="card__body">
+                <h3
+                  class="service-card_title"
+                  data-i18n="home.services.testing.title"
+                >
+                  Analytické testování
+                </h3>
+                <p
+                  class="service-card_text"
+                  data-i18n="home.services.testing.text"
+                >
+                  Komplexní analýzy kanabinoidů, terpenů, pesticidů, těžkých
+                  kovů a mikrobiologie.
+                </p>
+                <a
+                  class="btn btn--primary service-card_cta"
+                  href="analyticke-sluzby/"
+                  data-i18n="home.services.testing.cta"
+                  >Více o službě</a
+                >
+              </div>
+            </article>
 
-      <div class="modal" id="demo-modal" aria-hidden="true">
-        <div class="modal__overlay" data-close-modal></div>
-        <div class="modal__dialog" role="dialog" aria-modal="true" aria-labelledby="demo-modal-title">
-          <div class="modal__header">
-            <h3 class="modal__title" id="demo-modal-title">Demo modal</h3>
-            <button class="btn btn--ghost modal__close" type="button" data-close-modal>Close</button>
-          </div>
-          <div class="modal__body">
-            <p class="card-text">Toto je sjednocený modal pattern. V certifikacích i jinde použij stejnou komponentu.</p>
-          </div>
-          <div class="modal__footer cluster">
-            <button class="btn btn--primary" type="button" data-close-modal>OK</button>
-            <button class="btn btn--ghost" type="button" data-close-modal>Cancel</button>
+            <article class="card service-card" data-hover-card>
+              <div class="card__body">
+                <h3
+                  class="service-card_title"
+                  data-i18n="home.services.api.title"
+                >
+                  Vývoj &amp; výroba API
+                </h3>
+                <p class="service-card_text" data-i18n="home.services.api.text">
+                  Formulace a výroba aktivních farmaceutických složek (THC, CBD,
+                  CBG) dle EU-GMP.
+                </p>
+                <a
+                  class="btn btn--primary service-card_cta"
+                  href="vyvoj-a-vyzkum/"
+                  data-i18n="home.services.api.cta"
+                  >Zjistit více</a
+                >
+              </div>
+            </article>
+
+            <article class="card service-card" data-hover-card>
+              <div class="card__body">
+                <h3
+                  class="service-card_title"
+                  data-i18n="home.services.pharmacy.title"
+                >
+                  Produkty pro lékárny
+                </h3>
+                <p
+                  class="service-card_text"
+                  data-i18n="home.services.pharmacy.text"
+                >
+                  Standardizované olejové extrakty a přípravky dostupné pro
+                  lékárny a pacienty.
+                </p>
+                <a
+                  class="btn btn--primary service-card_cta"
+                  href="produkty/#lekarny"
+                  data-i18n="home.services.pharmacy.cta"
+                  >Nabídka produktů</a
+                >
+              </div>
+            </article>
           </div>
         </div>
-      </div>
 
+        <div class="servise-image-wrapper-sklo" aria-hidden="true">
+          <img
+            src="/assets/images/laboratorni_sklo.webp"
+            alt=""
+            class="servise-image"
+            loading="lazy"
+          />
+        </div>
+      </section>
+
+      <!-- ====== USP / PROČ GENETIA ====== -->
+      <section class="usp-section" data-usp-production>
+        <div class="container text-center">
+          <div id="uspProductionMount"></div>
+        </div>
+      </section>
+
+      <!-- ====== PRODUKTY – CAROUSEL ====== -->
+      <section class="section home-products" aria-labelledby="products-title">
+        <div class="container">
+          <h2 class="section-title" id="products-title">Carousel</h2>
+        </div>
+      </section>
+
+      <!-- ==========================
+     SEKCE 5 / KONTAKT & SPOLUPRÁCE (CTA místo formuláře)
+    ===============================-->
+      <section class="contact-section" data-home-contact-cta>
+        <div class="container">
+          <div class="row g-5 align-items-start align-items-lg-center">
+            <!-- Levý blok: text + kontakty -->
+            <div class="col-lg-5">
+              <h2
+                class="contact-cta__title fw-bold mb-3"
+                data-i18n="homeContact.title"
+              >
+                Zaujala vás naše práce?
+              </h2>
+
+              <p
+                class="contact-cta__subtitle text-muted mb-4"
+                data-i18n="homeContact.subtitle"
+              >
+                Napište nám ohledně spolupráce, testování nebo vývoje produktů.
+                <strong data-i18n="homeContact.subtitleStrong"
+                  >Ozveme se nejpozději následující pracovní den.</strong
+                >
+              </p>
+
+              <ul class="contact-info list-unstyled contact-cta__info">
+                <li class="mb-2">
+                  <strong data-i18n="homeContact.emailLabel">E-mail:</strong>
+                  <a href="mailto:info@genetia.cz" class="text-decoration-none"
+                    >info@genetia.eu</a
+                  >
+                </li>
+                <li class="mb-2">
+                  <strong data-i18n="homeContact.phoneLabel">Telefon:</strong>
+                  <a href="tel:+420777123456" class="text-decoration-none"
+                    >+420 311 440 038</a
+                  >
+                </li>
+                <li>
+                  <strong data-i18n="homeContact.addressLabel">Sídlo:</strong>
+                  <span data-i18n="homeContact.addressValue"
+                    >Inovační 122, 252 41 Zlatníky-Hodkovice, Česká
+                    republika</span
+                  >
+                </li>
+              </ul>
+            </div>
+
+            <!-- Pravý blok: CTA karta místo formuláře -->
+            <div class="col-lg-7">
+              <div class="contact-cta__card card-base p-4 shadow-sm">
+                <div class="contact-cta__actions">
+                  <a
+                    class="btn btn-accent px-4 py-2"
+                    href="../produkty/#productContact"
+                    data-i18n="homeContact.cardCta"
+                  >
+                    Přejít na formulář
+                  </a>
+                  <p
+                    class="contact-cta__card-text text-muted mb-4"
+                    data-i18n="homeContact.cardText"
+                  >
+                    Formulář vyplníte během chvíle a rovnou vyberete typ
+                    spolupráce. <strong>Odpovídáme nejpozději následující pracovní den.</strong>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
 
     <div class="mobile-nav" data-mobile-nav aria-hidden="true">
       <div class="mobile-nav__overlay" data-nav-close></div>
-      <div class="mobile-nav__panel" role="dialog" aria-modal="true" aria-label="Menu">
-        
-
+      <div
+        class="mobile-nav__panel"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Menu"
+      >
         <nav class="mobile-nav__links" aria-label="Mobile">
           <a class="nav-link" href="o-spolecnosti/">O společnosti</a>
           <a class="nav-link" href="analyticke-sluzby/">Analytické služby</a>
@@ -95,7 +276,9 @@
         </nav>
 
         <div class="mobile-nav__footer">
-          <button class="btn btn--primary" type="button" data-theme-toggle>Theme</button>
+          <button class="btn btn--primary" type="button" data-theme-toggle>
+            Theme
+          </button>
         </div>
       </div>
     </div>
@@ -109,7 +292,12 @@
         <div class="cluster">
           <a class="btn btn--link" href="legal/">Legal</a>
           <a class="btn btn--link" href="ui-kit/">UI Kit</a>
-          <button class="btn btn--ghost theme-switch" type="button" data-theme-toggle aria-label="Toggle theme">
+          <button
+            class="btn btn--ghost theme-switch"
+            type="button"
+            data-theme-toggle
+            aria-label="Toggle theme"
+          >
             Theme
           </button>
         </div>

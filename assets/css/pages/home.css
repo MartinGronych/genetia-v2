@@ -1,2 +1,9 @@
-/* Home page layout only */
-.hero{--page-title-size:clamp(2.4rem,4.8vw,3.6rem);} 
+/* ==================================================
+   GENETIA v2 – HOME (page orchestrator)
+   This file contains only imports for home page parts.
+================================================== */
+
+@import url("./home/home_hero.css");
+@import url("./home/home_services.css");
+@import url("./home/home_usp-production.css");
+@import url("./home/home_contact-cta.css");
