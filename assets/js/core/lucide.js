@@ -22,6 +22,9 @@ import {
   Award,
   PackageCheck,
 
+  // modal/info
+  FileText,
+
   // ui
   ChevronRight,
 
@@ -54,6 +57,8 @@ export function initLucide(root = document) {
         ShieldCheck,
         Award,
         PackageCheck,
+
+        FileText,
 
         ChevronRight,
         Bookmark

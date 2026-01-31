@@ -1,13 +1,18 @@
 /* ==================================================
    GENETIA v2 – CERTIFIKACE (page scoped)
-   Cíl: sladit s v1 referencí (výšky, ikonky, badge, CTA), bez zásahu do globálů.
+   Struktura:
+   - base (0–767)
+   - breakpointy na konci: 768 / 1024 / 1440 / 1920 (spacing only)
 ================================================== */
 
+/* -----------------------------
+   Page wrapper
+------------------------------ */
 .certifications {
 }
 
 /* -----------------------------
-   HERO – center
+   HERO (base)
 ------------------------------ */
 .certifications-hero {
   text-align: center;
@@ -24,25 +29,17 @@
   justify-content: center;
 }
 
-/* Hero badge text – zvětšit „Certifikovaná kvalita“ bez změny vzhledu badge */
+.certifications .page-title {
+  font-weight: 700;
+}
+
 .certifications-hero__badge .badge {
   font-size: 0.95rem;
   font-weight: 650;
 }
 
-@media (min-width: 768px) {
-  .certifications-hero__badge .badge {
-    font-size: 1rem;
-  }
-}
-
-/* Page title – požadavek: weight 700 */
-.certifications .page-title {
-  font-weight: 700;
-}
-
 /* -----------------------------
-   GRID – 1 / 2 / 4
+   GRID (base)
 ------------------------------ */
 .certifications-grid {
   display: grid;
@@ -51,55 +48,25 @@
   grid-template-columns: 1fr;
 }
 
-@media (min-width: 768px) {
-  .certifications-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-@media (min-width: 1024px) {
-  .certifications-grid {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-}
-
-@media (min-width: 1440px) {
-  .certifications-grid {
-    gap: calc(var(--space-6) + var(--space-1));
-  }
-}
-
 /* -----------------------------
-   CARD – stejný "clean surface" jako homepage services
-   Stabilita: na mobile jemné zúžení + centrování, od 768+ šířku řídí grid
+   CARDS – surface + sizing (base)
 ------------------------------ */
 .certifications-card.card,
 .certifications-pill.card {
   border: 0;
   background-color: var(--color-surface);
 
-  /* mobile: stabilní optická šířka (nezabije to rytmus, ale nepůsobí to přerostle) */
   width: 100%;
   max-width: 22rem;
   margin-inline: auto;
 }
 
-/* Od 768+: karty vyplní grid cell a nebudou skákat šířkou mezi breakpointy */
-@media (min-width: 768px) {
-  .certifications-card.card,
-  .certifications-pill.card {
-    max-width: none;
-    margin-inline: 0;
-  }
-}
-
-/* Zajistit stejné výšky buněk */
 .certifications-card {
   height: 100%;
 }
 
 /* -----------------------------
-   Card body – center + pevný rytmus + CTA vždy dole
+   Card body layout (base)
 ------------------------------ */
 .certifications-card__body {
   position: relative;
@@ -115,19 +82,11 @@
 
   gap: 0.75rem;
 
-  /* rezerva pro badge na hraně */
-  padding-top: calc(var(--space-6) + var(--space-3));
-}
-
-/* 15% "větší" až ve vyšším breakpointu (bez rozbití rytmu jinde) */
-@media (min-width: 1440px) {
-  .certifications-card__body {
-    gap: calc(0.75rem * 1.15);
-  }
+  padding-top: calc(var(--space-3) + var(--space-3));
 }
 
 /* -----------------------------
-   Badge bar – vlevo "Exkluzivně", vpravo GMP
+   Badges (base)
 ------------------------------ */
 .certifications-card__badges {
   position: absolute;
@@ -151,19 +110,16 @@
   pointer-events: none;
 }
 
-/* Exkluzivně vlevo */
 .certifications-card__badges .badge--star {
   order: 0;
   margin-right: auto;
 }
 
-/* GMP vpravo */
 .certifications-card__badges .badge:not(.badge--star) {
   order: 1;
   margin-left: auto;
 }
 
-/* Sjednotit výšku badge */
 .certifications-card__badges .badge {
   display: inline-flex;
   align-items: center;
@@ -173,7 +129,7 @@
 }
 
 /* -----------------------------
-   Lucide inline vykreslení – zabrání "létání" ikon
+   Lucide render helper (base)
 ------------------------------ */
 [data-lucide] {
   display: inline-flex;
@@ -187,7 +143,7 @@
 }
 
 /* -----------------------------
-   Ikony v kartách – radius sm + gene-light-50 background
+   Icon containers (base)
 ------------------------------ */
 .certifications-card__icon,
 .certifications-important__icon {
@@ -210,28 +166,26 @@
 }
 
 /* -----------------------------
-   Typografie v kartách – stabilní napříč šířkou (1 / 2 / 4 sloupce)
+   Card typography (base)
 ------------------------------ */
 .certifications-card .card-kicker {
   margin: 0;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   min-height: 1.25rem;
-  color: var(--brand-black);
+  color: var(--brand-800);
   font-weight: 650;
-  font-size: 0.85rem;
+  font-size: clamp(1.15rem, 0.85rem + 0.6vw, 2.15rem);
 }
 
 .certifications-card .card-title {
   margin: 0;
   text-align: center;
-  color: var(--brand-600);
+  color: var(--brand-black);
 
-  /* mobile: o chlup větší, aby karta působila „hotově“ */
   font-size: 1.35rem;
-  font-weight: 700;
+  font-weight: 780;
 
-  /* držet rytmus, ale nenechat to přerůst na úzkých kartách */
   min-height: 3.2em;
 }
 
@@ -242,47 +196,8 @@
   font-size: 0.98rem;
 }
 
-/* Tablet: karty jsou širší (2 sloupce), můžeme malinko přidat */
-@media (min-width: 768px) {
-  .certifications-card .card-title {
-    font-size: 1.4rem;
-  }
-
-  .certifications-card .card-text {
-    font-size: 1rem;
-  }
-}
-
-/* Desktop 4 sloupce: karty jsou užší → zjemnit titulky, aby se nelámaly příliš a CTA nelítalo */
-@media (min-width: 1024px) {
-  .certifications-card .card-title {
-    font-size: 1.15rem;
-    min-height: 3.6em;
-  }
-
-  .certifications-card .card-text {
-    font-size: 0.95rem;
-    min-height: 4.6em;
-  }
-
-  .certifications-card .card-kicker {
-    font-size: 0.8rem;
-  }
-}
-
-/* 1440+: lehce zpět (víc prostoru), ale stále stabilní */
-@media (min-width: 1440px) {
-  .certifications-card .card-title {
-    font-size: 1.2rem;
-  }
-
-  .certifications-card .card-text {
-    font-size: 0.96rem;
-  }
-}
-
 /* -----------------------------
-   CTA – stejné výšky, vycentrované, vždy dole
+   CTA (base)
 ------------------------------ */
 .certifications-card__cta {
   margin-top: auto;
@@ -298,23 +213,13 @@
   font-weight: 650;
 }
 
-/* CTA icon sizing ponecháme (už vypadá konzistentně) */
 .certifications-card__cta .btn svg {
   width: 2rem;
   height: 2rem;
 }
 
-/* Na 4 sloupce zjemníme text CTA, aby se vešlo stabilně */
-@media (min-width: 1024px) {
-  .certifications-card__cta .btn {
-    min-height: 2.6rem;
-    padding-inline: 1rem;
-    font-size: 0.95rem;
-  }
-}
-
 /* -----------------------------
-   Spodní sekce – center + title weight 700
+   LOWER SECTION (base)
 ------------------------------ */
 .certifications-important {
   text-align: center;
@@ -326,29 +231,13 @@
   margin-top: var(--space-6);
 }
 
-/* ikonu vycentrovat explicitně */
 .certifications-important__icon {
   margin-inline: auto;
 }
 
-/* Spodní nadpis – požadavek 700 */
 .certifications-important__head .section-title {
   font-weight: 700;
-
-  /* stabilní čitelnost napříč rozlišeními */
-  font-size: 1.45rem;
-}
-
-@media (min-width: 768px) {
-  .certifications-important__head .section-title {
-    font-size: 1.55rem;
-  }
-}
-
-@media (min-width: 1024px) {
-  .certifications-important__head .section-title {
-    font-size: 1.6rem;
-  }
+  font-size: clamp(1.95rem, 0.85rem + 0.6vw, 2.15rem);
 }
 
 .certifications-important__head .section-intro {
@@ -357,13 +246,6 @@
   font-size: 0.98rem;
 }
 
-@media (min-width: 768px) {
-  .certifications-important__head .section-intro {
-    font-size: 1rem;
-  }
-}
-
-/* Dvě buňky – na desktopu užší celek (o 20 % proti současnému) */
 .certifications-important__grid {
   display: grid;
   gap: var(--space-6);
@@ -371,21 +253,6 @@
   grid-template-columns: 1fr;
 }
 
-@media (min-width: 768px) {
-  .certifications-important__grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-@media (min-width: 1024px) {
-  .certifications-important__grid {
-    /* bylo 70% → zúžení o ~20% => 56% */
-    max-width: 56%;
-    margin-inline: auto;
-  }
-}
-
-/* Mini cards – center */
 .certifications-pill .card__body {
   display: flex;
   flex-direction: column;
@@ -397,25 +264,298 @@
 
 .certifications-pill .card-title {
   margin: 0;
-  color: var(--brand-600);
-  font-size: var(--ts-card-title);
+  color: var(--brand-800);
+  font-size: clamp(1.95rem, 0.85rem + 0.6vw, 2.5rem);
   font-weight: 700;
 }
 
 .certifications-pill .card-text {
   margin: 0;
-  font-size: 0.95rem;
+  font-size: 1.35rem;
+  font-weight: 400;
 }
 
-@media (min-width: 768px) {
-  .certifications-pill .card-text {
-    font-size: 0.98rem;
+#cert-modal .modal__dialog {
+  overflow: hidden;
+  width: min(75vw, 30rem);
+  max-width: 56rem;
+  position: relative; /* pro šipku */
+}
+
+@media (max-width: 424px) {
+  #cert-modal .modal__dialog {
+    width: min(92vw, 28rem);
   }
 }
 
-/* -----------------------------
-   Modal content host
------------------------------- */
-#cert-modal [data-cert-modal-content] > .card {
-  margin: 0;
+/* Šipka */
+#cert-modal .modal__dialog::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid var(--color-surface);
 }
+
+/* FIX: header nesmí shrinkovat */
+#cert-modal .modal__header {
+  padding: 0;
+  border: 0;
+  display: block;
+  width: 100%;
+  
+}
+
+/* FIX: top bar full width */
+#cert-modal .cert-modal__top {
+  width: 100%;
+  box-sizing: border-box;
+
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  column-gap: var(--space-4);
+
+  padding: var(--space-5);
+  background: var(--brand-600);
+  color: #fff;
+}
+
+#cert-modal .cert-modal__topIcon {
+  width: 2.75rem;
+  height: 2.75rem;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: var(--r-sm);
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+#cert-modal .cert-modal__topIcon svg {
+  width: 1.5rem;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  color: #fff;
+}
+
+#cert-modal .cert-modal__topText {
+  min-width: 0;
+}
+
+#cert-modal .cert-modal__title {
+  margin: 0;
+  font-weight: 700;
+  font-size: 1.1rem;
+  line-height: 1.2;
+  
+}
+
+#cert-modal .cert-modal__meta {
+  margin-top: 0.25rem;
+  font-size: 0.85rem;
+  opacity: 0.9;
+}
+
+/* Cross vpravo */
+#cert-modal .cert-modal__close {
+  width: 2.25rem;
+  height: 2.25rem;
+  font-size: 1.5rem;
+  display: grid;
+  place-items: center;
+  
+
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+padding-bottom: 10px;
+line-height: 1;
+  cursor: pointer;
+}
+
+#cert-modal .cert-modal__close:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+#cert-modal .modal__body {
+  padding: var(--space-5);
+}
+
+/* Info box – změna: gene-light-30 */
+#cert-modal .cert-modal__info {
+  padding: var(--space-4);
+  border-radius: var(--r-md);
+  background: var(--gene-light-30);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  
+}
+
+#cert-modal .cert-modal__infoHead {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+  color: var(--brand-black);
+  text-align: center;
+  font-weight: 700;
+}
+
+#cert-modal .cert-modal__infoHead svg {
+  width: 1.1rem;
+  height: auto;
+  aspect-ratio: 1 / 1;
+}
+
+#cert-modal .cert-modal__infoRow {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* obsah na střed */
+  gap: var(--space-3);
+}
+
+#cert-modal .cert-modal__infoText {
+  margin: 0;
+  color: var(--brand-black);
+  text-align: center;
+}
+
+#cert-modal .cert-modal__contactLink.btn {
+  width: auto;            /* ne 100% */
+  min-width: 12.5rem;     /* volitelné, aby nebylo moc úzké */
+  max-width: 230px;
+  align-self: center;     /* tlačítko na střed */
+  margin-top: var(--space-2);
+}
+
+@media (max-width: 424px) {
+  #cert-modal .cert-modal__infoRow {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  #cert-modal .cert-modal__contactLink.btn {
+    width: 100%;
+    align-self: right;
+  }
+}
+
+/* schovat starý render detailu */
+#cert-modal [data-cert-modal-content] {
+  display: none;
+}
+
+/* ==================================================
+   BREAKPOINTS
+================================================== */
+
+/* ≥768px */
+@media (min-width: 768px) {
+  .certifications-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .certifications-card.card,
+  .certifications-pill.card {
+    max-width: none;
+    margin-inline: 0;
+  }
+
+  .certifications-hero__badge .badge {
+    font-size: 1rem;
+  }
+
+  .certifications-card .card-title {
+    font-size: 1.4rem;
+  }
+
+  .certifications-card .card-text {
+    font-size: 1rem;
+  }
+
+  .certifications-important__head .section-title {
+    font-size: 1.55rem;
+  }
+
+  .certifications-important__head .section-intro {
+    font-size: 1rem;
+  }
+
+  .certifications-important__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .certifications-pill .card-text {
+    font-size: 1.38rem;
+  }
+
+  #cert-modal .cert-modal__title {
+    font-size: 1.2rem;
+  }
+}
+
+/* ≥1024px */
+@media (min-width: 1024px) {
+  .certifications-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .certifications-card .card-title {
+    font-size: 1.15rem;
+    min-height: 3.6em;
+  }
+
+  .certifications-card .card-text {
+    font-size: 0.95rem;
+    min-height: 4.6em;
+  }
+
+  .certifications-card .card-kicker {
+    font-size: 0.8rem;
+  }
+
+  .certifications-card__cta .btn {
+    min-height: 2.6rem;
+    padding-inline: 1rem;
+    font-size: 0.95rem;
+  }
+
+  .certifications-important__grid {
+    max-width: 56%;
+    margin-inline: auto;
+  }
+
+  .certifications-important__head .section-title {
+    font-size: 2.6rem;
+  }
+}
+
+/* ≥1440px */
+@media (min-width: 1440px) {
+  .certifications-grid {
+    gap: calc(var(--space-6) + var(--space-1));
+  }
+
+  .certifications-card__body {
+    gap: calc(0.75rem * 1.15);
+  }
+
+  .certifications-card .card-title {
+    font-size: 1.2rem;
+  }
+
+  .certifications-card .card-text {
+    font-size: 0.96rem;
+  }
+}
+
+/* ≥1920px (spacing only) */
+/* zatím není potřeba */
