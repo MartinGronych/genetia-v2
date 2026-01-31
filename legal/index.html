@@ -14,6 +14,14 @@
   document.documentElement.dataset.theme = theme;
 })();
 </script>
+<!-- Import map (Lucide) -->
+    <script type="importmap">
+      {
+        "imports": {
+          "lucide": "https://esm.sh/lucide@0.395.0"
+        }
+      }
+    </script>
 
     <link rel="stylesheet" href="../assets/css/styles.css" />
     <link rel="stylesheet" href="../assets/css/pages/legal.css" />
@@ -24,22 +32,37 @@
 
     <header class="site-header">
       <div class="container site-header__inner">
-        <a class="site-brand" href="../">Genetia</a>
+        <a class="site-brand" href="../" aria-label="Genetia – úvod">
+          <img
+            src="../assets/images/logo/GENETIA-G_logo.webp"
+            alt="Genetia"
+            class="site-brand__logo"
+          />
+        </a>
 
         <nav class="site-nav" aria-label="Primary">
           <ul class="nav-list">
-            <li><a class="nav-link" href="../o-spolecnosti/">O společnosti</a></li>
-            <li><a class="nav-link" href="../analyticke-sluzby/">Analytické služby</a></li>
-            <li><a class="nav-link" href="../vyvoj-a-vyzkum/">Vývoj a výzkum</a></li>
-            <li><a class="nav-link" href="../produkty/">Produkty</a></li>
-            <li><a class="nav-link" href="../certifikace/">Certifikace</a></li>
-            <li><a class="nav-link" href="../kontakt/">Kontakt</a></li>
+            <li><a class="nav-link" href="o-spolecnosti/">O společnosti</a></li>
+            <li>
+              <a class="nav-link" href="analyticke-sluzby/"
+                >Analytické služby</a
+              >
+            </li>
+            <li>
+              <a class="nav-link" href="vyvoj-a-vyzkum/">Vývoj a výzkum</a>
+            </li>
+            <li><a class="nav-link" href="produkty/">Produkty</a></li>
+            <li><a class="nav-link" href="certifikace/">Certifikace</a></li>
+            <li><a class="nav-link" href="kontakt/">Kontakt</a></li>
           </ul>
         </nav>
 
-        <button class="nav-toggle btn btn--ghost" type="button" data-nav-toggle aria-label="Open menu">
-          Menu
-        </button>
+        <button
+          class="nav-toggle btn btn--ghost"
+          type="button"
+          data-nav-toggle
+          aria-label="Open menu"
+        ></button>
       </div>
     </header>
 
@@ -84,18 +107,192 @@
       </div>
     </div>
 
-    <footer class="site-footer">
-      <div class="container site-footer__inner">
-        <div class="site-footer__bottom">
-          <p class="meta">Genetia v2 template (internal)</p>
+    <!-- FOOTER -->
+    <footer class="site-footer" aria-labelledby="footerTitle">
+      <div class="site-footer_container">
+        <!-- Brand -->
+        <div class="site-footer_brand">
+          <h2 class="visually-hidden" id="footerTitle">
+            Začneme spolu měřit výsledky?
+          </h2>
+
+          <a class="site-footer_logo" href="../" aria-label="Genetia – úvod">
+            <img
+              src="../assets/images/logo/GENETIA-logo.webp"
+              alt="Genetia"
+              class="site-footer_logoImg"
+            />
+          </a>
+
+          <p class="site-footer_tagline">
+            Analytické služby a odborné zázemí pro farmaceutickou kvalitu.
+          </p>
+
+          <div class="site-footer_social" aria-label="Sociální sítě">
+            <a
+              class="site-footer_socialLink"
+              href="https://www.linkedin.com/company/genetia-production/?lipi=urn%3Ali%3Apage%3Ad_flagship3_search_srp_all%3BN4duTOIGQMqen%2FXtulmTlg%3D%3D"
+              target="_blank"
+              rel="me noopener"
+              aria-label="Genetia Production na LinkedIn (otevře se v novém okně)"
+            >
+              <i data-lucide="linkedin"></i>
+            </a>
+
+            <a
+              class="site-footer_socialLink"
+              href="https://www.instagram.com/genetiaproduction/"
+              target="_blank"
+              rel="me noopener"
+              aria-label="Genetia Production na Instagramu (otevře se v novém okně)"
+            >
+              <i data-lucide="instagram"></i>
+            </a>
+          </div>
         </div>
 
-        <div class="cluster">
-          <a class="btn btn--link" href="../legal/">Legal</a>
-          <a class="btn btn--link" href="../ui-kit/">UI Kit</a>
-          <button class="btn btn--ghost theme-switch" type="button" data-theme-toggle aria-label="Toggle theme">
-            Theme
-          </button>
+        <!-- Columns -->
+        <div class="site-footer_cols">
+          <nav class="site-footer_col" aria-label="Odkazy – O společnosti">
+            <h3 class="site-footer_heading">Genetia</h3>
+            <ul class="site-footer_list">
+              <li>
+                <a class="site-footer_link" href="../o-spolecnosti/">
+                  O společnosti
+                </a>
+              </li>
+              <li>
+                <a class="site-footer_link" href="../kontakt/"> Kontakt </a>
+              </li>
+            </ul>
+          </nav>
+
+          <nav class="site-footer_col" aria-label="Odkazy – Služby">
+            <h3 class="site-footer_heading">Služby</h3>
+            <ul class="site-footer_list">
+              <li>
+                <a class="site-footer_link" href="../analyticke-sluzby/">
+                  Analytické služby
+                </a>
+              </li>
+              <li>
+                <a class="site-footer_link" href="../vyvoj-a-vyzkum/">
+                  Vývoj a výzkum
+                </a>
+              </li>
+              <li>
+                <a
+                  class="site-footer_link"
+                  href="../analyticke-sluzby/#testovaci-panely"
+                >
+                  Naše služby
+                </a>
+              </li>
+            </ul>
+          </nav>
+
+          <nav class="site-footer_col" aria-label="Odkazy – Produkty a kvalita">
+            <h3 class="site-footer_heading">Produkty</h3>
+            <ul class="site-footer_list">
+              <li>
+                <a class="site-footer_link" href="../produkty/"> Produkty </a>
+              </li>
+              <li>
+                <a class="site-footer_link" href="../certifikace/">
+                  Certifikace
+                </a>
+              </li>
+            </ul>
+          </nav>
+
+          <address
+            class="site-footer_col site-footer_contact"
+            aria-label="Kontakt"
+          >
+            <h3 class="site-footer_heading">Kontakt</h3>
+            <ul class="site-footer_list">
+              <li>
+                <a
+                  class="site-footer_link"
+                  href="mailto:info@genetia.eu"
+                  aria-label="Napsat e-mail na info@genetia.eu"
+                >
+                  <i data-lucide="mail"></i>
+                  <span>info@genetia.eu</span>
+                </a>
+              </li>
+
+              <li>
+                <a class="site-footer_link" href="tel:+420311440038">
+                  <i data-lucide="phone"></i>
+                  <span>+420&nbsp;311&nbsp;440&nbsp;038</span>
+                </a>
+              </li>
+
+              <li class="site-footer_text">
+                <a
+                  class="site-footer_link"
+                  href="https://maps.app.goo.gl/KSAFnAKaUEwaw8xv7"
+                  target="_blank"
+                  rel="noopener"
+                  aria-label="Zobrazit adresu na mapě"
+                >
+                  <i data-lucide="map-pin"></i>
+                  <span>Inovační 122, Zlatníky – Hodkovice</span>
+                </a>
+              </li>
+            </ul>
+          </address>
+        </div>
+      </div>
+
+      <div class="site-footer_bottom">
+        <div class="site-footer_bottomInner">
+          <small class="site-footer_copy">
+            © <span id="year"></span> Genetia Production s.r.o. Všechna práva
+            vyhrazena.
+          </small>
+
+          <nav class="site-footer_legal" aria-label="Právní informace">
+            <ul class="site-footer_legalList">
+              <li>
+                <a
+                  class="site-footer_link site-footer_legalLink"
+                  href="../legal/#gdpr"
+                >
+                  Ochrana osobních údajů
+                </a>
+              </li>
+              <li>
+                <a
+                  class="site-footer_link site-footer_legalLink"
+                  href="../legal/#cookies"
+                >
+                  Cookies
+                </a>
+              </li>
+              <li>
+                <a
+                  class="site-footer_link site-footer_legalLink"
+                  href="../legal/#terms"
+                >
+                  Podmínky použití
+                </a>
+              </li>
+              <li>
+                <a
+                  class="site-footer_link site-footer_legalLink"
+                  href="../legal/#terms_and_conditions"
+                >
+                  Obchodní podmínky
+                </a>
+              </li>
+            </ul>
+          </nav>
+
+          <small class="site-footer_dev">
+            Vyvinul: <span>Martin Gronych</span>
+          </small>
         </div>
       </div>
     </footer>

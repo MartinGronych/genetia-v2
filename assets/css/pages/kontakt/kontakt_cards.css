@@ -1,0 +1,60 @@
+/* Contact cards + contact info (page-scoped) */
+
+.contact .contact-card,
+.contact .contact-form,
+.contact .contact-map_frame {
+  border-radius: var(--radius-xl, 20px);
+  border: 1px solid rgba(47, 122, 75, 0.12);
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 30px rgba(16, 24, 20, 0.10);
+}
+
+#contactForm > fieldset > legend {
+  font-size: clamp(1.25rem, 0.9rem + 1.2vw, 1.32rem);
+  font-weight: 650;
+  margin: 0 0 0.5rem;
+  color: var(--brand-black, #0b0f0c);
+}
+
+.contact-card_block {
+  padding: 0.85rem 0;
+  border-bottom: 1px solid rgba(16, 24, 20, 0.08);
+}
+
+.contact-card_block:last-child {
+  border-bottom: 0;
+}
+
+.contact-card_label {
+  font-size: 1.0rem;
+  font-weight: 700;
+  opacity: 0.72;
+  margin-bottom: 0.25rem;
+}
+
+.contact-card_value {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--brand-700);
+}
+
+.contact-link {
+  color: var(--brand-700, #1f5a36);
+  text-decoration: none;
+}
+
+.contact-link:hover,
+.contact-link:focus-visible {
+  text-decoration: underline;
+}
+
+.contact-link--row {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.contact-link__icon {
+  line-height: 1;
+}

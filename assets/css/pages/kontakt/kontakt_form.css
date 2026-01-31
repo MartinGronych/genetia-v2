@@ -1,0 +1,60 @@
+/* Contact form tweaks (page-scoped) – uses v2 form markup */
+
+.contact .contact-form .form__grid {
+  width: 100%;
+}
+
+.contact .contact-form .form__control {
+  background: rgba(255, 255, 255, 0.65);
+  border: 1px solid rgba(16, 24, 20, 0.14);
+  border-radius: var(--radius-md, 14px);
+}
+
+/* Interest "chips" look over v2 checkbox markup */
+.contact .contact-form .form__fieldset {
+  margin: 0.25rem 0 0.5rem;
+  padding: 0;
+  border: 0;
+}
+
+.contact .contact-form .form__legend {
+  font-weight: 800;
+  color: white;
+  margin-bottom: 0.65rem;
+  font-size: 1.rem;
+}
+
+.contact .contact-form .form__check {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.65rem 0.9rem;
+  border-radius: 999px;
+  border: 1px solid rgba(47, 122, 75, 0.22);
+  background: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  user-select: none;
+  margin: 0 0.55rem 0.55rem 0;
+}
+
+.contact .contact-form .form__check-input {
+  margin: 0;
+}
+
+.contact .contact-form .form__check:has(.form__check-input:checked) {
+  background: rgba(47, 122, 75, 0.10);
+  border-color: rgba(47, 122, 75, 0.45);
+}
+
+.contact .contact-form .form__check:has(.form__check-input:focus-visible) {
+  outline: 2px solid rgba(47, 122, 75, 0.55);
+  outline-offset: 2px;
+}
+
+.contact .contact-form .form__inline-message {
+  padding: 0.75rem 0.9rem;
+  border-radius: var(--radius-md, 14px);
+  border: 1px solid rgba(16, 24, 20, 0.12);
+  background: rgba(255, 255, 255, 0.6);
+  margin: 0;
+}

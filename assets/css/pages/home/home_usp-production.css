@@ -48,7 +48,7 @@
 
 [data-usp-production] .usp-prod_why > h2 {
   /* sekční nadpis vlevo */
-  font-size: clamp(1.9rem, 2.2vw, 2.6rem);
+  font-size: clamp(2.2rem, 2.2vw, 2.9rem);
   line-height: 1.12;
   font-weight: 750;
   color: var(--brand-black);
@@ -74,6 +74,7 @@
   margin: 0 0 1.5rem;
   max-width: 68ch;
   text-align: center;
+  color: var(--brand-black);
 }
 
 /* ==================================================

@@ -1,2 +1,421 @@
-/* Certifications page layout only */
-.certifications{}
+/* ==================================================
+   GENETIA v2 – CERTIFIKACE (page scoped)
+   Cíl: sladit s v1 referencí (výšky, ikonky, badge, CTA), bez zásahu do globálů.
+================================================== */
+
+.certifications {
+}
+
+/* -----------------------------
+   HERO – center
+------------------------------ */
+.certifications-hero {
+  text-align: center;
+  align-items: center;
+}
+
+.certifications-hero .page-lead {
+  margin-inline: auto;
+  max-width: 72ch;
+}
+
+.certifications-hero__badge {
+  display: flex;
+  justify-content: center;
+}
+
+/* Hero badge text – zvětšit „Certifikovaná kvalita“ bez změny vzhledu badge */
+.certifications-hero__badge .badge {
+  font-size: 0.95rem;
+  font-weight: 650;
+}
+
+@media (min-width: 768px) {
+  .certifications-hero__badge .badge {
+    font-size: 1rem;
+  }
+}
+
+/* Page title – požadavek: weight 700 */
+.certifications .page-title {
+  font-weight: 700;
+}
+
+/* -----------------------------
+   GRID – 1 / 2 / 4
+------------------------------ */
+.certifications-grid {
+  display: grid;
+  gap: var(--space-6);
+  margin-top: var(--space-6);
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+  .certifications-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .certifications-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1440px) {
+  .certifications-grid {
+    gap: calc(var(--space-6) + var(--space-1));
+  }
+}
+
+/* -----------------------------
+   CARD – stejný "clean surface" jako homepage services
+   Stabilita: na mobile jemné zúžení + centrování, od 768+ šířku řídí grid
+------------------------------ */
+.certifications-card.card,
+.certifications-pill.card {
+  border: 0;
+  background-color: var(--color-surface);
+
+  /* mobile: stabilní optická šířka (nezabije to rytmus, ale nepůsobí to přerostle) */
+  width: 100%;
+  max-width: 22rem;
+  margin-inline: auto;
+}
+
+/* Od 768+: karty vyplní grid cell a nebudou skákat šířkou mezi breakpointy */
+@media (min-width: 768px) {
+  .certifications-card.card,
+  .certifications-pill.card {
+    max-width: none;
+    margin-inline: 0;
+  }
+}
+
+/* Zajistit stejné výšky buněk */
+.certifications-card {
+  height: 100%;
+}
+
+/* -----------------------------
+   Card body – center + pevný rytmus + CTA vždy dole
+------------------------------ */
+.certifications-card__body {
+  position: relative;
+  height: 100%;
+  width: auto;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  text-align: center;
+  justify-content: flex-start;
+
+  gap: 0.75rem;
+
+  /* rezerva pro badge na hraně */
+  padding-top: calc(var(--space-6) + var(--space-3));
+}
+
+/* 15% "větší" až ve vyšším breakpointu (bez rozbití rytmu jinde) */
+@media (min-width: 1440px) {
+  .certifications-card__body {
+    gap: calc(0.75rem * 1.15);
+  }
+}
+
+/* -----------------------------
+   Badge bar – vlevo "Exkluzivně", vpravo GMP
+------------------------------ */
+.certifications-card__badges {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  justify-content: flex-end;
+
+  transform: translateY(-50%);
+  padding-inline: var(--space-5);
+  z-index: 2;
+
+  pointer-events: none;
+}
+
+.certifications-card__badges .badge {
+  pointer-events: none;
+}
+
+/* Exkluzivně vlevo */
+.certifications-card__badges .badge--star {
+  order: 0;
+  margin-right: auto;
+}
+
+/* GMP vpravo */
+.certifications-card__badges .badge:not(.badge--star) {
+  order: 1;
+  margin-left: auto;
+}
+
+/* Sjednotit výšku badge */
+.certifications-card__badges .badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+/* -----------------------------
+   Lucide inline vykreslení – zabrání "létání" ikon
+------------------------------ */
+[data-lucide] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 0;
+}
+
+[data-lucide] svg {
+  display: block;
+}
+
+/* -----------------------------
+   Ikony v kartách – radius sm + gene-light-50 background
+------------------------------ */
+.certifications-card__icon,
+.certifications-important__icon {
+  width: 3rem;
+  height: 3rem;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: var(--r-sm);
+  background: var(--gene-light-50);
+  border: 0.5px solid #5e691c38;
+}
+
+.certifications-card__icon svg,
+.certifications-important__icon svg {
+  width: 1.75rem;
+  height: auto;
+  aspect-ratio: 1 / 1;
+}
+
+/* -----------------------------
+   Typografie v kartách – stabilní napříč šířkou (1 / 2 / 4 sloupce)
+------------------------------ */
+.certifications-card .card-kicker {
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  min-height: 1.25rem;
+  color: var(--brand-black);
+  font-weight: 650;
+  font-size: 0.85rem;
+}
+
+.certifications-card .card-title {
+  margin: 0;
+  text-align: center;
+  color: var(--brand-600);
+
+  /* mobile: o chlup větší, aby karta působila „hotově“ */
+  font-size: 1.35rem;
+  font-weight: 700;
+
+  /* držet rytmus, ale nenechat to přerůst na úzkých kartách */
+  min-height: 3.2em;
+}
+
+.certifications-card .card-text {
+  margin: 0;
+  max-width: 46ch;
+  min-height: 4.2em;
+  font-size: 0.98rem;
+}
+
+/* Tablet: karty jsou širší (2 sloupce), můžeme malinko přidat */
+@media (min-width: 768px) {
+  .certifications-card .card-title {
+    font-size: 1.4rem;
+  }
+
+  .certifications-card .card-text {
+    font-size: 1rem;
+  }
+}
+
+/* Desktop 4 sloupce: karty jsou užší → zjemnit titulky, aby se nelámaly příliš a CTA nelítalo */
+@media (min-width: 1024px) {
+  .certifications-card .card-title {
+    font-size: 1.15rem;
+    min-height: 3.6em;
+  }
+
+  .certifications-card .card-text {
+    font-size: 0.95rem;
+    min-height: 4.6em;
+  }
+
+  .certifications-card .card-kicker {
+    font-size: 0.8rem;
+  }
+}
+
+/* 1440+: lehce zpět (víc prostoru), ale stále stabilní */
+@media (min-width: 1440px) {
+  .certifications-card .card-title {
+    font-size: 1.2rem;
+  }
+
+  .certifications-card .card-text {
+    font-size: 0.96rem;
+  }
+}
+
+/* -----------------------------
+   CTA – stejné výšky, vycentrované, vždy dole
+------------------------------ */
+.certifications-card__cta {
+  margin-top: auto;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.certifications-card__cta .btn {
+  min-height: 2.75rem;
+  padding-inline: 1.15rem;
+  margin-inline: auto;
+  font-weight: 650;
+}
+
+/* CTA icon sizing ponecháme (už vypadá konzistentně) */
+.certifications-card__cta .btn svg {
+  width: 2rem;
+  height: 2rem;
+}
+
+/* Na 4 sloupce zjemníme text CTA, aby se vešlo stabilně */
+@media (min-width: 1024px) {
+  .certifications-card__cta .btn {
+    min-height: 2.6rem;
+    padding-inline: 1rem;
+    font-size: 0.95rem;
+  }
+}
+
+/* -----------------------------
+   Spodní sekce – center + title weight 700
+------------------------------ */
+.certifications-important {
+  text-align: center;
+}
+
+.certifications-important__head {
+  text-align: center;
+  align-items: center;
+  margin-top: var(--space-6);
+}
+
+/* ikonu vycentrovat explicitně */
+.certifications-important__icon {
+  margin-inline: auto;
+}
+
+/* Spodní nadpis – požadavek 700 */
+.certifications-important__head .section-title {
+  font-weight: 700;
+
+  /* stabilní čitelnost napříč rozlišeními */
+  font-size: 1.45rem;
+}
+
+@media (min-width: 768px) {
+  .certifications-important__head .section-title {
+    font-size: 1.55rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .certifications-important__head .section-title {
+    font-size: 1.6rem;
+  }
+}
+
+.certifications-important__head .section-intro {
+  margin-inline: auto;
+  max-width: 80ch;
+  font-size: 0.98rem;
+}
+
+@media (min-width: 768px) {
+  .certifications-important__head .section-intro {
+    font-size: 1rem;
+  }
+}
+
+/* Dvě buňky – na desktopu užší celek (o 20 % proti současnému) */
+.certifications-important__grid {
+  display: grid;
+  gap: var(--space-6);
+  margin-top: var(--space-6);
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+  .certifications-important__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .certifications-important__grid {
+    /* bylo 70% → zúžení o ~20% => 56% */
+    max-width: 56%;
+    margin-inline: auto;
+  }
+}
+
+/* Mini cards – center */
+.certifications-pill .card__body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.certifications-pill .card-title {
+  margin: 0;
+  color: var(--brand-600);
+  font-size: var(--ts-card-title);
+  font-weight: 700;
+}
+
+.certifications-pill .card-text {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+@media (min-width: 768px) {
+  .certifications-pill .card-text {
+    font-size: 0.98rem;
+  }
+}
+
+/* -----------------------------
+   Modal content host
+------------------------------ */
+#cert-modal [data-cert-modal-content] > .card {
+  margin: 0;
+}

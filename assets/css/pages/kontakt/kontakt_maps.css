@@ -1,0 +1,17 @@
+/* assets/css/pages/kontakt/kontakt_maps.css */
+
+.contact .contact-map_frame {
+  border-radius: var(--r-sm);
+}
+
+.contact .contact-map_frame .card__body {
+  padding: 0; /* green frame */
+  border-radius: var(--r-sm);
+}
+
+.contact .contact-map_canvas {
+  width: 100%;
+  min-height: 420px;
+  border-radius: var(--r-sm);
+  overflow: hidden;
+}

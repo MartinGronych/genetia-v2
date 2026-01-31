@@ -5,7 +5,7 @@
   isolation: isolate;
   border-radius: var(--r-lg);
   border: 1px solid color-mix(in oklab, var(--color-border) 82%, transparent);
-  background: color-mix(in oklab, var(--color-surface-3) 78%, transparent);
+  background: var(--bg);
   box-shadow: var(--shadow-card);
   transition:
     transform .35s ease,
@@ -23,6 +23,7 @@
 /* Default inner spacing */
 .card__body{
   padding: var(--space-6);
+  
 }
 
 /* Subtle inner highlight (adds “card depth” without changing layout) */
@@ -61,7 +62,7 @@
 .card:focus-within{
   transform: translateY(-3px) scale(1.02);
   transform-origin: center;
-  background: color-mix(in oklab, var(--color-surface-2) 72%, transparent);
+  background: var(--bg);
   border-color: color-mix(in oklab, var(--color-brand) 24%, var(--color-border));
   box-shadow: var(--shadow-card-hover);
 }

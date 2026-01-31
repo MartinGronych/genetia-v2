@@ -1,4 +1,11 @@
-/* Hero section (ported from v1 hero final v4.0) */
+/* Hero section (ported from v1 hero final v4.0)
+   Note: HTML uses BEM classes (.hero, .hero__video-wrapper, .hero__video, .hero__content, .hero__lead, .hero__br).
+   This file intentionally contains ONLY the BEM implementation (legacy .hero-section/... rules removed).
+*/
+
+/* ==================================================
+   HERO – layout (no media background here)
+================================================== */
 .hero {
   position: relative;
   display: flex;
@@ -11,19 +18,10 @@
   margin: 0;
   padding: 0;
   z-index: 1;
-
-  background:
-    linear-gradient(
-      180deg,
-      color-mix(in oklab, var(--color-bg) 94%, transparent) 0%,
-      color-mix(in oklab, var(--color-bg) 97%, transparent) 35%,
-      transparent 60%
-    ),
-    url("/assets/images/Innocrystal.webp") center/cover no-repeat;
-
   color: var(--color-text);
 }
 
+/* Content sits above media layer */
 .hero__content {
   position: relative;
   z-index: 3;
@@ -31,29 +29,36 @@
   margin-inline: auto;
 }
 
-.hero .page-title {
-  font-weight: 700;
-  letter-spacing: -0.01em;
-  line-height: 1.2;
-  font-size: clamp(2.4rem, 3vw + 1rem, 3.5rem);
-  padding: 0.55rem 0.5rem;
-  color: var(--bg);
+/* ==================================================
+   HERO – media layer (fallback image lives here)
+   Reason: .hero__video-wrapper covers the hero; putting fallback on .hero
+   can be visually hidden by the wrapper.
+================================================== */
+.hero__video-wrapper {
+  display: block;
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 0;
+  pointer-events: none;
+
+  /* Fallback image + readability gradient (always available) */
+  background:
+  linear-gradient(
+    180deg,
+    rgba(0,0,0,0.1) 0%,
+    rgba(0,0,0,0.05) 35%,
+    transparent 60%
+  ),
+  url("/assets/images/Innocrystal.webp") center/cover no-repeat;
 }
 
-.hero__lead {
-  display: inline-block;
-  max-width: 58ch;
-  margin-top: 0.75rem;
-  padding: 0.65rem 0.95rem;
-  
+/* Video element (hidden on small screens; shown from 768+) */
+.hero__video {
+  display: none;
 }
 
-/* Mobile-only line break inside H1 */
-.hero__br {
-  display: inline;
-}
-
-/* Fade into page background */
+/* Fade hero into page background */
 .hero::after {
   content: "";
   position: absolute;
@@ -73,28 +78,40 @@
   pointer-events: none;
 }
 
-/* Video background (>=768) */
-.hero__video-wrapper {
-  display: none;
+/* ==================================================
+   HERO – typography (kept as in v1)
+================================================== */
+.hero .page-title {
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  font-size: clamp(2.4rem, 3vw + 1rem, 3.5rem);
+  padding: 0.55rem 0.5rem;
+  color: var(--bg);
 }
 
+.hero__lead {
+  display: inline-block;
+  max-width: 58ch;
+  margin-top: 0.75rem;
+  padding: 0.65rem 0.95rem;
+}
+
+/* Mobile-only line break inside H1 */
+.hero__br {
+  display: inline;
+}
+
+/* ==================================================
+   Video background (>=768)
+================================================== */
 @media (min-width: 768px) {
   .hero {
     min-height: calc((74vh - var(--header-offset)) * 0.75);
   }
 
-  .hero__video-wrapper {
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: calc(100% + var(--header-offset));
-    overflow: hidden;
-    z-index: 0;
-  }
-
   .hero__video {
+    display: block;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -104,7 +121,24 @@
     pointer-events: none;
     object-fit: cover;
     object-position: center;
-    display: block;
+    z-index: 0;
+  }
+
+  /* Blend bottom part of the moving video into the static fallback image */
+  .hero__video-wrapper::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.00) 0%,
+      rgba(0, 0, 0, 0.00) 62%,
+      rgba(255, 255, 255, 0.10) 78%,
+      rgba(255, 255, 255, 0.219) 90%,
+      rgba(255, 255, 255, 0.466) 100%
+    );
   }
 
   .hero__br {
@@ -184,83 +218,9 @@
   }
 }
 
-/* Home page layout only */
-.hero-section {
-  position: relative;
-  overflow: clip;
-  padding: var(--space-12) 0;
-}
-
-.hero-video-wrapper {
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-}
-
-.hero-video-wrapper::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    180deg,
-    color-mix(in oklab, var(--color-surface) 65%, transparent) 0%,
-    color-mix(in oklab, var(--color-surface) 25%, transparent) 100%
-  );
-}
-
-.hero-video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.hero-section .text-center {
-  text-align: center;
-}
-
-.hero-content {
-  margin-inline: auto;
-  max-width: 60rem;
-}
-
-.hero-content h1 {
-  font-size: var(--ts-page-title);
-  font-weight: var(--tw-page-title);
-  line-height: var(--tlh-page-title);
-}
-
-.hero-lead {
-  margin-top: var(--space-6);
-  font-size: var(--ts-page-lead);
-  font-weight: var(--tw-page-lead);
-  line-height: var(--tlh-page-lead);
-  color: var(--color-muted);
-}
-
-.hero-br {
-  display: none;
-}
-
-@media (min-width: 768px) {
-  .hero-br {
-    display: inline;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .hero-video {
-    display: none;
-  }
-
-  .hero-video-wrapper::after {
-    background: color-mix(in oklab, var(--color-surface) 75%, transparent);
-  }
-}
-
 /* ==================================================
    HERO – Backdrop glass for readability over video
-   - Progressive enhancement (fallback safe)
-   - Theme-aware via semantic tokens (no [data-theme] selectors)
+   - Progressive enhancement
    - Applies only to title + lead
 ================================================== */
 
@@ -270,17 +230,12 @@
   position: relative;
   isolation: isolate;
 
-  /* readable even on moving video */
   background: color-mix(in oklab, var(--color-bg) 72%, transparent);
-
-  /* keep existing padding from above; only add rounding + outline */
   border-radius: 0.9rem;
 
-  /* multiline H1/lead should keep background per line */
   box-decoration-break: clone;
   -webkit-box-decoration-break: clone;
 
-  /* subtle edge to improve readability across themes */
   box-shadow:
     0 0 0 1px color-mix(in oklab, var(--color-text) 5%, transparent),
     0 10px 28px color-mix(in oklab, var(--color-text) 5%, transparent);
@@ -291,10 +246,8 @@
   .hero .page-title,
   .hero__lead {
     background: color-mix(in oklab, var(--color-bg) 45%, transparent);
-
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
-
   }
 }
 
@@ -304,4 +257,11 @@
   opacity: 0.95;
   font-weight: 400;
   font-size: clamp(0.8rem, 3vw + 0.2rem, 1.5rem);
+}
+
+/* Motion accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .hero__video {
+    display: none;
+  }
 }

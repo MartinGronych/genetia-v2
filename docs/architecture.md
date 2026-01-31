@@ -1,4 +1,4 @@
-# Genetia v2 – Architecture
+# Genetia – Architecture
 
 ## Goals
 - One global CSS entry (`assets/css/styles.css`) + one page-only CSS (`assets/css/pages/<page>.css`)

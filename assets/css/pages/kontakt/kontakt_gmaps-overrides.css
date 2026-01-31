@@ -1,0 +1,117 @@
+/* assets/css/pages/kontakt/kontakt_gmaps-overrides.css
+   Google Maps UI overrides (page-scoped) */
+
+.contact #contactMap {
+  /* prevents tiny artifacts with rounded corners */
+  isolation: isolate;
+}
+
+/* -------- InfoWindow shell -------- */
+.contact #contactMap .gm-style .gm-style-iw-c {
+  border-radius: var(--r-md);
+  padding: 15px; 
+  border: 1px solid rgba(47, 122, 75, 0.14);
+  backdrop-filter: blur(10px);
+  
+}
+/* inner scrolling area */
+.contact #contactMap .gm-style .gm-style-iw-d {
+  overflow: auto !important;
+}
+
+/* default close button positioning can be off — normalize */
+.contact #contactMap .gm-style button.gm-ui-hover-effect {
+  
+  
+  color: var(--gene-dark-30)
+}
+
+.contact #contactMap .gm-style button.gm-ui-hover-effect > span {
+  transform: scale(0.92);
+}
+
+/* -------- Our InfoWindow content -------- */
+.contact #contactMap .map-iw {
+  font-family: inherit;
+  color: var(--brand-black, #0b0f0c);
+  min-width: 240px;
+}
+
+.contact #contactMap .map-iw_header {
+  font-weight: 800;
+  font-size: 1.12rem;
+  line-height: 1.1;
+  margin: 0 0 6px;
+  color: var(--brand-800);
+  text-align: center;
+}
+
+/* Address can wrap to two lines */
+.contact #contactMap .map-iw_addr {
+  text-align: center;
+  font-size: 0.95rem;
+  line-height: 1.35;
+  font-weight: 400;
+  opacity: 0.86;
+  margin: 0 0 12px;
+  max-width: 26ch;               /* encourages 2-line wrap */
+}
+
+/* Center the action pill too */
+.contact #contactMap .map-iw_actions {
+  display: flex;
+  justify-content: center;
+}
+
+.contact #contactMap .map-iw_link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 9px 12px;
+  margin-bottom: 10px;
+  border-radius: 999px;
+  border: 0.4px solid rgba(47, 122, 74, 0.219);
+  background:rgba(47, 122, 75, 0.10);
+  color: var(--brand-700, #1f5a36);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.9rem;
+  line-height: 1;
+}
+
+.contact #contactMap .map-iw_link:hover,
+.contact #contactMap .map-iw_link:focus-visible {
+  background: rgba(47, 122, 75, 0.10);
+  border-color: rgba(47, 122, 75, 0.45);
+  text-decoration: none;
+}
+
+/* -------- Marker badge (AdvancedMarker content) -------- */
+.contact #contactMap .map-markerBadge {
+  width: 46px;
+  height: 46px;
+  padding: 0;
+  border: 1px solid rgba(4, 7, 5, 0.164);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.815);
+  backdrop-filter: blur(10px);
+
+  display: grid;
+  place-items: center;
+
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.18);
+}
+
+.contact #contactMap .map-markerBadge:focus-visible {
+  outline: 2px solid rgba(47, 122, 75, 0.55);
+  outline-offset: 3px;
+}
+
+.contact #contactMap .map-markerBadge_logo {
+  width: 35px;
+  height: 35px;
+  display: block;
+  border-radius: 6px; /* keeps logo crisp if it has transparent edges */
+}
+
+

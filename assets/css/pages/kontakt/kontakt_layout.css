@@ -1,0 +1,57 @@
+/* Contact page wrapper + layout (page-scoped) */
+
+.contact {
+  background: linear-gradient(
+    180deg,
+    var(--gene-light-80, #f6faf7) 5%,
+    var(--gene-dark-30, rgba(0, 0, 0, 0.06)) 100%
+  );
+  color: inherit;
+}
+
+.contact .container {
+  max-width: 1120px;
+}
+
+.contact-page_head {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin: 0 0 1.25rem;
+  padding-bottom: 1rem;
+}
+
+.contact-page_title {
+  letter-spacing: -0.02em;
+  font-weight: 700;
+  line-height: 1.05;
+  color: var(--brand-black, #0b0f0c);
+  font-size: clamp(1.8rem, 3vw, 2.35rem);
+  margin: 0;
+}
+
+.contact-page_rule {
+  height: 6px;
+  flex: 1;
+  background: var(--brand-600, #2f7a4b);
+  border-radius: var(--radius-lg, 16px);
+  opacity: 0.4;
+}
+
+/* Two-column layout without framework */
+.contact-columns {
+  display: grid;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+@media (min-width: 1024px) {
+  .contact-columns {
+    grid-template-columns: 5fr 7fr;
+    gap: 2rem;
+  }
+}
+
+.contact-map {
+  margin-top: 2.5rem;
+}

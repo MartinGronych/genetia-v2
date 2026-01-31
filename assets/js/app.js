@@ -13,47 +13,48 @@ import { initAccordion } from "./components/accordion.js";
 
 const page = document.documentElement.dataset.page;
 
+function domReady() {
+  if (document.readyState === "loading") {
+    return new Promise((resolve) => {
+      document.addEventListener("DOMContentLoaded", resolve, { once: true });
+    });
+  }
+  return Promise.resolve();
+}
+
 (async () => {
+  // Ne-DOM init (může běžet hned)
   await safeInit("theme", initTheme);
   await safeInit("i18n", initI18n);
-  await safeInit("lucide", initLucide);
+
+  // DOM jistota pro ikony + UI komponenty (footer je na každé stránce)
+  await domReady();
+
+  await safeInit("lucide", () => initLucide(document));
   await safeInit("scroll-ui", initScrollUI);
   await safeInit("nav", initNav);
   await safeInit("mobile-nav", initMobileNav);
   await safeInit("theme-switch", initThemeSwitch);
   await safeInit("modal", initModal);
   await safeInit("card-hover", initCardHover);
-  await safeInit("initTabs", initTabs);
-  document.addEventListener("DOMContentLoaded", () => {
-    safeInit("accordion", initAccordion);
-  });
+  await safeInit("tabs", initTabs);
+  await safeInit("accordion", initAccordion);
 
-  switch (page) {
-    case "home":
-      (await import("./pages/home.js")).initHome();
-      break;
-    case "contact":
-      (await import("./pages/contact.js")).initContact();
-      break;
-    case "services":
-      (await import("./pages/services.js")).initServices();
-      break;
-    case "products":
-      (await import("./pages/products.js")).initProducts();
-      break;
-    case "certifications":
-      (await import("./pages/certifications.js")).initCertifications();
-      break;
-    case "research":
-      (await import("./pages/research.js")).initResearch();
-      break;
-    case "legal":
-      (await import("./pages/legal.js")).initLegal();
-      break;
-    case "ui-kit":
-      (await import("./pages/ui-kit.js")).initUiKit();
-      break;
-    default:
-      break;
+  // 👇 JEDINÉ místo, kde se řeší stránka
+  if (page) {
+    await safeInit(`page:${page}`, async () => {
+      const mod = await import(`./pages/${page}.js`);
+      await mod.init?.();
+
+      // Pokud stránkový modul injektuje HTML (modaly/sekce),
+      // je bezpečné znovu spustit lucide jen nad celým dokumentem:
+      await safeInit("lucide:after-page", () => initLucide(document));
+    });
+  }
+
+  // Footer year (DOM už je ready)
+  const yearEl = document.getElementById("year");
+  if (yearEl) {
+    yearEl.textContent = new Date().getFullYear();
   }
 })();

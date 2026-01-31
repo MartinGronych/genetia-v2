@@ -30,7 +30,7 @@
   font-size: 0.82rem;
   letter-spacing: 0.2px;
 
-  color:var(--color-surface-2);
+  color:var(--color-surface-1);
   background: var(--brand-500);
   border: 1px solid rgba(150, 170, 70, 0.18);
   box-shadow: 0 10px 26px rgba(0, 0, 0, 0.08);

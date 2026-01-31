@@ -1,20 +1,19 @@
-// GENETIA v2 – Home page orchestrator
+// assets/js/pages/home.js
+// Home – page orchestrator (imports only)
 
+import { safeInit } from "../core/logger.js";
+
+// podle tree: assets/js/pages/home/usp-production.js
 import { initUspProduction } from "./home/usp-production.js";
 
-function safeInit(initFn, name) {
-  if (typeof initFn !== "function") return;
+const LOG = "[Genetia][home]";
 
+export async function init() {
   try {
-    initFn();
+    await safeInit("home:usp-production", initUspProduction);
   } catch (err) {
-    console.warn(`[genetia][home] ${name} failed:`, err);
+    console.error(LOG, "Page init failed:", err);
   }
 }
 
-export const initHome = () => {
-  
-  safeInit(initUspProduction, "usp-production");
-
-  
-};
+export default { init };

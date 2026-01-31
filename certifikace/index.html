@@ -3,17 +3,28 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Certifikace – Genetia v2</title>
+    <title>Certifikace – Genetia</title>
 
     <!-- Theme bootstrap (FOUC-free) -->
     <script>
-(() => {
-  const saved = localStorage.getItem("theme"); // "light" | "dark" | null
-  const systemDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
-  const theme = saved || (systemDark ? "dark" : "light");
-  document.documentElement.dataset.theme = theme;
-})();
-</script>
+      (() => {
+        const saved = localStorage.getItem("theme"); // "light" | "dark" | null
+        const systemDark =
+          window.matchMedia &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches;
+        const theme = saved || (systemDark ? "dark" : "light");
+        document.documentElement.dataset.theme = theme;
+      })();
+    </script>
+
+    <!-- Import map (Lucide) -->
+    <script type="importmap">
+      {
+        "imports": {
+          "lucide": "https://esm.sh/lucide@0.395.0"
+        }
+      }
+    </script>
 
     <link rel="stylesheet" href="../assets/css/styles.css" />
     <link rel="stylesheet" href="../assets/css/pages/certifikace.css" />
@@ -24,49 +35,323 @@
 
     <header class="site-header">
       <div class="container site-header__inner">
-        <a class="site-brand" href="../">Genetia</a>
+        <a class="site-brand" href="../" aria-label="Genetia – úvod">
+          <img
+            src="../assets/images/logo/GENETIA-G_logo.webp"
+            alt="Genetia"
+            class="site-brand__logo"
+          />
+        </a>
 
         <nav class="site-nav" aria-label="Primary">
           <ul class="nav-list">
-            <li><a class="nav-link" href="../o-spolecnosti/">O společnosti</a></li>
-            <li><a class="nav-link" href="../analyticke-sluzby/">Analytické služby</a></li>
-            <li><a class="nav-link" href="../vyvoj-a-vyzkum/">Vývoj a výzkum</a></li>
+            <li>
+              <a class="nav-link" href="../o-spolecnosti/">O společnosti</a>
+            </li>
+            <li>
+              <a class="nav-link" href="../analyticke-sluzby/"
+                >Analytické služby</a
+              >
+            </li>
+            <li>
+              <a class="nav-link" href="../vyvoj-a-vyzkum/">Vývoj a výzkum</a>
+            </li>
             <li><a class="nav-link" href="../produkty/">Produkty</a></li>
-            <li><a class="nav-link" href="../certifikace/">Certifikace</a></li>
+            <li>
+              <a class="nav-link" aria-current="page" href="../certifikace/"
+                >Certifikace</a
+              >
+            </li>
             <li><a class="nav-link" href="../kontakt/">Kontakt</a></li>
           </ul>
         </nav>
 
-        <button class="nav-toggle btn btn--ghost" type="button" data-nav-toggle aria-label="Open menu">
-          Menu
-        </button>
+        <button
+          class="nav-toggle btn btn--ghost"
+          type="button"
+          data-nav-toggle
+          aria-label="Open menu"
+        ></button>
       </div>
     </header>
 
-    <main id="main" class="site-main">
+    <main id="main" class="page-main">
       <section class="section certifications">
-        <div class="container">
-          <p class="page-kicker">Genetia</p>
-          <h1 class="page-title">Certifikace</h1>
-          <p class="page-lead">Certifikace (v2 template). Detail řešíme sjednoceným modalem.</p>
-
-          <div class="card">
-            <div class="card__body stack">
-              <h2 class="section-title">Placeholder</h2>
-              <p class="section-intro">Tady bude přepis sekcí z Genetia v1 → v2.</p>
+        <div class="container stack--lg">
+          <!-- HERO -->
+          <header class="certifications-hero stack--md">
+            <div class="certifications-hero__badge">
+              <span class="badge">
+                <span data-lucide="badge-check" aria-hidden="true"></span>
+                <span>Certifikovaná kvalita</span>
+              </span>
             </div>
-          </div>
+
+            <h1 class="page-title">Naše certifikace</h1>
+
+            <p class="page-lead">
+              Držíme GMP certifikáty vydané SÚKL, pro farmaceutickou výrobu a
+              kontrolní laboratoř. Naše výroba i kontrolní laboratoř splňují
+              přísné standardy GMP.
+            </p>
+          </header>
+
+          <section class="certifications-cards" aria-label="Seznam certifikací">
+            <div class="grid certifications-grid">
+              <!-- Card 1 -->
+              <article
+                class="card certifications-card"
+                data-cert-card
+                data-cert-id="gmp-release"
+              >
+                <div class="card__body certifications-card__body">
+                  <div class="certifications-card__badges">
+                    <span class="badge">GMP 1</span>
+                    <span class="badge badge--star">
+                      <span>Exkluzivně v ČR</span>
+                    </span>
+                  </div>
+
+                  <div class="certifications-card__icon" aria-hidden="true">
+                    <span data-lucide="shield" aria-hidden="true"></span>
+                  </div>
+
+                  <p class="card-kicker">GMP certifikát</p>
+                  <h2 class="card-title">Propouštění šarží léčivého přípravku</h2>
+                  <p class="card-text">
+                    Certifikát opravňující k propouštění šarží v souladu se
+                    standardy GMP 1
+                  </p>
+
+                  <div class="certifications-card__cta">
+                    <button
+                      type="button"
+                      class="btn btn--primary"
+                      data-cert-open
+                      data-cert-id="gmp-release"
+                      aria-haspopup="dialog"
+                      aria-controls="cert-modal"
+                    >
+                      Zobrazit detail
+                      <span data-lucide="chevron-right" aria-hidden="true"></span>
+                    </button>
+                  </div>
+                </div>
+              </article>
+
+              <!-- Card 2 -->
+              <article
+                class="card certifications-card"
+                data-cert-card
+                data-cert-id="gmp-lab"
+              >
+                <div class="card__body certifications-card__body">
+                  <div class="certifications-card__badges">
+                    <span class="badge">GMP 1</span>
+                  </div>
+
+                  <div class="certifications-card__icon" aria-hidden="true">
+                    <span data-lucide="badge-check" aria-hidden="true"></span>
+                  </div>
+
+                  <p class="card-kicker">GMP certifikát</p>
+                  <h2 class="card-title">Kontrolní laboratoř</h2>
+                  <p class="card-text">
+                    Certifikát pro kontrolní laboratoř v souladu se standardy
+                    GMP 1
+                  </p>
+
+                  <div class="certifications-card__cta">
+                    <button
+                      type="button"
+                      class="btn btn--primary"
+                      data-cert-open
+                      data-cert-id="gmp-lab"
+                      aria-haspopup="dialog"
+                      aria-controls="cert-modal"
+                    >
+                      Zobrazit detail
+                      <span data-lucide="chevron-right" aria-hidden="true"></span>
+                    </button>
+                  </div>
+                </div>
+              </article>
+
+              <!-- Card 3 -->
+              <article
+                class="card certifications-card"
+                data-cert-card
+                data-cert-id="gmp-api-pack"
+              >
+                <div class="card__body certifications-card__body">
+                  <div class="certifications-card__badges">
+                    <span class="badge">GMP 2</span>
+                  </div>
+
+                  <div class="certifications-card__icon" aria-hidden="true">
+                    <span data-lucide="package-check" aria-hidden="true"></span>
+                  </div>
+
+                  <p class="card-kicker">GMP certifikát</p>
+                  <h2 class="card-title">Balení API</h2>
+                  <p class="card-text">
+                    Certifikát opravňující k balení API v souladu se standardy
+                    GMP 2
+                  </p>
+
+                  <div class="certifications-card__cta">
+                    <button
+                      type="button"
+                      class="btn btn--primary"
+                      data-cert-open
+                      data-cert-id="gmp-api-pack"
+                      aria-haspopup="dialog"
+                      aria-controls="cert-modal"
+                    >
+                      Zobrazit detail
+                      <span data-lucide="chevron-right" aria-hidden="true"></span>
+                    </button>
+                  </div>
+                </div>
+              </article>
+
+              <!-- Card 4 -->
+              <article
+                class="card certifications-card"
+                data-cert-card
+                data-cert-id="gmp-api-extract"
+              >
+                <div class="card__body certifications-card__body">
+                  <div class="certifications-card__badges">
+                    <span class="badge">GMP 2</span>
+                  </div>
+
+                  <div class="certifications-card__icon" aria-hidden="true">
+                    <span data-lucide="award" aria-hidden="true"></span>
+                  </div>
+
+                  <p class="card-kicker">GMP certifikát</p>
+                  <h2 class="card-title">Extrakce API</h2>
+                  <p class="card-text">
+                    Povolení k extrakci API v souladu se standardy GMP 2
+                  </p>
+
+                  <div class="certifications-card__cta">
+                    <button
+                      type="button"
+                      class="btn btn--primary"
+                      data-cert-open
+                      data-cert-id="gmp-api-extract"
+                      aria-haspopup="dialog"
+                      aria-controls="cert-modal"
+                    >
+                      Zobrazit detail
+                      <span data-lucide="chevron-right" aria-hidden="true"></span>
+                    </button>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </section>
+
+          <!-- LOWER SECTION -->
+          <section
+            class="certifications-important"
+            aria-label="Proč jsou certifikace důležité"
+          >
+            <header class="certifications-important__head stack--md">
+              <div class="certifications-important__icon" aria-hidden="true">
+                <span data-lucide="shield-check" aria-hidden="true"></span>
+              </div>
+
+              <h2 class="section-title">Proč jsou certifikace důležité?</h2>
+
+              <p class="section-intro">
+                GMP (Good Manufacturing Practice) certifikace garantují, že naše
+                procesy splňují nejpřísnější farmaceutické standardy. Díky tomu
+                můžete mít jistotu, že vaše produkty jsou vyráběny a testovány v
+                souladu s mezinárodními normami.
+              </p>
+            </header>
+
+            <div
+              class="grid certifications-important__grid"
+              aria-label="Shrnutí standardů"
+            >
+              <div class="card certifications-pill">
+                <div class="card__body">
+                  <h3 class="card-title">GMP</h3>
+                  <p class="card-text">Certifikovaná výroba</p>
+                </div>
+              </div>
+
+              <div class="card certifications-pill">
+                <div class="card__body">
+                  <h3 class="card-title">EU</h3>
+                  <p class="card-text">Evropské standardy</p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Hidden trigger to open modal via global component -->
+          <button
+            class="sr-only"
+            type="button"
+            data-open-modal="cert-modal"
+            aria-hidden="true"
+            tabindex="-1"
+          >
+            Otevřít detail certifikace
+          </button>
         </div>
       </section>
-
     </main>
+
+    <!-- Certifications modal -->
+    <div class="modal" id="cert-modal" aria-hidden="true">
+      <div class="modal__overlay" data-close-modal></div>
+      <div
+        class="modal__dialog"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="cert-modal-title"
+      >
+        <div class="modal__header">
+          <h3 class="modal__title" id="cert-modal-title">Detail certifikace</h3>
+        </div>
+        <div class="modal__body">
+          <div class="stack" data-cert-modal-content>
+            <p class="card-text">Načítání…</p>
+          </div>
+        </div>
+        <div class="modal__footer cluster">
+          <a class="btn btn--primary" href="../kontakt/#contactForm">Kontakt</a>
+          <button class="btn btn--secondary" type="button" data-close-modal>
+            Zavřít
+          </button>
+        </div>
+      </div>
+    </div>
 
     <div class="mobile-nav" data-mobile-nav aria-hidden="true">
       <div class="mobile-nav__overlay" data-nav-close></div>
-      <div class="mobile-nav__panel" role="dialog" aria-modal="true" aria-label="Menu">
+      <div
+        class="mobile-nav__panel"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Menu"
+      >
         <div class="mobile-nav__header">
           <span class="mobile-nav__title">Genetia</span>
-          <button class="btn btn--ghost" type="button" data-nav-close aria-label="Close menu">Close</button>
+          <button
+            class="btn btn--ghost"
+            type="button"
+            data-nav-close
+            aria-label="Close menu"
+          >
+            Close
+          </button>
         </div>
 
         <nav class="mobile-nav__links" aria-label="Mobile">
@@ -79,27 +364,192 @@
         </nav>
 
         <div class="mobile-nav__footer">
-          <button class="btn btn--ghost" type="button" data-theme-toggle>Theme</button>
-        </div>
-      </div>
-    </div>
-
-    <footer class="site-footer">
-      <div class="container site-footer__inner">
-        <div class="site-footer__bottom">
-          <p class="meta">Genetia v2 template (internal)</p>
-        </div>
-
-        <div class="cluster">
-          <a class="btn btn--link" href="../legal/">Legal</a>
-          <a class="btn btn--link" href="../ui-kit/">UI Kit</a>
-          <button class="btn btn--ghost theme-switch" type="button" data-theme-toggle aria-label="Toggle theme">
+          <button class="btn btn--ghost theme-switch" type="button" data-theme-toggle>
             Theme
           </button>
         </div>
       </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="site-footer" aria-labelledby="footerTitle">
+      <div class="site-footer_container">
+        <!-- Brand -->
+        <div class="site-footer_brand">
+          <h2 class="visually-hidden" id="footerTitle">
+            Začneme spolu měřit výsledky?
+          </h2>
+
+          <a class="site-footer_logo" href="../" aria-label="Genetia – úvod">
+            <img
+              src="../assets/images/logo/GENETIA-logo.webp"
+              alt="Genetia"
+              class="site-footer_logoImg"
+            />
+          </a>
+
+          <p class="site-footer_tagline">
+            Analytické služby a odborné zázemí pro farmaceutickou kvalitu.
+          </p>
+
+          <div class="site-footer_social" aria-label="Sociální sítě">
+            <a
+              class="site-footer_socialLink"
+              href="https://www.linkedin.com/company/genetia-production/?lipi=urn%3Ali%3Apage%3Ad_flagship3_search_srp_all%3BN4duTOIGQMqen%2FXtulmTlg%3D%3D"
+              target="_blank"
+              rel="me noopener"
+              aria-label="Genetia Production na LinkedIn (otevře se v novém okně)"
+            >
+              <i data-lucide="linkedin"></i>
+            </a>
+
+            <a
+              class="site-footer_socialLink"
+              href="https://www.instagram.com/genetiaproduction/"
+              target="_blank"
+              rel="me noopener"
+              aria-label="Genetia Production na Instagramu (otevře se v novém okně)"
+            >
+              <i data-lucide="instagram"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Columns -->
+        <div class="site-footer_cols">
+          <nav class="site-footer_col" aria-label="Odkazy – O společnosti">
+            <h3 class="site-footer_heading">Genetia</h3>
+            <ul class="site-footer_list">
+              <li>
+                <a class="site-footer_link" href="../o-spolecnosti/">
+                  O společnosti
+                </a>
+              </li>
+              <li>
+                <a class="site-footer_link" href="../kontakt/"> Kontakt </a>
+              </li>
+            </ul>
+          </nav>
+
+          <nav class="site-footer_col" aria-label="Odkazy – Služby">
+            <h3 class="site-footer_heading">Služby</h3>
+            <ul class="site-footer_list">
+              <li>
+                <a class="site-footer_link" href="../analyticke-sluzby/">
+                  Analytické služby
+                </a>
+              </li>
+              <li>
+                <a class="site-footer_link" href="../vyvoj-a-vyzkum/">
+                  Vývoj a výzkum
+                </a>
+              </li>
+              <li>
+                <a
+                  class="site-footer_link"
+                  href="../analyticke-sluzby/#testovaci-panely"
+                >
+                  Naše služby
+                </a>
+              </li>
+            </ul>
+          </nav>
+
+          <nav class="site-footer_col" aria-label="Odkazy – Produkty a kvalita">
+            <h3 class="site-footer_heading">Produkty</h3>
+            <ul class="site-footer_list">
+              <li>
+                <a class="site-footer_link" href="../produkty/"> Produkty </a>
+              </li>
+              <li>
+                <a class="site-footer_link" href="../certifikace/">
+                  Certifikace
+                </a>
+              </li>
+            </ul>
+          </nav>
+
+          <address class="site-footer_col site-footer_contact" aria-label="Kontakt">
+            <h3 class="site-footer_heading">Kontakt</h3>
+            <ul class="site-footer_list">
+              <li>
+                <a
+                  class="site-footer_link"
+                  href="mailto:info@genetia.eu"
+                  aria-label="Napsat e-mail na info@genetia.eu"
+                >
+                  <i data-lucide="mail"></i>
+                  <span>info@genetia.eu</span>
+                </a>
+              </li>
+
+              <li>
+                <a class="site-footer_link" href="tel:+420311440038">
+                  <i data-lucide="phone"></i>
+                  <span>+420&nbsp;311&nbsp;440&nbsp;038</span>
+                </a>
+              </li>
+
+              <li class="site-footer_text">
+                <a
+                  class="site-footer_link"
+                  href="https://maps.app.goo.gl/KSAFnAKaUEwaw8xv7"
+                  target="_blank"
+                  rel="noopener"
+                  aria-label="Zobrazit adresu na mapě"
+                >
+                  <i data-lucide="map-pin"></i>
+                  <span>Inovační 122, Zlatníky – Hodkovice</span>
+                </a>
+              </li>
+            </ul>
+          </address>
+        </div>
+      </div>
+
+      <div class="site-footer_bottom">
+        <div class="site-footer_bottomInner">
+          <small class="site-footer_copy">
+            © <span id="year"></span> Genetia Production s.r.o. Všechna práva
+            vyhrazena.
+          </small>
+
+          <nav class="site-footer_legal" aria-label="Právní informace">
+            <ul class="site-footer_legalList">
+              <li>
+                <a class="site-footer_link site-footer_legalLink" href="../legal/#gdpr">
+                  Ochrana osobních údajů
+                </a>
+              </li>
+              <li>
+                <a class="site-footer_link site-footer_legalLink" href="../legal/#cookies">
+                  Cookies
+                </a>
+              </li>
+              <li>
+                <a class="site-footer_link site-footer_legalLink" href="../legal/#terms">
+                  Podmínky použití
+                </a>
+              </li>
+              <li>
+                <a
+                  class="site-footer_link site-footer_legalLink"
+                  href="../legal/#terms_and_conditions"
+                >
+                  Obchodní podmínky
+                </a>
+              </li>
+            </ul>
+          </nav>
+
+          <small class="site-footer_dev">
+            Vyvinul: <span>Martin Gronych</span>
+          </small>
+        </div>
+      </div>
     </footer>
 
+    <!-- App entry (only once) -->
     <script type="module" src="../assets/js/app.js"></script>
   </body>
 </html>

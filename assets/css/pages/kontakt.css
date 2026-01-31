@@ -1,2 +1,8 @@
-/* Contact page layout only */
-.contact{}
+/* assets/css/pages/kontakt.css
+   Page orchestrator (imports only) */
+
+@import url("./kontakt/kontakt_layout.css");
+@import url("./kontakt/kontakt_cards.css");
+@import url("./kontakt/kontakt_form.css");
+@import url("./kontakt/kontakt_maps.css");
+@import url("./kontakt/kontakt_gmaps-overrides.css");

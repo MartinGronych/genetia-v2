@@ -1,0 +1,28 @@
+/* assets/css/components/_footer-legal.css
+   Footer – bottom legal links (component-scoped) */
+
+.site-footer_legal {
+  display: flex;
+  align-items: center;
+}
+
+.site-footer_legalList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.site-footer_legalLink {
+  font-size: 0.875rem;
+  line-height: 1.2;
+  opacity: 0.9;
+  text-decoration: none;
+}
+
+.site-footer_legalLink:hover,
+.site-footer_legalLink:focus-visible {
+  text-decoration: underline;
+}

@@ -16,6 +16,14 @@
         document.documentElement.dataset.theme = theme;
       })();
     </script>
+    <!-- Import map (Lucide) -->
+    <script type="importmap">
+      {
+        "imports": {
+          "lucide": "https://esm.sh/lucide@0.395.0"
+        }
+      }
+    </script>
 
     <link rel="stylesheet" href="../assets/css/styles.css" />
     <link rel="stylesheet" href="../assets/css/pages/ui-kit.css" />
@@ -80,13 +88,13 @@
               Open Modal
             </button>
             <button
-            class="btn btn--ghost theme-switch"
-            type="button"
-            data-theme-toggle
-            aria-label="Toggle theme"
-          >
-            Theme
-          </button>
+              class="btn btn--ghost theme-switch"
+              type="button"
+              data-theme-toggle
+              aria-label="Toggle theme"
+            >
+              Theme
+            </button>
           </div>
         </div>
       </section>
@@ -529,19 +537,20 @@
           <div class="site-footer_social" aria-label="Sociální sítě">
             <a
               class="site-footer_socialLink"
-              href="#"
+              href="https://www.linkedin.com/company/genetia-production/?lipi=urn%3Ali%3Apage%3Ad_flagship3_search_srp_all%3BN4duTOIGQMqen%2FXtulmTlg%3D%3D"
               target="_blank"
-              rel="noopener"
-              aria-label="LinkedIn"
+              rel="me noopener"
+              aria-label="Genetia Production na LinkedIn (otevře se v novém okně)"
             >
               <i data-lucide="linkedin"></i>
             </a>
+
             <a
               class="site-footer_socialLink"
-              href="#"
+              href="https://www.instagram.com/genetiaproduction/"
               target="_blank"
-              rel="noopener"
-              aria-label="Instagram"
+              rel="me noopener"
+              aria-label="Genetia Production na Instagramu (otevře se v novém okně)"
             >
               <i data-lucide="instagram"></i>
             </a>
@@ -620,7 +629,7 @@
               </li>
 
               <li>
-                <a class="site-footer_link" href="tel:+420000000000">
+                <a class="site-footer_link" href="tel:+420311440038">
                   <i data-lucide="phone"></i>
                   <span>+420&nbsp;311&nbsp;440&nbsp;038</span>
                 </a>
@@ -649,14 +658,43 @@
             © <span id="year"></span> Genetia Production s.r.o. Všechna práva
             vyhrazena.
           </small>
-          <button
-            class="btn btn--ghost theme-switch"
-            type="button"
-            data-theme-toggle
-            aria-label="Toggle theme"
-          >
-            Theme
-          </button>
+
+          <nav class="site-footer_legal" aria-label="Právní informace">
+            <ul class="site-footer_legalList">
+              <li>
+                <a
+                  class="site-footer_link site-footer_legalLink"
+                  href="../legal/#gdpr"
+                >
+                  Ochrana osobních údajů
+                </a>
+              </li>
+              <li>
+                <a
+                  class="site-footer_link site-footer_legalLink"
+                  href="../legal/#cookies"
+                >
+                  Cookies
+                </a>
+              </li>
+              <li>
+                <a
+                  class="site-footer_link site-footer_legalLink"
+                  href="../legal/#terms"
+                >
+                  Podmínky použití
+                </a>
+              </li>
+              <li>
+                <a
+                  class="site-footer_link site-footer_legalLink"
+                  href="../legal/#terms_and_conditions"
+                >
+                  Obchodní podmínky
+                </a>
+              </li>
+            </ul>
+          </nav>
 
           <small class="site-footer_dev">
             Vyvinul: <span>Martin Gronych</span>

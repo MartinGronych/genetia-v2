@@ -3,17 +3,27 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Kontakt – Genetia v2</title>
+    <title>Kontakt – Genetia</title>
 
     <!-- Theme bootstrap (FOUC-free) -->
     <script>
-(() => {
-  const saved = localStorage.getItem("theme"); // "light" | "dark" | null
-  const systemDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
-  const theme = saved || (systemDark ? "dark" : "light");
-  document.documentElement.dataset.theme = theme;
-})();
-</script>
+      (() => {
+        const saved = localStorage.getItem("theme"); // "light" | "dark" | null
+        const systemDark =
+          window.matchMedia &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches;
+        const theme = saved || (systemDark ? "dark" : "light");
+        document.documentElement.dataset.theme = theme;
+      })();
+    </script>
+    <!-- Import map (Lucide) -->
+    <script type="importmap">
+      {
+        "imports": {
+          "lucide": "https://esm.sh/lucide@0.395.0"
+        }
+      }
+    </script>
 
     <link rel="stylesheet" href="../assets/css/styles.css" />
     <link rel="stylesheet" href="../assets/css/pages/kontakt.css" />
@@ -24,51 +34,309 @@
 
     <header class="site-header">
       <div class="container site-header__inner">
-        <a class="site-brand" href="../">Genetia</a>
+        <a class="site-brand" href="../" aria-label="Genetia – úvod">
+          <img
+            src="../assets/images/logo/GENETIA-G_logo.webp"
+            alt="Genetia"
+            class="site-brand__logo"
+          />
+        </a>
 
         <nav class="site-nav" aria-label="Primary">
           <ul class="nav-list">
-            <li><a class="nav-link" href="../o-spolecnosti/">O společnosti</a></li>
-            <li><a class="nav-link" href="../analyticke-sluzby/">Analytické služby</a></li>
-            <li><a class="nav-link" href="../vyvoj-a-vyzkum/">Vývoj a výzkum</a></li>
+            <li>
+              <a class="nav-link" href="../o-spolecnosti/">O společnosti</a>
+            </li>
+            <li>
+              <a class="nav-link" href="../analyticke-sluzby/"
+                >Analytické služby</a
+              >
+            </li>
+            <li>
+              <a class="nav-link" href="../vyvoj-a-vyzkum/">Vývoj a výzkum</a>
+            </li>
             <li><a class="nav-link" href="../produkty/">Produkty</a></li>
             <li><a class="nav-link" href="../certifikace/">Certifikace</a></li>
             <li><a class="nav-link" href="../kontakt/">Kontakt</a></li>
           </ul>
         </nav>
 
-        <button class="nav-toggle btn btn--ghost" type="button" data-nav-toggle aria-label="Open menu">
-          Menu
-        </button>
+        <button
+          class="nav-toggle btn btn--ghost"
+          type="button"
+          data-nav-toggle
+          aria-label="Open menu"
+        ></button>
       </div>
     </header>
 
     <main id="main" class="site-main">
-      <section class="section contact">
+      <section class="section contact" id="kontakt">
         <div class="container">
-          <p class="page-kicker">Genetia</p>
-          <h1 class="page-title">Kontakt</h1>
-          <p class="page-lead">Kontakt (v2 template). Napojíme formuláře, mapu a filtry při migraci.</p>
+          <!-- Head (v1 look) -->
+          <div class="contact-page_head">
+            <h1 class="contact-page_title">Kontaktujte nás</h1>
+            <div class="contact-page_rule" aria-hidden="true"></div>
+          </div>
 
-          <div class="card">
-            <div class="card__body stack">
-              <h2 class="section-title">Placeholder</h2>
-              <p class="section-intro">Tady bude přepis sekcí z Genetia v1 → v2.</p>
+          <!-- Columns -->
+          <div
+            class="contact-columns"
+            role="group"
+            aria-label="Kontaktní údaje a formulář"
+          >
+            <!-- Left: contact info (v1 content, v2 card shell) -->
+            <div class="contact-columns__left">
+              <div class="card contact-card">
+                <div class="card__body stack">
+                  <h2 class="contact-card_title">Genetia Production s.r.o.</h2>
+
+                  <div class="contact-card_block">
+                    <div class="contact-card_label">Adresa</div>
+                    <div class="contact-card_value">
+                      <a
+                        href="https://maps.app.goo.gl/KSAFnAKaUEwaw8xv7"
+                        target="_blank"
+                        rel="noopener"
+                        class="contact-link contact-link--row"
+                        aria-label="Otevřít adresu v Mapách"
+                      >
+                        <i data-lucide="map-pin"></i>
+                        <span>Inovační 122, Zlatníky – Hodkovice</span>
+                      </a>
+                    </div>
+                  </div>
+
+                  <div class="contact-card_block">
+                    <div class="contact-card_label">IČO</div>
+                    <div class="contact-card_value">19452519</div>
+                  </div>
+
+                  <div class="contact-card_block">
+                    <div class="contact-card_label">DIČ</div>
+                    <div class="contact-card_value">CZ19452519</div>
+                  </div>
+
+                  <div class="contact-card_block">
+                    <div class="contact-card_label">Telefon</div>
+                    <div class="contact-card_value">
+                      <a href="tel:+420000000000" class="contact-link"
+                        >+420 311 440 038</a
+                      >
+                    </div>
+                  </div>
+
+                  <div class="contact-card_block">
+                    <div class="contact-card_label">E-mail</div>
+                    <div class="contact-card_value">
+                      <a href="mailto:info@genetia.eu" class="contact-link"
+                        >info@genetia.eu</a
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right: v2 base form (without reCAPTCHA) -->
+            <div class="contact-columns__right">
+              <div class="container">
+                <div class="form__grid">
+                  <div class="form__body">
+                    <form
+                      class="form stack stack--sm"
+                      id="contactForm"
+                      method="POST"
+                      novalidate
+                    >
+                      <!-- reCaptcha v3 token (napojíme později) -->
+                      <input
+                        type="hidden"
+                        name="recaptcha_token"
+                        id="recaptchaToken"
+                      />
+
+                      <!-- Honeypot (antispam) -->
+                      <input
+                        type="text"
+                        name="_gotcha"
+                        tabindex="-1"
+                        autocomplete="off"
+                        class="form__gotcha"
+                        aria-hidden="true"
+                      />
+
+                      <!-- Filtry zájmu -->
+                      <fieldset class="form__fieldset">
+                        <legend class="form__legend">
+                          S jakou službou Vám můžeme pomoci?
+                        </legend>
+
+                        <label class="form__check">
+                          <input
+                            class="form__check-input"
+                            type="checkbox"
+                            name="interest_extrakty"
+                            value="1"
+                            data-interest="extrakty"
+                          />
+                          <span class="form__check-label"
+                            >Požaduji výrobu konopných extraktů</span
+                          >
+                        </label>
+
+                        <label class="form__check">
+                          <input
+                            class="form__check-input"
+                            type="checkbox"
+                            name="interest_analyzy"
+                            value="1"
+                            data-interest="analyzy"
+                          />
+                          <span class="form__check-label"
+                            >Požaduji analytické služby</span
+                          >
+                        </label>
+
+                        <!-- souhrn do emailu (doplní JS v dalším kroku) -->
+                        <input
+                          type="hidden"
+                          name="interest_summary"
+                          value="Nezvoleno"
+                        />
+                      </fieldset>
+
+                      <div class="form__row">
+                        <label class="form__label" for="contact-name"
+                          >Jméno a příjmení</label
+                        >
+                        <input
+                          class="form__control"
+                          id="contact-name"
+                          name="name"
+                          type="text"
+                          placeholder="Jméno a příjmení"
+                          autocomplete="name"
+                          required
+                        />
+                        <div class="form__error" aria-live="polite" hidden>
+                          Chyba ve jménu.
+                        </div>
+                      </div>
+
+                      <div class="form__row">
+                        <label class="form__label" for="contact-email"
+                          >E-mail</label
+                        >
+                        <input
+                          class="form__control"
+                          id="contact-email"
+                          name="_replyto"
+                          type="email"
+                          placeholder="E-mail"
+                          autocomplete="email"
+                          required
+                        />
+                        <div class="form__error" aria-live="polite" hidden>
+                          Chyba v e-mailu.
+                        </div>
+                      </div>
+
+                      <div class="form__row">
+                        <label class="form__label" for="contact-subject"
+                          >Předmět (volitelné)</label
+                        >
+                        <input
+                          class="form__control"
+                          id="contact-subject"
+                          name="subject"
+                          type="text"
+                          placeholder="Předmět zprávy (volitelné)"
+                          autocomplete="off"
+                        />
+                      </div>
+
+                      <div class="form__row">
+                        <label class="form__label" for="contact-message"
+                          >Zpráva</label
+                        >
+                        <textarea
+                          class="form__control"
+                          id="contact-message"
+                          name="message"
+                          rows="5"
+                          placeholder="Vaše zpráva..."
+                          required
+                        ></textarea>
+                        <div class="form__error" aria-live="polite" hidden>
+                          Chyba ve zprávě.
+                        </div>
+                      </div>
+
+                      <div class="form__actions cluster">
+                        <button class="btn btn--secondary" type="submit">
+                          Odeslat zprávu
+                        </button>
+                      </div>
+
+                      <!-- reCAPTCHA notice (Google requirement) – napojíme později -->
+                      <p class="form__recaptcha-notice">
+                        Tato stránka je chráněna pomocí reCAPTCHA a platí
+                        <a
+                          href="https://policies.google.com/privacy"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          Zásady ochrany osobních údajů
+                        </a>
+                        a
+                        <a
+                          href="https://policies.google.com/terms"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          Podmínky služby
+                        </a>
+                        společnosti Google.
+                      </p>
+
+                      <!-- Inline fallback místo modalu -->
+                      <div
+                        id="formInlineMessage"
+                        class="form__inline-message"
+                        hidden
+                      ></div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Map -->
+          <div class="contact-map" aria-label="Mapa">
+            <div class="card contact-map_frame">
+              <div class="card__body">
+                <div
+                  id="contactMap"
+                  class="contact-map_canvas"
+                  aria-label="Mapa – Genetia Production"
+                ></div>
+              </div>
             </div>
           </div>
         </div>
       </section>
-
     </main>
 
     <div class="mobile-nav" data-mobile-nav aria-hidden="true">
       <div class="mobile-nav__overlay" data-nav-close></div>
-      <div class="mobile-nav__panel" role="dialog" aria-modal="true" aria-label="Menu">
-        <div class="mobile-nav__header">
-          <span class="mobile-nav__title">Genetia</span>
-          <button class="btn btn--ghost" type="button" data-nav-close aria-label="Close menu">Close</button>
-        </div>
-
+      <div
+        class="mobile-nav__panel"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Menu"
+      >
         <nav class="mobile-nav__links" aria-label="Mobile">
           <a class="nav-link" href="../o-spolecnosti/">O společnosti</a>
           <a class="nav-link" href="../analyticke-sluzby/">Analytické služby</a>
@@ -77,25 +345,195 @@
           <a class="nav-link" href="../certifikace/">Certifikace</a>
           <a class="nav-link" href="../kontakt/">Kontakt</a>
         </nav>
-
-        <div class="mobile-nav__footer">
-          <button class="btn btn--ghost" type="button" data-theme-toggle>Theme</button>
-        </div>
       </div>
     </div>
 
-    <footer class="site-footer">
-      <div class="container site-footer__inner">
-        <div class="site-footer__bottom">
-          <p class="meta">Genetia v2 template (internal)</p>
+    <!-- FOOTER -->
+    <footer class="site-footer" aria-labelledby="footerTitle">
+      <div class="site-footer_container">
+        <!-- Brand -->
+        <div class="site-footer_brand">
+          <h2 class="visually-hidden" id="footerTitle">
+            Začneme spolu měřit výsledky?
+          </h2>
+
+          <a class="site-footer_logo" href="../" aria-label="Genetia – úvod">
+            <img
+              src="../assets/images/logo/GENETIA-logo.webp"
+              alt="Genetia"
+              class="site-footer_logoImg"
+            />
+          </a>
+
+          <p class="site-footer_tagline">
+            Analytické služby a odborné zázemí pro farmaceutickou kvalitu.
+          </p>
+
+          <div class="site-footer_social" aria-label="Sociální sítě">
+            <a
+              class="site-footer_socialLink"
+              href="https://www.linkedin.com/company/genetia-production/?lipi=urn%3Ali%3Apage%3Ad_flagship3_search_srp_all%3BN4duTOIGQMqen%2FXtulmTlg%3D%3D"
+              target="_blank"
+              rel="me noopener"
+              aria-label="Genetia Production na LinkedIn (otevře se v novém okně)"
+            >
+              <i data-lucide="linkedin"></i>
+            </a>
+
+            <a
+              class="site-footer_socialLink"
+              href="https://www.instagram.com/genetiaproduction/"
+              target="_blank"
+              rel="me noopener"
+              aria-label="Genetia Production na Instagramu (otevře se v novém okně)"
+            >
+              <i data-lucide="instagram"></i>
+            </a>
+          </div>
         </div>
 
-        <div class="cluster">
-          <a class="btn btn--link" href="../legal/">Legal</a>
-          <a class="btn btn--link" href="../ui-kit/">UI Kit</a>
-          <button class="btn btn--ghost theme-switch" type="button" data-theme-toggle aria-label="Toggle theme">
-            Theme
-          </button>
+        <!-- Columns -->
+        <div class="site-footer_cols">
+          <nav class="site-footer_col" aria-label="Odkazy – O společnosti">
+            <h3 class="site-footer_heading">Genetia</h3>
+            <ul class="site-footer_list">
+              <li>
+                <a class="site-footer_link" href="../o-spolecnosti/">
+                  O společnosti
+                </a>
+              </li>
+              <li>
+                <a class="site-footer_link" href="../kontakt/"> Kontakt </a>
+              </li>
+            </ul>
+          </nav>
+
+          <nav class="site-footer_col" aria-label="Odkazy – Služby">
+            <h3 class="site-footer_heading">Služby</h3>
+            <ul class="site-footer_list">
+              <li>
+                <a class="site-footer_link" href="../analyticke-sluzby/">
+                  Analytické služby
+                </a>
+              </li>
+              <li>
+                <a class="site-footer_link" href="../vyvoj-a-vyzkum/">
+                  Vývoj a výzkum
+                </a>
+              </li>
+              <li>
+                <a
+                  class="site-footer_link"
+                  href="../analyticke-sluzby/#testovaci-panely"
+                >
+                  Naše služby
+                </a>
+              </li>
+            </ul>
+          </nav>
+
+          <nav class="site-footer_col" aria-label="Odkazy – Produkty a kvalita">
+            <h3 class="site-footer_heading">Produkty</h3>
+            <ul class="site-footer_list">
+              <li>
+                <a class="site-footer_link" href="../produkty/"> Produkty </a>
+              </li>
+              <li>
+                <a class="site-footer_link" href="../certifikace/">
+                  Certifikace
+                </a>
+              </li>
+            </ul>
+          </nav>
+
+          <address
+            class="site-footer_col site-footer_contact"
+            aria-label="Kontakt"
+          >
+            <h3 class="site-footer_heading">Kontakt</h3>
+            <ul class="site-footer_list">
+              <li>
+                <a
+                  class="site-footer_link"
+                  href="mailto:info@genetia.eu"
+                  aria-label="Napsat e-mail na info@genetia.eu"
+                >
+                  <i data-lucide="mail"></i>
+                  <span>info@genetia.eu</span>
+                </a>
+              </li>
+
+              <li>
+                <a class="site-footer_link" href="tel:+420311440038">
+                  <i data-lucide="phone"></i>
+                  <span>+420&nbsp;311&nbsp;440&nbsp;038</span>
+                </a>
+              </li>
+
+              <li class="site-footer_text">
+                <a
+                  class="site-footer_link"
+                  href="https://maps.app.goo.gl/KSAFnAKaUEwaw8xv7"
+                  target="_blank"
+                  rel="noopener"
+                  aria-label="Zobrazit adresu na mapě"
+                >
+                  <i data-lucide="map-pin"></i>
+                  <span>Inovační 122, Zlatníky – Hodkovice</span>
+                </a>
+              </li>
+            </ul>
+          </address>
+        </div>
+      </div>
+
+      <div class="site-footer_bottom">
+        <div class="site-footer_bottomInner">
+          <small class="site-footer_copy">
+            © <span id="year"></span> Genetia Production s.r.o. Všechna práva
+            vyhrazena.
+          </small>
+
+          <nav class="site-footer_legal" aria-label="Právní informace">
+            <ul class="site-footer_legalList">
+              <li>
+                <a
+                  class="site-footer_link site-footer_legalLink"
+                  href="../legal/#gdpr"
+                >
+                  Ochrana osobních údajů
+                </a>
+              </li>
+              <li>
+                <a
+                  class="site-footer_link site-footer_legalLink"
+                  href="../legal/#cookies"
+                >
+                  Cookies
+                </a>
+              </li>
+              <li>
+                <a
+                  class="site-footer_link site-footer_legalLink"
+                  href="../legal/#terms"
+                >
+                  Podmínky použití
+                </a>
+              </li>
+              <li>
+                <a
+                  class="site-footer_link site-footer_legalLink"
+                  href="../legal/#terms_and_conditions"
+                >
+                  Obchodní podmínky
+                </a>
+              </li>
+            </ul>
+          </nav>
+
+          <small class="site-footer_dev">
+            Vyvinul: <span>Martin Gronych</span>
+          </small>
         </div>
       </div>
     </footer>
