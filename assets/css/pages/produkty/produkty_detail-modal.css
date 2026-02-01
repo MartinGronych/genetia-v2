@@ -1,11 +1,14 @@
 /* ==================================================
    Produkty – Detail modal (mobile-first)
-   0–1023:
-   - single column sections (no grid holes)
-   - internal scroll, hidden scrollbar
-   - smaller preview image
-   1024+:
-   - 2-column catalog layout (keep your good desktop)
+   Mobil:
+   - title + ratio na jednom řádku
+   - chytré řádkování sekcí (2-col / 3-col / 2-col)
+   - CTA sticky vždy viditelné
+   - stránka pod modalem nescrolluje (CSS :has)
+   Tablet:
+   - nový layout 768+: foto vlevo, obsah vpravo + 3sloupcové meta
+   Desktop:
+   - zachování 2-col layoutu
 ================================================== */
 
 .modal--product {
@@ -17,12 +20,19 @@
 .modal--product .modal__overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.45);
+  background: rgba(0, 0, 0, 0.664);
   backdrop-filter: blur(2px);
 }
 
+/* Lock page scroll when product modal is open (modern browsers) */
+@supports selector(body:has(.modal--product)) {
+  body:has(.modal--product[aria-hidden="false"]) {
+    overflow: hidden;
+  }
+}
+
 /* --------------------------------------------------
-   BASE (0+) = mobile-first bottom sheet + internal scroll
+   BASE (0+) = bottom sheet + internal scroll
 -------------------------------------------------- */
 
 .modal--product .modal__dialog {
@@ -31,23 +41,20 @@
   bottom: 0.5rem;
   transform: translateX(-50%);
 
-  width: calc(100% - 2rem);
-  max-height: calc(92svh - 2rem);
+  width: calc(100% - 1rem);
+  max-height: calc(90svh - 1rem);
 
   background: #fff;
-  border-radius: 18px;
+  border-radius: var(--r-md);
   box-shadow: 0 18px 50px rgba(0, 0, 0, 0.28);
-  overflow: hidden; /* scroll inside .product-modal__grid */
+  overflow: hidden;
 }
 
-/* Close = always accessible on small sizes */
+/* Close always visible */
 .product-modal__close {
-  position: sticky;
-  top: 0.5rem;
-
-  margin-left: auto;
-  margin-right: 0.5rem;
-  margin-top: 0.5rem;
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
 
   width: 44px;
   height: 44px;
@@ -81,7 +88,7 @@
   outline-offset: 3px;
 }
 
-/* Scroll container (hidden scrollbar) */
+/* Scroll container */
 .product-modal__grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -90,10 +97,11 @@
   height: 100%;
   overflow: auto;
 
-  padding: 0;
+  padding: 0.9rem;
+  padding-top: 1rem;
 
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* old Edge */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 .product-modal__grid::-webkit-scrollbar {
@@ -101,123 +109,179 @@
   height: 0;
 }
 
-/* blocks padding */
+/* no extra internal padding */
 .product-modal__media,
 .product-modal__content {
-  padding: 0.9rem;
+  padding: 0;
 }
 
 /* --------------------------------------------------
-   MEDIA (0–1023) = smaller preview image
+   MEDIA (mobile)
 -------------------------------------------------- */
 
 .product-modal__mediaFrame {
   width: 100%;
   border: 0;
-  background: rgba(0, 0, 0, 0.03);
+  background: var(--bg);
   border-radius: 16px;
-  padding: 0.7rem;
 
-  /* smaller than before */
-  min-height: 140px;
+  /* prostor pro lupu v rohu */
+  padding: 0.65rem;
+  padding-top: 2.2rem;
+
+  min-height: 118px;
 
   display: grid;
-  place-items: center;
+  place-items: start center;
 
   cursor: zoom-in;
   overflow: hidden;
   position: relative;
 }
 
-.product-modal__mediaFrame:focus-visible {
-  outline: 3px solid rgba(168, 199, 43, 0.45);
-  outline-offset: 3px;
-}
-
+/* lupa vždy NA fotce (top-left), ne dole */
 .product-modal__mediaFrame::after {
-  content: "Zvětšit";
+  content: "";
   position: absolute;
   left: 0.65rem;
-  bottom: 0.6rem;
+  top: 0.65rem;
 
-  padding: 0.22rem 0.5rem;
+  width: 34px;
+  height: 34px;
   border-radius: 999px;
 
-  background: rgba(255, 255, 255, 0.85);
-  color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(255, 255, 255, 0.6);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 18px 18px;
 
-  font-weight: 700;
-  font-size: 0.72rem;
-  letter-spacing: 0.02em;
+  transition: transform 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
+
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23444' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='M21 21l-4.3-4.3'/%3E%3C/svg%3E");
+
+  pointer-events: none;
 }
 
-/* preview (contain + light emphasis on label, but not huge) */
+.product-modal__mediaFrame:hover::after {
+  background-color: rgba(255, 255, 255, 0.98);
+  transform: scale(1.06);
+}
+
+.product-modal__mediaFrame:active::after {
+  transform: scale(0.96);
+}
+
+.product-modal__mediaFrame:focus-visible {
+  outline: 3px solid rgba(168, 199, 43, 0.55);
+  outline-offset: 2px;
+}
+
 .product-modal__image {
   width: 100%;
   height: auto;
-  max-height: 120px;
+  max-height: 108px;
 
   object-fit: contain;
   display: block;
   border-radius: 14px;
 
-  transform: scale(1.2) translateY(8%);
+  transform: scale(1.12) translateY(4%);
   transform-origin: center;
 }
 
 /* --------------------------------------------------
-   HEADER / TYPO (0–1023)
+   HEADER (mobile): title + ratio on one row
 -------------------------------------------------- */
 
 .product-modal__header {
-  padding-top: 0.1rem;
+  padding-top: 0.75rem;
+
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-areas:
+    "title ratio"
+    "desc  desc";
+  column-gap: 0.65rem;
+  row-gap: 0.35rem;
+  align-items: baseline;
 }
 
 .product-modal__title {
+  grid-area: title;
   margin: 0;
   color: var(--brand-800);
   font-weight: 800;
   line-height: 1.15;
-  font-size: clamp(1.25rem, 3.4vw, 1.6rem);
+  font-size: clamp(1.45rem, 3.2vw, 1.45rem);
 }
 
 .product-modal__ratio {
-  display: inline-block;
-  margin-top: 0.4rem;
+  grid-area: ratio;
+  justify-self: end;
 
-  padding: 0.22rem 0.6rem;
+  display: inline-block;
+  margin: 0;
+
+  padding: 0.2rem 0.55rem;
   border-radius: 999px;
 
   background: rgba(168, 199, 43, 0.16);
   color: rgba(0, 0, 0, 0.55);
 
   font-weight: 700;
-  font-size: 0.88rem;
+  font-size: 0.85rem;
+  white-space: nowrap;
 }
 
 .product-modal__desc {
-  margin: 0.6rem 0 0;
-  color: rgba(0, 0, 0, 0.62);
-  line-height: 1.6;
-  font-size: 0.95rem;
-  max-width: 60ch;
+  grid-area: desc;
+  margin: 0;
+  color: rgba(0, 0, 0, 0.295);
+  line-height: 1.55;
+  font-size: 0.92rem;
+  max-width: 62ch;
 }
 
 /* --------------------------------------------------
-   SECTIONS GRID (0–1023) = single column (mobile-first)
+   SECTIONS (mobile): rows exactly as requested
 -------------------------------------------------- */
 
 .product-modal__sections {
   margin-top: 0.85rem;
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 0.85rem;
+  gap: 0.75rem;
+}
+
+/* Row wrappers */
+.product-modal__row {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.product-modal__row--top {
+  grid-template-columns: 1fr 1fr;
   align-items: start;
 }
 
+.product-modal__row--extraction {
+  grid-template-columns: 1fr;
+}
+
+.product-modal__row--certmeta {
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: start;
+  gap: 0.6rem 0.75rem;
+}
+
+.product-modal__row--forms {
+  grid-template-columns: 1fr 1fr;
+  align-items: start;
+  gap: 0.75rem;
+}
+
 .product-modal__label {
-  margin: 0 0 0.35rem;
-  font-size: 0.78rem;
+  margin: 0 0 0.3rem;
+  font-size: 0.76rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   font-weight: 800;
@@ -227,25 +291,28 @@
 .product-modal__text {
   margin: 0;
   color: rgba(0, 0, 0, 0.7);
-  line-height: 1.55;
+  line-height: 1.5;
+  font-size: 0.95rem;
 }
 
+/* Účinné látky: "THC – 25% (hm./hm.)" in one line */
 .product-modal__list {
   margin: 0;
   display: grid;
-  gap: 0.4rem;
+  gap: 0.35rem;
 }
 
 .product-modal__listRow {
-  display: grid;
-  grid-template-columns: 92px 1fr;
-  gap: 0.7rem;
+  display: flex;
+  align-items: baseline;
+  gap: 0.45rem;
 }
 
 .product-modal__listKey {
   margin: 0;
   font-weight: 800;
   color: rgba(0, 0, 0, 0.72);
+  white-space: nowrap;
 }
 
 .product-modal__listVal {
@@ -253,21 +320,14 @@
   color: rgba(0, 0, 0, 0.68);
 }
 
-/* Meta stacked (no 3 columns under 1024) */
-.product-modal__meta {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 0.7rem;
-  margin-top: 0.1rem;
-}
-
+/* Meta items (package/container/erecept) */
 .product-modal__metaItem {
   display: grid;
-  gap: 0.3rem;
+  gap: 0.25rem;
 }
 
 .product-modal__metaLabel {
-  font-size: 0.78rem;
+  font-size: 0.76rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   font-weight: 800;
@@ -279,32 +339,53 @@
   color: rgba(0, 0, 0, 0.72);
 }
 
-/* Forms */
+/* Forms: 2x2 squares */
 .product-modal__chips {
   list-style: none;
   padding: 0;
   margin: 0.35rem 0 0;
-  display: flex;
-  flex-wrap: wrap;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 0.55rem;
 }
 
 .product-modal__chip {
   border: 1px solid rgba(0, 0, 0, 0.14);
-  border-radius: 999px;
-  padding: 0.33rem 0.6rem;
+  border-radius: 12px;
+
+  padding: 0.55rem 0.65rem;
   background: rgba(0, 0, 0, 0.02);
   color: rgba(0, 0, 0, 0.72);
-  font-weight: 600;
+
+  font-weight: 700;
   font-size: 0.88rem;
+  text-align: center;
+  line-height: 1.15;
+
+  min-height: 40px;
+  display: grid;
+  place-items: center;
 }
 
-/* Footer CTA */
+/* --------------------------------------------------
+   CTA sticky (always visible)
+-------------------------------------------------- */
+
 .product-modal__footer {
+  position: sticky;
+  bottom: 0;
+  z-index: 40;
+
   display: flex;
   justify-content: center;
-  margin-top: 0.25rem;
-  padding-bottom: 0.25rem;
+
+  margin-top: 0.75rem;
+  padding: 0.75rem 0.25rem calc(0.75rem + env(safe-area-inset-bottom));
+
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(6px);
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
 }
 
 .product-modal__cta.btn.btn-ghost {
@@ -315,209 +396,20 @@
 }
 
 /* --------------------------------------------------
-   Zoom overlay (inside modal) – animated open/close
--------------------------------------------------- */
-
-.product-zoom {
-  position: absolute;
-  inset: 0;
-  z-index: 80;
-
-  /* no display:none -> enables close animation */
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-
-  transition: opacity 220ms ease, visibility 0s linear 220ms;
-}
-
-.product-zoom__backdrop {
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.58);
-  backdrop-filter: blur(2px);
-
-  opacity: 0;
-  transition: opacity 220ms ease;
-}
-
-.product-zoom__panel {
-  position: absolute;
-  inset: 0;
-  padding: 1rem;
-  display: grid;
-  place-items: center;
-
-  transform: translateY(8px) scale(0.985);
-  opacity: 0;
-  transition: transform 240ms ease, opacity 240ms ease;
-}
-
-/* OPEN STATE */
-.product-zoom[data-open="true"] {
-  opacity: 1;
-  visibility: visible;
-  pointer-events: auto;
-
-  transition: opacity 220ms ease, visibility 0s;
-}
-
-.product-zoom[data-open="true"] .product-zoom__backdrop {
-  opacity: 1;
-}
-
-.product-zoom[data-open="true"] .product-zoom__panel {
-  transform: translateY(0) scale(1);
-  opacity: 1;
-}
-
-/* FULLSCREEN IMAGE (mobile-first) */
-.product-zoom .product-zoom__img {
-  width: auto;
-  height: 100%;
-  max-height: 100%;
-  max-width: 100%;
-  object-fit: contain;
-  display: block;
-  border-radius: 14px;
-  background: rgba(255, 255, 255, 0.02);
-
-  transform: scale(3.3) translateY(0);
-  transform-origin: center;
-
-  transition: transform 260ms ease;
-}
-
-.product-zoom[data-open="true"] .product-zoom__img {
-  transform: scale(3.25) translateY(0);
-}
-
-/* Close button for zoom */
-.product-zoom__close {
-  position: absolute;
-  right: 0.9rem;
-  top: 1.75rem;
-
-  width: 44px;
-  height: 44px;
-  border: 0;
-  border-radius: 999px;
-
-  background: rgba(0, 0, 0, 0.55);
-  color: rgba(255, 255, 255, 0.98);
-
-  font-size: 1.8rem;
-  line-height: 1;
-  cursor: pointer;
-
-  display: grid;
-  place-items: center;
-  z-index: 90;
-
-  transition: background 0.15s ease, transform 0.15s ease, opacity 220ms ease;
-}
-
-.product-zoom__close:hover {
-  background: rgba(0, 0, 0, 0.65);
-}
-
-.product-zoom__close:active {
-  transform: translateY(1px);
-}
-
-.product-zoom__close:focus-visible {
-  outline: 3px solid rgba(168, 199, 43, 0.55);
-  outline-offset: 3px;
-}
-
-
-/* --------------------------------------------------
-   Zoom scale per breakpoints (min-width only)
--------------------------------------------------- */
-
-@media (min-width: 425px) {
-  .product-zoom .product-zoom__img {
-    transform: scale(2.8) translateY(0);
-  }
-  .product-zoom[data-open="true"] .product-zoom__img {
-    transform: scale(2.75) translateY(0);
-  }
-}
-
-@media (min-width: 768px) {
-  .product-zoom .product-zoom__img {
-    transform: scale(2.2) translateY(0);
-  }
-  .product-zoom[data-open="true"] .product-zoom__img {
-    transform: scale(2.15) translateY(0);
-  }
-  .product-modal__footer {
-    position: sticky;
-    bottom: 0;
-    z-index: 40;
-
-    margin-top: 0;
-    padding: 0.75rem 0.9rem calc(0.75rem + env(safe-area-inset-bottom));
-    background: rgba(255, 255, 255, 0.96);
-    backdrop-filter: blur(6px);
-
-    /* jemná linka aby to působilo jako systémová “action bar” */
-    border-top: 1px solid rgba(0, 0, 0, 0.08);
-  }
-
-  /* aby obsah “nekončil pod sticky lištou” */
-  .product-modal__sections {
-    padding-bottom: calc(1.2rem + 64px);
-  }
-}
-
-@media (min-width: 1024px) {
-  .product-zoom .product-zoom__img {
-    transform: scale(1.85) translateY(0);
-  }
-  .product-zoom[data-open="true"] .product-zoom__img {
-    transform: scale(1.8) translateY(0);
-  }
-}
-
-@media (min-width: 1440px) {
-  .product-zoom .product-zoom__img {
-    transform: scale(1.7) translateY(0);
-  }
-  .product-zoom[data-open="true"] .product-zoom__img {
-    transform: scale(1.65) translateY(0);
-  }
-}
-
-@media (min-width: 1920px) {
-  .product-zoom .product-zoom__img {
-    transform: scale(1.6) translateY(0);
-  }
-  .product-zoom[data-open="true"] .product-zoom__img {
-    transform: scale(1.55) translateY(0);
-  }
-}
-
-/* Reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  .product-zoom,
-  .product-zoom__backdrop,
-  .product-zoom__panel,
-  .product-zoom .product-zoom__img {
-    transition: none !important;
-  }
-}
-
-/* --------------------------------------------------
-   425+ small padding tweak only
+   425+ small tweak
 -------------------------------------------------- */
 @media (min-width: 425px) {
   .modal--product .modal__dialog {
     width: calc(100% - 1.25rem);
   }
+
+  .product-modal__image {
+    max-height: 120px;
+  }
 }
+
 /* --------------------------------------------------
-   768+ DESKTOP SWITCH (keep your good catalog)
+   768+ TABLET: nový layout podle zadání
 -------------------------------------------------- */
 @media (min-width: 768px) {
   .modal--product .modal__dialog {
@@ -527,82 +419,149 @@
     bottom: auto;
     transform: translate(-50%, -50%);
 
-    width: min(530px, calc(80% - 2.5rem));
-    max-height: none;
+    width: min(920px, calc(96% - 2.5rem));
+    max-height: min(84svh, 820px);
+  }
+
+  .product-modal__grid {
+    grid-template-columns: 0.9fr 1.25fr;
+    gap: 1.2rem;
+    padding: 1.25rem;
+    overflow: auto;
+  }
+
+  /* Foto vlevo, lupa vždy v rohu fotky */
+  .product-modal__mediaFrame {
+    min-height: 360px;
+    padding-top: 2.2rem;
+  }
+
+  .product-modal__image {
+    max-height: 320px;
+    transform: scale(1.18) translateY(4%);
+  }
+
+  /* Header vpravo: přidej prostor nahoře, aby ratio nelezlo do close */
+  .product-modal__header {
+    padding-top: 0.4rem;
+    padding-right: 3.25rem; /* ochrana proti překryvu s close */
+  }
+
+  .product-modal__title {
+    font-size: clamp(1.6rem, 2.1vw, 2rem);
+  }
+
+  .product-modal__ratio {
+    font-size: clamp(0.85rem, 1.05vw, 0.95rem);
+  }
+
+  .product-modal__desc {
+    font-size: clamp(0.95rem, 1.15vw, 1.05rem);
+    color: rgba(0, 0, 0, 0.42);
+  }
+
+  /* Tablet: sekce řídíme jako 3sloupcový grid přes wrappery */
+  .product-modal__sections {
+    display: grid;
+    grid-template-columns: 1.2fr 0.9fr 1fr;
+    gap: 0.9rem 1.1rem;
+    align-items: start;
+  }
+
+  /* TOP (účinné látky + nosič) pod desc, přes celou šířku meta gridu */
+  .product-modal__row--top {
+    grid-column: 1 / -1;
+    grid-template-columns: 1.2fr 0.9fr;
+    gap: 1rem;
+  }
+
+  /* EXTRAKCE jako plná šířka */
+  .product-modal__row--extraction {
+    grid-column: 1 / -1;
+  }
+
+  /* LEVÝ SLOUPEC: certifikace + balení + typ obalu (pod sebe) */
+  .product-modal__row--certmeta {
+    grid-column: 1 / 2;
+    grid-template-columns: 1fr;
+    gap: 0.7rem;
+  }
+
+  /* STŘED + PRAVÝ SLOUPEC: e-recept + formy */
+  .product-modal__row--forms {
+    grid-column: 2 / -1;
+    grid-template-columns: 0.9fr 1fr;
+    gap: 1rem;
+    align-items: start;
+  }
+
+  /* Forms grid (2x2) zůstává */
+  .product-modal__chips {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.6rem;
+  }
+
+  .product-modal__chip {
+    font-size: clamp(0.85rem, 1vw, 0.95rem);
+    min-height: 42px;
+  }
+
+  /* CTA sticky zůstává */
+  .product-modal__footer {
+    margin-top: 0.9rem;
   }
 }
 
 /* --------------------------------------------------
-   1024+ DESKTOP SWITCH (keep your good catalog)
+   1024+ DESKTOP: keep your good catalog
 -------------------------------------------------- */
 @media (min-width: 1024px) {
   .modal--product .modal__dialog {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    bottom: auto;
-    transform: translate(-50%, -50%);
-
     width: min(920px, calc(100% - 2.5rem));
-    max-height: none;
-  }
-
-  .product-modal__close {
-    position: absolute;
-    top: 0.75rem;
-    right: 0.9rem;
-    margin: 0;
+    max-height: min(82svh, 860px);
   }
 
   .product-modal__grid {
     grid-template-columns: 0.95fr 1.45fr;
     gap: 1.15rem;
     padding: 1.25rem;
-    height: auto;
-    overflow: visible;
-  }
-
-  .product-modal__media,
-  .product-modal__content {
-    padding: 0;
+    overflow: auto;
   }
 
   .product-modal__mediaFrame {
     min-height: 360px;
     padding: 0.85rem;
+    padding-top: 2.2rem;
   }
 
   .product-modal__image {
     max-height: 320px;
-    transform: scale(1.45) translateY(10%);
+    transform: scale(1.25) translateY(6%);
   }
 
   .product-modal__title {
     font-size: 2rem;
   }
 
-  .product-modal__ratio {
-    font-size: 0.95rem;
-  }
-
   .product-modal__desc {
-    margin-top: 0.75rem;
     font-size: 1rem;
   }
+}
 
-  /* Desktop sections = 2 columns + meta 3 columns */
-  .product-modal__sections {
-    grid-template-columns: 1.1fr 1fr;
-    grid-auto-flow: row dense;
-    gap: 0.9rem 1.1rem;
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .product-modal__close,
+  .product-modal__mediaFrame::after {
+    transition: none !important;
   }
+}
 
-  .product-modal__meta {
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 0.9rem;
-  }
+/* --------------------------------------------------
+   Zoom – safety limit proti překrytí close (≈900px)
+-------------------------------------------------- */
+@media (min-width: 900px) {
+  .product-zoom .product-zoom__img {
+    width: min(920px, calc(96% - 2.5rem));
 
-  .product-modal__cta.btn.btn-ghost {
-    padding: 0.85rem 1.6rem;
   }
 }

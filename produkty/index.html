@@ -136,7 +136,7 @@
                     Jak se kvalita extraktu hlídá v průběhu výroby.
                   </p>
                 </div>
-                <a class="public-card__link" href="#">
+                <a class="public-card__link" href="#" data-video-modal-open>
                   Prohlédněte si video z výroby
                 </a>
               </article>
@@ -225,136 +225,224 @@
     </div>
 
     <!-- PRODUCT DETAIL MODAL -->
-<div class="modal modal--product" id="productModal" aria-hidden="true">
-  <div class="modal__overlay" data-product-modal-close tabindex="-1"></div>
+    <div class="modal modal--product" id="productModal" aria-hidden="true">
+      <div class="modal__overlay" data-product-modal-close tabindex="-1"></div>
 
-  <div
-    class="modal__dialog product-modal"
-    role="dialog"
-    aria-modal="true"
-    aria-labelledby="productModalTitle"
-    aria-describedby="productModalDesc"
-    tabindex="-1"
-  >
-    <button
-      class="product-modal__close"
-      type="button"
-      data-product-modal-close
-      aria-label="Zavřít"
-    >
-      ×
-    </button>
-
-    <div class="product-modal__grid">
-      <!-- MEDIA -->
-      <div class="product-modal__media">
+      <div
+        class="modal__dialog product-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="productModalTitle"
+        aria-describedby="productModalDesc"
+        tabindex="-1"
+      >
         <button
-          class="product-modal__mediaFrame"
+          class="product-modal__close"
           type="button"
-          data-product-zoom-open
-          aria-label="Zvětšit fotografii produktu"
-        >
-          <img
-            id="productModalImage"
-            class="product-modal__image"
-            src=""
-            alt=""
-            loading="lazy"
-          />
-        </button>
-      </div>
-
-      <!-- CONTENT -->
-      <div class="product-modal__content">
-        <header class="product-modal__header">
-          <h2 class="product-modal__title" id="productModalTitle"></h2>
-          <span class="product-modal__ratio" id="productModalRatio"></span>
-          <p class="product-modal__desc" id="productModalDesc"></p>
-        </header>
-
-        <div class="product-modal__sections">
-          <!-- Composition -->
-          <section class="product-modal__section product-modal__section--composition">
-            <h3 class="product-modal__label">Účinné látky / složení</h3>
-            <dl class="product-modal__list" id="productModalComposition"></dl>
-          </section>
-
-          <!-- Extraction -->
-          <section class="product-modal__section product-modal__section--extraction">
-            <h3 class="product-modal__label">Způsob extrakce</h3>
-            <p class="product-modal__text" id="productModalExtraction"></p>
-          </section>
-
-          <!-- Carrier -->
-          <section class="product-modal__section product-modal__section--carrier">
-            <h3 class="product-modal__label">Nosič</h3>
-            <p class="product-modal__text" id="productModalCarrier"></p>
-          </section>
-
-          <!-- Certification -->
-          <section class="product-modal__section product-modal__section--cert">
-            <h3 class="product-modal__label">Certifikace</h3>
-            <p class="product-modal__text" id="productModalCertification"></p>
-          </section>
-
-          <!-- Meta -->
-          <section class="product-modal__meta">
-            <div class="product-modal__metaItem">
-              <span class="product-modal__metaLabel">Balení</span>
-              <span class="product-modal__metaValue" id="productModalPackage"></span>
-            </div>
-            <div class="product-modal__metaItem">
-              <span class="product-modal__metaLabel">Typ obalu</span>
-              <span class="product-modal__metaValue" id="productModalContainer"></span>
-            </div>
-            <div class="product-modal__metaItem">
-              <span class="product-modal__metaLabel">E-recept</span>
-              <span class="product-modal__metaValue" id="productModalERecept"></span>
-            </div>
-          </section>
-
-          <!-- Forms -->
-          <section class="product-modal__section product-modal__section--forms">
-            <h3 class="product-modal__label">Možné lékové formy</h3>
-            <ul class="product-modal__chips" id="productModalForms"></ul>
-          </section>
-
-          <!-- CTA -->
-          <footer class="product-modal__footer">
-            <a class="btn btn-ghost product-modal__cta" href="../kontakt/">
-              Kontaktovat zástupce
-            </a>
-          </footer>
-        </div>
-      </div>
-    </div>
-
-    <!-- Fullscreen image overlay (inside modal) -->
-    <div class="product-zoom" id="productZoom" aria-hidden="true">
-      <div class="product-zoom__backdrop" data-product-zoom-close></div>
-
-      <div class="product-zoom__panel" role="dialog" aria-modal="true" aria-label="Zvětšená fotografie">
-        <button
-          class="product-zoom__close"
-          type="button"
-          data-product-zoom-close
-          aria-label="Zavřít zvětšenou fotografii"
+          data-product-modal-close
+          aria-label="Zavřít"
         >
           ×
         </button>
 
-        <img
-          id="productZoomImage"
-          class="product-zoom__img"
-          src=""
-          alt=""
-          loading="lazy"
-        />
+        <!-- SCROLL WRAPPER (new) -->
+        <div class="product-modal__scroll">
+          <div class="product-modal__grid">
+            <!-- MEDIA -->
+            <div class="product-modal__media">
+              <button
+                class="product-modal__mediaFrame"
+                type="button"
+                data-product-zoom-open
+                aria-label="Zvětšit fotografii produktu"
+              >
+                <img
+                  id="productModalImage"
+                  class="product-modal__image"
+                  src=""
+                  alt=""
+                  loading="lazy"
+                />
+              </button>
+            </div>
+
+            <!-- CONTENT -->
+            <div class="product-modal__content">
+              <header class="product-modal__header">
+                <h2 class="product-modal__title" id="productModalTitle"></h2>
+                <span
+                  class="product-modal__ratio"
+                  id="productModalRatio"
+                ></span>
+                <p class="product-modal__desc" id="productModalDesc"></p>
+              </header>
+
+              <div class="product-modal__sections">
+                <!-- ROW: composition + carrier -->
+                <div class="product-modal__row product-modal__row--top">
+                  <section
+                    class="product-modal__section product-modal__section--composition"
+                  >
+                    <h3 class="product-modal__label">Účinné látky / složení</h3>
+                    <dl
+                      class="product-modal__list"
+                      id="productModalComposition"
+                    ></dl>
+                  </section>
+
+                  <section
+                    class="product-modal__section product-modal__section--carrier"
+                  >
+                    <h3 class="product-modal__label">Nosič</h3>
+                    <p class="product-modal__text" id="productModalCarrier"></p>
+                  </section>
+                </div>
+
+                <!-- ROW: extraction full -->
+                <div class="product-modal__row product-modal__row--extraction">
+                  <section
+                    class="product-modal__section product-modal__section--extraction"
+                  >
+                    <h3 class="product-modal__label">Způsob extrakce</h3>
+                    <p
+                      class="product-modal__text"
+                      id="productModalExtraction"
+                    ></p>
+                  </section>
+                </div>
+
+                <!-- ROW: cert + package + container in one row -->
+                <div class="product-modal__row product-modal__row--certmeta">
+                  <section
+                    class="product-modal__section product-modal__section--cert"
+                  >
+                    <h3 class="product-modal__label">Certifikace</h3>
+                    <p
+                      class="product-modal__text"
+                      id="productModalCertification"
+                    ></p>
+                  </section>
+
+                  <div
+                    class="product-modal__metaItem product-modal__metaItem--package"
+                  >
+                    <span class="product-modal__metaLabel">Balení</span>
+                    <span
+                      class="product-modal__metaValue"
+                      id="productModalPackage"
+                    ></span>
+                  </div>
+
+                  <div
+                    class="product-modal__metaItem product-modal__metaItem--container"
+                  >
+                    <span class="product-modal__metaLabel">Typ obalu</span>
+                    <span
+                      class="product-modal__metaValue"
+                      id="productModalContainer"
+                    ></span>
+                  </div>
+                </div>
+
+                <!-- ROW: e-recept + forms -->
+                <div class="product-modal__row product-modal__row--forms">
+                  <div
+                    class="product-modal__metaItem product-modal__metaItem--erecept"
+                  >
+                    <span class="product-modal__metaLabel">E-recept</span>
+                    <span
+                      class="product-modal__metaValue"
+                      id="productModalERecept"
+                    ></span>
+                  </div>
+
+                  <section
+                    class="product-modal__section product-modal__section--forms"
+                  >
+                    <h3 class="product-modal__label">Možné lékové formy</h3>
+                    <ul
+                      class="product-modal__chips"
+                      id="productModalForms"
+                    ></ul>
+                  </section>
+                </div>
+              </div>
+
+              <!-- CTA moved OUTSIDE sections (important) -->
+              <footer class="product-modal__footer">
+                <a class="btn btn-ghost product-modal__cta" href="../kontakt/">
+                  Kontaktovat zástupce
+                </a>
+              </footer>
+            </div>
+          </div>
+        </div>
+
+        <!-- Fullscreen image overlay (inside modal) -->
+        <div class="product-zoom" id="productZoom" aria-hidden="true">
+          <div class="product-zoom__backdrop" data-product-zoom-close></div>
+
+          <div class="product-zoom__panel">
+            <button
+              class="product-zoom__close"
+              type="button"
+              data-product-zoom-close
+              aria-label="Zavřít zvětšenou fotografii"
+            >
+              ×
+            </button>
+
+            <img
+              id="productZoomImage"
+              class="product-zoom__img"
+              src=""
+              alt=""
+            />
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
+    <!-- Video modal (produkty - veřejnost) -->
+    <div
+      class="modal modal--video"
+      id="videoModal"
+      aria-hidden="true"
+      data-open="false"
+    >
+      <div class="modal__overlay" data-video-modal-close tabindex="-1"></div>
 
+      <div
+        class="modal__dialog video-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="videoModalTitle"
+        tabindex="-1"
+      >
+        <button
+          class="video-modal__close"
+          type="button"
+          data-video-modal-close
+          aria-label="Zavřít"
+        >
+          ×
+        </button>
+
+        <div class="video-modal__body">
+          <div class="video-modal__frame">
+            <video
+              id="videoModalPlayer"
+              class="video-modal__video"
+              src="../assets/video/Genetia1080i_2min.mp4"
+              controls
+              muted
+              playsinline
+              preload="metadata"
+              autoplay
+            ></video>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- Mobile nav -->
     <div class="mobile-nav" data-mobile-nav aria-hidden="true">

@@ -1,0 +1,176 @@
+/* ==================================================
+   Produkty – Product detail zoom overlay
+   - zoom je vrstva NAD obsahem modalu
+   - modal pod tím zešedne
+   - close (×) je vpravo nahoře PŘÍMO VE FOTCE
+================================================== */
+
+/* --------------------------------------------------
+   ZOOM ROOT
+-------------------------------------------------- */
+
+.modal--product .product-zoom {
+  position: absolute;
+  inset: 0;
+  z-index: 90;
+
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+
+  transition:
+    opacity 220ms ease,
+    visibility 0s linear 220ms;
+}
+
+/* aktivní stav */
+.modal--product .product-zoom[data-open="true"] {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+
+  transition:
+    opacity 220ms ease,
+    visibility 0s;
+}
+
+/* --------------------------------------------------
+   MODAL CONTENT DIM (šednutí modalu pod zoomem)
+-------------------------------------------------- */
+
+.modal--product .product-zoom[data-open="true"]
+~ .product-modal__grid,
+.modal--product .product-zoom[data-open="true"]
+~ .product-modal__content {
+  filter: grayscale(0.25) saturate(0.7);
+  opacity: 0.35;
+  transition: opacity 200ms ease, filter 200ms ease;
+}
+
+/* --------------------------------------------------
+   BACKDROP = ztmavení MODALU (ne celé stránky)
+-------------------------------------------------- */
+
+.modal--product .product-zoom__backdrop {
+  position: absolute;
+  inset: 0;
+
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(1px);
+
+  opacity: 0;
+  transition: opacity 220ms ease;
+}
+
+.modal--product .product-zoom[data-open="true"] .product-zoom__backdrop {
+  opacity: 1;
+}
+
+/* --------------------------------------------------
+   PANEL
+-------------------------------------------------- */
+
+.modal--product .product-zoom__panel {
+  position: absolute;
+  inset: 0;
+
+  padding: 1rem;
+  display: grid;
+  place-items: center;
+
+  opacity: 0;
+  transform: scale(0.96);
+  transition:
+    transform 240ms ease,
+    opacity 240ms ease;
+}
+
+.modal--product .product-zoom[data-open="true"] .product-zoom__panel {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* --------------------------------------------------
+   IMAGE WRAPPER
+-------------------------------------------------- */
+
+.modal--product .product-zoom__panel {
+  pointer-events: none;
+}
+
+.modal--product .product-zoom__panel > * {
+  pointer-events: auto;
+}
+
+/* samotná fotka */
+.modal--product .product-zoom__img {
+  position: relative;
+
+  max-width: 100%;
+  max-height: 100%;
+
+  object-fit: contain;
+  display: block;
+
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.02);
+
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.35);
+}
+
+/* --------------------------------------------------
+   CLOSE BUTTON – PŘÍMO VE FOTCE
+-------------------------------------------------- */
+
+.modal--product .product-zoom__close {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+
+  width: 40px;
+  height: 40px;
+
+  border: 0;
+  border-radius: 999px;
+
+  background: rgba(0, 0, 0, 0.55);
+  color: rgba(255, 255, 255, 0.95);
+
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+
+  display: grid;
+  place-items: center;
+
+  transition:
+    background 0.15s ease,
+    transform 0.15s ease,
+    opacity 150ms ease;
+}
+
+.modal--product .product-zoom__close:hover {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.modal--product .product-zoom__close:active {
+  transform: translateY(1px);
+}
+
+.modal--product .product-zoom__close:focus-visible {
+  outline: 3px solid rgba(168, 199, 43, 0.55);
+  outline-offset: 3px;
+}
+
+/* --------------------------------------------------
+   REDUCED MOTION
+-------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .modal--product .product-zoom,
+  .modal--product .product-zoom__backdrop,
+  .modal--product .product-zoom__panel {
+    transition: none !important;
+  }
+}
