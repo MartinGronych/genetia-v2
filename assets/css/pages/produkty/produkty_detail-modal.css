@@ -24,13 +24,11 @@
   backdrop-filter: blur(2px);
 }
 
-/* Lock page scroll when product modal is open (modern browsers) */
 @supports selector(body:has(.modal--product)) {
-  body:has(.modal--product[aria-hidden="false"]) {
+  body:has(.modal--product[data-open="true"]) {
     overflow: hidden;
   }
 }
-
 /* --------------------------------------------------
    BASE (0+) = bottom sheet + internal scroll
 -------------------------------------------------- */

@@ -25,7 +25,6 @@
     border-color 0.4s ease;
 }
 
-
 :root[data-theme="light"] .site-header {
   background: #fff;
   border-bottom-color: color-mix(in oklab, black 10%, transparent);
@@ -107,33 +106,8 @@
   color: var(--color-brand-hover);
 }
 
-/* ===============================
-   Underline – DESKTOP
-=============================== */
-@media (min-width: 1024px) {
-  .nav-link::after {
-    content: "";
-    position: absolute;
-    bottom: 2px;
-    left: 50%;
-    transform: translateX(-50%) scaleX(0);
-    transform-origin: center;
-
-    width: 60%;
-    height: 2px;
-    background: var(--color-brand-hover);
-    transition: transform 0.3s ease;
-  }
-
-  .nav-link:hover::after {
-    transform: translateX(-50%) scaleX(1);
-  }
-}
-
-/* ===============================
-   Underline – MOBILE NAV
-=============================== */
-.mobile-nav__links .nav-link::after {
+/* underline */
+.nav-link::after {
   content: "";
   position: absolute;
   bottom: -2px;
@@ -147,14 +121,20 @@
   transition: transform 0.3s ease;
 }
 
-.mobile-nav__links .nav-link:hover,
-.mobile-nav__links .nav-link[aria-current="page"] {
-  color: var(--color-brand-hover);
+.nav-link:hover::after,
+.nav-link:focus-visible::after,
+.nav-link[aria-current="page"]::after {
+  transform: translateX(-50%) scaleX(1);
 }
 
-.mobile-nav__links .nav-link:hover::after,
-.mobile-nav__links .nav-link:focus-visible::after {
-  transform: translateX(-50%) scaleX(1);
+.nav-link:active {
+  transform: translateY(1px);
+}
+
+.nav-link:focus-visible {
+  outline: 3px solid rgba(168, 199, 43, 0.45);
+  outline-offset: 3px;
+  border-radius: 999px;
 }
 
 /* ===============================
@@ -192,6 +172,11 @@
   transform: translateY(1px);
 }
 
+.nav-toggle:focus-visible {
+  outline: 3px solid rgba(168, 199, 43, 0.45);
+  outline-offset: 3px;
+}
+
 /* Hamburger lines */
 .nav-toggle {
   background-image: linear-gradient(var(--color-brand-hover), var(--color-brand-hover));
@@ -218,13 +203,7 @@
 
 /* Open state -> X */
 .nav-toggle[data-state="open"] {
-  background-image: none;
-  box-shadow: none;
-  background: rgba(255, 255, 255, 0.28);
-}
-
-:root:not([data-theme="light"]) .nav-toggle[data-state="open"] {
-  background: color-mix(in oklab, var(--color-surface) 35%, transparent);
+  background-size: 0 0;
 }
 
 .nav-toggle[data-state="open"]::before {
@@ -233,12 +212,13 @@
 }
 
 .nav-toggle[data-state="open"]::after {
-  bottom: 20px;
+  bottom: auto;
+  top: 20px;
   transform: rotate(-45deg);
 }
 
 /* ===============================
-   Mobile nav drawer
+   Mobile nav overlay (drawer)
 =============================== */
 .mobile-nav {
   position: fixed;
@@ -254,7 +234,9 @@
 
 .mobile-nav[aria-hidden="false"] {
   opacity: 1;
-  pointer-events: auto;
+
+  /* CHANGE: allow scrolling the page under the open nav */
+  pointer-events: none;
 }
 
 /* Overlay = click-out area (no visual dim) */
@@ -263,15 +245,18 @@
   inset: 0;
   z-index: 1;
   background: transparent;
+
+  /* CHANGE: must not block page scroll */
+  pointer-events: none;
 }
 
 .mobile-nav__panel {
   position: absolute;
   z-index: 2;
 
-  right: 10px;
+  right: 30px;
   top: calc(var(--nav-height, 70px) + 6px);
-  width: min(78vw, 420px);
+  width: min(78vw, 280px);
 
   border-radius: 1rem;
   box-shadow: 0 10px 34px rgba(0, 0, 0, 0.28);
@@ -293,6 +278,9 @@
 
   min-height: 320px;
   max-height: calc(100vh - (var(--nav-height, 70px) + 16px));
+
+  /* CHANGE: panel stays interactive while container is non-interactive */
+  pointer-events: auto;
 }
 
 .mobile-nav[aria-hidden="false"] .mobile-nav__panel {
@@ -325,118 +313,41 @@
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.28);
 }
 
+/* Mobile underline only for mobile nav */
+.mobile-nav__links .nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  transform: translateX(-50%) scaleX(0);
+  transform-origin: center;
+
+  width: 40%;
+  height: 2px;
+  background: var(--color-brand-hover);
+  transition: transform 0.3s ease;
+}
+
+.mobile-nav__links .nav-link:hover,
+.mobile-nav__links .nav-link[aria-current="page"] {
+  color: var(--color-brand-hover);
+}
+
+.mobile-nav__links .nav-link:hover::after,
+.mobile-nav__links .nav-link:focus-visible::after {
+  transform: translateX(-50%) scaleX(1);
+}
+
 /* ===============================
    Breakpoints
 =============================== */
 @media (min-width: 768px) {
   .site-header { --nav-height: 80px; }
-  .site-header__inner { padding: 0.5rem 1.5rem; }
-  .site-brand__logo { height: 55px; }
+  .site-header__inner { padding: 0.5rem 1.2rem; }
 }
 
 @media (min-width: 1024px) {
-  .site-header__inner {
-    padding: 0.5rem 2rem;
-    position: relative;
-  }
-
-  .site-brand__logo { height: 65px; }
-
-  .site-nav {
-    display: block;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-
-    /* FIX: give nav more room on 1024 so last item doesn't get clipped */
-    max-width: calc(100% - 220px);
-
-    /* FIX: do not clip last items */
-    overflow: visible;
-  }
-
-  /* FIX: reduce gap slightly on narrow desktop widths so all items fit */
-  .nav-list {
-    gap: 1.2rem;
-  }
-
+  .site-nav { display: block; }
   .nav-toggle { display: none; }
   .mobile-nav { display: none; }
-}
-
-@media (min-width: 1440px) {
-  .site-header { --nav-height: 102px; }
-}
-
-/* Back-to-top button (injected by JS) */
-.scroll-top-btn {
-  position: fixed;
-  right: 40px;
-  bottom: 40px;
-  z-index: var(--z-overlay);
-
-  width: 65px;
-  height: 65px;
-  border-radius: 999px;
-
-  border: 1px solid color-mix(in oklab, var(--color-border) 70%, transparent);
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.15);
-
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  background: rgba(255, 255, 255, 0.9);
-  transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.25s ease, opacity 0.25s ease;
-
-  opacity: 0;
-  pointer-events: none;
-  transform: translateY(4px);
-}
-
-:root:not([data-theme="light"]) .scroll-top-btn {
-  background: color-mix(in oklab, var(--color-surface) 70%, transparent);
-}
-
-.scroll-top-btn.is-visible {
-  opacity: 1;
-  pointer-events: auto;
-  transform: translateY(0);
-  backdrop-filter: blur(28px) saturate(220%);
-  -webkit-backdrop-filter: blur(28px) saturate(220%);
-}
-
-.scroll-top-btn:hover {
-  background: color-mix(in oklab, var(--color-brand) 10%, white);
-}
-
-.scroll-top-btn:active {
-  transform: translateY(1px);
-}
-
-/* Lucide uses currentColor (stroke) */
-.scroll-top-btn {
-  color: var(--color-brand-hover);
-}
-
-.scroll-top-btn__icon {
-  display: block;
-}
-/* ==================================================
-   Desktop navigation font scaling
-================================================== */
-
-/* 1440+ : +20 % */
-@media (min-width: 1440px) {
-  .nav-link {
-    font-size: 1.2em;
-  }
-}
-
-/* 2560+ : +100 % */
-@media (min-width: 2560px) {
-  .nav-link {
-    font-size: 2em;
-  }
 }

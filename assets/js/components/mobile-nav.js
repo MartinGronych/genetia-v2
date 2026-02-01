@@ -15,7 +15,6 @@ export const initMobileNav = () => {
   if (!toggle || !nav) return;
 
   const panel = nav.querySelector(".mobile-nav__panel") || nav;
-  const overlay = nav.querySelector(".mobile-nav__overlay");
 
   if (!nav.id) nav.id = "mobile-nav";
   toggle.setAttribute("aria-controls", nav.id);
@@ -38,7 +37,7 @@ export const initMobileNav = () => {
     toggle.setAttribute("data-state", "open");
     toggle.setAttribute("aria-label", "Close menu");
 
-    document.documentElement.style.overflow = "hidden";
+    // CHANGE: do NOT lock page scroll (user wants scroll under open nav)
 
     // focus first link/control inside panel
     const first = getFocusable(panel)[0];
@@ -53,7 +52,8 @@ export const initMobileNav = () => {
     toggle.setAttribute("data-state", "closed");
     toggle.setAttribute("aria-label", "Open menu");
 
-    document.documentElement.style.overflow = "";
+    // CHANGE: no scroll lock to restore
+
     lastActive?.focus?.();
   };
 
@@ -64,13 +64,8 @@ export const initMobileNav = () => {
     toggleMenu();
   });
 
-  // Close on overlay click
-  if (overlay) {
-    overlay.addEventListener("click", (e) => {
-      e.preventDefault();
-      close();
-    });
-  }
+  // NOTE: overlay click-to-close is intentionally disabled when background scrolling is allowed,
+  // because the overlay must not capture pointer/touch events.
 
   // Close on link click
   nav.addEventListener("click", (e) => {
