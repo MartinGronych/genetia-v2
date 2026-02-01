@@ -196,6 +196,11 @@
   font-size: 0.98rem;
 }
 
+/*individual buttons*/
+.certifications-card__cta > button{
+  border-radius: var(--r-md);
+}
+
 /* -----------------------------
    CTA (base)
 ------------------------------ */

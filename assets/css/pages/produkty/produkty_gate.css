@@ -1,0 +1,55 @@
+/* ==================================================
+   Products – entry gate section (buttons + locked state)
+================================================== */
+
+.products-gate {
+  padding-block: 0;
+}
+
+.products-gate__actions {
+  display: flex;
+  justify-content: center;
+  gap: 1.2rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+
+/* Tohle jsou “key buttons” – držíme v page scope, dokud nebude komponenta */
+.products-gate__btn {
+  font-size: 1.35rem;
+  padding: 1rem 2.8rem;
+  border-radius: 16px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+
+}
+
+
+
+/* “HCP” tlačítko – tmavší varianta (v1 vibe) */
+.products-gate__btn--hcp {
+  background: #1f2937;
+  color: #ffffff;
+  border-color: rgba(31, 41, 55, 0.35);
+}
+
+
+
+/* zamčený panel (HCP část) – jen vizuální hook, logiku dá JS */
+.hcp-locked {
+  filter: blur(6px);
+  pointer-events: none;
+  user-select: none;
+}
+
+/* mobile */
+@media (max-width: 600px) {
+  .products-gate__actions {
+    gap: 1rem;
+  }
+
+  .products-gate__btn {
+    font-size: 1.15rem;
+    padding: 0.85rem 2rem;
+  }
+}

@@ -29,7 +29,9 @@ import {
   ChevronRight,
 
   // optional
-  Bookmark
+  Bookmark,
+  Leaf,
+  Search,
 } from "lucide";
 
 /**
@@ -58,17 +60,20 @@ export function initLucide(root = document) {
         Award,
         PackageCheck,
 
+        Leaf,
+        Search,
+
         FileText,
 
         ChevronRight,
-        Bookmark
+        Bookmark,
       },
       attrs: {
         class: "lucide-icon",
         "aria-hidden": "true",
-        focusable: "false"
+        focusable: "false",
       },
-      root
+      root,
     });
   } catch (err) {
     console.error("[Genetia][lucide] init failed", err);

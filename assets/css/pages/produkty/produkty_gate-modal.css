@@ -1,0 +1,212 @@
+/* ==================================================
+   Genetia v2 – Gate modal (v1 visual reference)
+   Scope: ONLY .modal--gate
+   Goal: investor-approved look (red header, soft body, 2 CTA pills)
+================================================== */
+
+.modal--gate {
+  /* hard-coded colors allowed (explicit requirement: copy v1 incl. colors) */
+  --gate-surface: var(--bg);
+  --gate-shadow: 0 0 0 1px rgba(0, 0, 0, 0.212);
+  --gate-radius: var(--r-md);
+
+  --gate-header-bg: #d62828; /* v1 red header */
+  --gate-header-ink: #ffffff;
+
+  --gate-text: rgba(17, 24, 39, 0.86);
+  --gate-muted: rgba(17, 24, 39, 0.72);
+
+  --gate-primary-bg: #a8c72b; /* v1 green pill */
+  --gate-primary-ink: #ffffff;
+
+  --gate-secondary-ink: rgba(17, 24, 39, 0.72);
+  --gate-secondary-border: rgba(168, 199, 43, 0.55); /* green outline */
+  --gate-secondary-bg: transparent;
+}
+
+/* Root positioning (works with your JS display toggle) */
+.modal--gate {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+}
+
+/* Overlay */
+.modal--gate .modal__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(2px);
+}
+
+/* Dialog center */
+.modal--gate .modal__dialog {
+  position: relative;
+  margin: 0;
+  width: min(680px, calc(100% - 2.5rem));
+  border: none;
+  outline: none;
+
+  box-shadow: var(--gate-shadow);
+  overflow: hidden;
+
+  /* center */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Header bar */
+.modal--gate .modal__header {
+  background: var(--gate-header-bg);
+  color: var(--gate-header-ink);
+  padding: 1.05rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+/* Title centered like v1 */
+.modal--gate .modal__title {
+  margin: 0;
+  font-weight: 800;
+  font-size: 1.25rem;
+  line-height: 1.15;
+  text-align: center;
+  padding-inline: 2.25rem; /* room for close button */
+}
+
+/* Close "X" (subtle, top-right) */
+.modal--gate .modal__close {
+  position: absolute;
+  right: 0.65rem;
+  top: 0.55rem;
+
+  width: 40px;
+  height: 40px;
+  border: 0;
+
+  background: transparent;
+  color: rgba(255, 255, 255, 0.92);
+  cursor: pointer;
+  font-size: 1.6rem;
+  line-height: 1;
+  display: grid;
+  place-items: center;
+  transition:
+    background 0.15s ease,
+    transform 0.15s ease;
+}
+
+.modal--gate .modal__close:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.modal--gate .modal__close:active {
+  transform: translateY(1px);
+}
+
+.modal--gate .modal__close:focus-visible {
+  outline: 3px solid rgba(255, 255, 255, 0.55);
+  outline-offset: 2px;
+}
+
+/* Body */
+.modal--gate .modal__body {
+  padding: 1.25rem 1.5rem 1.1rem;
+  color: var(--gate-text);
+}
+
+.modal--gate .modal__body p {
+  margin: 0 0 0.95rem;
+  color: var(--gate-muted);
+  line-height: 1.6;
+  font-size: 0.98rem;
+}
+
+/* Actions row (centered like v1) */
+.modal--gate .modal__actions {
+  padding: 0.5rem 1.5rem 1.35rem;
+  display: flex;
+  gap: 1.1rem;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Buttons */
+.modal--gate .gate-btn {
+  appearance: none;
+  border: 1px solid transparent;
+  border-radius: var(--r-md);
+  padding: 0.85rem 2.1rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.2s ease,
+    filter 0.2s ease,
+    background 0.2s ease;
+  min-width: 190px;
+}
+
+/* Primary (green filled) */
+.modal--gate .gate-btn--primary {
+  background: var(--gate-primary-bg);
+  color: var(--gate-primary-ink);
+  box-shadow: 0 12px 26px rgba(168, 199, 43, 0.35);
+}
+
+.modal--gate .gate-btn--primary:hover {
+  filter: brightness(0.98);
+  box-shadow: 0 14px 30px rgba(168, 199, 43, 0.4);
+}
+
+.modal--gate .gate-btn--primary:active {
+  transform: translateY(3px);
+}
+
+/* Secondary (outlined pill) */
+.modal--gate .gate-btn--secondary {
+  background: var(--gate-secondary-bg);
+  color: var(--gate-secondary-ink);
+  border-color: var(--gate-secondary-border);
+  box-shadow: none;
+}
+
+.modal--gate .gate-btn--secondary:hover {
+  filter: brightness(0.98);
+}
+
+.modal--gate .gate-btn--secondary:active {
+  transform: translateY(1px);
+}
+
+.modal--gate .gate-btn:focus-visible {
+  outline: 3px solid rgba(168, 199, 43, 0.45);
+  outline-offset: 3px;
+}
+
+/* Mobile */
+@media (max-width: 424px) {
+  .modal--gate .modal__dialog {
+    width: calc(100% - 1.5rem);
+  }
+
+  .modal--gate .modal__body {
+    padding: 1.1rem 1.15rem 0.9rem;
+  }
+
+  .modal--gate .modal__actions {
+    padding: 0.4rem 1.15rem 1.15rem;
+    flex-direction: column;
+    gap: 0.85rem;
+  }
+
+  .modal--gate .gate-btn {
+    width: 100%;
+    min-width: 0;
+    padding: 0.85rem 1.4rem;
+  }
+}

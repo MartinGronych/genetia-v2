@@ -1,0 +1,173 @@
+/* ==================================================
+   Products – public info cards (3 cards under gate)
+================================================== */
+#main > section.products-gate > div > section.public-products > div >  {
+  padding: var(--space-2) !important;
+}
+.public-products {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.public-products__header {
+  text-align: center;
+}
+
+.public-products__title {
+  margin: 0 0 0.5rem;
+  font-size: clamp(2.2rem, 4vw, 3rem);
+  font-weight: 700;
+  color: var(--brand-800);
+  text-align: center;
+}
+
+.public-products__lead {
+  font-size: 1.1rem;
+  opacity: 0.9;
+  max-width: 520px;
+  margin: 0.75rem auto 0;
+  color: var(--brand-black);
+  font-weight: 600;
+  padding: 10px 10px;
+  text-align: center;
+}
+
+.public-products__grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+.public-card__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 64px;
+  height: 64px;
+  margin-inline: auto; 
+
+  background: var(--gene-light-90);
+  border-radius: 999px;
+}
+
+.public-card {
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 0.8rem 0.5rem;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
+  text-align: center;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: 0.25s ease;
+}
+
+.public-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.08);
+}
+
+.public-card__title {
+  margin: 0 0 0.6rem;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color:var(--brand-800)
+}
+
+.public-card__text {
+  
+  font-size: 0.95rem;
+  opacity: 0.95;
+  font-weight: 600;
+  color:var(--brand-black);
+}
+/* ==================================================
+   Public cards – CTA link (pill highlight around text)
+   Rule: width = text width + small side padding
+================================================== */
+
+.public-card__link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.4rem 0.6rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  line-height: 1.1;
+  text-decoration: none;
+  color: var(--brand-black);
+}
+
+.public-card__link:hover::before {
+  transform: scale(0.9);
+  transition: transform 1s ease;
+  transform-origin: center;
+}
+
+/* pill background around the whole label */
+.public-card__link::before {
+  content: "";
+  position: absolute;
+  inset: 0; /* full box behind text */
+  border-radius: var(--r-sm);
+
+  background: rgba(168, 199, 43, 0.26);
+  border: 1px solid rgba(168, 199, 43, 0.35);
+
+  z-index: -1;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+/* Hover / focus */
+.public-card__link:hover::before {
+  background: rgba(168, 199, 43, 0.38);
+  border-color: rgba(168, 199, 43, 0.5);
+}
+
+.public-card__link:focus-visible {
+  outline: none;
+}
+
+.public-card__link:focus-visible::before {
+  background: rgba(168, 199, 43, 0.76);
+  border-color: rgba(168, 199, 43, 0.849);
+}
+
+/* Disabled / preparing */
+.public-card__link.is-muted {
+  color: rgba(0, 0, 0, 0.45);
+  pointer-events: none;
+  cursor: default;
+}
+
+.public-card__link.is-muted::before {
+  background: rgba(0, 0, 0, 0.08);
+  border-color: rgba(0, 0, 0, 0.1);
+}
+
+#pro-odborniky .section-title {
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 2.6rem;
+  font-weight: 650;
+  color:var(--brand-black);
+}
+
+#pro-odborniky .section-intro {
+  font-size: 1.1rem;
+  opacity: 0.9;
+  max-width: 850px;
+  margin: 0.25rem auto 0;
+  color: var(--brand-black);
+  font-weight: 600;
+  padding: 10px 10px;
+  text-align: center;
+}
+.public-products .public-card__icon svg
+ {
+  color: var(--brand-800);
+}
+

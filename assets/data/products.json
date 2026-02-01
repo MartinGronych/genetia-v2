@@ -1,0 +1,65 @@
+[
+  {
+    "id": "ignite-25-1",
+    "name": "Genetia Ignite",
+    "ratio": "25:1",
+    "image": "assets/images/products/Genetia_Ignite.png",
+    "description": "Standardizovaný extrakt z konopí v olejové formě. Dominantní obsah THC, vhodný pro pacienty s vyšší tolerancí.",
+    "category": "thc",
+    "composition": {
+      "THC": "25% (hm./hm.)",
+      "CBD": "<1% (hm./hm.)",
+      "CBN": "<1% (hm./hm.)"
+    },
+    "extraction": "Studená ethanolová extrakce s následnou molekulární destilací.",
+    "carrier": "MCT olej (farmaceutická kvalita)",
+    "certification": "EU-GMP",
+    "forms": ["Kapky", "Kapsle", "Masti", "Čípky"],
+    "formsIcon": ["droplet", "pill", "beaker", "circle-dot"],
+    "package": "50 ml",
+    "container": "Sklenice",
+    "eRecept": "9390000"
+  },
+  {
+    "id": "harmony-15-15",
+    "name": "Genetia Harmony",
+    "ratio": "15:15",
+    "image": "assets/images/products/Genetia_Harmony.png",
+    "description": "Vyvážený extrakt s poměrem THC a CBD 1:1, vhodný pro široké terapeutické použití.",
+    "category": "balanced",
+    "composition": {
+      "THC": "15% (hm./hm.)",
+      "CBD": "15% (hm./hm.)",
+      "CBN": "<1% (hm./hm.)"
+    },
+    "extraction": "Studená ethanolová extrakce s následnou molekulární destilací.",
+    "carrier": "MCT olej (farmaceutická kvalita)",
+    "certification": "EU-GMP",
+    "forms": ["Kapky", "Kapsle", "Masti", "Čípky"],
+    "formsIcon": ["droplet", "pill", "beaker", "circle-dot"],
+    "package": "50 ml",
+    "container": "Sklenice",
+    "eRecept": "9390000"
+  },
+  {
+    "id": "serene-1-25",
+    "name": "Genetia Serene",
+    "ratio": "1:25",
+    "image": "assets/images/products/Genetia_Serene.png",
+    "description": "CBD-dominantní extrakt určený pro pacienty citlivé na THC.",
+    "category": "cbd",
+    "composition": {
+      "THC": "1% (hm./hm.)",
+      "CBD": "<25% (hm./hm.)",
+      "CBN": "<1% (hm./hm.)"
+    },
+    "extraction": "Studená ethanolová extrakce s následnou molekulární destilací.",
+    "carrier": "MCT olej (farmaceutická kvalita)",
+    "certification": "EU-GMP",
+    "forms": ["Kapky", "Kapsle", "Masti", "Čípky"],
+    "formsIcon": ["droplet", "pill", "beaker", "circle-dot"],
+    "package": "50 ml",
+    "container": "Sklenice",
+    "eRecept": "9390000"
+  }
+]

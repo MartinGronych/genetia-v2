@@ -3,18 +3,20 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Produkty – Genetia v2</title>
+    <title>Produkty - Genetia</title>
 
     <!-- Theme bootstrap (FOUC-free) -->
     <script>
-(() => {
-  const saved = localStorage.getItem("theme"); // "light" | "dark" | null
-  const systemDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
-  const theme = saved || (systemDark ? "dark" : "light");
-  document.documentElement.dataset.theme = theme;
-})();
-</script>
-<!-- Import map (Lucide) -->
+      (() => {
+        const saved = localStorage.getItem("theme"); // "light" | "dark" | null
+        const systemDark =
+          window.matchMedia &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches;
+        const theme = saved || (systemDark ? "dark" : "light");
+        document.documentElement.dataset.theme = theme;
+      })();
+    </script>
+    <!-- Import map (Lucide) -->
     <script type="importmap">
       {
         "imports": {
@@ -66,32 +68,303 @@
       </div>
     </header>
 
-    <main id="main" class="site-main">
-      <section class="section products">
+    <main id="main">
+      <!-- =========================
+           HERO
+      ========================== -->
+      <section class="products-hero">
         <div class="container">
-          <p class="page-kicker">Genetia</p>
-          <h1 class="page-title">Produkty</h1>
-          <p class="page-lead">Produkty (v2 template). Tabs + cards + detail v modalu sjednotíme v komponentách.</p>
-
-          <div class="card">
-            <div class="card__body stack">
-              <h2 class="section-title">Placeholder</h2>
-              <p class="section-intro">Tady bude přepis sekcí z Genetia v1 → v2.</p>
-            </div>
-          </div>
+          <h1 class="products-hero__title page-title">
+            Standardizované extrakty Genetia
+          </h1>
+          <p class="products-hero__lead page-lead">
+            Veřejná část obsahuje základní informace o produktech, odborná sekce
+            poskytuje detailní parametry dostupné po ověření odbornosti.
+          </p>
         </div>
       </section>
 
+      <!-- =========================
+           GATE + CONTENT
+      ========================== -->
+      <section class="products-gate">
+        <div class="container">
+          <!-- CTA -->
+          <div class="products-gate__actions">
+            <button class="btn btn--ghost products-gate__btn">
+              Pro veřejnost
+            </button>
+
+            <button class="btn btn--primary products-gate__btn" data-gate-open>
+              Pro lékaře a lékárny
+            </button>
+          </div>
+
+          <!-- =========================
+               VEŘEJNÁ ČÁST
+          ========================== -->
+          <section class="public-products">
+            <h2 class="public-products__title">Produkty dostupné veřejnosti</h2>
+            <p class="public-products__lead">
+              Přehled produktů a informací, které jsou určeny široké veřejnosti.
+              Všechny produkty jsou vyráběny v režimu farmaceutické kvality.
+            </p>
+
+            <div class="public-products__grid">
+              <article class="card public-card">
+                <div class="card__body">
+                  <div class="public-card__icon" aria-hidden="true">
+                    <i data-lucide="leaf"></i>
+                  </div>
+                  <h3 class="public-card__title">Co jsou konopné extrakty?</h3>
+                  <p class="public-card__text">
+                    Stručné vysvětlení principu, rozdíl mezi THC/CBD a jejich
+                    účinky.
+                  </p>
+                </div>
+                <a class="public-card__link is-muted"> Připravujeme </a>
+              </article>
+
+              <article class="card public-card">
+                <div class="card__body">
+                  <div class="public-card__icon" aria-hidden="true">
+                    <i data-lucide="search"></i>
+                  </div>
+
+                  <h3 class="public-card__title">Jak se extrakt získává?</h3>
+                  <p class="public-card__text">
+                    Jak se kvalita extraktu hlídá v průběhu výroby.
+                  </p>
+                </div>
+                <a class="public-card__link" href="#">
+                  Prohlédněte si video z výroby
+                </a>
+              </article>
+
+              <article class="card public-card">
+                <div class="card__body">
+                  <div class="public-card__icon" aria-hidden="true">
+                    <i data-lucide="shield-check"></i>
+                  </div>
+
+                  <h3 class="public-card__title">Bezpečnost a kvalita</h3>
+                  <p class="public-card__text">
+                    Jak probíhá kontrola, testování a proč je důležitá
+                    farmaceutická kvalita.
+                  </p>
+                </div>
+                <a class="public-card__link" href="../analyticke-sluzby/">
+                  Analytické služby
+                </a>
+              </article>
+            </div>
+          </section>
+
+          <!-- =========================
+               HCP ČÁST (LOCKED)
+          ========================== -->
+          <section id="pro-odborniky" class="hcp-section hcp-locked">
+            <h2 class="section-title">Informace pro odborníky</h2>
+            <p class="section-intro">
+              Sekce určená zdravotnickým profesionálům a lékárnám. Přístup bude
+              aktivován po ověření odbornosti.
+            </p>
+
+            <div id="hcp-products-section">
+              <!-- produkty se renderují z JS -->
+            </div>
+          </section>
+        </div>
+      </section>
     </main>
 
-    <div class="mobile-nav" data-mobile-nav aria-hidden="true">
-      <div class="mobile-nav__overlay" data-nav-close></div>
-      <div class="mobile-nav__panel" role="dialog" aria-modal="true" aria-label="Menu">
-        <div class="mobile-nav__header">
-          <span class="mobile-nav__title">Genetia</span>
-          <button class="btn btn--ghost" type="button" data-nav-close aria-label="Close menu">Close</button>
+    <!-- =========================
+         GATE MODAL
+    ========================== -->
+    <div class="modal modal--gate" id="gateModal" aria-hidden="true">
+      <div class="modal__overlay" data-modal-close></div>
+
+      <div
+        class="modal__dialog"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="gateTitle"
+      >
+        <header class="modal__header">
+          <h2 class="modal__title" id="gateTitle">
+            Jste odborný pracovník ve zdravotnictví?
+          </h2>
+          <button class="modal__close" data-modal-close aria-label="Zavřít">
+            ×
+          </button>
+        </header>
+
+        <div class="modal__body">
+          <p>
+            Jsem odborníkem ve smyslu §2a Zákona č. 40/1995 Sb., o regulaci
+            reklamy, ve znění pozdějších předpisů, čili osobou oprávněnou
+            předepisovat nebo vydávat léčivé přípravky.
+          </p>
+          <p>
+            Potvrzuji, že jsem se seznámil/a s definicí odborníka dle zákona č.
+            40/1995 Sb. a jsem si vědom/a rizik, jimž se jiná osoba než odborník
+            vystavuje.
+          </p>
         </div>
 
+        <div class="modal__actions">
+          <button class="btn btn--ghost products-gate__btn" data-gate-accept>
+            Ano, vstoupit
+          </button>
+
+          <button class="btn btn--ghost products-gate__btn" data-gate-deny>
+            Ne, odejít
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- PRODUCT DETAIL MODAL -->
+<div class="modal modal--product" id="productModal" aria-hidden="true">
+  <div class="modal__overlay" data-product-modal-close tabindex="-1"></div>
+
+  <div
+    class="modal__dialog product-modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="productModalTitle"
+    aria-describedby="productModalDesc"
+    tabindex="-1"
+  >
+    <button
+      class="product-modal__close"
+      type="button"
+      data-product-modal-close
+      aria-label="Zavřít"
+    >
+      ×
+    </button>
+
+    <div class="product-modal__grid">
+      <!-- MEDIA -->
+      <div class="product-modal__media">
+        <button
+          class="product-modal__mediaFrame"
+          type="button"
+          data-product-zoom-open
+          aria-label="Zvětšit fotografii produktu"
+        >
+          <img
+            id="productModalImage"
+            class="product-modal__image"
+            src=""
+            alt=""
+            loading="lazy"
+          />
+        </button>
+      </div>
+
+      <!-- CONTENT -->
+      <div class="product-modal__content">
+        <header class="product-modal__header">
+          <h2 class="product-modal__title" id="productModalTitle"></h2>
+          <span class="product-modal__ratio" id="productModalRatio"></span>
+          <p class="product-modal__desc" id="productModalDesc"></p>
+        </header>
+
+        <div class="product-modal__sections">
+          <!-- Composition -->
+          <section class="product-modal__section product-modal__section--composition">
+            <h3 class="product-modal__label">Účinné látky / složení</h3>
+            <dl class="product-modal__list" id="productModalComposition"></dl>
+          </section>
+
+          <!-- Extraction -->
+          <section class="product-modal__section product-modal__section--extraction">
+            <h3 class="product-modal__label">Způsob extrakce</h3>
+            <p class="product-modal__text" id="productModalExtraction"></p>
+          </section>
+
+          <!-- Carrier -->
+          <section class="product-modal__section product-modal__section--carrier">
+            <h3 class="product-modal__label">Nosič</h3>
+            <p class="product-modal__text" id="productModalCarrier"></p>
+          </section>
+
+          <!-- Certification -->
+          <section class="product-modal__section product-modal__section--cert">
+            <h3 class="product-modal__label">Certifikace</h3>
+            <p class="product-modal__text" id="productModalCertification"></p>
+          </section>
+
+          <!-- Meta -->
+          <section class="product-modal__meta">
+            <div class="product-modal__metaItem">
+              <span class="product-modal__metaLabel">Balení</span>
+              <span class="product-modal__metaValue" id="productModalPackage"></span>
+            </div>
+            <div class="product-modal__metaItem">
+              <span class="product-modal__metaLabel">Typ obalu</span>
+              <span class="product-modal__metaValue" id="productModalContainer"></span>
+            </div>
+            <div class="product-modal__metaItem">
+              <span class="product-modal__metaLabel">E-recept</span>
+              <span class="product-modal__metaValue" id="productModalERecept"></span>
+            </div>
+          </section>
+
+          <!-- Forms -->
+          <section class="product-modal__section product-modal__section--forms">
+            <h3 class="product-modal__label">Možné lékové formy</h3>
+            <ul class="product-modal__chips" id="productModalForms"></ul>
+          </section>
+
+          <!-- CTA -->
+          <footer class="product-modal__footer">
+            <a class="btn btn-ghost product-modal__cta" href="../kontakt/">
+              Kontaktovat zástupce
+            </a>
+          </footer>
+        </div>
+      </div>
+    </div>
+
+    <!-- Fullscreen image overlay (inside modal) -->
+    <div class="product-zoom" id="productZoom" aria-hidden="true">
+      <div class="product-zoom__backdrop" data-product-zoom-close></div>
+
+      <div class="product-zoom__panel" role="dialog" aria-modal="true" aria-label="Zvětšená fotografie">
+        <button
+          class="product-zoom__close"
+          type="button"
+          data-product-zoom-close
+          aria-label="Zavřít zvětšenou fotografii"
+        >
+          ×
+        </button>
+
+        <img
+          id="productZoomImage"
+          class="product-zoom__img"
+          src=""
+          alt=""
+          loading="lazy"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    <!-- Mobile nav -->
+    <div class="mobile-nav" data-mobile-nav aria-hidden="true">
+      <div class="mobile-nav__overlay" data-nav-close></div>
+      <div
+        class="mobile-nav__panel"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Menu"
+      >
         <nav class="mobile-nav__links" aria-label="Mobile">
           <a class="nav-link" href="../o-spolecnosti/">O společnosti</a>
           <a class="nav-link" href="../analyticke-sluzby/">Analytické služby</a>
@@ -100,17 +373,12 @@
           <a class="nav-link" href="../certifikace/">Certifikace</a>
           <a class="nav-link" href="../kontakt/">Kontakt</a>
         </nav>
-
-        <div class="mobile-nav__footer">
-          <button class="btn btn--ghost" type="button" data-theme-toggle>Theme</button>
-        </div>
       </div>
     </div>
 
     <!-- FOOTER -->
     <footer class="site-footer" aria-labelledby="footerTitle">
       <div class="site-footer_container">
-        <!-- Brand -->
         <div class="site-footer_brand">
           <h2 class="visually-hidden" id="footerTitle">
             Začneme spolu měřit výsledky?
@@ -151,7 +419,6 @@
           </div>
         </div>
 
-        <!-- Columns -->
         <div class="site-footer_cols">
           <nav class="site-footer_col" aria-label="Odkazy – O společnosti">
             <h3 class="site-footer_heading">Genetia</h3>
@@ -290,9 +557,9 @@
             </ul>
           </nav>
 
-          <small class="site-footer_dev">
-            Vyvinul: <span>Martin Gronych</span>
-          </small>
+          <small class="site-footer_dev"
+            >Vyvinul: <span>Martin Gronych</span></small
+          >
         </div>
       </div>
     </footer>

@@ -1,0 +1,24 @@
+/* ==================================================
+   Products page – layout glue only
+================================================== */
+
+.products {
+  /* stránkový namespace (pokud budeš chtít později scope) */
+}
+
+.products .section {
+  /* pokud už globální .section existuje, nic nepřepisuj;
+     tady zatím necháváme prázdné schválně */
+}
+
+/* utilitní wrapper pro produkty stránku */
+.products-wrap {
+  display: grid;
+  gap: 2.5rem;
+}
+
+/* bloky stránky */
+.products-block {
+  display: grid;
+  gap: 1.25rem;
+}

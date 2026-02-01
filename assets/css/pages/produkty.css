@@ -1,2 +1,12 @@
-/* Products page layout only */
-.products{}
+/* ==================================================
+   Genetia v2 – Produkty (orchestrator)
+   Importuje pouze soubory použité na stránce /produkty/
+================================================== */
+
+@import url("./produkty/produkty_layout.css");
+@import url("./produkty/produkty_hero.css");
+@import url("./produkty/produkty_gate.css");
+@import url("./produkty/produkty_public-cards.css");
+@import url("./produkty/produkty_hcp.css");
+@import url("./produkty/produkty_gate-modal.css");
+@import url("./produkty/produkty_detail-modal.css");

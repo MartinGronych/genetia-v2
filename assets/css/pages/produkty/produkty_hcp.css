@@ -1,0 +1,149 @@
+/* ==================================================
+   Produkty – HCP section + product cards
+   Scope: only HCP area (#pro-odborniky, #hcp-products-section, .hcp-product-card)
+================================================== */
+
+#pro-odborniky {
+  /* aby poslední karta nebyla nalepená na footer */
+  padding-bottom: clamp(2.25rem, 4vw, 4rem);
+}
+
+/* pokud máš v layoutu sekce marginy řízené jinde, nech tohle jako pojistku */
+#pro-odborniky + footer,
+#pro-odborniky + .site-footer {
+  margin-top: 0;
+}
+
+#hcp-products-section {
+  /* drží grid karet – pokud už máš definováno jinde, zachová se (tady jen pojistka) */
+  display: grid;
+  gap: clamp(1rem, 2.2vw, 1.6rem);
+  margin-top: clamp(1.25rem, 2.5vw, 2rem);
+}
+
+/* --------------------------------------------------
+   Card layout
+-------------------------------------------------- */
+
+.hcp-product-card {
+  /* a11y */
+  cursor: pointer;
+  width: 100%;
+  max-width: 320px;     /* stejná hodnota jako grid */
+  justify-self: center; /* důležité pro single-column */
+}
+
+.hcp-product-card:focus-visible {
+  outline: 3px solid rgba(168, 199, 43, 0.45);
+  outline-offset: 4px;
+}
+
+/* ZMENŠENÍ “BUŇKY” / vnitřního prostoru kolem obsahu: */
+.hcp-product-card .card__body {
+  padding: clamp(1rem, 1.4vw, 1.25rem);
+  display: grid;
+  justify-items: center;
+  text-align: center;
+  row-gap: 0.75rem;
+}
+
+/* --------------------------------------------------
+   Image – větší detail lahvičky, menší okraje
+   Cíl:
+   - výraznější lahev (větší měřítko)
+   - oříznutí (crop) tak, aby nahoře zůstalo ~5px od víčka
+   - dole ~5px od spodku lahve
+-------------------------------------------------- */
+
+/* “frame” efekt bez přidání wrapperu – používáme img jako výřezový box */
+.hcp-product-card img {
+  width: 100%;
+  max-width: 150px;              /* lahev bude větší (výraznější) */
+  height: clamp(160px, 18vw, 210px); /* stabilní výška pro crop */
+  display: block;
+
+  object-fit: cover;
+
+  /* posun výřezu směrem k lahvičce:
+     - 50% X uprostřed
+     - Y výš (víčko bude blíž hornímu okraji) */
+  object-position: 50% 8%;
+
+  /* menší “mezera od kraje” – odstraníme optický padding */
+  margin: 0;
+
+  border-radius: var(--r-md);
+  background: rgba(0, 0, 0, 0.02);
+}
+
+/* --------------------------------------------------
+   Typography
+-------------------------------------------------- */
+
+/* Nadpis produktu */
+.hcp-product-card h3 {
+  margin: 0;
+  color: var(--brand-800);
+  font-weight: 750;
+  font-size: clamp(1.1rem, 1.6vw, 1.45rem);
+  line-height: 1.2;
+}
+
+/* Poměr – víc viditelný než teď (ale menší než nadpis) */
+.hcp-product-card .ratio {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+
+  font-weight: 700;
+  font-size: clamp(0.95rem, 1.25vw, 1.1rem);
+  line-height: 1;
+
+  color: rgba(0, 0, 0, 0.62);
+  background: rgba(168, 199, 43, 0.16);
+}
+
+/* Subtitle / popis */
+.hcp-product-card p {
+  margin: 0;
+  max-width: 34ch;
+
+  font-weight: 550;
+  line-height: 1.55;
+  color: rgba(0, 0, 0, 0.65);
+
+  font-size: clamp(0.95rem, 1.2vw, 1.05rem);
+}
+
+/* --------------------------------------------------
+   Responsive: mobile (0–424)
+-------------------------------------------------- */
+@media (max-width: 424px) {
+  .hcp-product-card .card__body {
+    padding: 0.9rem;
+    row-gap: 0.65rem;
+  }
+
+  .hcp-product-card img {
+    max-width: 260px;
+    height: 170px;
+    object-position: 50% 16%;
+  }
+}
+#hcp-products-section {
+  display: grid;
+
+  /* kontrola šířky buněk */
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(260px, 320px)
+  );
+
+  justify-content: center; /* centrování gridu v sekci */
+  gap: clamp(1rem, 2.2vw, 1.6rem);
+
+  margin-top: clamp(1.25rem, 2.5vw, 2rem);
+}
