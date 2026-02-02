@@ -1,6 +1,6 @@
-/* assets/js/core/scroll-ui.js */
+/* assets/js/components/scroll-ui.js */
 
-const LOG_PREFIX = "[Genetia] scroll-ui:";
+const LOG_PREFIX = "[GENETIA] scroll-ui:";
 
 const prefersReducedMotion = () =>
   window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches ?? false;
@@ -20,30 +20,15 @@ const createScrollTopButton = () => {
   btn.setAttribute("data-scroll-top", "");
   btn.setAttribute("aria-label", "Zpět nahoru");
   btn.setAttribute("title", "Zpět nahoru");
-
-  // A11Y: when hidden, it must not be focusable nor in accessibility tree
   btn.hidden = true;
 
-  // Lucide: arrow-up-to-line
+  /* Lucide icon placeholder */
   btn.innerHTML = `
-    <svg
+    <i
       class="scroll-top-btn__icon"
-      xmlns="http://www.w3.org/2000/svg"
-      width="32"
-      height="32"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      data-lucide="arrow-up"
       aria-hidden="true"
-      focusable="false"
-    >
-      <path d="M5 3h14"></path>
-      <path d="m18 13-6-6-6 6"></path>
-      <path d="M12 7v14"></path>
-    </svg>
+    ></i>
   `;
 
   btn.addEventListener("click", (e) => {
@@ -56,8 +41,7 @@ const createScrollTopButton = () => {
   return btn;
 };
 
-const applyMinimalHeader = ({ header, inner, brand, nav, toggle, toggleMount }) => {
-  // 1) Collapse the header bar itself (removes the white strip)
+const applyMinimalHeader = ({ header, inner, brand, nav, toggle }) => {
   header.style.height = "0px";
   header.style.minHeight = "0px";
   header.style.borderBottom = "0";
@@ -65,8 +49,8 @@ const applyMinimalHeader = ({ header, inner, brand, nav, toggle, toggleMount }) 
   header.style.background = "transparent";
   header.style.pointerEvents = "none";
   header.style.overflow = "visible";
+  
 
-  // 2) Hide inner content in a non-destructive way
   inner.style.padding = "0";
   if (nav) nav.style.display = "none";
 
@@ -75,24 +59,21 @@ const applyMinimalHeader = ({ header, inner, brand, nav, toggle, toggleMount }) 
     brand.style.pointerEvents = "none";
   }
 
-  // 3) Float hamburger outside the header so it remains visible/clickable
-  //    Move button into <body> (preserves click handlers from nav.js)
-  if (toggle && toggleMount.parent === header) {
+  if (toggle && toggle.parentNode !== document.body) {
     document.body.appendChild(toggle);
   }
 
   if (toggle) {
     toggle.classList.add("nav-toggle--floating");
     toggle.style.position = "fixed";
-    toggle.style.top = "16px";
-    toggle.style.right = "16px";
+    toggle.style.top = "26px";
+    toggle.style.right = "26px";
     toggle.style.zIndex = "var(--z-header)";
     toggle.style.pointerEvents = "auto";
   }
 };
 
 const resetMinimalHeader = ({ header, inner, brand, nav, toggle, toggleMount }) => {
-  // Restore header styles
   header.style.height = "";
   header.style.minHeight = "";
   header.style.borderBottom = "";
@@ -108,7 +89,6 @@ const resetMinimalHeader = ({ header, inner, brand, nav, toggle, toggleMount }) 
     brand.style.pointerEvents = "";
   }
 
-  // Return toggle back to original DOM location
   if (toggle) {
     toggle.classList.remove("nav-toggle--floating");
     toggle.style.position = "";
@@ -117,11 +97,14 @@ const resetMinimalHeader = ({ header, inner, brand, nav, toggle, toggleMount }) 
     toggle.style.zIndex = "";
     toggle.style.pointerEvents = "";
 
-    // put it back exactly where it was
-    if (toggleMount.nextSibling && toggleMount.nextSibling.parentNode === toggleMount.parent) {
-      toggleMount.parent.insertBefore(toggle, toggleMount.nextSibling);
-    } else {
-      toggleMount.parent.appendChild(toggle);
+    const { parent, nextSibling } = toggleMount;
+
+    if (parent) {
+      if (nextSibling && nextSibling.parentNode === parent) {
+        parent.insertBefore(toggle, nextSibling);
+      } else {
+        parent.appendChild(toggle);
+      }
     }
   }
 };
@@ -138,7 +121,6 @@ export const initScrollUI = () => {
   const mqlUnder1024 = window.matchMedia("(max-width: 1023.98px)");
   const scrollTopBtn = createScrollTopButton();
 
-  // Remember original mount point for the toggle so we can restore precisely
   const toggleMount = {
     parent: toggle.parentNode,
     nextSibling: toggle.nextSibling,
@@ -157,20 +139,15 @@ export const initScrollUI = () => {
     const shouldMinimal = under1024 && y > halfViewport;
 
     if (shouldMinimal && !isMinimalApplied) {
-      applyMinimalHeader({ header, inner, brand, nav, toggle, toggleMount });
+      applyMinimalHeader({ header, inner, brand, nav, toggle });
       isMinimalApplied = true;
     } else if (!shouldMinimal && isMinimalApplied) {
       resetMinimalHeader({ header, inner, brand, nav, toggle, toggleMount });
       isMinimalApplied = false;
     }
 
-    // Back-to-top: appears at the same threshold (50% viewport) on long pages
     const showTop = isLongPage() && y > halfViewport;
-
-    // Visual class (existing)
     scrollTopBtn.classList.toggle("is-visible", showTop);
-
-    // A11Y-safe toggle: hidden removes it from focus + accessibility tree
     scrollTopBtn.hidden = !showTop;
   };
 
@@ -188,10 +165,10 @@ export const initScrollUI = () => {
   if (mqlUnder1024.addEventListener) {
     mqlUnder1024.addEventListener("change", requestUpdate);
   } else {
-    // Safari fallback
     mqlUnder1024.addListener(requestUpdate);
   }
 
-  // eslint-disable-next-line no-console
   console.debug(`${LOG_PREFIX} ready`);
 };
+
+export default { initScrollUI };

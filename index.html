@@ -226,7 +226,8 @@
       <!-- ====== PRODUKTY – CAROUSEL ====== -->
       <section class="section home-products" aria-labelledby="products-title">
         <div class="container">
-          <h2 class="section-title" id="products-title">Carousel</h2>
+          <!-- v2 mount pro homepage carousel -->
+          <div class="home-products__carousel"></div>
         </div>
       </section>
 
@@ -493,6 +494,62 @@
         </div>
       </div>
     </footer>
+    <!-- Gate modal (use gate visual styling: .modal--gate) -->
+    <div
+      class="modal modal--gate"
+      id="gateModal"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Ověření odbornosti"
+      aria-hidden="true"
+      style="display: none"
+    >
+      <button
+        class="modal__overlay"
+        type="button"
+        aria-label="Zavřít"
+        data-modal-close
+        tabindex="-1"
+      ></button>
+
+      <div class="modal__dialog" tabindex="-1">
+        <div class="modal__header">
+          <h2 class="modal__title">Ověření odbornosti</h2>
+          <button
+            class="modal__close"
+            type="button"
+            aria-label="Zavřít"
+            data-modal-close
+          >
+            ×
+          </button>
+        </div>
+
+        <div class="modal__body">
+          <p>
+            Tento obsah je určen výhradně pro odbornou veřejnost (lékaře a
+            lékárníky). Potvrďte prosím, že jste odborný pracovník.
+          </p>
+        </div>
+
+        <div class="modal__actions">
+          <button
+            class="gate-btn gate-btn--primary"
+            type="button"
+            data-gate-accept
+          >
+            Ano
+          </button>
+          <button
+            class="gate-btn gate-btn--secondary"
+            type="button"
+            data-gate-deny
+          >
+            Ne
+          </button>
+        </div>
+      </div>
+    </div>
 
     <script type="module" src="./assets/js/app.js"></script>
   </body>

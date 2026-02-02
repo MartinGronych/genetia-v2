@@ -14,3 +14,26 @@
   .site-nav{ display: block; }
   
 }
+/* =========================================================
+   FIX: mobile-nav must not intercept clicks when CLOSED
+   Source of truth: aria-hidden (set by mobile-nav.js)
+   ========================================================= */
+
+.mobile-nav[aria-hidden="true"] {
+  pointer-events: none;
+}
+
+.mobile-nav[aria-hidden="true"] .mobile-nav__overlay,
+.mobile-nav[aria-hidden="true"] .mobile-nav__panel {
+  pointer-events: none;
+}
+
+.mobile-nav[aria-hidden="false"] {
+  pointer-events: auto;
+}
+
+.mobile-nav[aria-hidden="false"] .mobile-nav__overlay,
+.mobile-nav[aria-hidden="false"] .mobile-nav__panel {
+  pointer-events: auto;
+}
+

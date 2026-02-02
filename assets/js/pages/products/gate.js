@@ -1,7 +1,17 @@
 // assets/js/pages/products/gate.js
-// Products – gate (standalone; no products init here)
+// Gate modal + HCP verified state (reusable across pages)
+//
+// - Reusable controller: createGateController()
+// - State helpers: isHcpVerified(), setHcpVerified()
+// - Products-specific initializer kept: initProductsGate()
+//
+// A11Y:
+// - focus trap
+// - ESC closes
+// - overlay click closes
+// - returns focus to the opener
 
-const LOG = "[Genetia][products][gate]";
+const LOG = "[GENETIA][gate]";
 const LS_HCP_VERIFIED = "genetia_hcp_verified"; // "1" | null
 const EVT_HCP_VERIFIED = "genetia:hcp-verified";
 
@@ -14,11 +24,34 @@ function warn(...args) {
   console.warn(LOG, ...args);
 }
 
-function emitVerified() {
+export function isHcpVerified() {
+  try {
+    return localStorage.getItem(LS_HCP_VERIFIED) === "1";
+  } catch (_) {
+    return false;
+  }
+}
+
+export function setHcpVerified() {
+  try {
+    localStorage.setItem(LS_HCP_VERIFIED, "1");
+  } catch (_) {}
   window.dispatchEvent(new CustomEvent(EVT_HCP_VERIFIED));
 }
 
-function createGateModalController(modalRoot) {
+export function emitHcpVerified() {
+  window.dispatchEvent(new CustomEvent(EVT_HCP_VERIFIED));
+}
+
+/**
+ * Creates an accessible modal controller for the existing gate modal markup.
+ * Expects:
+ * - .modal__dialog
+ * - .modal__overlay
+ * Optional:
+ * - [data-modal-close]
+ */
+export function createGateModalController(modalRoot) {
   const dialog = q(".modal__dialog", modalRoot);
   const overlay = q(".modal__overlay", modalRoot);
   const closeBtns = modalRoot.querySelectorAll("[data-modal-close]");
@@ -99,6 +132,73 @@ function createGateModalController(modalRoot) {
   return api;
 }
 
+/**
+ * Reusable gate controller bound to DOM (modal + buttons).
+ * Expects IDs & selectors used across pages:
+ * - #gateModal
+ * - [data-gate-open] (optional on a page)
+ * - [data-gate-accept]
+ * - [data-gate-deny]
+ *
+ * You can provide callbacks for accept/deny.
+ */
+export function createGateController({
+  modalId = "gateModal",
+  onAccept = null,
+  onDeny = null,
+} = {}) {
+  const modalEl = document.getElementById(modalId);
+  if (!modalEl) {
+    warn(`Missing #${modalId}`);
+    return null;
+  }
+
+  const modal = createGateModalController(modalEl);
+  if (!modal) return null;
+
+  const acceptBtn = q("[data-gate-accept]", modalEl);
+  const denyBtn = q("[data-gate-deny]", modalEl);
+
+  if (!acceptBtn || !denyBtn) {
+    warn("Missing [data-gate-accept] or [data-gate-deny] inside gate modal");
+  }
+
+  const api = {
+    open: () => modal.open(),
+    close: () => modal.close(),
+    isVerified: () => isHcpVerified(),
+    verify: () => setHcpVerified(),
+    setHandlers(next) {
+      if (next?.onAccept) onAccept = next.onAccept;
+      if (next?.onDeny) onDeny = next.onDeny;
+    },
+  };
+
+  acceptBtn?.addEventListener("click", (e) => {
+    e.preventDefault();
+    api.verify();
+    api.close();
+    try {
+      onAccept?.();
+    } catch (err) {
+      warn("onAccept handler failed", err);
+    }
+  });
+
+  denyBtn?.addEventListener("click", (e) => {
+    e.preventDefault();
+    api.close();
+    try {
+      onDeny?.();
+    } catch (err) {
+      warn("onDeny handler failed", err);
+    }
+  });
+
+  return api;
+}
+
+// Products-only helper (kept for backwards compatibility)
 function unlockHcpSection() {
   const pane = document.getElementById("pro-odborniky");
   if (!pane) {
@@ -108,51 +208,38 @@ function unlockHcpSection() {
   pane.classList.remove("hcp-locked");
 }
 
+// Products page initializer (uses the reusable controller)
 export function initProductsGate() {
-  const modalEl = document.getElementById("gateModal");
-  const openBtn = q("[data-gate-open]");
-  const acceptBtn = q("[data-gate-accept]");
-  const denyBtn = q("[data-gate-deny]");
+  const gate = createGateController({
+    onAccept: () => {
+      unlockHcpSection();
+      info("verified stored → unlocked");
+    },
+    onDeny: () => {
+      // root homepage from /produkty/
+      window.location.href = "../";
+    },
+  });
 
-  if (!modalEl) {
-    warn("Missing #gateModal");
-    return;
-  }
+  if (!gate) return;
 
-  const modal = createGateModalController(modalEl);
-  if (!modal) return;
-
-  // auto-unlock pokud už ověřen
-  if (localStorage.getItem(LS_HCP_VERIFIED) === "1") {
+  // auto-unlock if already verified
+  if (gate.isVerified()) {
     unlockHcpSection();
-    emitVerified();
+    emitHcpVerified();
     info("already verified → unlocked");
   }
 
+  // products page might have an opener button
+  const openBtn = q("[data-gate-open]");
   openBtn?.addEventListener("click", (e) => {
     e.preventDefault();
-    if (localStorage.getItem(LS_HCP_VERIFIED) === "1") {
+    if (gate.isVerified()) {
       unlockHcpSection();
-      emitVerified();
+      emitHcpVerified();
       return;
     }
-    modal.open();
-  });
-
-  acceptBtn?.addEventListener("click", (e) => {
-    e.preventDefault();
-    localStorage.setItem(LS_HCP_VERIFIED, "1");
-    modal.close();
-    unlockHcpSection();
-    emitVerified();
-    info("verified stored → unlocked");
-  });
-window.dispatchEvent(new CustomEvent("genetia:hcp-verified"));
-
-  denyBtn?.addEventListener("click", (e) => {
-    e.preventDefault();
-    modal.close();
-    window.location.href = "../"; // root homepage z /produkty/
+    gate.open();
   });
 
   info("initialized");

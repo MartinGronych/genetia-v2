@@ -1,108 +1,128 @@
-/* assets/js/components/mobile-nav.js */
+// assets/js/components/mobile-nav.js
+// Mobile nav controller (A11Y + reliable open/close)
+// - single source of truth: aria-hidden on [data-mobile-nav]
+// - aria-expanded on [data-nav-toggle]
+// - overlay is clickable ONLY when open
+// - ESC closes
+// - restores focus
 
-let lastActive = null;
+const LOG = "[GENETIA][mobile-nav]";
 
-const getFocusable = (root) =>
-  Array.from(
-    root.querySelectorAll(
-      'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
-    )
-  ).filter((el) => el.offsetParent !== null);
+function q(sel, root = document) {
+  return root.querySelector(sel);
+}
 
-export const initMobileNav = () => {
-  const toggle = document.querySelector("[data-nav-toggle]");
-  const nav = document.querySelector("[data-mobile-nav]");
-  if (!toggle || !nav) return;
+function qa(sel, root = document) {
+  return Array.from(root.querySelectorAll(sel));
+}
 
-  const panel = nav.querySelector(".mobile-nav__panel") || nav;
+function setOverlayTabindex(overlayBtn, isOpen) {
+  if (!overlayBtn) return;
+  overlayBtn.tabIndex = isOpen ? 0 : -1;
+}
 
-  if (!nav.id) nav.id = "mobile-nav";
-  toggle.setAttribute("aria-controls", nav.id);
+function isOpen(navEl) {
+  return navEl?.getAttribute("aria-hidden") === "false";
+}
 
-  // Initial state
-  nav.setAttribute("aria-hidden", "true");
-  toggle.setAttribute("aria-expanded", "false");
-  toggle.setAttribute("data-state", "closed");
-  toggle.setAttribute("aria-label", "Open menu");
+function openNav({ navEl, toggleBtn, overlayBtn, panelEl }) {
+  if (!navEl || !toggleBtn) return;
 
-  const isOpen = () => nav.getAttribute("aria-hidden") === "false";
+  navEl.setAttribute("aria-hidden", "false");
+  toggleBtn.setAttribute("aria-expanded", "true");
+  setOverlayTabindex(overlayBtn, true);
 
-  const open = () => {
-    if (isOpen()) return;
+  // focus panel (dialog)
+  if (panelEl) {
+    // wait a tick so CSS transitions don't fight focus ring
+    requestAnimationFrame(() => {
+      try {
+        panelEl.focus({ preventScroll: true });
+      } catch (_) {}
+    });
+  }
 
-    lastActive = document.activeElement;
+  document.documentElement.classList.add("is-mobile-nav-open");
+}
 
-    nav.setAttribute("aria-hidden", "false");
-    toggle.setAttribute("aria-expanded", "true");
-    toggle.setAttribute("data-state", "open");
-    toggle.setAttribute("aria-label", "Close menu");
+function closeNav({ navEl, toggleBtn, overlayBtn, panelEl, restoreFocusEl }) {
+  if (!navEl || !toggleBtn) return;
 
-    // CHANGE: do NOT lock page scroll (user wants scroll under open nav)
+  navEl.setAttribute("aria-hidden", "true");
+  toggleBtn.setAttribute("aria-expanded", "false");
+  setOverlayTabindex(overlayBtn, false);
 
-    // focus first link/control inside panel
-    const first = getFocusable(panel)[0];
-    first?.focus?.();
-  };
+  document.documentElement.classList.remove("is-mobile-nav-open");
 
-  const close = () => {
-    if (!isOpen()) return;
+  // restore focus to toggle (or provided element)
+  const target = restoreFocusEl || toggleBtn;
+  requestAnimationFrame(() => {
+    try {
+      target.focus({ preventScroll: true });
+    } catch (_) {}
+  });
 
-    nav.setAttribute("aria-hidden", "true");
-    toggle.setAttribute("aria-expanded", "false");
-    toggle.setAttribute("data-state", "closed");
-    toggle.setAttribute("aria-label", "Open menu");
+  // If panel was focused, blur it
+  if (panelEl && document.activeElement === panelEl) {
+    try {
+      panelEl.blur();
+    } catch (_) {}
+  }
+}
 
-    // CHANGE: no scroll lock to restore
+export function initMobileNav() {
+  const navEl = q("[data-mobile-nav]");
+  const toggleBtn = q("[data-nav-toggle]");
+  const overlayBtn = q("[data-nav-close]", navEl);
+  const panelEl = q(".mobile-nav__panel", navEl);
 
-    lastActive?.focus?.();
-  };
+  if (!navEl || !toggleBtn) {
+    console.debug(LOG, "No mobile nav on page");
+    return;
+  }
 
-  const toggleMenu = () => (isOpen() ? close() : open());
+  // Ensure initial A11Y state is consistent
+  if (!navEl.hasAttribute("aria-hidden")) navEl.setAttribute("aria-hidden", "true");
+  if (!toggleBtn.hasAttribute("aria-expanded")) toggleBtn.setAttribute("aria-expanded", "false");
+  if (panelEl) panelEl.tabIndex = -1;
+  setOverlayTabindex(overlayBtn, isOpen(navEl));
 
-  toggle.addEventListener("click", (e) => {
+  const restoreFocusEl = toggleBtn;
+
+  const onToggle = (e) => {
     e.preventDefault();
-    toggleMenu();
-  });
-
-  // NOTE: overlay click-to-close is intentionally disabled when background scrolling is allowed,
-  // because the overlay must not capture pointer/touch events.
-
-  // Close on link click
-  nav.addEventListener("click", (e) => {
-    if (e.target.closest("a")) close();
-  });
-
-  // ESC + focus trap
-  document.addEventListener("keydown", (e) => {
-    if (!isOpen()) return;
-
-    if (e.key === "Escape") {
-      e.preventDefault();
-      close();
-      return;
+    if (isOpen(navEl)) {
+      closeNav({ navEl, toggleBtn, overlayBtn, panelEl, restoreFocusEl });
+    } else {
+      openNav({ navEl, toggleBtn, overlayBtn, panelEl });
     }
-
-    if (e.key !== "Tab") return;
-
-    const focusable = getFocusable(panel);
-    if (focusable.length === 0) return;
-
-    const first = focusable[0];
-    const last = focusable[focusable.length - 1];
-
-    if (e.shiftKey && document.activeElement === first) {
-      e.preventDefault();
-      last.focus();
-    } else if (!e.shiftKey && document.activeElement === last) {
-      e.preventDefault();
-      first.focus();
-    }
-  });
-
-  // If user resizes to desktop, force-close (desktop has no hamburger)
-  const onResize = () => {
-    if (window.matchMedia("(min-width: 1024px)").matches) close();
   };
-  window.addEventListener("resize", onResize, { passive: true });
-  window.addEventListener("orientationchange", onResize, { passive: true });
-};
+
+  const onClose = (e) => {
+    e.preventDefault();
+    if (!isOpen(navEl)) return;
+    closeNav({ navEl, toggleBtn, overlayBtn, panelEl, restoreFocusEl });
+  };
+
+  toggleBtn.addEventListener("click", onToggle);
+  overlayBtn?.addEventListener("click", onClose);
+
+  // Close on ESC
+  window.addEventListener("keydown", (e) => {
+    if (e.key !== "Escape") return;
+    if (!isOpen(navEl)) return;
+    closeNav({ navEl, toggleBtn, overlayBtn, panelEl, restoreFocusEl });
+  });
+
+  // Prevent clicks “through” when closed (just in case some CSS leaves it visible)
+  navEl.addEventListener("click", (e) => {
+    if (!isOpen(navEl)) {
+      // if nav is closed, never trap interactions
+      e.stopPropagation();
+    }
+  });
+
+  console.info(LOG, "initialized");
+}
+
+export default { initMobileNav };

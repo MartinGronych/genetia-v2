@@ -10,7 +10,7 @@
   inset: 0 0 auto 0;
   z-index: var(--z-header);
 
-  --nav-height: 70px;
+  --nav-height: 80px;
 
   height: var(--nav-height);
   display: flex;

@@ -27,6 +27,7 @@ import {
 
   // ui
   ChevronRight,
+  ArrowUp,          // ✅ SPRÁVNÝ IMPORT
 
   // optional
   Bookmark,
@@ -36,7 +37,8 @@ import {
 
 /**
  * Lucide init (selected icons only)
- * - DO NOT manually remap icon names. Lucide derives data-lucide names from exports.
+ * - DO NOT manually remap icon names.
+ * - data-lucide names are derived from export names
  * - safe to call multiple times
  */
 export function initLucide(root = document) {
@@ -66,6 +68,8 @@ export function initLucide(root = document) {
         FileText,
 
         ChevronRight,
+        ArrowUp,       // ✅ REGISTRACE
+
         Bookmark,
       },
       attrs: {

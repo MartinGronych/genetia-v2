@@ -1,0 +1,102 @@
+/* =========================================================
+   Scroll to top – global component
+   ========================================================= */
+
+.scroll-top-btn {
+  position: fixed;
+  right: 30px;
+  bottom: 30px;
+  z-index: var(--z-header);
+
+  width: 44px;
+  height: 44px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 999px;
+
+  border: 1px solid white;
+  color: var(--brand-black);
+  background: var(--gene-dark-20);
+
+  opacity: 0;
+  transform: translateY(6px);
+  transition:
+    opacity 200ms ease,
+    transform 200ms ease,
+    background-color 200ms ease;
+
+  cursor: pointer;
+  pointer-events: none;
+}
+.scroll-top-btn.scroll-top-btn:hover {
+  transform: scale(1.4);
+  transition: 1s ease-in-out;
+}
+
+.scroll-top-btn.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.scroll-top-btn[hidden] {
+  display: none;
+}
+
+.scroll-top-btn__icon {
+  display: block;
+  width: 30px;
+  height: 30px;
+  stroke-width: 3;
+}
+
+.scroll-top-btn:hover,
+.scroll-top-btn:focus-visible {
+  background-color:  var(--gene-dark-20);
+  border: none;
+  outline: none;
+}
+
+@media (min-width: 424px) {
+  .scroll-top-btn {
+    right: 25px;
+    bottom: 25px;
+    width: 50px;
+    height: 50px;
+  }
+  .scroll-top-btn__icon {
+    width: 18px;
+    height: 18px;
+  }
+}
+@media (min-width: 767px) {
+  .scroll-top-btn {
+    right: 40px;
+    bottom: 40px;
+    width: 50px;
+    height: 50px;
+    stroke-width: 4;
+    }
+}
+
+@media (min-width: 1024px) {
+  .scroll-top-btn {
+    right: 60px;
+    bottom: 60px;
+    width: 50px;
+    height: 50px;
+    stroke-width: 4;
+    }
+}
+
+@media (min-width: 1440px) {
+  .scroll-top-btn {
+    right: 70px;
+    bottom: 70px;
+    width: 50px;
+    height: 50px;
+    stroke-width: 4;
+    }
+}
