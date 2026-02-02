@@ -342,8 +342,16 @@
    Breakpoints
 =============================== */
 @media (min-width: 768px) {
-  .site-header { --nav-height: 80px; }
-  .site-header__inner { padding: 0.5rem 1.2rem; }
+  .site-nav {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .site-nav a {
+  font-size: clamp(0.95rem, 0.9rem + 0.3vw, 1.05rem);
+  line-height: 1.2;
+  font-weight: 700; /* pokud už není */
+}
 }
 
 @media (min-width: 1024px) {

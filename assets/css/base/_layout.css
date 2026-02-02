@@ -16,11 +16,8 @@ body {
   --header-offset: 70px;
 }
 
-/* you reported the issue starts at 1440 where header becomes taller */
 @media (min-width: 1440px) {
-  :root {
-    --header-offset: 102px;
-  }
+  /* 1440+ = spacing only (no header height change to avoid body padding gap) */
 }
 
 body {
