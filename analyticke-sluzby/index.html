@@ -7,14 +7,16 @@
 
     <!-- Theme bootstrap (FOUC-free) -->
     <script>
-(() => {
-  const saved = localStorage.getItem("theme"); // "light" | "dark" | null
-  const systemDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
-  const theme = saved || (systemDark ? "dark" : "light");
-  document.documentElement.dataset.theme = theme;
-})();
-</script>
-<!-- Import map (Lucide) -->
+      (() => {
+        const saved = localStorage.getItem("theme"); // "light" | "dark" | null
+        const systemDark =
+          window.matchMedia &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches;
+        const theme = saved || (systemDark ? "dark" : "light");
+        document.documentElement.dataset.theme = theme;
+      })();
+    </script>
+    <!-- Import map (Lucide) -->
     <script type="importmap">
       {
         "imports": {
@@ -28,7 +30,6 @@
   </head>
 
   <body>
-    <body>
     <a class="skip-link" href="#main">Skip to content</a>
 
     <header class="site-header">
@@ -43,16 +44,20 @@
 
         <nav class="site-nav" aria-label="Primary">
           <ul class="nav-list">
-            <li><a class="nav-link" href="../o-spolecnosti/">O společnosti</a></li>
             <li>
-              <a class="nav-link" href="../analyticke-sluzby/">Analytické služby</a>
+              <a class="nav-link" href="../o-spolecnosti/">O společnosti</a>
+            </li>
+            <li>
+              <a class="nav-link" href="./analyticke-sluzby/"
+                >Analytické služby</a
+              >
             </li>
             <li>
               <a class="nav-link" href="../vyvoj-a-vyzkum/">Vývoj a výzkum</a>
             </li>
             <li><a class="nav-link" href="../produkty/">Produkty</a></li>
             <li><a class="nav-link" href="../certifikace/">Certifikace</a></li>
-            <li><a class="nav-link" href="../kontakt/">Kontakt</a></li>
+            <li><a class="nav-link" href="../">Kontakt</a></li>
           </ul>
         </nav>
 
@@ -86,11 +91,11 @@
       >
         <nav class="mobile-nav__links" aria-label="Mobile">
           <a class="nav-link" href="../o-spolecnosti/">O společnosti</a>
-          <a class="nav-link" href="../analyticke-sluzby/">Analytické služby</a>
+          <a class="nav-link" href="./analyticke-sluzby/">Analytické služby</a>
           <a class="nav-link" href="../vyvoj-a-vyzkum/">Vývoj a výzkum</a>
           <a class="nav-link" href="../produkty/">Produkty</a>
           <a class="nav-link" href="../certifikace/">Certifikace</a>
-          <a class="nav-link" href="../kontakt/">Kontakt</a>
+          <a class="nav-link" href="../">Kontakt</a>
         </nav>
       </div>
     </div>
@@ -100,19 +105,21 @@
         <div class="container">
           <p class="page-kicker">Genetia</p>
           <h1 class="page-title">Analytické služby</h1>
-          <p class="page-lead">Analytické služby (v2 template). Sekce pro služby a panelové karty.</p>
+          <p class="page-lead">
+            Analytické služby (v2 template). Sekce pro služby a panelové karty.
+          </p>
 
           <div class="card">
             <div class="card__body stack">
               <h2 class="section-title">Placeholder</h2>
-              <p class="section-intro">Tady bude přepis sekcí z Genetia v1 → v2.</p>
+              <p class="section-intro">
+                Tady bude přepis sekcí z Genetia v1 → v2.
+              </p>
             </div>
           </div>
         </div>
       </section>
-
     </main>
-
 
     <!-- FOOTER -->
     <footer class="site-footer" aria-labelledby="footerTitle">
