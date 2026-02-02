@@ -1,114 +1,116 @@
-/* assets/js/components/nav.js */
+// assets/js/components/nav.js
+// Primary + Mobile navigation (Genetia v2)
+
+import { withAssetBase } from "../core/paths.js";
 import { LOG } from "../core/logger.js";
-import { getAssetBase } from "../core/paths.js";
 
-let navDataPromise = null;
+/* ==================================================
+   Helpers
+================================================== */
 
-const normalizePath = (p) =>
-  (p || "").replace(/\/index\.html$/i, "/").replace(/\/+/g, "/");
+/**
+ * Resolve href for folder routing.
+ * - external / absolute links stay untouched
+ * - internal section links get trailing slash
+ */
+function resolveHref(href) {
+  if (!href) return "#";
 
-const getCurrentSlug = () => {
-  const path = normalizePath(window.location.pathname);
-  const parts = path.split("/").filter(Boolean);
-  return parts.length ? parts[parts.length - 1] : "";
-};
+  // absolute or external
+  if (
+    href.startsWith("http://") ||
+    href.startsWith("https://") ||
+    href.startsWith("/")
+  ) {
+    return href;
+  }
 
-// pro stránky v rootu: ""
-// pro stránky ve složce (např. /ui-kit/): "../"
-const getPageBase = () => (getAssetBase() === "assets/" ? "" : "../");
+  // folder routing (ensure trailing slash)
+  return href.endsWith("/") ? href : `${href}/`;
+}
 
-// nav.json může obsahovat "/certifikace/" (legacy) nebo "certifikace/"
-// pro náš folder routing chceme relativní href vůči aktuální stránce,
-// takže pokud to začne "/" -> odstraníme ho a přidáme pageBase.
-const resolveHref = (pageBase, href) => {
-  const raw = (href || "").trim();
-  const cleaned = raw.startsWith("/") ? raw.slice(1) : raw;
-  return `${pageBase}${cleaned}`;
-};
+/* ==================================================
+   Data loading
+================================================== */
 
-const loadNavData = async () => {
-  if (navDataPromise) return navDataPromise;
+async function loadNavData() {
+  const url = withAssetBase("assets/data/nav.json");
 
-  navDataPromise = (async () => {
-    const url = `${getAssetBase()}data/nav.json`;
-    const res = await fetch(url, { cache: "force-cache" });
-    if (!res.ok) throw new Error(`nav.json fetch failed: ${res.status}`);
-    return res.json();
-  })().catch((err) => {
-    // nav.json je volitelné — když chybí, necháme HTML fallback
+  try {
+    const res = await fetch(url, { cache: "no-store" });
+    if (!res.ok) {
+      throw new Error(`nav.json fetch failed (${res.status})`);
+    }
+    return await res.json();
+  } catch (err) {
     LOG.warn("nav.json not available, using HTML fallback", err);
     return null;
+  }
+}
+
+/* ==================================================
+   Render
+================================================== */
+
+function renderDesktopNav(listEl, items) {
+  if (!listEl || !Array.isArray(items)) return;
+
+  listEl.innerHTML = "";
+
+  items.forEach((item) => {
+    const li = document.createElement("li");
+    const a = document.createElement("a");
+
+    a.className = "nav-link";
+    a.textContent = item.label;
+    a.href = resolveHref(item.href);
+
+    li.appendChild(a);
+    listEl.appendChild(li);
   });
+}
 
-  return navDataPromise;
-};
+function renderMobileNav(container, items) {
+  if (!container || !Array.isArray(items)) return;
 
-const markCurrentLinks = () => {
-  const current = getCurrentSlug();
-  if (!current) return;
+  container.innerHTML = "";
 
-  document.querySelectorAll(".nav-link").forEach((a) => {
-    const href = a.getAttribute("href") || "";
-    const slug = href.replace(/\/+$/, "").split("/").filter(Boolean).pop() || "";
-    if (slug && slug === current) a.setAttribute("aria-current", "page");
+  items.forEach((item) => {
+    const a = document.createElement("a");
+
+    a.className = "nav-link";
+    a.textContent = item.label;
+    a.href = resolveHref(item.href);
+
+    container.appendChild(a);
   });
-};
+}
 
-const renderDesktop = (items, pageBase) => {
-  const list =
-    document.querySelector(".site-nav .nav-list") ||
-    document.querySelector("[data-nav-list]");
-  if (!list) return;
+/* ==================================================
+   Init
+================================================== */
 
-  const current = getCurrentSlug();
+export async function initNav() {
+  const desktopList = document.querySelector(".site-nav .nav-list");
+  const mobileLinks = document.querySelector(".mobile-nav__links");
 
-  list.innerHTML = items
-    .map((it) => {
-      const href = resolveHref(pageBase, it.href);
-      const slug =
-        (it.href || "").replace(/\/+$/, "").split("/").filter(Boolean).pop() || "";
-      const isCurrent = slug === current && current !== "";
-      const ariaCurrent = isCurrent ? ' aria-current="page"' : "";
-      return `<li><a class="nav-link" href="${href}"${ariaCurrent}>${it.label}</a></li>`;
-    })
-    .join("");
-};
-
-const renderMobile = (items, pageBase) => {
-  const container =
-    document.querySelector(".mobile-nav__links") ||
-    document.querySelector("[data-mobile-nav-links]");
-  if (!container) return;
-
-  const current = getCurrentSlug();
-
-  container.innerHTML = items
-    .map((it) => {
-      const href = resolveHref(pageBase, it.href);
-      const slug =
-        (it.href || "").replace(/\/+$/, "").split("/").filter(Boolean).pop() || "";
-      const isCurrent = slug === current && current !== "";
-      const ariaCurrent = isCurrent ? ' aria-current="page"' : "";
-      return `<a class="nav-link" href="${href}"${ariaCurrent}>${it.label}</a>`;
-    })
-    .join("");
-};
-
-export const initNav = async () => {
   const data = await loadNavData();
 
-  // Podporujeme oba formáty:
-  // - { primary: [...] } (původní očekávání)
-  // - { items: [...] }   (aktuální nav.json v repu)
-  const items = data?.primary?.length ? data.primary : data?.items;
-
-  // Když nav.json není / nemá items, necháme HTML fallback a jen označíme active link
-  if (!items?.length) {
-    markCurrentLinks();
+  // Fallback: HTML already present
+  if (!data) {
+    LOG.info("nav initialized (HTML fallback)");
     return;
   }
 
-  const pageBase = getPageBase();
-  renderDesktop(items, pageBase);
-  renderMobile(items, pageBase);
-};
+  if (desktopList && Array.isArray(data.primary)) {
+    renderDesktopNav(desktopList, data.primary);
+  }
+
+  if (mobileLinks && Array.isArray(data.primary)) {
+    renderMobileNav(mobileLinks, data.primary);
+  }
+
+  LOG.info("nav initialized");
+}
+
+export default { initNav };
