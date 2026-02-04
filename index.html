@@ -5,17 +5,14 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Genetia Production</title>
 
-    <!-- Theme bootstrap (FOUC-free) -->
     <script>
       (() => {
-        const saved = localStorage.getItem("theme"); // "light" | "dark" | null
-        const systemDark =
-          window.matchMedia &&
-          window.matchMedia("(prefers-color-scheme: dark)").matches;
-        const theme = saved || (systemDark ? "dark" : "light");
-        document.documentElement.dataset.theme = theme;
+        // Force light theme only (FOUC-free)
+        localStorage.removeItem("theme");
+        document.documentElement.dataset.theme = "light";
       })();
     </script>
+    
     <!-- Import map (Lucide) -->
     <script type="importmap">
       {
@@ -106,7 +103,7 @@
         <div class="hero__video-wrapper" aria-hidden="true">
           <video
             class="hero__video"
-            src="assets/video/Genetia_home.webm"
+            src="assets/video/Genetia_home.mp4"
             autoplay
             muted
             loop
@@ -282,7 +279,7 @@
                 <div class="contact-cta__actions">
                   <a
                     class="btn btn-accent px-4 py-2"
-                    href="./produkty/#productContact"
+                    href="./kontakt/#kontakt"
                     data-i18n="homeContact.cardCta"
                   >
                     Přejít na formulář
@@ -494,62 +491,50 @@
         </div>
       </div>
     </footer>
-    <!-- Gate modal (use gate visual styling: .modal--gate) -->
-    <div
-      class="modal modal--gate"
-      id="gateModal"
-      role="dialog"
-      aria-modal="true"
-      aria-label="Ověření odbornosti"
-      aria-hidden="true"
-      style="display: none"
-    >
-      <button
-        class="modal__overlay"
-        type="button"
-        aria-label="Zavřít"
-        data-modal-close
-        tabindex="-1"
-      ></button>
+    <!-- =========================
+     GATE MODAL
+========================== -->
+<div class="modal modal--gate" id="gateModal" aria-hidden="true">
+  <div class="modal__overlay" data-modal-close></div>
 
-      <div class="modal__dialog" tabindex="-1">
-        <div class="modal__header">
-          <h2 class="modal__title">Ověření odbornosti</h2>
-          <button
-            class="modal__close"
-            type="button"
-            aria-label="Zavřít"
-            data-modal-close
-          >
-            ×
-          </button>
-        </div>
+  <div
+    class="modal__dialog"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="gateTitle"
+  >
+    <header class="modal__header">
+      <h2 class="modal__title" id="gateTitle">
+        Jste odborný pracovník ve zdravotnictví?
+      </h2>
+      <button class="modal__close" data-modal-close aria-label="Zavřít">×</button>
+    </header>
 
-        <div class="modal__body">
-          <p>
-            Tento obsah je určen výhradně pro odbornou veřejnost (lékaře a
-            lékárníky). Potvrďte prosím, že jste odborný pracovník.
-          </p>
-        </div>
-
-        <div class="modal__actions">
-          <button
-            class="gate-btn gate-btn--primary"
-            type="button"
-            data-gate-accept
-          >
-            Ano
-          </button>
-          <button
-            class="gate-btn gate-btn--secondary"
-            type="button"
-            data-gate-deny
-          >
-            Ne
-          </button>
-        </div>
-      </div>
+    <div class="modal__body">
+      <p>
+        Jsem odborníkem ve smyslu §2a Zákona č. 40/1995 Sb., o regulaci reklamy,
+        ve znění pozdějších předpisů, čili osobou oprávněnou předepisovat nebo
+        vydávat léčivé přípravky.
+      </p>
+      <p>
+        Potvrzuji, že jsem se seznámil/a s definicí odborníka dle zákona č.
+        40/1995 Sb. a jsem si vědom/a rizik, jimž se jiná osoba než odborník
+        vystavuje.
+      </p>
     </div>
+
+    <div class="modal__actions">
+      <button class="gate-btn gate-btn--primary" type="button" data-gate-accept>
+        Ano, vstoupit
+      </button>
+
+      <button class="gate-btn gate-btn--secondary" type="button" data-gate-deny>
+        Ne, odejít
+      </button>
+    </div>
+  </div>
+</div>
+
 
     <script type="module" src="./assets/js/app.js"></script>
   </body>

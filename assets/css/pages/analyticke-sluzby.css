@@ -1,0 +1,13 @@
+/* ==================================================
+   GENETIA v2 – Analytické služby (orchestraotr)
+   This file contains only imports for home page parts.
+================================================== */
+
+@import url("./analyticke-sluzby/analyticke-sluzby_layout.css");
+@import url("./analyticke-sluzby/analyticke-sluzby_uspBar.css");
+@import url("./analyticke-sluzby/analyticke-sluzby_benefits.css");
+@import url("./analyticke-sluzby/analyticke-sluzby_test-panels.css");
+@import url("./analyticke-sluzby/analyticke-sluzby_individual.css");
+@import url("./analyticke-sluzby/analyticke-sluzby_process.css");
+@import url("./analyticke-sluzby/analyticke-sluzby_faq.css");
+@import url("./analyticke-sluzby/analyticke-sluzby_cta.css");

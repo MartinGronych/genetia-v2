@@ -17,11 +17,15 @@
 .certifications-hero {
   text-align: center;
   align-items: center;
+  margin-bottom: 2rem;
+  
 }
 
 .certifications-hero .page-lead {
   margin-inline: auto;
   max-width: 72ch;
+  margin-bottom: 4rem;
+  
 }
 
 .certifications-hero__badge {
@@ -31,6 +35,7 @@
 
 .certifications .page-title {
   font-weight: 700;
+  margin-top: 1rem;
 }
 
 .certifications-hero__badge .badge {
@@ -243,6 +248,7 @@
 .certifications-important__head .section-title {
   font-weight: 700;
   font-size: clamp(1.95rem, 0.85rem + 0.6vw, 2.15rem);
+  margin-top:1rem;
 }
 
 .certifications-important__head .section-intro {

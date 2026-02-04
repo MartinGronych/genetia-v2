@@ -226,7 +226,14 @@
   height: 72px;
   display: grid;
   place-items: center;
+  color: rgba(0, 0, 0, 0.863);
+  background: transparent;
+  box-shadow: none;
 }
+.home-products__eye svg path, .home-products__eye svg line {
+  stroke-width: 1.6; /* 🔽 tady se ztenčují čáry */
+}
+
 
 .home-products__eye svg {
   width: 72px;

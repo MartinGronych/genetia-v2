@@ -25,11 +25,21 @@ function isOpen(navEl) {
   return navEl?.getAttribute("aria-hidden") === "false";
 }
 
+/**
+ * Keeps a CSS-friendly state for hamburger -> X animation.
+ * CSS can target: .nav-toggle[data-state="open"]
+ */
+function setToggleVisualState(toggleBtn, open) {
+  if (!toggleBtn) return;
+  toggleBtn.setAttribute("data-state", open ? "open" : "closed");
+}
+
 function openNav({ navEl, toggleBtn, overlayBtn, panelEl }) {
   if (!navEl || !toggleBtn) return;
 
   navEl.setAttribute("aria-hidden", "false");
   toggleBtn.setAttribute("aria-expanded", "true");
+  setToggleVisualState(toggleBtn, true);
   setOverlayTabindex(overlayBtn, true);
 
   // focus panel (dialog)
@@ -50,6 +60,7 @@ function closeNav({ navEl, toggleBtn, overlayBtn, panelEl, restoreFocusEl }) {
 
   navEl.setAttribute("aria-hidden", "true");
   toggleBtn.setAttribute("aria-expanded", "false");
+  setToggleVisualState(toggleBtn, false);
   setOverlayTabindex(overlayBtn, false);
 
   document.documentElement.classList.remove("is-mobile-nav-open");
@@ -85,6 +96,9 @@ export function initMobileNav() {
   if (!navEl.hasAttribute("aria-hidden")) navEl.setAttribute("aria-hidden", "true");
   if (!toggleBtn.hasAttribute("aria-expanded")) toggleBtn.setAttribute("aria-expanded", "false");
   if (panelEl) panelEl.tabIndex = -1;
+
+  // sync initial visual state (hamburger vs X)
+  setToggleVisualState(toggleBtn, isOpen(navEl));
   setOverlayTabindex(overlayBtn, isOpen(navEl));
 
   const restoreFocusEl = toggleBtn;
@@ -122,7 +136,7 @@ export function initMobileNav() {
     }
   });
 
-  console.info(LOG, "initialized");
+
 }
 
 export default { initMobileNav };

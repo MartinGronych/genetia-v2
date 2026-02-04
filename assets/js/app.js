@@ -1,5 +1,5 @@
 import { safeInit } from "./core/logger.js";
-import { initTheme } from "./core/theme.js";
+// import { initTheme } from "./core/theme.js";
 import { initI18n } from "./core/i18n.js";
 import { initLucide } from "./core/lucide.js";
 import { initScrollUI } from "./components/scroll-ui.js";
@@ -24,7 +24,7 @@ function domReady() {
 
 (async () => {
   // Ne-DOM init (může běžet hned)
-  await safeInit("theme", initTheme);
+  // await safeInit("theme", initTheme);
   await safeInit("i18n", initI18n);
 
   // DOM jistota pro ikony + UI komponenty (footer je na každé stránce)

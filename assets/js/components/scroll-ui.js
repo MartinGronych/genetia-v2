@@ -1,4 +1,5 @@
 /* assets/js/components/scroll-ui.js */
+import { initLucide } from "../core/lucide.js";
 
 const LOG_PREFIX = "[GENETIA] scroll-ui:";
 
@@ -38,6 +39,10 @@ const createScrollTopButton = () => {
   });
 
   document.body.appendChild(btn);
+
+  // ✅ ensure icons render even if created after initial lucide init
+  initLucide(btn);
+
   return btn;
 };
 
@@ -49,7 +54,6 @@ const applyMinimalHeader = ({ header, inner, brand, nav, toggle }) => {
   header.style.background = "transparent";
   header.style.pointerEvents = "none";
   header.style.overflow = "visible";
-  
 
   inner.style.padding = "0";
   if (nav) nav.style.display = "none";
@@ -168,7 +172,8 @@ export const initScrollUI = () => {
     mqlUnder1024.addListener(requestUpdate);
   }
 
-  console.debug(`${LOG_PREFIX} ready`);
+  // ✅ debug bývá filtrován → info uvidíš defaultně
+  console.info(`${LOG_PREFIX} ready`);
 };
 
 export default { initScrollUI };

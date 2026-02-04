@@ -1,0 +1,269 @@
+/* Hero section (ported from v1 hero final v4.0)
+   Note: HTML uses BEM classes (.hero, .hero__video-wrapper, .hero__video, .hero__content, .hero__lead, .hero__br).
+   This file intentionally contains ONLY the BEM implementation (legacy .hero-section/... rules removed).
+*/
+
+/* ==================================================
+   HERO – layout (no media background here)
+================================================== */
+.hero {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+  min-height: calc(74vh - var(--header-offset));
+  margin: 0;
+  padding: 0;
+  z-index: 1;
+  color: var(--color-text);
+}
+
+/* Content sits above media layer */
+.hero__content {
+  position: relative;
+  z-index: 3;
+  max-width: 720px;
+  margin-inline: auto;
+}
+
+/* ==================================================
+   HERO – media layer (fallback image lives here)
+   Reason: .hero__video-wrapper covers the hero; putting fallback on .hero
+   can be visually hidden by the wrapper.
+================================================== */
+.hero__video-wrapper {
+  display: block;
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 0;
+  pointer-events: none;
+
+  /* Fallback image + readability gradient (always available) */
+  background:
+    linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.1) 0%,
+      rgba(0, 0, 0, 0.05) 35%,
+      transparent 60%
+    ),
+    url("../../images/Innocrystal.webp") center/cover no-repeat;
+}
+
+/* Video element (hidden on small screens; shown from 768+) */
+.hero__video {
+  display: none;
+}
+
+/* Fade hero into page background */
+.hero::after {
+  content: "";
+  position: absolute;
+  bottom: -1.5px;
+  left: 0;
+  width: 100%;
+  height: 40px;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    color-mix(in oklab, var(--color-bg) 15%, transparent) 35%,
+    color-mix(in oklab, var(--color-bg) 25%, transparent) 55%,
+    color-mix(in oklab, var(--color-bg) 33%, transparent) 75%,
+    color-mix(in oklab, var(--color-bg) 45%, transparent) 100%
+  );
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* ==================================================
+   HERO – typography (kept as in v1)
+================================================== */
+.hero .page-title {
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  font-size: clamp(2.4rem, 3vw + 1rem, 3.5rem);
+  padding: 0.55rem 0.5rem;
+  color: var(--bg);
+}
+
+.hero__lead {
+  display: inline-block;
+  max-width: 58ch;
+  margin-top: 0.75rem;
+  padding: 0.65rem 0.95rem;
+}
+
+/* Mobile-only line break inside H1 */
+.hero__br {
+  display: inline;
+}
+
+/* ==================================================
+   Video background (>=768)
+================================================== */
+@media (min-width: 768px) {
+  .hero {
+    min-height: calc((74vh - var(--header-offset)) * 0.75);
+  }
+
+  .hero__video {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 160%;
+    height: calc(160% + 2px);
+    transform: translate(-50%, -50%) scale(1.08);
+    pointer-events: none;
+    object-fit: cover;
+    object-position: center;
+    z-index: 0;
+  }
+
+  /* Blend bottom part of the moving video into the static fallback image */
+  .hero__video-wrapper::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 0) 62%,
+      rgba(255, 255, 255, 0.1) 78%,
+      rgba(255, 255, 255, 0.219) 90%,
+      rgba(255, 255, 255, 0.466) 100%
+    );
+  }
+
+  .hero__br {
+    display: none;
+  }
+
+  .hero .page-title {
+    padding: 0.8rem 0.1rem;
+    width: 90%;
+    margin-inline: auto;
+  }
+
+  .hero__lead {
+    font-size: 0.95rem;
+  }
+}
+
+/* Desktop UX switch (>=1024) */
+@media (min-width: 1024px) {
+  .hero {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding-inline: 4rem;
+    min-height: calc(55vh - var(--header-offset));
+  }
+
+  .hero__content {
+    max-width: 760px;
+  }
+
+  .hero .page-title {
+    width: 90%;
+    margin-inline: auto;
+  }
+
+  .hero__lead {
+    font-size: 0.95rem;
+    font-weight: 400;
+  }
+}
+
+/* Large screens (>=1440) */
+@media (min-width: 1440px) {
+  .hero {
+    min-height: 55vh;
+  }
+
+  .hero__content {
+    max-width: 980px;
+    margin-inline: auto;
+  }
+
+  .hero .page-title {
+    font-size: 3.8rem;
+    line-height: 1.14;
+    margin-inline: auto;
+  }
+
+  .hero__lead {
+    font-size: 1.25rem;
+    line-height: 1.6;
+    max-width: 66ch;
+    margin-inline: auto;
+  }
+
+  .hero::after {
+    height: 60px;
+    bottom: -2px;
+  }
+}
+
+/* 1920+ (spacing only) */
+@media (min-width: 1920px) {
+  .hero__content {
+    max-width: 1120px;
+  }
+}
+
+/* ==================================================
+   HERO – Backdrop glass for readability over video
+   - Progressive enhancement
+   - Applies only to title + lead
+================================================== */
+
+/* Fallback first: translucent panel WITHOUT blur */
+.hero .page-title,
+.hero__lead {
+  position: relative;
+  isolation: isolate;
+
+  background: color-mix(in oklab, var(--color-bg) 72%, transparent);
+  border-radius: 0.9rem;
+
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+
+  box-shadow:
+    0 0 0 1px color-mix(in oklab, var(--color-text) 5%, transparent),
+    0 10px 28px color-mix(in oklab, var(--color-text) 5%, transparent);
+}
+
+/* If backdrop-filter is supported, use true glass */
+@supports (
+  (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))
+) {
+  .hero .page-title,
+  .hero__lead {
+    background: color-mix(in oklab, var(--color-bg) 45%, transparent);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+}
+
+/* Keep lead text color legible; do not fight global typography tokens */
+.hero__lead {
+  color: var(--bg);
+  opacity: 0.95;
+  font-weight: 400;
+  font-size: clamp(0.8rem, 3vw + 0.2rem, 1.5rem);
+}
+
+/* Motion accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .hero__video {
+    display: none;
+  }
+}

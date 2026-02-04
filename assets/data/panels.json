@@ -1,0 +1,80 @@
+{
+  "groups": [
+    {
+      "id": "farmakognosticke",
+      "title": "Farmakognostické metody",
+      "subtitle": "Identifikace a ověření kvality rostlinného materiálu",
+      "icon": "leaf",
+      "items": [
+        { "id": "makroskopicke-mikroskopicke-vysetreni", "title": "Makroskopické a mikroskopické vyšetření" },
+        { "id": "stanoveni-cizorodych-primesi", "title": "Stanovení cizorodých příměsí" },
+        { "id": "rezidua-pesticidu-50", "title": "Stanovení reziduí pesticidů (více než 50 pesticidů)" },
+        { "id": "mykotoxiny", "title": "Stanovení mykotoxinů (ochratoxin A, aflatoxin B1, B2, G1, G2)" },
+        { "id": "hptlc-identifikace", "title": "Identifikace pomocí tenkovrstvé chromatografie s vysokým rozlišením (HPTLC)" }
+      ]
+    },
+
+    {
+      "id": "fyzikalni",
+      "title": "Fyzikální a fyzikálně-chemické zkoušky",
+      "subtitle": "Stanovení fyzikálních vlastností a chemického složení",
+      "icon": "beaker",
+      "items": [
+        { "id": "ztrata-susenim", "title": "Ztráta sušením" },
+        { "id": "stanoveni-obsahu-kanabinoidu", "title": "Stanovení obsahu kanabinoidů", "subtitle": "Kanabinoidní profil, až 16 kanabinoidů" }
+      ]
+    },
+
+    {
+      "id": "mikrobiologie",
+      "title": "Zkoušky mikrobiologické jakosti",
+      "subtitle": "Mikrobiální čistota a detekce patogenů",
+      "icon": "worm",
+      "items": [
+        { "id": "tamc", "title": "TAMC", "subtitle": "Celkový počet aerobních mikroorganismů" },
+        { "id": "tymc", "title": "TYMC", "subtitle": "Celkový počet kvasinek a plísní" },
+        { "id": "btgn", "title": "BTGN", "subtitle": "Gramnegativní bakterie tolerantní k žluči" },
+        { "id": "tce", "title": "TC&E", "subtitle": "Celkové koliformy a enterobakterie" },
+        { "id": "escherichia-coli", "title": "Escherichia coli" },
+        { "id": "stec", "title": "STEC", "subtitle": "E. coli produkující Shiga toxin" },
+        { "id": "salmonella-spp", "title": "Salmonella spp." },
+        { "id": "staphylococcus-aureus", "title": "Staphylococcus aureus" },
+        { "id": "pseudomonas-aeruginosa", "title": "Pseudomonas aeruginosa" },
+        { "id": "listeria-monocytogenes", "title": "Listeria monocytogenes" }
+      ]
+    },
+
+    {
+      "id": "limitni",
+      "title": "Limitní zkoušky",
+      "subtitle": "Kontrola limitních hodnot kontaminantů",
+      "icon": "shield-check",
+      "items": [
+        { "id": "tezke-kovy", "title": "Stanovení těžkých kovů", "subtitle": "Pb, Cd, Hg, As, Zn, Ni" },
+        { "id": "celkovy-popel", "title": "Stanovení celkového popela" },
+        { "id": "siranovy-popel", "title": "Stanovení síranového popela" }
+      ]
+    },
+
+    {
+      "id": "obsah",
+      "title": "Stanovení obsahu látek",
+      "subtitle": "Kvantitativní analýza specifických parametrů",
+      "icon": "flask-conical",
+      "items": [
+        { "id": "peroxidove-cislo", "title": "Stanovení peroxidového čísla" },
+        { "id": "cislo-kyselosti", "title": "Stanovení čísla kyselosti" }
+      ]
+    },
+
+    {
+      "id": "viroidni",
+      "title": "Zkoušky viroidní jakosti",
+      "subtitle": "Viroidní čistota a detekce patogenů",
+      "icon": "microscope",
+      "items": [
+        { "id": "hlvd-viroid", "title": "HLVd viroid", "badge": "Exkluzivně v ČR" }
+      ]
+    }
+  ]
+}

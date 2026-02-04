@@ -1,82 +1,27 @@
 // assets/js/core/lucide.js
-import {
-  createIcons,
-
-  // social
-  Linkedin,
-  Instagram,
-  Github,
-  Twitter,
-  Youtube,
-  Facebook,
-
-  // contact
-  Mail,
-  Phone,
-  MapPin,
-
-  // certifications / badges
-  BadgeCheck,
-  Shield,
-  ShieldCheck,
-  Award,
-  PackageCheck,
-
-  // modal/info
-  FileText,
-
-  // ui
-  ChevronRight,
-  ArrowUp,          // ✅ SPRÁVNÝ IMPORT
-
-  // optional
-  Bookmark,
-  Leaf,
-  Search,
-} from "lucide";
+import { createIcons, icons } from "lucide";
 
 /**
- * Lucide init (selected icons only)
- * - DO NOT manually remap icon names.
- * - data-lucide names are derived from export names
- * - safe to call multiple times
+ * Lucide init – stable browser ESM (NO bundler)
+ * Uses official `icons` registry from lucide.
+ *
+ * HTML/JSON must use kebab-case:
+ *  <i data-lucide="linkedin"></i>
+ *  <i data-lucide="arrow-up"></i>
  */
 export function initLucide(root = document) {
   try {
+    // NOTE: createIcons scans the document by default.
+    // Some builds support scoping; if not, this is still safe to call multiple times.
     createIcons({
-      icons: {
-        Linkedin,
-        Instagram,
-        Github,
-        Twitter,
-        Youtube,
-        Facebook,
-
-        Mail,
-        Phone,
-        MapPin,
-
-        BadgeCheck,
-        Shield,
-        ShieldCheck,
-        Award,
-        PackageCheck,
-
-        Leaf,
-        Search,
-
-        FileText,
-
-        ChevronRight,
-        ArrowUp,       // ✅ REGISTRACE
-
-        Bookmark,
-      },
+      icons,
+      nameAttr: "data-lucide",
       attrs: {
         class: "lucide-icon",
         "aria-hidden": "true",
         focusable: "false",
       },
+      // keep root if supported by your lucide build; harmless if ignored
       root,
     });
   } catch (err) {

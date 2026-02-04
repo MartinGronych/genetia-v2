@@ -147,3 +147,19 @@
 
   margin-top: clamp(1.25rem, 2.5vw, 2rem);
 }
+
+/* ==================================================
+   HCP products – layout 2 + 1 (centered) from 768+
+   Scope: layout only, no visual changes
+================================================== */
+
+@media (min-width: 768px) {
+  #hcp-products-section {
+    grid-template-columns: repeat(2, minmax(260px, 320px));
+  }
+
+  #hcp-products-section .hcp-product-card:nth-child(3) {
+    grid-column: 1 / -1;
+    justify-self: center;
+  }
+}

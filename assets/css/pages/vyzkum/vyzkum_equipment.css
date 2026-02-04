@@ -1,0 +1,113 @@
+/* assets/css/pages/vyzkum/vyzkum_equipment.css — celý soubor */
+
+.equipment__head{
+  text-align:center;
+  max-width:900px;
+  margin-inline:auto;
+  margin-bottom:2rem;
+}
+
+.equipment .section__title{
+  margin:0 0 var(--space-3);
+  font-size:clamp(2.8rem,3.2vw,4rem);
+  line-height:1.15;
+  font-weight:700;
+  color:var(--brand-black);
+  text-wrap:balance;
+}
+
+.equipment__lead{
+  margin:0;
+  font-size:clamp(1.05rem,1rem + .35vw,1.2rem);
+  line-height:1.7;
+  color:var(--text-muted);
+}
+
+.equipment__grid{
+  display:grid;
+  gap:clamp(1.5rem, 1.2rem + 1vw, 2.5rem); /* víc vzduchu mezi card */
+  align-items:stretch;
+}
+
+.equipment__card{
+  height:100%;
+  border-radius:var(--r-lg);
+  overflow:hidden;
+  border:1px solid var(--border-soft);
+  background:var(--surface);
+  box-shadow:var(--shadow-card);
+}
+
+.equipment__body{
+  padding:clamp(1.5rem, 1.2rem + 1vw, 2rem); /* víc prostoru od krajů */
+  display:flex;
+  flex-direction:column;
+  gap:var(--space-5);
+}
+
+.equipment__top{
+  display:flex;
+  align-items:center;
+  gap:var(--space-3);
+}
+
+.equipment__icon{
+  width:44px;
+  height:44px;
+  border-radius:var(--r-md);
+  display:grid;
+  place-items:center;
+  background:color-mix(in oklab, var(--brand-50) 70%, transparent);
+  border:1px solid var(--border-soft);
+  color:var(--brand-800);
+  flex:0 0 auto;
+}
+
+.equipment__icon svg{
+  width:22px;
+  height:22px;
+}
+
+.equipment__title{
+  margin:0;
+  font-size:clamp(1.25rem,1.15rem + .6vw,1.6rem);
+  line-height:1.25;
+  font-weight:700;
+  color:var(--brand-black);
+}
+
+.equipment__list{
+  margin:0;
+  padding:0;
+  list-style:none;
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:var(--space-3) var(--space-6);
+}
+
+.equipment__li{
+  position:relative;
+  padding-left:1.1rem;
+  font-size:clamp(1rem,.95rem + .25vw,1.1rem);
+  line-height:1.55;
+  color:var(--text-muted);
+}
+
+.equipment__li::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:.6rem;
+  width:.45rem;
+  height:.45rem;
+  border-radius:999px;
+  background:var(--brand-700);
+  opacity:.75;
+}
+
+@media (min-width:768px){
+  .equipment__grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:clamp(2rem, 1.5rem + 1vw, 3rem);
+  }
+}

@@ -5,15 +5,11 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Vývoj a výzkum – Genetia</title>
 
-    <!-- Theme bootstrap (FOUC-free) -->
     <script>
       (() => {
-        const saved = localStorage.getItem("theme"); // "light" | "dark" | null
-        const systemDark =
-          window.matchMedia &&
-          window.matchMedia("(prefers-color-scheme: dark)").matches;
-        const theme = saved || (systemDark ? "dark" : "light");
-        document.documentElement.dataset.theme = theme;
+        // Force light theme only (FOUC-free)
+        localStorage.removeItem("theme");
+        document.documentElement.dataset.theme = "light";
       })();
     </script>
     <!-- Import map (Lucide) -->
@@ -25,8 +21,8 @@
       }
     </script>
 
-    <link rel="stylesheet" href="../assets/css/styles.css" />
-    <link rel="stylesheet" href="../assets/css/pages/vyvoj-a-vyzkum.css" />
+    <link rel="stylesheet" href="../assets/css/styles.css"/>
+    <link rel="stylesheet" href="../assets/css/pages/vyvoj-a-vyzkum.css"/>
   </head>
 
   <body>
@@ -102,22 +98,382 @@
 
     <main id="main" class="site-main">
       <section class="section research">
-        <div class="container">
-          <p class="page-kicker">Genetia</p>
-          <h1 class="page-title">Vývoj a výzkum</h1>
-          <p class="page-lead">
-            Vývoj a výzkum (v2 template). Sekce pro výzkumné bloky a metodiku.
-          </p>
+        <!-- HERO -->
+        <section
+          class="section research-hero"
+          aria-labelledby="research-hero-title"
+          data-section="research-hero"
+        >
+          <div class="container">
+            <header class="research__hero section__head section__head--center">
+              <h2 id="research-hero-title" class="section__title">
+                Aplikovaný výzkum ve farmacii
+              </h2>
+              <p class="section__lead">
+                Přeměňujeme vědecké poznatky v inovativní léčiva. Spojujeme
+                akademickou excelenci s průmyslovou praxí pro rychlejší cestu od
+                molekuly k pacientovi.
+              </p>
+            </header>
+          </div>
+        </section>
 
-          <div class="card">
-            <div class="card__body stack">
-              <h2 class="section-title">Placeholder</h2>
-              <p class="section-intro">
-                Tady bude přepis sekcí z Genetia v1 → v2.
+        <!-- Zaměření výzkumu -->
+
+        <section
+          class="section research-focus"
+          id="vyzkum-zamereni"
+          aria-labelledby="research-focus-title"
+          data-section="research-focus"
+        >
+          <div class="container">
+            <header
+              class="section__head section__head--center research-focus__head"
+            >
+              <h2 id="research-focus-title" class="section__title">
+                Zaměření výzkumu
+              </h2>
+            </header>
+
+            <div class="research-focus__grid">
+              <!-- 1 -->
+              <article class="research-focus__item card" data-hover-card>
+                <div class="card__body research-focus__body">
+                  <h3 class="research-focus__title">Formulace léčivé látky</h3>
+                  <p class="research-focus__text">
+                    Vyvíjíme inovativní přístupy k léčbě a transformujeme
+                    přírodní zdroje do účinných a stabilních léčivých extraktů s
+                    konzistentní kvalitou a ověřeným biologickým účinkem.
+                  </p>
+
+                  <div class="research-focus__media" aria-hidden="true">
+                    <img
+                      src="../assets/images/vyzkum/formulace_stabilita.webp"
+                      alt="Laboratorní příprava vzorku pro testování stability"
+                      loading="lazy"
+                    />
+                  </div>
+                </div>
+              </article>
+
+              <!-- 2 -->
+              <article class="research-focus__item card" data-hover-card>
+                <div class="card__body research-focus__body">
+                  <h3 class="research-focus__title">
+                    Vývoj a validace analytických metod
+                  </h3>
+                  <p class="research-focus__text">
+                    Vyvíjíme a následně validujeme analytické metody určené k
+                    testování vstupních surovin, meziproduktů a finálních
+                    produktů v různých matricích.
+                  </p>
+
+                  <div class="research-focus__media" aria-hidden="true">
+                    <img
+                      src="../assets/images/vyzkum/validace_metod.webp"
+                      alt="Validace analytických metod v laboratoři"
+                      loading="lazy"
+                    />
+                  </div>
+                </div>
+              </article>
+
+              <!-- 3 -->
+              <article class="research-focus__item card" data-hover-card>
+                <div class="card__body research-focus__body">
+                  <h3 class="research-focus__title">
+                    Jištění farmaceutické jakosti
+                  </h3>
+                  <p class="research-focus__text">
+                    Zajišťujeme komplexní jištění jakosti od vstupních surovin
+                    až po finální produkt, s důrazem na konzistentní kvalitu,
+                    bezpečnost a splnění regulačních požadavků.
+                  </p>
+
+                  <div class="research-focus__media" aria-hidden="true">
+                    <img
+                      src="../assets/images/vyzkum/cannabinoidni_profil.webp"
+                      alt="Kontrola jakosti a profilace složek v laboratoři"
+                      loading="lazy"
+                    />
+                  </div>
+                </div>
+              </article>
+            </div>
+
+            <div class="research-focus__cta">
+              <a class="btn btn-brand btn-lg" href="../kontakt/#form-contact"
+                >Konzultace vašeho projektu</a
+              >
+              <p class="research-focus__note">
+                Nezávazně prodiskutujeme možnosti spolupráce na vašem výzkumném
+                záměru
               </p>
             </div>
           </div>
-        </div>
+        </section>
+
+        <!-- Projekty -->
+
+        <section
+          class="section research-projects"
+          id="vyzkum-projekty"
+          aria-labelledby="research-projects-title"
+          data-section="research-projects"
+        >
+          <div class="container">
+            <header
+              class="section__head section__head--center research-projects__head"
+            >
+              <h2 id="research-projects-title" class="section__title">
+                Běžící projekty
+              </h2>
+              <p class="section__lead research-projects__lead">
+                Aktuální výzkumné projekty, na kterých pracujeme
+              </p>
+            </header>
+
+            <div class="research-projects__grid">
+              <!-- 1 -->
+              <article class="research-projects__item card">
+                <div class="card__body research-projects__body">
+                  <div class="research-projects__top">
+                    <span class="research-projects__icon" aria-hidden="true">
+                      <i data-lucide="target"></i>
+                    </span>
+                    <h3 class="research-projects__title">
+                      Vylepšení formulace léčivé látky
+                    </h3>
+                  </div>
+
+                  <p class="research-projects__text">
+                    Systematicky optimalizujeme výrobní a technologické přístupy
+                    tak, aby výsledná léčivá látka dosahovala vyšší stability a
+                    homogenity, přičemž zároveň zvyšujeme efektivitu procesů a
+                    snižujeme výrobní náklady. Naším cílem je udržitelná a
+                    kvalitní výroba s dlouhodobou přidanou hodnotou.
+                  </p>
+
+                  <h4 class="research-projects__subhead">Cíle projektu:</h4>
+                  <ul class="research-projects__list" role="list">
+                    <li class="research-projects__li">
+                      Zvýšení stability a homogenity léčivé látky
+                    </li>
+                    <li class="research-projects__li">
+                      Optimalizace výrobních a technologických postupů
+                    </li>
+                    <li class="research-projects__li">
+                      Snížení výrobních nákladů při zachování kvality
+                    </li>
+                    <li class="research-projects__li">
+                      Zajištění udržitelné a kvalitní výroby
+                    </li>
+                  </ul>
+                </div>
+              </article>
+
+              <!-- 2 -->
+              <article class="research-projects__item card">
+                <div class="card__body research-projects__body">
+                  <div class="research-projects__top">
+                    <span class="research-projects__icon" aria-hidden="true">
+                      <i data-lucide="target"></i>
+                    </span>
+                    <h3 class="research-projects__title">
+                      Vývoj a validace analytických metod pomocí LC-MS/MS v
+                      konopí a výrobcích z něj
+                    </h3>
+                  </div>
+
+                  <p class="research-projects__text">
+                    Zaměřujeme se na vývoj a validaci analytických metod s
+                    využitím technologie LC-MS/MS, která představuje špičku v
+                    moderní analytické chemii. Tato technologie umožňuje vysoce
+                    selektivní, citlivé a přesné stanovení různých analytů ve
+                    složitých matricích, jako je konopí a výrobky z něj, a to
+                    při velmi nízkých detekčních limitech.
+                  </p>
+
+                  <h4 class="research-projects__subhead">Cíle projektu:</h4>
+                  <ul class="research-projects__list" role="list">
+                    <li class="research-projects__li">
+                      Vývoj vysoce selektivních a citlivých analytických metod
+                    </li>
+                    <li class="research-projects__li">
+                      Validace metod podle mezinárodních standardů
+                    </li>
+                    <li class="research-projects__li">
+                      Stanovení látek ve složitých matricích
+                    </li>
+                    <li class="research-projects__li">
+                      Dosažení velmi nízkých detekčních limitů
+                    </li>
+                  </ul>
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <!-- METODIKA – CAROUSEL -->
+        <section
+          class="section research-equipment"
+          aria-labelledby="research-equipment-title"
+          data-section="research-equipment"
+        >
+          <div class="container">
+            <div
+              class="metodika-slider"
+              aria-label="Galerie metodiky a laboratorního vybavení"
+            >
+              <div class="metodika-slider_track">
+                <!-- originály -->
+                <div class="metodika-slider_slide">
+                  <img
+                    src="../assets/images/vyzkum/Analyticka_laborator.webp"
+                    alt="Analytická laboratoř s laboratorním vybavením"
+                    loading="lazy"
+                  />
+                </div>
+
+                <div class="metodika-slider_slide">
+                  <img
+                    src="../assets/images/vyzkum/Aparatura_separace.webp"
+                    alt="Laboratorní aparatura pro separační procesy"
+                    loading="lazy"
+                  />
+                </div>
+
+                <div class="metodika-slider_slide">
+                  <img
+                    src="../assets/images/vyzkum/Homogenizace_vzorku.webp"
+                    alt="Proces homogenizace laboratorního vzorku"
+                    loading="lazy"
+                  />
+                </div>
+
+                <div class="metodika-slider_slide">
+                  <img
+                    src="../assets/images/vyzkum/Priprava_vzorku.webp"
+                    alt="Příprava vzorku před laboratorní analýzou"
+                    loading="lazy"
+                  />
+                </div>
+
+                <div class="metodika-slider_slide">
+                  <img
+                    src="../assets/images/vyzkum/Proces_extrakce.webp"
+                    alt="Laboratorní proces extrakce analytů"
+                    loading="lazy"
+                  />
+                </div>
+
+                <!-- duplicity pro nekonečný loop -->
+                <div class="metodika-slider_slide" aria-hidden="true">
+                  <img
+                    src="../assets/images/vyzkum/Analyticka_laborator.webp"
+                    alt=""
+                    loading="lazy"
+                  />
+                </div>
+
+                <div class="metodika-slider_slide" aria-hidden="true">
+                  <img
+                    src="../assets/images/vyzkum/Aparatura_separace.webp"
+                    alt=""
+                    loading="lazy"
+                  />
+                </div>
+
+                <div class="metodika-slider_slide" aria-hidden="true">
+                  <img
+                    src="../assets/images/vyzkum/Homogenizace_vzorku.webp"
+                    alt=""
+                    loading="lazy"
+                  />
+                </div>
+
+                <div class="metodika-slider_slide" aria-hidden="true">
+                  <img
+                    src="../assets/images/vyzkum/Priprava_vzorku.webp"
+                    alt=""
+                    loading="lazy"
+                  />
+                </div>
+
+                <div class="metodika-slider_slide" aria-hidden="true">
+                  <img
+                    src="../assets/images/vyzkum/Proces_extrakce.webp"
+                    alt=""
+                    loading="lazy"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+        <!-- NAŠE VYBAVENÍ -->
+        <section
+          class="section equipment"
+          id="vybaveni"
+          aria-labelledby="equipment-title"
+          data-section="equipment"
+        >
+          <div class="container">
+            <header class="section__head section__head--center equipment__head">
+              <h2 id="equipment-title" class="section__title">Naše vybavení</h2>
+              <p class="section__lead equipment__lead">
+                Moderní výrobní zařízení a laboratoře, připravené pro komplexní
+                farmaceutický vývoj
+              </p>
+            </header>
+
+            <div class="equipment__grid">
+              <!-- Laboratorní vybavení -->
+              <article class="equipment__card card">
+                <div class="card__body equipment__body">
+                  <div class="equipment__top">
+                    <span class="equipment__icon" aria-hidden="true"
+                      ><i data-lucide="microscope"></i
+                    ></span>
+                    <h3 class="equipment__title">Laboratorní vybavení</h3>
+                  </div>
+
+                  <ul class="equipment__list" role="list">
+                    <li class="equipment__li">HPTLC</li>
+                    <li class="equipment__li">HPLC-MS/MS</li>
+                    <li class="equipment__li">GC-MS</li>
+                    <li class="equipment__li">HPLC-UV/VIS</li>
+                    <li class="equipment__li">qPCR</li>
+                    <li class="equipment__li">ICP-MS</li>
+                  </ul>
+                </div>
+              </article>
+
+              <!-- Výrobní zařízení -->
+              <article class="equipment__card card">
+                <div class="card__body equipment__body">
+                  <div class="equipment__top">
+                    <span class="equipment__icon" aria-hidden="true"
+                      ><i data-lucide="cog"></i
+                    ></span>
+                    <h3 class="equipment__title">Výrobní zařízení</h3>
+                  </div>
+
+                  <ul class="equipment__list" role="list">
+                    <li class="equipment__li">Molekulární destilační aparát</li>
+                    <li class="equipment__li">Extrakktor</li>
+                    <li class="equipment__li">Dekarboxylátor</li>
+                    <li class="equipment__li">Rotační odparka</li>
+                    <li class="equipment__li">Filtrační aparatura</li>
+                    <li class="equipment__li">Flash chromatografie</li>
+                  </ul>
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
       </section>
     </main>
 

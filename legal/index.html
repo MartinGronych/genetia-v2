@@ -5,16 +5,14 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Legal – Genetia</title>
 
-    <!-- Theme bootstrap (FOUC-free) -->
     <script>
-(() => {
-  const saved = localStorage.getItem("theme"); // "light" | "dark" | null
-  const systemDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
-  const theme = saved || (systemDark ? "dark" : "light");
-  document.documentElement.dataset.theme = theme;
-})();
-</script>
-<!-- Import map (Lucide) -->
+      (() => {
+        // Force light theme only (FOUC-free)
+        localStorage.removeItem("theme");
+        document.documentElement.dataset.theme = "light";
+      })();
+    </script>
+    <!-- Import map (Lucide) -->
     <script type="importmap">
       {
         "imports": {
@@ -103,17 +101,20 @@
         <div class="container">
           <p class="page-kicker">Genetia</p>
           <h1 class="page-title">Legal</h1>
-          <p class="page-lead">Právní informace (GDPR atd.). Obsah se bude generovat z JSON.</p>
+          <p class="page-lead">
+            Právní informace (GDPR atd.). Obsah se bude generovat z JSON.
+          </p>
 
           <div class="card">
             <div class="card__body stack">
               <h2 class="section-title">Placeholder</h2>
-              <p class="section-intro">Tady bude přepis sekcí z Genetia v1 → v2.</p>
+              <p class="section-intro">
+                Tady bude přepis sekcí z Genetia v1 → v2.
+              </p>
             </div>
           </div>
         </div>
       </section>
-
     </main>
 
     <!-- FOOTER -->

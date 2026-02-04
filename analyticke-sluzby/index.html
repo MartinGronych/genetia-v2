@@ -5,15 +5,11 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Analytické služby – Genetia</title>
 
-    <!-- Theme bootstrap (FOUC-free) -->
     <script>
       (() => {
-        const saved = localStorage.getItem("theme"); // "light" | "dark" | null
-        const systemDark =
-          window.matchMedia &&
-          window.matchMedia("(prefers-color-scheme: dark)").matches;
-        const theme = saved || (systemDark ? "dark" : "light");
-        document.documentElement.dataset.theme = theme;
+        // Force light theme only (FOUC-free)
+        localStorage.removeItem("theme");
+        document.documentElement.dataset.theme = "light";
       })();
     </script>
     <!-- Import map (Lucide) -->
@@ -101,21 +97,348 @@
     </div>
 
     <main id="main" class="site-main">
-      <section class="section services">
+      <!-- ===================
+        HERO – analytické služby
+        ==================== -->
+      <section
+        class="section hero"
+        aria-labelledby="hero-title"
+        data-section="hero"
+      >
+        <div class="hero__video-wrapper" aria-hidden="true">
+          <video
+            class="hero__video"
+            src="../assets/video/Genetia_analytics.mp4"
+            autoplay
+            muted
+            loop
+            playsinline
+            preload="metadata"
+          ></video>
+        </div>
+
         <div class="container">
-          <p class="page-kicker">Genetia</p>
-          <h1 class="page-title">Analytické služby</h1>
-          <p class="page-lead">
-            Analytické služby (v2 template). Sekce pro služby a panelové karty.
+          <div class="hero__content">
+            <h1 class="page-title" id="hero-title">
+              Laboratorní analýza<br class="hero__br" />
+              <span class="hero-highlight">konopí</span> a výrobků z něj
+            </h1>
+
+            <p class="page-lead hero__lead">
+              Poskytujeme komplexní, rychlé a spolehlivé analýzy s využitím
+              špičkového laboratorního vybavení. Naše laboratoř je držitelem
+              certifikátu GMP&nbsp;/&nbsp;SVP vydaného&nbsp;SÚKL.
+            </p>
+
+            <!-- CTA (stejné jako v1) -->
+            <div class="hero__actions">
+              <a href="../kontakt/#form-contact" class="btn btn-brand btn-lg">
+                Objednat analýzu
+              </a>
+
+              <a href="#proc-laborator" class="btn btn-brand btn-lg">
+                Zjistit více
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================================
+        USP BAR – Proč si vybrat naši laboratoř
+        =================================== -->
+      <section
+        class="section usp-bar"
+        id="proc-laborator"
+        data-section="usp"
+        aria-labelledby="usp-title"
+      >
+        <div class="container">
+          <header class="usp-bar__header">
+            <h2 class="usp-bar__title" id="usp-title">
+              Proč si vybrat naši laboratoř?
+            </h2>
+
+            <p class="usp-bar__subtitle">
+              Kombinujeme odbornost, moderní technologie a přísné standardy
+              kvality.
+            </p>
+          </header>
+
+          <div
+            class="usp-bar__grid"
+            id="uspGrid"
+            aria-label="Klíčové benefity"
+            aria-live="polite"
+          >
+            <!-- render z benefits.json -->
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================
+        DETAIL BENEFITY – rozšířené USP
+        =========================== -->
+      <section
+        class="section benefits"
+        id="benefits"
+        data-section="benefits"
+        aria-labelledby="benefits-title"
+      >
+        <div class="container">
+          <div id="benefitsMount" class="benefits__list" aria-live="polite">
+            <!-- render z assets/data/benefits.json -->
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================
+        NAŠE SLUŽBY – testovací panely
+        ========================== -->
+      <section
+        id="testovaci-panely"
+        class="section test-panels-section"
+        data-section="service-panels"
+        aria-labelledby="services-panels-title"
+      >
+        <div class="container">
+          <header class="section-header section-header--center">
+            <h2 class="section-title" id="services-panels-title">
+              Naše služby
+            </h2>
+
+            <p class="test-panels-subtitle">
+              Nabízíme komplexní portfolio analytických služeb pro konopí a
+              produkty z něj.
+            </p>
+          </header>
+
+          <div
+            id="testPanelsGrid"
+            class="test-panels-grid"
+            aria-label="Přehled analytických služeb"
+            aria-live="polite"
+          >
+            <!-- JS render z assets/data/panels.json -->
+          </div>
+        </div>
+      </section>
+      <!-- =====
+    Individual
+    ====== -->
+      <section id="individual" class="section individual">
+        <div class="individual-approach_card text-center">
+          <div class="individual-approach_title">Individuální přístup</div>
+
+          <p class="mb-0">
+            Potřebujete analytickou metodu pro jiný typ matrice? Připravíme a
+            validujeme metody přesně podle vašich specifických požadavků.
+          </p>
+        </div>
+      </section>
+
+      <!-- ====================
+      PRŮBĚH TESTOVÁNÍ – proces
+      ===================== -->
+      <section
+        id="proces"
+        class="section process-section"
+        aria-labelledby="process-title"
+        data-scrolly-end
+      >
+        <div class="container">
+          <header class="section__head section__head--center">
+            <h2 id="process-title" class="section__title">Průběh testování</h2>
+            <p class="section__lead">
+              Čtyři jasné kroky od objednávky po doručení certifikátu.
+            </p>
+          </header>
+
+          <ol class="process-grid" role="list">
+            <li class="process-step card" data-hover-card>
+              <div class="process-step__icon" aria-hidden="true">
+                <i data-lucide="shopping-cart"></i>
+              </div>
+              <h3 class="process-step__title">1) Objednávka</h3>
+              <p class="process-step__text">
+                Vyplňte online formulář nebo nás kontaktujte e-mailem.
+              </p>
+            </li>
+
+            <li class="process-step card" data-hover-card>
+              <div class="process-step__icon" aria-hidden="true">
+                <i data-lucide="flask-conical"></i>
+              </div>
+              <h3 class="process-step__title">2) Odeslání vzorku</h3>
+              <p class="process-step__text">
+                Připravte, bezpečně zabalte a odešlete vzorek.
+              </p>
+            </li>
+
+            <li class="process-step card" data-hover-card>
+              <div class="process-step__icon" aria-hidden="true">
+                <i data-lucide="beaker"></i>
+              </div>
+              <h3 class="process-step__title">3) Analýza</h3>
+              <p class="process-step__text">
+                Vzorek je pečlivě zpracován v naší GMP certifikované laboratoři.
+              </p>
+            </li>
+
+            <li class="process-step card" data-hover-card>
+              <div class="process-step__icon" aria-hidden="true">
+                <i data-lucide="file-check-2"></i>
+              </div>
+              <h3 class="process-step__title">4) Výsledky</h3>
+              <p class="process-step__text">
+                Obdržíte jasný a srozumitelný report s výsledky.
+              </p>
+            </li>
+          </ol>
+
+          <div class="process-cta cluster cluster--center">
+            <a class="btn btn--accent" href="/kontakt/#form-contact"
+              >Objednat analýzu</a
+            >
+          </div>
+        </div>
+      </section>
+
+      <section id="faq" class="section faq-section" aria-labelledby="faq-title">
+        <div class="container">
+          <header class="section__head section__head--center">
+            <h2 id="faq-title" class="section__title">Často kladené otázky</h2>
+          </header>
+
+          <div class="accordion" style="max-width: 800px; margin-inline: auto">
+            <div class="accordion__item" data-accordion-item>
+              <button
+                class="accordion__trigger"
+                type="button"
+                aria-expanded="false"
+                aria-controls="faq-a1"
+                id="faq-q1"
+                data-accordion-trigger
+              >
+                Jak dlouho trvá zpracování analýzy?
+                <span class="accordion__chevron" aria-hidden="true">›</span>
+              </button>
+              <div
+                class="accordion__panel"
+                id="faq-a1"
+                role="region"
+                aria-labelledby="faq-q1"
+                data-accordion-panel
+              >
+                <p class="card-text">
+                  Standardní doba zpracování je nejméně
+                  <strong>5 pracovních dnů</strong>.
+                </p>
+              </div>
+            </div>
+
+            <div class="accordion__item" data-accordion-item>
+              <button
+                class="accordion__trigger"
+                type="button"
+                aria-expanded="false"
+                aria-controls="faq-a2"
+                id="faq-q2"
+                data-accordion-trigger
+              >
+                Jaké platební metody akceptujete?
+                <span class="accordion__chevron" aria-hidden="true">›</span>
+              </button>
+              <div
+                class="accordion__panel"
+                id="faq-a2"
+                role="region"
+                aria-labelledby="faq-q2"
+                data-accordion-panel
+              >
+                <p class="card-text">
+                  Akceptujeme platbu bankovním převodem na základě faktury. Pro
+                  firemní zákazníky nabízíme také možnost úhrady na dobírku nebo
+                  platbu kartou online.
+                </p>
+              </div>
+            </div>
+
+            <div class="accordion__item" data-accordion-item>
+              <button
+                class="accordion__trigger"
+                type="button"
+                aria-expanded="false"
+                aria-controls="faq-a3"
+                id="faq-q3"
+                data-accordion-trigger
+              >
+                Je možné zaslat vzorky ze zahraničí?
+                <span class="accordion__chevron" aria-hidden="true">›</span>
+              </button>
+              <div
+                class="accordion__panel"
+                id="faq-a3"
+                role="region"
+                aria-labelledby="faq-q3"
+                data-accordion-panel
+              >
+                <p class="card-text">
+                  Ano, po dohodě s naším logistickým oddělením. Vzorky musí
+                  splňovat legislativní podmínky přepravy biologického
+                  materiálu.
+                </p>
+              </div>
+            </div>
+
+            <div class="accordion__item" data-accordion-item>
+              <button
+                class="accordion__trigger"
+                type="button"
+                aria-expanded="false"
+                aria-controls="faq-a4"
+                id="faq-q4"
+                data-accordion-trigger
+              >
+                Poskytujete výsledky v elektronické podobě?
+                <span class="accordion__chevron" aria-hidden="true">›</span>
+              </button>
+              <div
+                class="accordion__panel"
+                id="faq-a4"
+                role="region"
+                aria-labelledby="faq-q4"
+                data-accordion-panel
+              >
+                <p class="card-text">
+                  Ano, výsledky a CoA standardně posíláme elektronickou formou.
+                  V případě zájmu vám můžeme zaslat originál na požadovanou
+                  adresu.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================
+      CTA – závěrečná výzva
+      ================= -->
+      <section class="cta-section">
+        <div class="container">
+          <h2>Začněme spolu měřit výsledky?</h2>
+          <p class="mb-4">
+            Kontaktujte nás pro individuální nabídku testů a aktuální přehled
+            připravovaných metod.
           </p>
 
-          <div class="card">
-            <div class="card__body stack">
-              <h2 class="section-title">Placeholder</h2>
-              <p class="section-intro">
-                Tady bude přepis sekcí z Genetia v1 → v2.
-              </p>
-            </div>
+          <div class="d-flex flex-wrap justify-content-center gap-3 mt-4">
+            <button
+              href="kontakt.html#form-contact"
+              class="btn btn-accent"
+            >
+              Objednat analýzu
+            </button>
           </div>
         </div>
       </section>

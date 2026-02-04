@@ -16,18 +16,24 @@ import { LOG } from "../core/logger.js";
 function resolveHref(href) {
   if (!href) return "#";
 
-  // absolute or external
+  // external
   if (
     href.startsWith("http://") ||
-    href.startsWith("https://") ||
-    href.startsWith("/")
+    href.startsWith("https://")
   ) {
     return href;
   }
 
-  // folder routing (ensure trailing slash)
-  return href.endsWith("/") ? href : `${href}/`;
+  // root-absolute internal
+  if (href.startsWith("/")) {
+    return href.endsWith("/") ? href : `${href}/`;
+  }
+
+  // internal folder routing -> force root
+  const normalized = href.endsWith("/") ? href : `${href}/`;
+  return `/${normalized}`;
 }
+
 
 /* ==================================================
    Data loading
@@ -102,13 +108,20 @@ export async function initNav() {
     return;
   }
 
-  if (desktopList && Array.isArray(data.primary)) {
-    renderDesktopNav(desktopList, data.primary);
+    const items = Array.isArray(data.primary)
+    ? data.primary
+    : Array.isArray(data.items)
+      ? data.items
+      : null;
+
+  if (desktopList && items) {
+    renderDesktopNav(desktopList, items);
   }
 
-  if (mobileLinks && Array.isArray(data.primary)) {
-    renderMobileNav(mobileLinks, data.primary);
+  if (mobileLinks && items) {
+    renderMobileNav(mobileLinks, items);
   }
+
 
   LOG.info("nav initialized");
 }

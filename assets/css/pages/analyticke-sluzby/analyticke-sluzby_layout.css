@@ -1,0 +1,15 @@
+.section {
+  padding: 0 !important;
+}
+.hero-highlight {
+  color: var(--brand-800);
+    font-weight: 720;
+
+}
+.hero__actions {
+  display:flex;
+  gap:3rem;
+  justify-content: center;
+  margin-top: 1rem;
+}
+

@@ -1,0 +1,51 @@
+/* assets/css/pages/analyticke-sluzby/analyticke-sluzby_faq.css — celý soubor */
+.faq-section {
+    margin-top: 2rem;
+  position: relative;
+}
+.faq-section .section__head{
+  text-align:center;
+  max-width:800px;
+  margin-inline:auto;
+  margin-bottom: 2rem;
+}
+
+.faq-section .section__title{
+  font-size:clamp(3.05rem,3.2vw,4.1rem);
+  line-height:1.2;
+  color:var(--brand-black);
+  text-wrap:balance;
+}
+
+/* accordion wrapper */
+.faq-section .accordion{
+  margin-inline:auto;
+  max-width:800px;
+}
+
+/* otázka (trigger) */
+.faq-section .accordion__trigger{
+  font-size:clamp(1.05rem,1rem + .25vw,1.2rem);
+  line-height:1.4;
+  font-weight:600;
+  color:var(--brand-800);
+  text-align:center;
+}
+
+/* caret / chevron zůstává z UI kitu */
+
+/* panel – odpověď */
+.faq-section .accordion__panel{
+  text-align:center;
+}
+
+/* text uvnitř odpovědi */
+.faq-section .accordion__panel p{
+  margin:0;
+  font-size:clamp(.95rem,.9rem + .25vw,1.05rem);
+  line-height:1.65;
+  color:var(--brand-black);
+  max-width:60ch;
+  margin-inline:auto;
+}
+

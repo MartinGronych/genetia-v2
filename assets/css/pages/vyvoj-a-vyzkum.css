@@ -1,2 +1,10 @@
-/* Research page layout only */
-.research{}
+/* ==================================================
+   Genetia v2 – Vývoj a výzkum (orchestrator)
+   Importuje pouze soubory použité na stránce /vývoj a výzkum/
+================================================== */
+
+@import url("./vyzkum/vyzkum_hero.css");
+@import url("./vyzkum/vyzkum_focus.css");
+@import url("./vyzkum/vyzkum_projects.css");
+@import url("./vyzkum/vyzkum_metodika.css");
+@import url("./vyzkum/vyzkum_equipment.css");

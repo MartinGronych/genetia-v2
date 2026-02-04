@@ -1,0 +1,129 @@
+/* assets/css/pages/vyzkum/vyzkum_focus.css — celý soubor
+   Požadavky:
+   - nadpis sekce velikostí jako HERO (vyzkum_hero.css)
+   - pořadí v kartě: title → subtitle → foto (foto dole)
+   - foto všechny stejné výšky, opticky stejné karty
+   - mezery: nadpis (sekce) 2rem od karet, CTA 2rem od karet
+*/
+
+/* SECTION HEAD */
+.research-focus__head{
+  text-align:center;
+  max-width:900px;
+  margin-inline:auto;
+  margin-bottom:2rem; /* nadpis 2rem od cards */
+}
+
+.research-focus .section__title{
+  margin:0;
+  font-size:clamp(2.8rem,3.2vw,4rem); /* stejně jako HERO */
+  line-height:1.15;
+  font-weight:700;
+  color:var(--brand-black);
+  text-wrap:balance;
+}
+
+/* GRID */
+.research-focus__grid{
+  display:grid;
+  gap:var(--space-5);
+  align-items:stretch;
+}
+
+@media (min-width:768px){
+  .research-focus__grid{
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:var(--space-6);
+  }
+}
+
+/* CARD */
+.research-focus__item{
+  height:100%;
+  display:flex;
+  border-radius:var(--r-lg);
+  overflow:hidden;
+  border:1px solid var(--border-soft);
+  background:var(--surface);
+  box-shadow:var(--shadow-card);
+  transition:transform .25s ease, box-shadow .25s ease;
+}
+
+.research-focus__item[data-hover-card]:hover{
+  transform:translateY(-6px);
+  box-shadow:var(--shadow-card-hover);
+}
+
+/* BODY: title → subtitle → photo (photo pinned bottom) */
+.research-focus__body{
+  width:100%;
+  padding:var(--space-6);
+  display:flex;
+  flex-direction:column;
+  gap:var(--space-3);
+  min-width:0;
+}
+
+/* TITLE inside card */
+.research-focus__title{
+  margin:0;
+  font-size:clamp(1.35rem,1.15rem + 1vw,1.9rem);
+  line-height:1.2;
+  font-weight:700;
+  color:var(--brand-800);
+  text-wrap:balance;
+}
+
+/* SUBTITLE (text) inside card */
+.research-focus__text{
+  margin:0;
+  font-size:clamp(1rem,.95rem + .35vw,1.125rem);
+  line-height:1.65;
+  font-weight:400;
+  color:var(--text-muted);
+  max-width:46ch;
+}
+
+/* PHOTO: always bottom + same height */
+.research-focus__media{
+  margin-top:auto; /* pin to bottom */
+  height:172px;    /* same height across cards */
+  border-radius:var(--r-md);
+  overflow:hidden;
+  border:1px solid var(--border-soft);
+  background:var(--surface);
+}
+
+.research-focus__media img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center 45%; /* stabilní framing směrem odspodu ke středu */
+  display:block;
+}
+
+/* CTA: 2rem from cards */
+.research-focus__cta{
+  margin-top:2rem; /* tlačítko 2rem od cards */
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+  gap:var(--space-3);
+}
+
+.research-focus__note{
+  margin:0;
+  font-size:clamp(.95rem,.9rem + .25vw,1.05rem);
+  line-height:1.6;
+  color:var(--text-muted);
+  max-width:60ch;
+}
+
+/* ALIGNMENTS */
+@media (min-width:768px){
+  .research-focus__title,
+  .research-focus__text{
+    text-align:center;
+  }
+}

@@ -5,15 +5,11 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Certifikace – Genetia</title>
 
-    <!-- Theme bootstrap (FOUC-free) -->
     <script>
       (() => {
-        const saved = localStorage.getItem("theme"); // "light" | "dark" | null
-        const systemDark =
-          window.matchMedia &&
-          window.matchMedia("(prefers-color-scheme: dark)").matches;
-        const theme = saved || (systemDark ? "dark" : "light");
-        document.documentElement.dataset.theme = theme;
+        // Force light theme only (FOUC-free)
+        localStorage.removeItem("theme");
+        document.documentElement.dataset.theme = "light";
       })();
     </script>
 
@@ -117,8 +113,8 @@
 
             <p class="page-lead">
               Držíme GMP certifikáty vydané SÚKL, pro farmaceutickou výrobu a
-              kontrolní laboratoř. Naše výroba i kontrolní laboratoř splňují
-              přísné standardy GMP.
+              kontrolní laboratoř. <br />Naše výroba i kontrolní laboratoř
+              splňují přísné standardy GMP.
             </p>
           </header>
 
@@ -143,10 +139,12 @@
                   </div>
 
                   <p class="card-kicker">GMP certifikát</p>
-                  <h2 class="card-title">Propouštění šarží léčivého přípravku</h2>
+                  <h2 class="card-title">
+                    Propouštění šarží léčivého přípravku
+                  </h2>
                   <p class="card-text">
                     Certifikát opravňující k propouštění šarží v souladu se
-                    standardy GMP 1
+                    standardy GMP 1.
                   </p>
 
                   <div class="certifications-card__cta">
@@ -159,7 +157,6 @@
                       aria-controls="cert-modal"
                     >
                       Zobrazit detail
-                      
                     </button>
                   </div>
                 </div>
@@ -184,7 +181,7 @@
                   <h2 class="card-title">Kontrolní laboratoř</h2>
                   <p class="card-text">
                     Certifikát pro kontrolní laboratoř v souladu se standardy
-                    GMP 1
+                    GMP 1.
                   </p>
 
                   <div class="certifications-card__cta">
@@ -197,7 +194,6 @@
                       aria-controls="cert-modal"
                     >
                       Zobrazit detail
-                      
                     </button>
                   </div>
                 </div>
@@ -219,10 +215,10 @@
                   </div>
 
                   <p class="card-kicker">GMP certifikát</p>
-                  <h2 class="card-title">Balení API</h2>
+                  <h2 class="card-title">Balení léčivé látky</h2>
                   <p class="card-text">
-                    Certifikát opravňující k balení API v souladu se standardy
-                    GMP 2
+                    Certifikát opravňující k balení léčivé látky v souladu se
+                    standardy GMP 2.
                   </p>
 
                   <div class="certifications-card__cta">
@@ -235,7 +231,6 @@
                       aria-controls="cert-modal"
                     >
                       Zobrazit detail
-                     
                     </button>
                   </div>
                 </div>
@@ -257,9 +252,10 @@
                   </div>
 
                   <p class="card-kicker">GMP certifikát</p>
-                  <h2 class="card-title">Extrakce API</h2>
+                  <h2 class="card-title">Extrakce léčivé látky</h2>
                   <p class="card-text">
-                    Povolení k extrakci API v souladu se standardy GMP 2
+                    Certifikát opravňující k extrakci léčivé látky v souladu se
+                    standardy GMP 2."
                   </p>
 
                   <div class="certifications-card__cta">
@@ -272,7 +268,6 @@
                       aria-controls="cert-modal"
                     >
                       Zobrazit detail
-                      
                     </button>
                   </div>
                 </div>
@@ -293,7 +288,7 @@
               <h2 class="section-title">Proč jsou certifikace důležité?</h2>
 
               <p class="section-intro">
-                GMP (Good Manufacturing Practice) certifikace garantují, že naše
+                Certifikace garantují, že naše
                 procesy splňují nejpřísnější farmaceutické standardy. Díky tomu
                 můžete mít jistotu, že vaše produkty jsou vyráběny a testovány v
                 souladu s mezinárodními normami.
@@ -335,59 +330,78 @@
     </main>
 
     <!-- Certifications modal -->
-<div class="modal" id="cert-modal" aria-hidden="true">
-  <div class="modal__overlay" data-close-modal></div>
+    <div class="modal" id="cert-modal" aria-hidden="true">
+      <div class="modal__overlay" data-close-modal></div>
 
-  <div
-    class="modal__dialog"
-    role="dialog"
-    aria-modal="true"
-    aria-labelledby="cert-modal-title"
-  >
-    <div class="modal__header">
-      <div class="cert-modal__top">
-        <div class="cert-modal__topIcon" aria-hidden="true">
-          <span data-cert-modal-icon data-lucide="badge-check" aria-hidden="true"></span>
+      <div
+        class="modal__dialog"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="cert-modal-title"
+      >
+        <div class="modal__header">
+          <div class="cert-modal__top">
+            <div class="cert-modal__topIcon" aria-hidden="true">
+              <span
+                data-cert-modal-icon
+                data-lucide="badge-check"
+                aria-hidden="true"
+              ></span>
+            </div>
+
+            <div class="cert-modal__topText">
+              <h3
+                class="cert-modal__title"
+                id="cert-modal-title"
+                data-cert-modal-title
+              >
+                Načítání…
+              </h3>
+              <div class="cert-modal__meta" data-cert-modal-meta></div>
+            </div>
+
+            <button
+              type="button"
+              class="cert-modal__close"
+              data-close-modal
+              aria-label="Zavřít"
+            >
+              ×
+            </button>
+          </div>
         </div>
 
-        <div class="cert-modal__topText">
-          <h3 class="cert-modal__title" id="cert-modal-title" data-cert-modal-title>
-            Načítání…
-          </h3>
-          <div class="cert-modal__meta" data-cert-modal-meta></div>
-        </div>
+        <div class="modal__body">
+          <div
+            class="cert-modal__info"
+            role="note"
+            aria-label="Získání kopie certifikátu"
+          >
+            <div class="cert-modal__infoHead" aria-hidden="true">
+              <span data-lucide="file-text"></span>
+              <span class="cert-modal__infoTitle"
+                >Certifikáty k nahlédnutí na vyžádání</span
+              >
+            </div>
 
-        <button
-          type="button"
-          class="cert-modal__close"
-          data-close-modal
-          aria-label="Zavřít"
-        >
-          ×
-        </button>
+            <div class="cert-modal__infoRow">
+              <p class="cert-modal__infoText">
+                Pro získání kopie certifikátu nás prosím
+              </p>
+
+              <a
+                class="btn btn--secondary cert-modal__contactLink"
+                href="../kontakt/#contactForm"
+              >
+                kontaktujte nás
+              </a>
+            </div>
+          </div>
+
+          <div class="stack" data-cert-modal-content></div>
+        </div>
       </div>
     </div>
-
-    <div class="modal__body">
-      <div class="cert-modal__info" role="note" aria-label="Získání kopie certifikátu">
-        <div class="cert-modal__infoHead" aria-hidden="true">
-          <span data-lucide="file-text"></span>
-          <span class="cert-modal__infoTitle">Certifikáty k nahlédnutí na vyžádání</span>
-        </div>
-
-        <div class="cert-modal__infoRow">
-          <p class="cert-modal__infoText">Pro získání kopie certifikátu nás prosím</p>
-
-          <a class="btn btn--secondary cert-modal__contactLink" href="../kontakt/#contactForm">
-            kontaktujte nás
-          </a>
-        </div>
-      </div>
-
-      <div class="stack" data-cert-modal-content></div>
-    </div>
-  </div>
-</div>
 
     <!-- FOOTER -->
     <footer class="site-footer" aria-labelledby="footerTitle">
@@ -487,7 +501,10 @@
             </ul>
           </nav>
 
-          <address class="site-footer_col site-footer_contact" aria-label="Kontakt">
+          <address
+            class="site-footer_col site-footer_contact"
+            aria-label="Kontakt"
+          >
             <h3 class="site-footer_heading">Kontakt</h3>
             <ul class="site-footer_list">
               <li>
@@ -535,17 +552,26 @@
           <nav class="site-footer_legal" aria-label="Právní informace">
             <ul class="site-footer_legalList">
               <li>
-                <a class="site-footer_link site-footer_legalLink" href="../legal/#gdpr">
+                <a
+                  class="site-footer_link site-footer_legalLink"
+                  href="../legal/#gdpr"
+                >
                   Ochrana osobních údajů
                 </a>
               </li>
               <li>
-                <a class="site-footer_link site-footer_legalLink" href="../legal/#cookies">
+                <a
+                  class="site-footer_link site-footer_legalLink"
+                  href="../legal/#cookies"
+                >
                   Cookies
                 </a>
               </li>
               <li>
-                <a class="site-footer_link site-footer_legalLink" href="../legal/#terms">
+                <a
+                  class="site-footer_link site-footer_legalLink"
+                  href="../legal/#terms"
+                >
                   Podmínky použití
                 </a>
               </li>

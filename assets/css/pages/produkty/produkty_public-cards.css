@@ -171,3 +171,19 @@
   color: var(--brand-800);
 }
 
+/* ==================================================
+   Public products – layout 2 + 1 (centered) from 768+
+   Scope: layout only, no visual changes
+================================================== */
+
+@media (min-width: 768px) {
+  .public-products__grid {
+    grid-template-columns: repeat(2, minmax(240px, 1fr));
+  }
+
+  .public-products__grid .public-card:nth-child(3) {
+    grid-column: 1 / -1;
+    justify-self: center;
+    max-width: 50%;
+  }
+}

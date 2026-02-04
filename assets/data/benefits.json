@@ -1,0 +1,59 @@
+{
+  "benefits": [
+    {
+      "id": "benefit-gmp",
+      "icon": "award",
+      "title": "GMP certifikovaná laboratoř",
+      "subtitle": "Naše laboratoř je držitelem certifikátu správné výrobní praxe (GMP/SVP) vydaného Státním ústavem pro kontrolu léčiv (SÚKL). Tento certifikát zaručuje, že všechny naše procesy splňují nejpřísnější farmaceutické standardy.",
+      "details": [
+        "Certifikát vydaný SÚKL",
+        "Pravidelné audity a kontroly",
+        "Dokumentované postupy dle EU GMP",
+        "Kvalifikovaný personál"
+      ],
+      "image": "benefit-gmp.webp",
+      "imageAlt": "Ilustrační fotografie: GMP certifikovaná laboratoř"
+    },
+    {
+      "id": "benefit-instruments",
+      "icon": "microscope",
+      "title": "Špičkové analytické přístroje",
+      "subtitle": "Využíváme nejnovější generaci analytických přístrojů od předních světových výrobců. Naše instrumentace zajišťuje vysokou citlivost, přesnost a opakovatelnost měření. Všechny přístroje jsou pravidelně kalibrovány a procházejí revizí.",
+      "details": [
+        "HPLC-MS/MS instrumentace",
+        "HPLC-UV/VIS instrumentace",
+        "GC-MS instrumentace",
+        "qPCR instrumentace"
+      ],
+      "image": "benefit-instruments.webp",
+      "imageAlt": "Ilustrační fotografie: Špičkové analytické přístroje"
+    },
+    {
+      "id": "benefit-spectrum",
+      "icon": "clipboard-check",
+      "title": "Široké spektrum testů",
+      "subtitle": "Nabízíme komplexní portfolio analytických služeb pokrývající všechny aspekty kontroly kvality konopí a produktů z něj. Každá analýza je doložena přehledným certifikátem určeným pro účely vaší dokumentace.",
+      "details": [
+        "Identita",
+        "Čistota",
+        "Stanovení obsahu",
+        "Certifikáty analýzy (CoA)"
+      ],
+      "image": "benefit-spectrum.webp",
+      "imageAlt": "Ilustrační fotografie: Široké spektrum testů"
+    },
+    {
+      "id": "benefit-validated",
+      "icon": "flask-conical",
+      "title": "Lékopisné i naše vlastní metody",
+      "subtitle": "Nabízíme flexibilní přístup k analytickým metodám. Můžete si vybrat mezi standardními lékopisnými metodami nebo našimi interně vyvinutými a následně validovanými postupy optimalizovanými pro specifické potřeby zákazníka.",
+      "details": [
+        "Široké portfolio služeb",
+        "Verifikované lékopisné metody",
+        "Validované vlastní metody"
+      ],
+      "image": "benefit-validated.webp",
+      "imageAlt": "Ilustrační fotografie: Lékopisné i naše vlastní metody"
+    }
+  ]
+}

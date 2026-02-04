@@ -1,0 +1,285 @@
+/* ==================================================
+   BENEFITS – Detail benefitů (Analytické služby)
+   - mount: #benefitsMount (.benefits__list)
+   - item:  .benefit (id="benefit-*")
+   - grid:  .benefit__grid
+   - reverse: .benefit--reverse
+================================================== */
+
+.benefits {
+  position: relative;
+
+  /* ✅ extra spacing from previous section */
+  margin-top: 2rem;
+}
+
+/* Tokens (safe fallbacks) */
+:root {
+  --benefits-brand-800: var(--color-brand-800, var(--brand-800, var(--color-accent, currentColor)));
+  --benefits-black: var(--color-text, var(--color-black, #0b0b0b));
+}
+
+.benefits__header {
+  max-width: 64rem;
+  margin-inline: auto;
+  text-align: center;
+  margin-bottom: 1.75rem;
+}
+
+.benefits__title {
+  margin-bottom: 0.5rem;
+  font-size: clamp(1.9rem, 2.2vw + 1rem, 3rem);
+  line-height: 1.15;
+}
+
+.benefits__subtitle {
+  margin: 0;
+  font-size: clamp(1.05rem, 1.1vw + 0.65rem, 1.55rem);
+  line-height: 1.5;
+  opacity: 0.85;
+}
+
+/* List wrapper (just rhythm between sections) */
+.benefits__list {
+  display: grid;
+  gap: 1.5rem;
+}
+
+/* 768+ spacing */
+@media (min-width: 768px) {
+  .benefits__header {
+    margin-bottom: 2rem;
+  }
+
+  .benefits__list {
+    gap: 2rem;
+  }
+}
+
+/* 1440+ spacing only */
+@media (min-width: 1440px) {
+  .benefits__list {
+    gap: 2.25rem;
+  }
+}
+
+/* 1920+ spacing only */
+@media (min-width: 1920px) {
+  .benefits__list {
+    gap: 2.5rem;
+  }
+}
+
+/* ==================================================
+   Single benefit block
+================================================== */
+
+.benefit {
+  position: relative;
+}
+
+/* Layout grid */
+.benefit__grid {
+  display: grid;
+  gap: 1rem;
+  align-items: center;
+}
+
+/* Mobile: stack */
+.benefit__text {
+  order: 1;
+}
+
+.benefit__media {
+  order: 2;
+}
+
+/* 768+: 2 columns (image matches text height) */
+@media (min-width: 768px) {
+  .benefit__grid {
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 1.5rem;
+
+    /* ✅ columns match height */
+    align-items: stretch;
+  }
+
+  .benefit--reverse .benefit__grid {
+    grid-template-columns: 0.85fr 1.15fr;
+  }
+
+  .benefit--reverse .benefit__text {
+    order: 2;
+  }
+
+  .benefit--reverse .benefit__media {
+    order: 1;
+  }
+
+  .benefit__text,
+  .benefit__media {
+    align-self: stretch;
+  }
+}
+
+/* 1024+ */
+@media (min-width: 1024px) {
+  .benefit__grid {
+    gap: 2rem;
+  }
+}
+
+/* ==================================================
+   Text block
+================================================== */
+
+.benefit__header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.benefit__icon {
+  display: inline-grid;
+  place-items: center;
+
+  width: 2.75rem;
+  height: 2.75rem;
+
+  border-radius: 1rem;
+
+  background: color-mix(in oklab, var(--color-bg) 70%, transparent);
+  border: 1px solid color-mix(in oklab, var(--color-text) 8%, transparent);
+}
+
+/* icon size */
+.benefit__icon .lucide-icon {
+  width: 1.35rem;
+  height: 1.35rem;
+}
+
+/* ✅ Title styling request */
+.benefit__title {
+  margin: 0;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  line-height: 1.12;
+  font-size: clamp(1.85rem, 1vw + 1.05rem, 2.15rem);
+  color: var(--brand-black);
+}
+
+/* ✅ Subtitle styling request */
+.benefit__subtitle {
+  margin: 0.5rem 0 0.9rem;
+  font-weight: 450;
+  line-height: 1.55;
+  font-size: clamp(1.02rem, 0.55vw + 0.9rem, 1.35rem);
+  color: var(--benefits-black);
+  opacity: 1; /* keep requested color true (no fade) */
+}
+
+/* ✅ List + custom dots */
+.benefit__list {
+  margin: 0;
+  padding-left: 0;
+  list-style: none;
+
+  display: grid;
+  gap: 0.45rem;
+}
+
+/* each item with dot */
+.benefit__listItem {
+  position: relative;
+
+  /* light indent */
+  padding-left: 1.1rem;
+
+  font-weight: 550;
+  line-height: 1.55;
+  font-size: clamp(0.98rem, 0.4vw + 0.88rem, 1.18rem);
+  color: var(--benefits-black);
+}
+
+/* dot (no hover effects) */
+.benefit__listItem::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.7em; /* visually aligns with first line */
+  transform: translateY(-50%);
+
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--benefits-brand-800);
+}
+
+/* ==================================================
+   Media block
+================================================== */
+
+.benefit__mediaFrame {
+  margin: 0;
+  border-radius: var(--radius-lg, 1.25rem);
+  overflow: hidden;
+
+  background: color-mix(in oklab, var(--color-bg) 85%, transparent);
+  border: 1px solid color-mix(in oklab, var(--color-text) 8%, transparent);
+
+  box-shadow:
+    0 0 0 1px color-mix(in oklab, var(--color-text) 3%, transparent),
+    0 10px 28px color-mix(in oklab, var(--color-text) 6%, transparent);
+
+  height: auto;
+}
+
+.benefit__image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Desktop: image must match text height */
+@media (min-width: 768px) {
+  .benefit__mediaFrame {
+    height: 100%;
+  }
+
+  .benefit__image {
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+}
+
+/* Hover on image (kept subtle, no color change rules) */
+.benefit__image {
+  transition:
+    transform 420ms ease,
+    filter 420ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .benefit__mediaFrame:hover .benefit__image {
+    transform: scale(1.03);
+    filter: brightness(1.04);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .benefit__image {
+    transition: none;
+  }
+}
+
+/* If image missing (should not happen, but safe) */
+.benefit__placeholder {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius-lg, 1.25rem);
+
+  background: color-mix(in oklab, var(--color-bg) 85%, transparent);
+  border: 1px solid color-mix(in oklab, var(--color-text) 8%, transparent);
+}

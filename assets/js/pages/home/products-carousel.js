@@ -1,19 +1,13 @@
 // assets/js/pages/home/products-carousel.js
 
-import { getAssetBase } from "../../core/paths.js";
-import { createGateController, isHcpVerified } from "../products/gate.js";
+import { withAssetBase } from "../../core/paths.js";
+import { LOG } from "../../core/logger.js";
 
-const LOG = "[GENETIA][home:products-carousel]";
+const SCOPE = "home:products-carousel";
 const SS_DEEPLINK = "genetia_product_deeplink";
+const LS_HCP_VERIFIED = "genetia_hcp_verified";
 
 const q = (sel, root = document) => root.querySelector(sel);
-
-function info(...args) {
-  console.info(LOG, ...args);
-}
-function warn(...args) {
-  console.warn(LOG, ...args);
-}
 
 function storeDeeplinkFromQuery() {
   try {
@@ -23,8 +17,13 @@ function storeDeeplinkFromQuery() {
   } catch (_) {}
 }
 
+function isHcpVerifiedLocal() {
+  return localStorage.getItem(LS_HCP_VERIFIED) === "1";
+}
+
 function getProductsUrl() {
-  return "produkty/";
+  // homepage -> /produkty/
+  return "./produkty/";
 }
 
 function redirectToProducts() {
@@ -36,8 +35,9 @@ function redirectToHome() {
 }
 
 function normalizeProducts(data) {
-  if (!Array.isArray(data)) return [];
-  return data
+  // supports both: array OR { products: [...] }
+  const arr = Array.isArray(data) ? data : Array.isArray(data?.products) ? data.products : [];
+  return arr
     .map((p) => ({
       slug: String(p.slug ?? p.id ?? "").trim(),
       name: String(p.name ?? p.title ?? "").trim(),
@@ -112,7 +112,7 @@ function createItem(product) {
 
   const imgSrc =
     product.image && !/^https?:\/\//.test(product.image)
-      ? `${getAssetBase()}${product.image.replace(/^\/*/, "")}`
+      ? withAssetBase(product.image)
       : product.image;
 
   li.innerHTML = `
@@ -139,6 +139,39 @@ function applyClasses(items) {
   items[2].className = "home-products__item act";
   items[3].className = "home-products__item next";
   items[4].className = "home-products__item new-next";
+}
+
+function renderDots(dotsEl, count) {
+  dotsEl.innerHTML = "";
+  for (let i = 0; i < count; i++) {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "home-products__dot";
+    b.setAttribute("role", "tab");
+    b.setAttribute("aria-label", `Produkt ${i + 1}`);
+    b.dataset.index = String(i);
+    dotsEl.appendChild(b);
+  }
+}
+
+function setActiveDot(dotsEl, idx) {
+  const dots = Array.from(dotsEl.querySelectorAll(".home-products__dot"));
+  dots.forEach((d, i) => {
+    const active = i === idx;
+    d.setAttribute("aria-selected", active ? "true" : "false");
+    d.tabIndex = active ? 0 : -1;
+    d.classList.toggle("is-active", active);
+  });
+}
+
+function lockStage(stageEl) {
+  stageEl.classList.add("is-locked");
+}
+
+function unlockStage(stageEl) {
+  stageEl.classList.remove("is-locked");
+  const lock = q("[data-carousel-lock]", stageEl);
+  lock?.remove();
 }
 
 /**
@@ -176,10 +209,8 @@ function enablePointerSwipe(swipeEl, { onNext, onPrev, isLocked }) {
       if (Math.abs(dx) < DECIDE_AT && Math.abs(dy) < DECIDE_AT) return;
       decided = true;
       isHorizontal = Math.abs(dx) >= Math.abs(dy);
-      // If it's vertical, do nothing and allow normal scroll.
       return;
     }
-
     // still no-op; we only act on pointerup
   });
 
@@ -199,44 +230,11 @@ function enablePointerSwipe(swipeEl, { onNext, onPrev, isLocked }) {
   });
 }
 
-function renderDots(dotsEl, count) {
-  dotsEl.innerHTML = "";
-  for (let i = 0; i < count; i++) {
-    const b = document.createElement("button");
-    b.type = "button";
-    b.className = "home-products__dot";
-    b.setAttribute("role", "tab");
-    b.setAttribute("aria-label", `Produkt ${i + 1}`);
-    b.dataset.index = String(i);
-    dotsEl.appendChild(b);
-  }
-}
-
-function setActiveDot(dotsEl, idx) {
-  const dots = Array.from(dotsEl.querySelectorAll(".home-products__dot"));
-  dots.forEach((d, i) => {
-    const active = i === idx;
-    d.setAttribute("aria-selected", active ? "true" : "false");
-    d.tabIndex = active ? 0 : -1;
-    d.classList.toggle("is-active", active);
-  });
-}
-
-function lockStage(stageEl) {
-  stageEl.classList.add("is-locked");
-}
-
-function unlockStage(stageEl) {
-  stageEl.classList.remove("is-locked");
-  const lock = q("[data-carousel-lock]", stageEl);
-  lock?.remove();
-}
-
-function getProductsJsonUrl() {
-  const base = String(getAssetBase() || "./");
-  const normalized = base.endsWith("/") ? base : `${base}/`;
-  if (normalized.endsWith("assets/")) return `${normalized}data/products.json`;
-  return `${normalized}assets/data/products.json`;
+async function loadProductsJson() {
+  const url = withAssetBase("assets/data/products.json");
+  const res = await fetch(url, { credentials: "same-origin", cache: "no-store" });
+  if (!res.ok) throw new Error(`products.json HTTP ${res.status}`);
+  return await res.json();
 }
 
 export async function initHomeProductsCarousel() {
@@ -244,14 +242,13 @@ export async function initHomeProductsCarousel() {
 
   const mount = q(".home-products__carousel");
   if (!mount) {
-    warn("Missing .home-products__carousel mount");
+    // homepage without carousel section
     return;
   }
 
   renderCarouselMarkup(mount, {
     titleText: "Naše produkty pro lékárny",
-    leadText:
-      "Standardizované léčebné extrakty a formulace připravené pro distribuci.",
+    leadText: "Standardizované léčebné extrakty a formulace připravené pro distribuci.",
     ctaText: "Odborné informace",
   });
 
@@ -265,29 +262,36 @@ export async function initHomeProductsCarousel() {
   const ctaBtn = q("[data-home-products-cta]", mount);
 
   if (!stage || !list || !swipe || !prevBtn || !nextBtn || !dotsEl || !ctaBtn) {
-    warn("Carousel markup missing required parts");
+    LOG.warn(`${SCOPE} markup missing required parts`);
     return;
   }
 
-  const gate = createGateController({
-    onAccept: () => redirectToProducts(),
-    onDeny: () => redirectToHome(),
-  });
+  // Gate controller is loaded lazily so a bug inside gate.js won't crash homepage.
+  let gate = null;
+  try {
+    const mod = await import("../products/gate.js");
+    if (typeof mod?.createGateController === "function") {
+      gate = mod.createGateController({
+        onAccept: () => redirectToProducts(),
+        onDeny: () => redirectToHome(),
+      });
+    }
+  } catch (err) {
+    LOG.warn(`${SCOPE} gate module failed to load, using fallback`, err);
+    gate = null;
+  }
 
   let products = [];
   try {
-    const url = getProductsJsonUrl();
-    const res = await fetch(url, { credentials: "same-origin" });
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    products = normalizeProducts(await res.json());
+    products = normalizeProducts(await loadProductsJson());
   } catch (err) {
-    warn("Failed to load products.json", err);
+    LOG.warn(`${SCOPE} failed to load products.json`, err);
     return;
   }
 
   const view = products.slice(0, 3);
   if (view.length < 3) {
-    warn("Need at least 3 products for homepage carousel");
+    LOG.warn(`${SCOPE} need at least 3 products for homepage carousel`);
     return;
   }
 
@@ -348,7 +352,7 @@ export async function initHomeProductsCarousel() {
     setActiveDot(dotsEl, current % view.length);
   }
 
-  const locked = () => !isHcpVerified();
+  const locked = () => !isHcpVerifiedLocal();
 
   function syncLock() {
     if (locked()) lockStage(stage);
@@ -401,19 +405,19 @@ export async function initHomeProductsCarousel() {
 
   eyeBtn?.addEventListener("click", (e) => {
     e.preventDefault();
-    gate?.open();
+    gate?.open?.();
   });
 
   ctaBtn.addEventListener("click", (e) => {
     e.preventDefault();
-    if (isHcpVerified()) {
+    if (isHcpVerifiedLocal()) {
       redirectToProducts();
       return;
     }
-    gate?.open();
+    gate?.open?.();
   });
 
-  info("ready");
+  LOG.info(`${SCOPE} ready`);
 }
 
 export default { initHomeProductsCarousel };

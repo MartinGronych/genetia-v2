@@ -1,0 +1,271 @@
+/* assets/css/pages/analyticke-sluzby/analyticke-sluzby_test-panels.css */
+/* Pozadí sekce neřeším – jen buňky, typografie, barvy textu, hover. */
+
+/* =========================
+   Section header (Naše služby)
+========================= */
+
+.test-panels-section .section-header {
+  margin-bottom: 2.2rem;
+}
+
+.test-panels-section .section-title {
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  font-size: clamp(3.05rem, 3.2vw, 4.1rem);
+  color: var(--brand-black);
+  position: relative;
+  margin-top: 3rem;
+  text-align: center;
+  padding-bottom: 0.8rem;
+}
+
+/* underline pod hlavním nadpisem */
+.test-panels-section .section-title::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0.25rem;
+  transform: translateX(-50%);
+  width: clamp(4.2rem, 7vw, 7.8rem);
+  height: 0.22rem;
+  border-radius: var(--r-sm);
+  background: var(--brand-800, #7aa12a);
+  opacity: 0.85;
+}
+
+.test-panels-subtitle {
+  margin: 0.9rem auto 0;
+  max-width: 52rem;
+  font-weight: 650;
+  line-height: 1.45;
+  letter-spacing: -0.01em;
+  font-size: clamp(1.12rem, 1.25vw, 1.18rem);
+  text-align: center;
+  color: var(--brand-black);
+}
+
+/* =========================
+   Layout
+   Mobile/tablet: grid
+   Desktop: masonry via columns
+========================= */
+
+.test-panels-grid {
+  display: grid;
+  gap: 1.2rem;
+  align-items: start;
+}
+
+@media (min-width: 768px) {
+  .test-panels-grid {
+    gap: 1.35rem;
+  }
+}
+
+/* Masonry desktop */
+@media (min-width: 1024px) {
+  .test-panels-grid {
+    display: block;
+    column-count: 3;
+    column-gap: 1.4rem;
+  }
+}
+
+/* =========================
+   Group card (sekce uvnitř gridu)
+========================= */
+
+.panels-group {
+  border-radius: var(--r-sm);
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(17, 17, 17, 0.08);
+  padding: 1.15rem;
+  box-shadow: 0 1px 0 rgba(17, 17, 17, 0.04);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+@media (min-width: 768px) {
+  .panels-group {
+    padding: 1.25rem;
+  }
+}
+
+/* Masonry: prevent column breaks inside cards */
+@media (min-width: 1024px) {
+  .panels-group {
+    display: inline-block;
+    width: 100%;
+    break-inside: avoid;
+    margin: 0 0 1.4rem;
+  }
+}
+
+.panels-group_header {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.85rem;
+  align-items: start;
+  margin-bottom: 1rem;
+}
+
+/* ikona */
+.panels-group_icon {
+  width: 2.65rem;
+  height: 2.65rem;
+  border-radius: var(--r-sm);
+  display: grid;
+  place-items: center;
+  background: rgba(255, 255, 255, 0.66);
+  border: 1px solid rgba(17, 17, 17, 0.08);
+  box-shadow: 0 1px 0 rgba(17, 17, 17, 0.04);
+}
+
+.panels-group_icon .lucide-icon,
+.panels-group_icon svg {
+  width: 1.35rem;
+  height: 1.35rem;
+  color: var(--brand-800, #7aa12a);
+  opacity: 0.95;
+}
+
+
+.panels-group_headText {
+  min-width: 0;
+}
+
+.panels-group_title {
+  margin: 0;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.12;
+  font-size: clamp(1.05rem, 1.35vw, 1.32rem);
+  color: var(--text-black, #111111);
+}
+
+.panels-group_subtitle {
+  margin: 0.35rem 0 0;
+  font-weight: 650;
+  line-height: 1.35;
+  font-size: clamp(0.92rem, 1.05vw, 1.05rem);
+  color: var(--brand-800, #7aa12a);
+  opacity: 0.95;
+}
+
+/* =========================
+   Items list
+========================= */
+
+.panels-group_items {
+  display: grid;
+  gap: 0.75rem;
+}
+
+/* Buňky */
+.panel-card {
+  display: block;
+}
+
+.panel-card--chip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.9rem;
+  width: 100%;
+  border-radius: var(--r-sm);
+  padding: 0.9rem 0.95rem;
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(17, 17, 17, 0.10);
+  box-shadow: 0 1px 0 rgba(17, 17, 17, 0.04);
+
+  transition:
+    transform 160ms ease,
+    border-color 160ms ease,
+    background 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.panel-chipText {
+  display: grid;
+  gap: 0.25rem;
+  min-width: 0;
+}
+
+.panel-title {
+  font-weight: 750;
+  letter-spacing: -0.015em;
+  line-height: 1.2;
+  font-size: clamp(0.98rem, 1.05vw, 1.08rem);
+  color: var(--text-black, #111111);
+}
+
+.panel-subtitle {
+  font-weight: 650;
+  line-height: 1.25;
+  font-size: clamp(0.88rem, 0.95vw, 0.98rem);
+  color: var(--brand-600);
+}
+
+/* badge */
+.panel-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+
+  width: fit-content;
+  margin-top: 0.1rem;
+
+  padding: 0.32rem 0.55rem;
+  border-radius: var(--r-sm);
+
+  font-weight: 750;
+  font-size: 0.82rem;
+  line-height: 1;
+
+  background: rgba(255, 255, 255, 0.68);
+  border: 1px solid rgba(17, 17, 17, 0.10);
+  color: var(--brand-800, #7aa12a);
+}
+
+.panel-badge--star svg,
+.panel-badge--star .lucide-icon {
+  width: 0.95rem;
+  height: 0.95rem;
+  color: var(--brand-800, #7aa12a);
+}
+
+/* šipka */
+.panel-chipArrow {
+  flex: 0 0 auto;
+  font-size: 1.25rem;
+  line-height: 1;
+  color: color-mix(in srgb, var(--text-black, #111111) 35%, transparent);
+  transform: translateX(0);
+  transition: transform 160ms ease, color 160ms ease;
+}
+
+/* =========================
+   Hover / focus (větší efekt, bez přestřelených stínů)
+========================= */
+
+@media (hover: hover) and (pointer: fine) {
+  .panel-card--chip:hover {
+    transform: translateY(-4px) scale(1.015);
+    border-color: color-mix(in srgb, var(--brand-800, #7aa12a) 38%, rgba(17, 17, 17, 0.10));
+    background: rgba(255, 255, 255, 0.90);
+    box-shadow: 0 2px 10px rgba(17, 17, 17, 0.08);
+  }
+
+  .panel-card--chip:hover .panel-chipArrow {
+    transform: translateX(3px);
+    color: color-mix(in srgb, var(--brand-800, #7aa12a) 55%, transparent);
+  }
+}
+
+.panel-card--chip:focus-within {
+  outline: none;
+  border-color: color-mix(in srgb, var(--brand-800, #7aa12a) 55%, rgba(17, 17, 17, 0.10));
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--brand-800, #7aa12a) 22%, transparent);
+}

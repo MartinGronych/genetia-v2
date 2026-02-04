@@ -86,7 +86,7 @@ function getCertificationsData() {
       title: "Propouštění šarží léčivého přípravku",
       badges: ["GMP 1", "Exkluzivně v ČR"],
       text:
-        "Certifikát opravňující k propouštění šarží v souladu se standardy GMP 1. " +
+        "Certifikát opravňující k propouštění šarží v souladu se standardy GMP 1." +
         "Zajišťuje konzistentní, dohledatelné a validované propouštění šarží dle GMP.",
       noticeTitle: "Poznámka",
       noticeText:
@@ -100,18 +100,17 @@ function getCertificationsData() {
       title: "Kontrolní laboratoř",
       badges: ["GMP 1"],
       text:
-        "Certifikát pro kontrolní laboratoř v souladu se standardy GMP 1. " +
-        "Důraz je kladen na kvalifikaci zařízení, validaci metod a integritu dat.",
+        "Certifikát pro kontrolní laboratoř v souladu se standardy GMP 1.",
       ctaHref: "../kontakt/#contactForm",
       ctaLabel: "Kontaktovat laboratoř"
     },
 
     "gmp-api-pack": {
       kicker: "GMP certifikát",
-      title: "Balení API",
+      title: "Balení léčivé látky",
       badges: ["GMP 2"],
       text:
-        "Certifikát opravňující k balení API v souladu se standardy GMP 2. " +
+        "Certifikát opravňující k balení léčivé látky v souladu se standardy GMP 2." +
         "Pokrytí zahrnuje kontrolované prostředí, značení, dohledatelnost a řízení šarží.",
       ctaHref: "../kontakt/#contactForm",
       ctaLabel: "Zeptejte se na kapacity a podmínky"
@@ -119,10 +118,10 @@ function getCertificationsData() {
 
     "gmp-api-extract": {
       kicker: "GMP certifikát",
-      title: "Extrakce API",
+      title: "Extrakce léčivé látky",
       badges: ["GMP 2"],
       text:
-        "Povolení k extrakci API v souladu se standardy GMP 2. " +
+        "Povolení k extrakci léčivé látky v souladu se standardy GMP 2." +
         "Zaměřujeme se na stabilní proces, dokumentaci a konzistentní parametry kvality.",
       ctaHref: "../kontakt/#contactForm",
       ctaLabel: "Probrat požadavky na proces"

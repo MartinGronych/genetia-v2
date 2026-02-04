@@ -1,0 +1,37 @@
+/* assets/css/pages/analyticke-sluzby/analyticke-sluzby_cta.css — celý soubor */
+
+.cta-section{
+  position:relative;
+  overflow:hidden;
+  margin-top:var(--space-8);
+  padding-block:var(--space-9);
+  margin-bottom: 2rem;
+}
+
+.cta-section .container{
+  max-width:900px;
+  text-align:center;
+}
+
+.cta-section h2{
+  margin:0 0 var(--space-3);
+  font-size:clamp(2.4rem,2.4vw,3.2rem);
+  line-height:1.2;
+  color:var(--brand-black);
+  text-wrap:balance;
+  text-align: center;
+}
+
+.cta-section p{
+  margin:0 auto;
+  max-width:60ch;
+  font-size:clamp(1.05rem,1rem + .3vw,1.15rem);
+  line-height:1.7;
+  color:var(--brand-black);
+}
+
+.cta-section .btn-accent{
+  margin-top:var(--space-5);
+  font-size:1rem;
+  padding-inline:var(--space-6);
+}

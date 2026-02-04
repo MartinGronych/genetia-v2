@@ -74,8 +74,8 @@
 .home-services .service-card_title {
   margin: 0;
   text-align: center;
-  color: var(--brand-600);
-  font-size: var(--ts-card-title);
+  color: var(--brand-800);
+  font-size: clamp(1.2rem, 2.2vw + 1rem, 1.8rem);
   font-weight: 680;
 }
 
