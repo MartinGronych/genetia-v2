@@ -5,6 +5,47 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Genetia Production</title>
 
+    <!-- SEO -->
+    <meta
+      name="description"
+      content="Genetia Production se zaměřuje na analytické služby a výzkum, LC-MS analýzu, validaci metod a stabilitu extraktů."
+    />
+    <link rel="canonical" href="https://martingronych.github.io/genetia-v2/" />
+
+    <!-- SEO indexace -->
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+
+    <!-- Open Graph (LinkedIn) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Genetia Production" />
+    <meta property="og:title" content="Genetia Production" />
+    <meta
+      property="og:description"
+      content="Genetia Production se zaměřuje na analytické služby a výzkum, LC-MS analýzu, validaci metod a stabilitu extraktů."
+    />
+    <meta
+      property="og:url"
+      content="https://martingronych.github.io/genetia-v2/"
+    />
+    <meta
+      property="og:image"
+      content="https://martingronych.github.io/genetia-v2/assets/images/og/og-home.jpg"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <!-- Twitter Card (safe fallback) -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Genetia Production" />
+    <meta
+      name="twitter:description"
+      content="Genetia Production se zaměřuje na analytické služby a výzkum, LC-MS analýzu, validaci metod a stabilitu extraktů."
+    />
+    <meta
+      name="twitter:image"
+      content="https://martingronych.github.io/genetia-v2/assets/images/og/og-home.jpg"
+    />
+
     <script>
       (() => {
         // Force light theme only (FOUC-free)
@@ -12,7 +53,7 @@
         document.documentElement.dataset.theme = "light";
       })();
     </script>
-    
+
     <!-- Import map (Lucide) -->
     <script type="importmap">
       {
@@ -22,8 +63,17 @@
       }
     </script>
 
+    <!-- Icons -->
+    <link rel="icon" href="./favicon.ico" />
+    <link
+      rel="apple-touch-icon"
+      href="./apple-touch-icon.png"
+      sizes="180x180"
+    />
+
     <link rel="stylesheet" href="assets/css/styles.css" />
     <link rel="stylesheet" href="assets/css/pages/home.css" />
+    
   </head>
 
   <body>
@@ -494,48 +544,58 @@
     <!-- =========================
      GATE MODAL
 ========================== -->
-<div class="modal modal--gate" id="gateModal" aria-hidden="true">
-  <div class="modal__overlay" data-modal-close></div>
+    <div class="modal modal--gate" id="gateModal" aria-hidden="true">
+      <div class="modal__overlay" data-modal-close></div>
 
-  <div
-    class="modal__dialog"
-    role="dialog"
-    aria-modal="true"
-    aria-labelledby="gateTitle"
-  >
-    <header class="modal__header">
-      <h2 class="modal__title" id="gateTitle">
-        Jste odborný pracovník ve zdravotnictví?
-      </h2>
-      <button class="modal__close" data-modal-close aria-label="Zavřít">×</button>
-    </header>
+      <div
+        class="modal__dialog"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="gateTitle"
+      >
+        <header class="modal__header">
+          <h2 class="modal__title" id="gateTitle">
+            Jste odborný pracovník ve zdravotnictví?
+          </h2>
+          <button class="modal__close" data-modal-close aria-label="Zavřít">
+            ×
+          </button>
+        </header>
 
-    <div class="modal__body">
-      <p>
-        Jsem odborníkem ve smyslu §2a Zákona č. 40/1995 Sb., o regulaci reklamy,
-        ve znění pozdějších předpisů, čili osobou oprávněnou předepisovat nebo
-        vydávat léčivé přípravky.
-      </p>
-      <p>
-        Potvrzuji, že jsem se seznámil/a s definicí odborníka dle zákona č.
-        40/1995 Sb. a jsem si vědom/a rizik, jimž se jiná osoba než odborník
-        vystavuje.
-      </p>
+        <div class="modal__body">
+          <p>
+            Jsem odborníkem ve smyslu §2a Zákona č. 40/1995 Sb., o regulaci
+            reklamy, ve znění pozdějších předpisů, čili osobou oprávněnou
+            předepisovat nebo vydávat léčivé přípravky.
+          </p>
+          <p>
+            Potvrzuji, že jsem se seznámil/a s definicí odborníka dle zákona č.
+            40/1995 Sb. a jsem si vědom/a rizik, jimž se jiná osoba než odborník
+            vystavuje.
+          </p>
+        </div>
+
+        <div class="modal__actions">
+          <button
+            class="gate-btn gate-btn--primary"
+            type="button"
+            data-gate-accept
+          >
+            Ano, vstoupit
+          </button>
+
+          <button
+            class="gate-btn gate-btn--secondary"
+            type="button"
+            data-gate-deny
+          >
+            Ne, odejít
+          </button>
+        </div>
+      </div>
     </div>
-
-    <div class="modal__actions">
-      <button class="gate-btn gate-btn--primary" type="button" data-gate-accept>
-        Ano, vstoupit
-      </button>
-
-      <button class="gate-btn gate-btn--secondary" type="button" data-gate-deny>
-        Ne, odejít
-      </button>
-    </div>
-  </div>
-</div>
-
-
+    
+    <script type="module" src="./assets/js/cookies.js"></script>
     <script type="module" src="./assets/js/app.js"></script>
   </body>
 </html>

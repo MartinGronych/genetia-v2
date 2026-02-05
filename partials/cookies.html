@@ -1,0 +1,124 @@
+<!-- =========================
+ COOKIE BANNER
+========================== -->
+<div
+  class="cookie-banner"
+  id="cookieBanner"
+  role="region"
+  aria-label="Nastavení cookies"
+>
+  <div class="cookie-banner__content">
+    <div class="cookie-banner__text">
+      <h2 class="cookie-banner__title">Používáme cookies</h2>
+      <p class="cookie-banner__description">
+        Cookies používáme k zajištění správného fungování webu a ke zlepšování
+        našich služeb.
+        <a href="./legal/#cookies" class="cookie-banner__link">Více informací</a>
+      </p>
+    </div>
+
+    <div class="cookie-banner__actions">
+      <button class="btn btn--primary" type="button" id="cookieAcceptAll">
+        Přijmout vše
+      </button>
+
+      <button class="btn btn--ghost" type="button" id="cookieSettings">
+        Nastavení
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- =========================
+ COOKIE MODAL
+========================== -->
+<div
+  class="cookie-modal"
+  id="cookieModal"
+  aria-hidden="true"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="cookieModalTitle"
+>
+  <div class="cookie-modal__overlay" id="cookieModalOverlay" tabindex="-1"></div>
+
+  <div class="cookie-modal__content">
+    <header class="cookie-modal__header">
+      <h2 class="cookie-modal__title" id="cookieModalTitle">
+        Nastavení cookies
+      </h2>
+
+      <button
+        class="cookie-modal__close"
+        type="button"
+        id="cookieModalClose"
+        aria-label="Zavřít"
+      >
+        ×
+      </button>
+    </header>
+
+    <div class="cookie-modal__body">
+      <!-- Nutné cookies -->
+      <div class="cookie-category">
+        <div class="cookie-category__header">
+          <div class="cookie-category__info">
+            <h3 class="cookie-category__title">Nutné cookies</h3>
+            <p class="cookie-category__description">
+              Tyto cookies jsou nezbytné pro správné fungování webu.
+            </p>
+          </div>
+
+          <label class="cookie-toggle cookie-toggle--disabled">
+            <input type="checkbox" checked disabled />
+            <span class="cookie-toggle__slider"></span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Analytické cookies -->
+      <div class="cookie-category">
+        <div class="cookie-category__header">
+          <div class="cookie-category__info">
+            <h3 class="cookie-category__title">Analytické cookies</h3>
+            <p class="cookie-category__description">
+              Pomáhají nám porozumět, jak návštěvníci používají web.
+            </p>
+          </div>
+
+          <label class="cookie-toggle">
+            <input type="checkbox" id="cookieAnalytics" />
+            <span class="cookie-toggle__slider"></span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Marketingové cookies -->
+      <div class="cookie-category">
+        <div class="cookie-category__header">
+          <div class="cookie-category__info">
+            <h3 class="cookie-category__title">Marketingové cookies</h3>
+            <p class="cookie-category__description">
+              Slouží k personalizaci obsahu a reklam.
+            </p>
+          </div>
+
+          <label class="cookie-toggle">
+            <input type="checkbox" id="cookieMarketing" />
+            <span class="cookie-toggle__slider"></span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <footer class="cookie-modal__footer">
+      <button class="btn btn--ghost" type="button" id="cookieRejectAll">
+        Odmítnout
+      </button>
+
+      <button class="btn btn--primary" type="button" id="cookieSavePreferences">
+        Uložit nastavení
+      </button>
+    </footer>
+  </div>
+</div>

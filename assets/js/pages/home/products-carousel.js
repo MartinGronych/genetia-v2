@@ -26,8 +26,11 @@ function getProductsUrl() {
   return "./produkty/";
 }
 
+import { getAssetBase } from "../../core/paths.js";
+
 function redirectToProducts() {
-  window.location.href = getProductsUrl();
+  const base = getAssetBase(); // "" lokál, "/genetia-v2" na GH Pages
+  window.location.href = `${base}/produkty/`;
 }
 
 function redirectToHome() {
@@ -36,7 +39,11 @@ function redirectToHome() {
 
 function normalizeProducts(data) {
   // supports both: array OR { products: [...] }
-  const arr = Array.isArray(data) ? data : Array.isArray(data?.products) ? data.products : [];
+  const arr = Array.isArray(data)
+    ? data
+    : Array.isArray(data?.products)
+      ? data.products
+      : [];
   return arr
     .map((p) => ({
       slug: String(p.slug ?? p.id ?? "").trim(),
@@ -232,7 +239,10 @@ function enablePointerSwipe(swipeEl, { onNext, onPrev, isLocked }) {
 
 async function loadProductsJson() {
   const url = withAssetBase("assets/data/products.json");
-  const res = await fetch(url, { credentials: "same-origin", cache: "no-store" });
+  const res = await fetch(url, {
+    credentials: "same-origin",
+    cache: "no-store",
+  });
   if (!res.ok) throw new Error(`products.json HTTP ${res.status}`);
   return await res.json();
 }
@@ -248,7 +258,8 @@ export async function initHomeProductsCarousel() {
 
   renderCarouselMarkup(mount, {
     titleText: "Naše produkty pro lékárny",
-    leadText: "Standardizované léčebné extrakty a formulace připravené pro distribuci.",
+    leadText:
+      "Standardizované léčebné extrakty a formulace připravené pro distribuci.",
     ctaText: "Odborné informace",
   });
 
@@ -386,7 +397,7 @@ export async function initHomeProductsCarousel() {
     if (!btn || locked()) return;
     const target = Number(btn.dataset.index || "0");
     if (Number.isNaN(target)) return;
-    while ((current % view.length) !== target) next();
+    while (current % view.length !== target) next();
   });
 
   mount.addEventListener("keydown", (e) => {

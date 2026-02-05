@@ -91,7 +91,7 @@ function getCertificationsData() {
       noticeTitle: "Poznámka",
       noticeText:
         "Na vyžádání připravíme přehled rozsahu certifikace a související dokumentace pro vaše interní compliance.",
-      ctaHref: "../kontakt/#contactForm",
+      ctaHref: "../kontakt/#kontakt",
       ctaLabel: "Zeptejte se na audit / dokumentaci"
     },
 
@@ -101,7 +101,7 @@ function getCertificationsData() {
       badges: ["GMP 1"],
       text:
         "Certifikát pro kontrolní laboratoř v souladu se standardy GMP 1.",
-      ctaHref: "../kontakt/#contactForm",
+      ctaHref: "../kontakt/#kontakt",
       ctaLabel: "Kontaktovat laboratoř"
     },
 
@@ -112,7 +112,7 @@ function getCertificationsData() {
       text:
         "Certifikát opravňující k balení léčivé látky v souladu se standardy GMP 2." +
         "Pokrytí zahrnuje kontrolované prostředí, značení, dohledatelnost a řízení šarží.",
-      ctaHref: "../kontakt/#contactForm",
+      ctaHref: "../kontakt/#kontakt",
       ctaLabel: "Zeptejte se na kapacity a podmínky"
     },
 
@@ -123,7 +123,7 @@ function getCertificationsData() {
       text:
         "Povolení k extrakci léčivé látky v souladu se standardy GMP 2." +
         "Zaměřujeme se na stabilní proces, dokumentaci a konzistentní parametry kvality.",
-      ctaHref: "../kontakt/#contactForm",
+      ctaHref: "../kontakt/#kontakt",
       ctaLabel: "Probrat požadavky na proces"
     }
   };
@@ -137,7 +137,7 @@ function deriveFallbackDataFromCard(card, id) {
       title: "Detail certifikace",
       badges: [],
       text: "Detail bude doplněn.",
-      ctaHref: "../kontakt/#contactForm",
+      ctaHref: "../kontakt/#kontakt",
       ctaLabel: "Kontakt"
     };
   }
@@ -164,7 +164,7 @@ function deriveFallbackDataFromCard(card, id) {
     title,
     badges,
     text,
-    ctaHref: "../kontakt/#contactForm",
+    ctaHref: "../kontakt/#kontakt",
     ctaLabel: "Kontakt"
   };
 }

@@ -1,9 +1,55 @@
 <!doctype html>
-<html lang="cs" data-page="about">
+<html lang="cs" data-page="home">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>O společnosti – Genetia</title>
+    <title>O společnosti | Genetia Production</title>
+
+    <!-- SEO -->
+    <meta
+      name="description"
+      content="Genetia Production – farmaceutická kvalita v oblasti léčebného konopí. Analytické služby, vývoj a výzkum, EU-GMP procesy."
+    />
+    <link
+      rel="canonical"
+      href="https://martingronych.github.io/genetia-v2/o-spolecnosti/"
+    />
+
+    <!-- SEO indexace -->
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+
+    <!-- Open Graph (LinkedIn) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Genetia Production" />
+    <meta property="og:title" content="O společnosti | Genetia Production" />
+    <meta
+      property="og:description"
+      content="Kdo jsme a co děláme: analytické služby, vývoj a výzkum. Procesy splňují standardy EU-GMP."
+    />
+    <meta
+      property="og:url"
+      content="https://martingronych.github.io/genetia-v2/o-spolecnosti/"
+    />
+    <!-- Pokud nemáš OG obrázek pro tuto stránku, můžeš dočasně nechat home.
+         Ideálně později vytvořit og-about.jpg -->
+    <meta
+      property="og:image"
+      content="https://martingronych.github.io/genetia-v2/assets/images/og/og-home.jpg"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="O společnosti | Genetia Production" />
+    <meta
+      name="twitter:description"
+      content="Kdo jsme a co děláme: analytické služby, vývoj a výzkum. EU-GMP standardy."
+    />
+    <meta
+      name="twitter:image"
+      content="https://martingronych.github.io/genetia-v2/assets/images/og/og-home.jpg"
+    />
 
     <script>
       (() => {
@@ -12,6 +58,7 @@
         document.documentElement.dataset.theme = "light";
       })();
     </script>
+
     <!-- Import map (Lucide) -->
     <script type="importmap">
       {
@@ -21,8 +68,17 @@
       }
     </script>
 
+    <!-- Icons -->
+    <link rel="icon" href="../favicon.ico" />
+    <link
+      rel="apple-touch-icon"
+      href="../apple-touch-icon.png"
+      sizes="180x180"
+    />
+
     <link rel="stylesheet" href="../assets/css/styles.css" />
-    <link rel="stylesheet" href="../assets/css/pages/about.css" />
+    <link rel="stylesheet" href="../assets/css/pages/home.css" />
+    <link rel="stylesheet" href="../assets/css/cookies.css" />
   </head>
 
   <body>
@@ -41,7 +97,7 @@
         <nav class="site-nav" aria-label="Primary">
           <ul class="nav-list">
             <li>
-              <a class="nav-link" href="./o-spolecnosti/">O společnosti</a>
+              <a class="nav-link" href="../o-spolecnosti/">O společnosti</a>
             </li>
             <li>
               <a class="nav-link" href="../analyticke-sluzby/"
@@ -86,32 +142,181 @@
         tabindex="-1"
       >
         <nav class="mobile-nav__links" aria-label="Mobile">
-          <a class="nav-link" href="./o-spolecnosti/">O společnosti</a>
+          <a class="nav-link" href="../o-spolecnosti/">O společnosti</a>
           <a class="nav-link" href="../analyticke-sluzby/">Analytické služby</a>
           <a class="nav-link" href="../vyvoj-a-vyzkum/">Vývoj a výzkum</a>
           <a class="nav-link" href="../produkty/">Produkty</a>
           <a class="nav-link" href="../certifikace/">Certifikace</a>
-          <a class="nav-link" href="../">Kontakt</a>
+          <a class="nav-link" href="../kontakt/">Kontakt</a>
         </nav>
       </div>
     </div>
 
     <main id="main" class="site-main">
-      <section class="section about">
-        <div class="container">
-          <p class="page-kicker">Genetia</p>
-          <h1 class="page-title">O společnosti</h1>
-          <p class="page-lead">
-            Stránka „O společnosti“ (v2 template). Obsah doplníme při migraci z
-            v1.
-          </p>
+      <!-- ====== HERO SEKCE (kopie layoutu, ale SEO-friendly obsah) ====== -->
+      <section class="section hero" aria-labelledby="hero-title">
+        <div class="hero__video-wrapper" aria-hidden="true">
+          <video
+            class="hero__video"
+            src="../assets/video/Genetia_home.mp4"
+            autoplay
+            muted
+            loop
+            playsinline
+            preload="metadata"
+          ></video>
+        </div>
 
-          <div class="card">
-            <div class="card__body stack">
-              <h2 class="section-title">Placeholder</h2>
-              <p class="section-intro">
-                Tady bude přepis sekcí z Genetia v1 → v2.
+        <div class="container">
+          <div class="hero__content">
+            <h1 class="page-title" id="hero-title">
+              O společnosti Genetia Production
+            </h1>
+
+            <p class="page-lead hero__lead">
+              Zaměřujeme se na farmaceutickou kvalitu v oblasti léčebného
+              konopí: analytické služby, vývoj a výzkum účinných látek a
+              stabilní EU-GMP procesy.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SEKCE – SLUŽBY (kopie struktury) -->
+      <section class="section home-services" aria-labelledby="services-title">
+        <div class="container text-center">
+          <h2 class="visually-hidden" id="services-title">Naše oblasti</h2>
+
+          <div class="services-grid">
+            <article class="card service-card" data-hover-card>
+              <div class="card__body">
+                <h3 class="service-card_title">Analytické testování</h3>
+                <p class="service-card_text">
+                  Komplexní analýzy kanabinoidů, terpenů, pesticidů, těžkých
+                  kovů a mikrobiologie.
+                </p>
+                <a
+                  class="btn btn--primary service-card_cta"
+                  href="../analyticke-sluzby/"
+                >
+                  Více o službě
+                </a>
+              </div>
+            </article>
+
+            <article class="card service-card" data-hover-card>
+              <div class="card__body">
+                <h3 class="service-card_title">Vývoj &amp; výroba API</h3>
+                <p class="service-card_text">
+                  Formulace a výroba aktivních farmaceutických složek (THC, CBD,
+                  CBG) dle EU-GMP.
+                </p>
+                <a
+                  class="btn btn--primary service-card_cta"
+                  href="../vyvoj-a-vyzkum/"
+                >
+                  Zjistit více
+                </a>
+              </div>
+            </article>
+
+            <article class="card service-card" data-hover-card>
+              <div class="card__body">
+                <h3 class="service-card_title">Produkty pro lékárny</h3>
+                <p class="service-card_text">
+                  Standardizované olejové extrakty a přípravky dostupné pro
+                  lékárny a pacienty.
+                </p>
+                <a
+                  class="btn btn--primary service-card_cta"
+                  href="../produkty/#lekarny"
+                >
+                  Nabídka produktů
+                </a>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <div class="servise-image-wrapper-sklo" aria-hidden="true">
+          <img
+            src="../assets/images/laboratorni_sklo.webp"
+            alt=""
+            class="servise-image"
+            loading="lazy"
+          />
+        </div>
+      </section>
+
+      <!-- ====== USP / PROČ GENETIA ====== (reuse stejný mount) -->
+      <section class="usp-section" data-usp-production>
+        <div class="container text-center">
+          <div id="uspProductionMount"></div>
+        </div>
+      </section>
+
+      <!-- ====== PRODUKTY – CAROUSEL ====== (reuse stejný mount) -->
+      <section class="section home-products" aria-labelledby="products-title">
+        <div class="container">
+          <h2 class="visually-hidden" id="products-title">Produkty</h2>
+          <div class="home-products__carousel"></div>
+        </div>
+      </section>
+
+      <!-- KONTAKT & SPOLUPRÁCE (CTA) -->
+      <section class="contact-section" data-home-contact-cta>
+        <div class="container">
+          <div class="row g-5 align-items-start align-items-lg-center">
+            <div class="col-lg-5">
+              <h2 class="contact-cta__title fw-bold mb-3">
+                Zaujala vás naše práce?
+              </h2>
+
+              <p class="contact-cta__subtitle text-muted mb-4">
+                Napište nám ohledně spolupráce, testování nebo vývoje produktů.
               </p>
+
+              <ul class="contact-info list-unstyled contact-cta__info">
+                <li class="mb-2">
+                  <strong>E-mail:</strong>
+                  <a href="mailto:info@genetia.eu" class="text-decoration-none"
+                    >info@genetia.eu</a
+                  >
+                </li>
+                <li class="mb-2">
+                  <strong>Telefon:</strong>
+                  <a href="tel:+420311440038" class="text-decoration-none"
+                    >+420 311 440 038</a
+                  >
+                </li>
+                <li>
+                  <strong>Sídlo:</strong>
+                  <span
+                    >Inovační 122, 252 41 Zlatníky-Hodkovice, Česká
+                    republika</span
+                  >
+                </li>
+              </ul>
+            </div>
+
+            <div class="col-lg-7">
+              <div class="contact-cta__card card-base p-4 shadow-sm">
+                <div class="contact-cta__actions">
+                  <a
+                    class="btn btn-accent px-4 py-2"
+                    href="../kontakt/#kontakt"
+                  >
+                    Přejít na formulář
+                  </a>
+                  <p class="contact-cta__card-text text-muted mb-4">
+                    Formulář vyplníte během chvíle a rovnou vyberete typ
+                    spolupráce.
+                    <strong
+                      >Odpovídáme nejpozději následující pracovní den.</strong
+                    >
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -121,7 +326,6 @@
     <!-- FOOTER -->
     <footer class="site-footer" aria-labelledby="footerTitle">
       <div class="site-footer_container">
-        <!-- Brand -->
         <div class="site-footer_brand">
           <h2 class="visually-hidden" id="footerTitle">
             Začneme spolu měřit výsledky?
@@ -142,7 +346,7 @@
           <div class="site-footer_social" aria-label="Sociální sítě">
             <a
               class="site-footer_socialLink"
-              href="https://www.linkedin.com/company/genetia-production/?lipi=urn%3Ali%3Apage%3Ad_flagship3_search_srp_all%3BN4duTOIGQMqen%2FXtulmTlg%3D%3D"
+              href="https://www.linkedin.com/company/genetia-production/"
               target="_blank"
               rel="me noopener"
               aria-label="Genetia Production na LinkedIn (otevře se v novém okně)"
@@ -162,7 +366,6 @@
           </div>
         </div>
 
-        <!-- Columns -->
         <div class="site-footer_cols">
           <nav class="site-footer_col" aria-label="Odkazy – O společnosti">
             <h3 class="site-footer_heading">Genetia</h3>
@@ -223,11 +426,7 @@
             <h3 class="site-footer_heading">Kontakt</h3>
             <ul class="site-footer_list">
               <li>
-                <a
-                  class="site-footer_link"
-                  href="mailto:info@genetia.eu"
-                  aria-label="Napsat e-mail na info@genetia.eu"
-                >
+                <a class="site-footer_link" href="mailto:info@genetia.eu">
                   <i data-lucide="mail"></i>
                   <span>info@genetia.eu</span>
                 </a>
@@ -290,24 +489,17 @@
                   Podmínky použití
                 </a>
               </li>
-              <li>
-                <a
-                  class="site-footer_link site-footer_legalLink"
-                  href="../legal/#terms_and_conditions"
-                >
-                  Obchodní podmínky
-                </a>
-              </li>
             </ul>
           </nav>
 
-          <small class="site-footer_dev">
-            Vyvinul: <span>Martin Gronych</span>
-          </small>
+          <small class="site-footer_dev"
+            >Vyvinul: <span>Martin Gronych</span></small
+          >
         </div>
       </div>
     </footer>
 
+    <!-- jen jeden entry -->
     <script type="module" src="../assets/js/app.js"></script>
   </body>
 </html>

@@ -3,15 +3,43 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
+
     <title>UI Kit – Genetia v2</title>
 
+    <!-- SEO -->
+    <meta
+      name="description"
+      content="UI Kit Genetia v2 slouží jako interní referenční přehled komponent, typografie a vizuálních pravidel používaných na webu Genetia Production."
+    />
+    <link
+      rel="canonical"
+      href="https://martingronych.github.io/genetia-v2/ui-kit/"
+    />
+
+    <!-- ❗ UI Kit = interní stránka → neindexovat -->
+    <meta name="robots" content="noindex,nofollow" />
+
+    <!-- Open Graph (omezené, ale konzistentní) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Genetia Production" />
+    <meta property="og:title" content="UI Kit – Genetia v2" />
+    <meta
+      property="og:description"
+      content="Interní UI Kit Genetia v2 – přehled komponent, stylů a rozhraní."
+    />
+    <meta
+      property="og:url"
+      content="https://martingronych.github.io/genetia-v2/ui-kit/"
+    />
+
+    <!-- Theme (FOUC-free, light only) -->
     <script>
       (() => {
-        // Force light theme only (FOUC-free)
         localStorage.removeItem("theme");
         document.documentElement.dataset.theme = "light";
       })();
     </script>
+
     <!-- Import map (Lucide) -->
     <script type="importmap">
       {
@@ -21,6 +49,15 @@
       }
     </script>
 
+    <!-- Icons -->
+    <link rel="icon" href="../favicon.ico" />
+    <link
+      rel="apple-touch-icon"
+      href="../apple-touch-icon.png"
+      sizes="180x180"
+    />
+
+    <!-- Styles -->
     <link rel="stylesheet" href="../assets/css/styles.css" />
     <link rel="stylesheet" href="../assets/css/pages/ui-kit.css" />
   </head>
@@ -688,14 +725,6 @@
                   href="../legal/#terms"
                 >
                   Podmínky použití
-                </a>
-              </li>
-              <li>
-                <a
-                  class="site-footer_link site-footer_legalLink"
-                  href="../legal/#terms_and_conditions"
-                >
-                  Obchodní podmínky
                 </a>
               </li>
             </ul>

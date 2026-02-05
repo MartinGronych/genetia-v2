@@ -3,15 +3,62 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Kontakt – Genetia</title>
 
+    <title>Kontakt – Genetia Production</title>
+
+    <!-- SEO -->
+    <meta
+      name="description"
+      content="Kontaktujte Genetia Production. Rádi s vámi probereme analytické služby, LC-MS analýzu, validaci metod a stabilitu extraktů."
+    />
+    <link
+      rel="canonical"
+      href="https://martingronych.github.io/genetia-v2/kontakt/"
+    />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+
+    <!-- Open Graph (LinkedIn) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Genetia Production" />
+    <meta property="og:title" content="Kontakt – Genetia Production" />
+    <meta
+      property="og:description"
+      content="Kontaktujte Genetia Production. Rádi s vámi probereme analytické služby, LC-MS analýzu, validaci metod a stabilitu extraktů."
+    />
+    <meta
+      property="og:url"
+      content="https://martingronych.github.io/genetia-v2/kontakt/"
+    />
+    <meta
+      property="og:image"
+      content="https://martingronych.github.io/genetia-v2/assets/images/og/og-kontakt.jpg"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Kontakt – Genetia Production" />
+    <meta
+      name="twitter:description"
+      content="Kontaktujte Genetia Production. Rádi s vámi probereme analytické služby, LC-MS analýzu, validaci metod a stabilitu extraktů."
+    />
+    <meta
+      name="twitter:image"
+      content="https://martingronych.github.io/genetia-v2/assets/images/og/og-kontakt.jpg"
+    />
+
+    <!-- reCAPTCHA v3 -->
+    <script src="https://www.google.com/recaptcha/api.js?render=6LehyWEsAAAAACaW5n_TtkHNq3x0b1Fk7cR-1Uge"></script>
+
+    <!-- Theme (FOUC-free, light only) -->
     <script>
       (() => {
-        // Force light theme only (FOUC-free)
         localStorage.removeItem("theme");
         document.documentElement.dataset.theme = "light";
       })();
     </script>
+
     <!-- Import map (Lucide) -->
     <script type="importmap">
       {
@@ -21,6 +68,15 @@
       }
     </script>
 
+    <!-- Icons -->
+    <link rel="icon" href="../favicon.ico" />
+    <link
+      rel="apple-touch-icon"
+      href="../apple-touch-icon.png"
+      sizes="180x180"
+    />
+
+    <!-- Styles -->
     <link rel="stylesheet" href="../assets/css/styles.css" />
     <link rel="stylesheet" href="../assets/css/pages/kontakt.css" />
   </head>
@@ -91,7 +147,7 @@
           <a class="nav-link" href="../vyvoj-a-vyzkum/">Vývoj a výzkum</a>
           <a class="nav-link" href="../produkty/">Produkty</a>
           <a class="nav-link" href="../certifikace/">Certifikace</a>
-          <a class="nav-link" href="./kontakt/">Kontakt</a>
+          <a class="nav-link" href="./">Kontakt</a>
         </nav>
       </div>
     </div>
@@ -202,9 +258,9 @@
                           <input
                             class="form__check-input"
                             type="checkbox"
-                            name="interest_extrakty"
+                            name="interests_extrakty"
                             value="1"
-                            data-interest="extrakty"
+                            data-interests="extrakty"
                           />
                           <span class="form__check-label"
                             >Požaduji výrobu konopných extraktů</span
@@ -215,9 +271,9 @@
                           <input
                             class="form__check-input"
                             type="checkbox"
-                            name="interest_analyzy"
+                            name="interests_analyzy"
                             value="1"
-                            data-interest="analyzy"
+                            data-interests="analyzy"
                           />
                           <span class="form__check-label"
                             >Požaduji analytické služby</span
@@ -227,7 +283,7 @@
                         <!-- souhrn do emailu (doplní JS v dalším kroku) -->
                         <input
                           type="hidden"
-                          name="interest_summary"
+                          name="interests_summary"
                           value="Nezvoleno"
                         />
                       </fieldset>
@@ -525,14 +581,6 @@
                   href="../legal/#terms"
                 >
                   Podmínky použití
-                </a>
-              </li>
-              <li>
-                <a
-                  class="site-footer_link site-footer_legalLink"
-                  href="../legal/#terms_and_conditions"
-                >
-                  Obchodní podmínky
                 </a>
               </li>
             </ul>

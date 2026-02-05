@@ -3,15 +3,65 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Analytické služby – Genetia</title>
 
+    <title>Analytické služby – Genetia Production</title>
+
+    <!-- SEO -->
+    <meta
+      name="description"
+      content="Analytické služby Genetia Production zahrnují LC-MS analýzu, validaci analytických metod a hodnocení stability extraktů."
+    />
+    <link
+      rel="canonical"
+      href="https://martingronych.github.io/genetia-v2/analyticke-sluzby/"
+    />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+
+    <!-- Open Graph (LinkedIn) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Genetia Production" />
+    <meta
+      property="og:title"
+      content="Analytické služby – Genetia Production"
+    />
+    <meta
+      property="og:description"
+      content="Analytické služby Genetia Production zahrnují LC-MS analýzu, validaci analytických metod a hodnocení stability extraktů."
+    />
+    <meta
+      property="og:url"
+      content="https://martingronych.github.io/genetia-v2/analyticke-sluzby/"
+    />
+    <meta
+      property="og:image"
+      content="https://martingronych.github.io/genetia-v2/assets/images/og/og-analyticke-sluzby.jpg"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Analytické služby – Genetia Production"
+    />
+    <meta
+      name="twitter:description"
+      content="Analytické služby Genetia Production zahrnují LC-MS analýzu, validaci analytických metod a hodnocení stability extraktů."
+    />
+    <meta
+      name="twitter:image"
+      content="https://martingronych.github.io/genetia-v2/assets/images/og/og-analyticke-sluzby.jpg"
+    />
+
+    <!-- Theme (FOUC-free, light only) -->
     <script>
       (() => {
-        // Force light theme only (FOUC-free)
         localStorage.removeItem("theme");
         document.documentElement.dataset.theme = "light";
       })();
     </script>
+
     <!-- Import map (Lucide) -->
     <script type="importmap">
       {
@@ -21,6 +71,15 @@
       }
     </script>
 
+    <!-- Icons -->
+    <link rel="icon" href="../favicon.ico" />
+    <link
+      rel="apple-touch-icon"
+      href="../apple-touch-icon.png"
+      sizes="180x180"
+    />
+
+    <!-- Styles -->
     <link rel="stylesheet" href="../assets/css/styles.css" />
     <link rel="stylesheet" href="../assets/css/pages/analyticke-sluzby.css" />
   </head>
@@ -91,7 +150,7 @@
           <a class="nav-link" href="../vyvoj-a-vyzkum/">Vývoj a výzkum</a>
           <a class="nav-link" href="../produkty/">Produkty</a>
           <a class="nav-link" href="../certifikace/">Certifikace</a>
-          <a class="nav-link" href="../">Kontakt</a>
+          <a class="nav-link" href="../kontakt/">Kontakt</a>
         </nav>
       </div>
     </div>
@@ -433,12 +492,9 @@
           </p>
 
           <div class="d-flex flex-wrap justify-content-center gap-3 mt-4">
-            <button
-              href="kontakt.html#form-contact"
-              class="btn btn-accent"
+            <a class="btn btn--accent" href="/kontakt/#form-contact"
+              >Objednat analýzu</a
             >
-              Objednat analýzu
-            </button>
           </div>
         </div>
       </section>
@@ -614,14 +670,6 @@
                   href="../legal/#terms"
                 >
                   Podmínky použití
-                </a>
-              </li>
-              <li>
-                <a
-                  class="site-footer_link site-footer_legalLink"
-                  href="../legal/#terms_and_conditions"
-                >
-                  Obchodní podmínky
                 </a>
               </li>
             </ul>

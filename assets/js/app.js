@@ -3,6 +3,7 @@
 import { safeInit } from "./core/logger.js";
 // import { initTheme } from "./core/theme.js";
 import { initI18n } from "./core/i18n.js";
+import "./cookies.js";
 import { initLucide } from "./core/lucide.js";
 import { initScrollUI } from "./components/scroll-ui.js";
 import { initNav } from "./components/nav.js";

@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="cs">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+    <title>Stránka nenalezena (404) | Genetia Production</title>
+
+    <!-- SEO -->
+    <meta
+      name="description"
+      content="Požadovaná stránka nebyla nalezena. Vraťte se na úvodní stránku Genetia Production nebo nás kontaktujte."
+    />
+    <meta name="robots" content="noindex,follow" />
+
+    <!-- Open Graph (není nutné, ale neškodí) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Stránka nenalezena | Genetia Production" />
+    <meta
+      property="og:description"
+      content="Požadovaná stránka nebyla nalezena."
+    />
+
+    <!-- Theme lock (stejné jako zbytek webu) -->
+    <script>
+      (() => {
+        localStorage.removeItem("theme");
+        document.documentElement.dataset.theme = "light";
+      })();
+    </script>
+
+    <!-- Icons -->
+    <link rel="icon" href="./favicon.ico" />
+    <link
+      rel="apple-touch-icon"
+      href="./apple-touch-icon.png"
+      sizes="180x180"
+    />
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="./assets/css/styles.css" />
+  </head>
+
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <!-- HEADER (zjednodušený, ale konzistentní) -->
+    <header class="site-header">
+      <div class="container site-header__inner">
+        <a class="site-brand" href="./" aria-label="Genetia – úvod">
+          <img
+            src="./assets/images/logo/GENETIA-G_logo.webp"
+            alt="Genetia"
+            class="site-brand__logo"
+          />
+        </a>
+      </div>
+    </header>
+
+    <main id="main" class="site-main">
+      <section class="section">
+        <div class="container text-center">
+          <h1 class="page-title">Stránka nenalezena</h1>
+
+          <p class="page-lead">
+            Omlouváme se, ale stránka, kterou hledáte, neexistuje nebo byla
+            přesunuta.
+          </p>
+
+          <div class="mt-4">
+            <a href="./" class="btn btn--primary">
+              Zpět na úvodní stránku
+            </a>
+
+            <a href="./kontakt/" class="btn btn--ghost ms-2">
+              Kontaktujte nás
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- FOOTER (zkrácený, ale brandově správný) -->
+    <footer class="site-footer">
+      <div class="site-footer_bottom">
+        <div class="site-footer_bottomInner">
+          <small class="site-footer_copy">
+            © <span id="year"></span> Genetia Production s.r.o.
+          </small>
+        </div>
+      </div>
+    </footer>
+
+    <script type="module" src="./assets/js/app.js"></script>
+  </body>
+</html>

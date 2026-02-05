@@ -1,14 +1,23 @@
-// assets/js/pages/contact.js
-// Kontakt – page orchestrator (imports only)
+/**
+ * ========================================
+ * KONTAKTNÍ STRÁNKA - PAGE MODUL
+ * ========================================
+ * 
+ * Tento soubor se načítá automaticky přes app.js
+ * když je data-page="contact"
+ */
 
 import { safeInit } from "../core/logger.js";
 
-// podle tree: assets/js/pages/kontakt/contact_map.js + contact_form.js
+
+import { initContactForm } from './kontakt/contact-form.js';
 import { initContactMap } from "./kontakt/contact_map.js";
-import { initContactForm } from "./kontakt/contact_form.js";
+
 
 const LOG = "[Genetia][contact]";
-
+/**
+ * Inicializace kontaktní stránky
+ */
 export async function init() {
   try {
     await safeInit("contact:map", initContactMap);
@@ -19,3 +28,7 @@ export async function init() {
 }
 
 export default { init };
+  
+  // Zde můžeš přidat další inicializace pro kontaktní stránku
+  // např. Google Maps, Mapy.cz, atd.
+  
