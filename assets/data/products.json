@@ -21,15 +21,15 @@
     "eRecept": "9390000"
   },
   {
-    "id": "harmony-15-15",
+    "id": "harmony-12-12",
     "name": "Genetia Harmony",
-    "ratio": "15:15",
+    "ratio": "12:12",
     "image": "assets/images/products/Genetia_harmony.png",
     "description": "Vyvážený extrakt s poměrem THC a CBD 1:1, vhodný pro široké terapeutické použití.",
     "category": "balanced",
     "composition": {
-      "THC": "15% (hm./hm.)",
-      "CBD": "15% (hm./hm.)",
+      "THC": "12% (hm./hm.)",
+      "CBD": "12% (hm./hm.)",
       "CBN": "<1% (hm./hm.)"
     },
     "extraction": "Studená ethanolová extrakce s následnou molekulární destilací.",
