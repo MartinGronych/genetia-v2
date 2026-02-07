@@ -3,6 +3,16 @@
  * Handles cookie banner display, user preferences, and consent tracking
  */
 
+/**
+ * Safe Consent API wrapper (works in ES modules)
+ * - In module scope, calling `gtag()` directly can throw ReferenceError.
+ * - This wrapper always pushes into dataLayer.
+ */
+function consentUpdate(payload) {
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push(["consent", "update", payload]);
+}
+
 // Cookie configuration
 const COOKIE_CONFIG = {
   consentCookieName: "genetia_cookie_consent",
@@ -15,42 +25,11 @@ const COOKIE_CONFIG = {
 };
 
 /**
- * Resolve site base using getAssetBase() (required for fetch routing on GitHub Pages).
- * We derive site base from asset base by stripping trailing "/assets".
- */
-function getSiteBase() {
-  try {
-    // Prefer project helper if available
-    const assetBase =
-      typeof window.getAssetBase === "function" ? window.getAssetBase() : null;
-
-    if (assetBase && typeof assetBase === "string") {
-      // Normalize: remove trailing slash
-      const normalized = assetBase.replace(/\/+$/, "");
-      // If ends with "/assets" remove it to get site base
-      const siteBase = normalized.replace(/\/assets$/, "");
-      return siteBase || ".";
-    }
-  } catch (e) {
-    // fall through
-  }
-
-  // Fallback: try to infer from current location (GitHub Pages safe-ish)
-  // e.g. https://domain.tld/repo/kontakt/ -> /repo
-  const path = window.location.pathname || "/";
-  const parts = path.split("/").filter(Boolean);
-  if (parts.length > 0) {
-    return `/${parts[0]}`;
-  }
-  return ".";
-}
-
-/**
  * Inject cookie banner + modal markup from /partials/cookies.html
  * Keeps HTML pages clean while still having required DOM IDs.
  */
 async function injectCookieMarkup() {
-  // už je na stránce / už injektované
+  // already injected?
   if (
     document.getElementById("cookieBanner") ||
     document.getElementById("cookieModal")
@@ -59,8 +38,7 @@ async function injectCookieMarkup() {
   }
 
   try {
-    // Robustní cesta nezávislá na /kontakt/, /produkty/, GitHub Pages atd.
-    // cookies.js je v /assets/js/, takže ../../ míří do web rootu
+    // cookies.js is in /assets/js/ -> ../../ goes to site root
     const url = new URL("../../partials/cookies.html", import.meta.url);
 
     const res = await fetch(url, { credentials: "same-origin" });
@@ -86,18 +64,14 @@ document.addEventListener("DOMContentLoaded", async () => {
  * Initialize cookie consent system
  */
 function initCookieConsent() {
-  // Check if user has already made a choice
   const consent = getCookieConsent();
 
   if (!consent) {
-    // Show cookie banner if no consent exists
     showCookieBanner();
   } else {
-    // Apply saved preferences
     applyCookiePreferences(consent);
   }
 
-  // Set up event listeners
   setupEventListeners();
 }
 
@@ -109,13 +83,8 @@ function setupEventListeners() {
   const acceptAllBtn = document.getElementById("cookieAcceptAll");
   const settingsBtn = document.getElementById("cookieSettings");
 
-  if (acceptAllBtn) {
-    acceptAllBtn.addEventListener("click", acceptAllCookies);
-  }
-
-  if (settingsBtn) {
-    settingsBtn.addEventListener("click", openCookieModal);
-  }
+  if (acceptAllBtn) acceptAllBtn.addEventListener("click", acceptAllCookies);
+  if (settingsBtn) settingsBtn.addEventListener("click", openCookieModal);
 
   // Modal buttons
   const modalCloseBtn = document.getElementById("cookieModalClose");
@@ -124,31 +93,16 @@ function setupEventListeners() {
   const savePreferencesBtn = document.getElementById("cookieSavePreferences");
   const settingsPageBtn = document.getElementById("cookieSettingsBtn");
 
-  if (modalCloseBtn) {
-    modalCloseBtn.addEventListener("click", closeCookieModal);
-  }
-
-  if (modalOverlay) {
-    modalOverlay.addEventListener("click", closeCookieModal);
-  }
-
-  if (rejectAllBtn) {
-    rejectAllBtn.addEventListener("click", rejectAllCookies);
-  }
-
-  if (savePreferencesBtn) {
+  if (modalCloseBtn) modalCloseBtn.addEventListener("click", closeCookieModal);
+  if (modalOverlay) modalOverlay.addEventListener("click", closeCookieModal);
+  if (rejectAllBtn) rejectAllBtn.addEventListener("click", rejectAllCookies);
+  if (savePreferencesBtn)
     savePreferencesBtn.addEventListener("click", savePreferences);
-  }
+  if (settingsPageBtn) settingsPageBtn.addEventListener("click", openCookieModal);
 
-  if (settingsPageBtn) {
-    settingsPageBtn.addEventListener("click", openCookieModal);
-  }
-
-  // Close modal on Escape key
+  // Close modal on Escape
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") {
-      closeCookieModal();
-    }
+    if (e.key === "Escape") closeCookieModal();
   });
 }
 
@@ -157,12 +111,11 @@ function setupEventListeners() {
  */
 function showCookieBanner() {
   const banner = document.getElementById("cookieBanner");
-  if (banner) {
-    // Small delay for better UX
-    setTimeout(() => {
-      banner.classList.add("active");
-    }, 500);
-  }
+  if (!banner) return;
+
+  setTimeout(() => {
+    banner.classList.add("active");
+  }, 500);
 }
 
 /**
@@ -170,9 +123,7 @@ function showCookieBanner() {
  */
 function hideCookieBanner() {
   const banner = document.getElementById("cookieBanner");
-  if (banner) {
-    banner.classList.remove("active");
-  }
+  if (banner) banner.classList.remove("active");
 }
 
 /**
@@ -180,22 +131,16 @@ function hideCookieBanner() {
  */
 function openCookieModal() {
   const modal = document.getElementById("cookieModal");
-  if (modal) {
-    modal.setAttribute("aria-hidden", "false");
-    document.body.style.overflow = "hidden";
+  if (!modal) return;
 
-    // Load current preferences
-    const consent = getCookieConsent();
-    if (consent) {
-      loadPreferencesIntoModal(consent);
-    }
+  modal.setAttribute("aria-hidden", "false");
+  document.body.style.overflow = "hidden";
 
-    // Focus first interactive element
-    const firstInput = modal.querySelector('input[type="checkbox"]:not(:disabled)');
-    if (firstInput) {
-      setTimeout(() => firstInput.focus(), 100);
-    }
-  }
+  const consent = getCookieConsent();
+  if (consent) loadPreferencesIntoModal(consent);
+
+  const firstInput = modal.querySelector('input[type="checkbox"]:not(:disabled)');
+  if (firstInput) setTimeout(() => firstInput.focus(), 100);
 }
 
 /**
@@ -203,10 +148,10 @@ function openCookieModal() {
  */
 function closeCookieModal() {
   const modal = document.getElementById("cookieModal");
-  if (modal) {
-    modal.setAttribute("aria-hidden", "true");
-    document.body.style.overflow = "";
-  }
+  if (!modal) return;
+
+  modal.setAttribute("aria-hidden", "true");
+  document.body.style.overflow = "";
 }
 
 /**
@@ -216,13 +161,8 @@ function loadPreferencesIntoModal(consent) {
   const analyticsCheckbox = document.getElementById("cookieAnalytics");
   const marketingCheckbox = document.getElementById("cookieMarketing");
 
-  if (analyticsCheckbox) {
-    analyticsCheckbox.checked = consent.analytics || false;
-  }
-
-  if (marketingCheckbox) {
-    marketingCheckbox.checked = consent.marketing || false;
-  }
+  if (analyticsCheckbox) analyticsCheckbox.checked = !!consent.analytics;
+  if (marketingCheckbox) marketingCheckbox.checked = !!consent.marketing;
 }
 
 /**
@@ -240,8 +180,6 @@ function acceptAllCookies() {
   applyCookiePreferences(consent);
   hideCookieBanner();
   closeCookieModal();
-
-  console.log("All cookies accepted");
 }
 
 /**
@@ -259,8 +197,6 @@ function rejectAllCookies() {
   applyCookiePreferences(consent);
   hideCookieBanner();
   closeCookieModal();
-
-  console.log("Non-essential cookies rejected");
 }
 
 /**
@@ -281,15 +217,13 @@ function savePreferences() {
   applyCookiePreferences(consent);
   hideCookieBanner();
   closeCookieModal();
-
-  console.log("Cookie preferences saved:", consent);
 }
 
 /**
  * Save consent to cookie
  */
 function saveCookieConsent(consent) {
-  const consentString = JSON.stringify(consent);
+  const consentString = encodeURIComponent(JSON.stringify(consent));
   const expiryDate = new Date();
   expiryDate.setDate(expiryDate.getDate() + COOKIE_CONFIG.consentCookieExpiry);
 
@@ -309,7 +243,7 @@ function getCookieConsent() {
       try {
         return JSON.parse(decodeURIComponent(value));
       } catch (e) {
-        console.error("Error parsing consent cookie:", e);
+        console.error("[cookies] Error parsing consent cookie:", e);
         return null;
       }
     }
@@ -319,61 +253,44 @@ function getCookieConsent() {
 }
 
 /**
- * Apply cookie preferences (load analytics, marketing scripts, etc.)
+ * Apply cookie preferences (Consent Mode + optional local cleanup)
  */
 function applyCookiePreferences(consent) {
-  console.log("Applying cookie preferences:", consent);
+  console.log("[cookies] Applying cookie preferences:", consent);
 
-  // Analytics cookies
-  if (consent.analytics) {
-    loadAnalytics();
-  } else {
-    removeAnalytics();
-  }
+  // ✅ Google Consent Mode v2 – THIS is the key piece
+  consentUpdate({
+    analytics_storage: consent.analytics ? "granted" : "denied",
+    ad_storage: consent.marketing ? "granted" : "denied",
+    ad_user_data: consent.marketing ? "granted" : "denied",
+    ad_personalization: consent.marketing ? "granted" : "denied",
+    functionality_storage: "granted",
+    security_storage: "granted",
+    personalization_storage: "denied",
+  });
 
-  // Marketing cookies
-  if (consent.marketing) {
-    loadMarketing();
-  } else {
-    removeMarketing();
-  }
+  // Optional: local cleanup of cookies on disable (helps keep things tidy)
+  if (!consent.analytics) removeAnalytics();
+  if (!consent.marketing) removeMarketing();
 }
 
 /**
- * Load analytics scripts (Google Analytics, etc.)
- */
-function loadAnalytics() {
-  console.log("Analytics enabled");
-}
-
-/**
- * Remove analytics scripts
+ * Remove analytics scripts/cookies (optional cleanup)
  */
 function removeAnalytics() {
-  // Remove Google Analytics cookies if they exist
   deleteCookie("_ga");
   deleteCookie("_gid");
   deleteCookie("_gat");
-
-  console.log("Analytics disabled");
+  console.log("[cookies] Analytics disabled (cookies cleaned)");
 }
 
 /**
- * Load marketing scripts (Facebook Pixel, etc.)
- */
-function loadMarketing() {
-  console.log("Marketing enabled");
-}
-
-/**
- * Remove marketing scripts
+ * Remove marketing scripts/cookies (optional cleanup)
  */
 function removeMarketing() {
-  // Remove Facebook Pixel cookies if they exist
   deleteCookie("_fbp");
   deleteCookie("fr");
-
-  console.log("Marketing disabled");
+  console.log("[cookies] Marketing disabled (cookies cleaned)");
 }
 
 /**
@@ -396,4 +313,9 @@ window.CookieConsent = {
 };
 
 // Export for ES modules
-export { openCookieModal, acceptAllCookies, rejectAllCookies, getCookieConsent };
+export {
+  openCookieModal,
+  acceptAllCookies,
+  rejectAllCookies,
+  getCookieConsent,
+};

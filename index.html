@@ -1,6 +1,38 @@
 <!doctype html>
 <html lang="cs" data-page="home">
   <head>
+    <!-- Google Consent Mode v2: default (before GTM loads) -->
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+
+      gtag("consent", "default", {
+        ad_storage: "denied",
+        ad_user_data: "denied",
+        ad_personalization: "denied",
+        analytics_storage: "denied",
+        functionality_storage: "granted",
+        personalization_storage: "denied",
+        security_storage: "granted",
+        wait_for_update: 500,
+      });
+    </script>
+    <!-- Google Tag Manager -->
+    <script>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != "dataLayer" ? "&l=" + l : "";
+        j.async = true;
+        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, "script", "dataLayer", "GTM-MDLDMK5S");
+    </script>
+    <!-- End Google Tag Manager -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Genetia Production</title>
@@ -73,10 +105,19 @@
 
     <link rel="stylesheet" href="assets/css/styles.css" />
     <link rel="stylesheet" href="assets/css/pages/home.css" />
-    
   </head>
 
   <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript
+      ><iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-MDLDMK5S"
+        height="0"
+        width="0"
+        style="display: none; visibility: hidden"
+      ></iframe
+    ></noscript>
+    <!-- End Google Tag Manager (noscript) -->
     <a class="skip-link" href="#main">Skip to content</a>
 
     <header class="site-header">
@@ -151,6 +192,17 @@
       <!-- ====== HERO SEKCE ====== -->
       <section class="section hero" aria-labelledby="hero-title">
         <div class="hero__video-wrapper" aria-hidden="true">
+          <img
+            class="hero__video"
+            src="assets/images/Innocrystal.webp"
+            alt=""
+            loading="eager"
+            decoding="async"
+          />
+        </div>
+
+        <!-- zakomentované video - po výměně prohoditt za img nahoře
+        <div class="hero__video-wrapper" aria-hidden="true">
           <video
             class="hero__video"
             src="assets/video/Genetia_home.mp4"
@@ -160,7 +212,7 @@
             playsinline
             preload="metadata"
           ></video>
-        </div>
+        </div>-->
 
         <div class="container">
           <div class="hero__content">
@@ -594,7 +646,7 @@
         </div>
       </div>
     </div>
-    
+
     <script type="module" src="./assets/js/cookies.js"></script>
     <script type="module" src="./assets/js/app.js"></script>
   </body>
