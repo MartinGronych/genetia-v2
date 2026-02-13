@@ -117,7 +117,7 @@
   font-size:clamp(.95rem,.9rem + .25vw,1.05rem);
   line-height:1.6;
   color:var(--text-muted);
-  max-width:60ch;
+  max-width:65ch;
 }
 
 /* ALIGNMENTS */

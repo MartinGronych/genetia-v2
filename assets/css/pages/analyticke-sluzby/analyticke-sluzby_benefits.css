@@ -1,12 +1,12 @@
 /* ==================================================
-   BENEFITS – Detail benefitů (Analytické služby)
-   - mount: #benefitsMount (.benefits__list)
+   BENEFIT – Detail benefitů (Analytické služby)
+   - mount: #benefitMount (.benefit__list)
    - item:  .benefit (id="benefit-*")
    - grid:  .benefit__grid
    - reverse: .benefit--reverse
 ================================================== */
 
-.benefits {
+.benefit {
   position: relative;
 
   /* ✅ extra spacing from previous section */
@@ -15,57 +15,69 @@
 
 /* Tokens (safe fallbacks) */
 :root {
-  --benefits-brand-800: var(--color-brand-800, var(--brand-800, var(--color-accent, currentColor)));
-  --benefits-black: var(--color-text, var(--color-black, #0b0b0b));
+  --benefit-brand-800: var(
+    --color-brand-800,
+    var(--brand-800, var(--color-accent, currentColor))
+  );
+  --benefit-black: var(--color-text, var(--color-black, #0b0b0b));
 }
 
-.benefits__header {
+.benefit__header {
   max-width: 64rem;
   margin-inline: auto;
   text-align: center;
   margin-bottom: 1.75rem;
 }
 
-.benefits__title {
+.benefit__title {
   margin-bottom: 0.5rem;
   font-size: clamp(1.9rem, 2.2vw + 1rem, 3rem);
   line-height: 1.15;
 }
 
-.benefits__subtitle {
+.benefit__subtitle {
   margin: 0;
   font-size: clamp(1.05rem, 1.1vw + 0.65rem, 1.55rem);
-  line-height: 1.5;
-  opacity: 0.85;
+  line-height: 1.6;
+  opacity: 0.9;
+
+  /* MOBILE FIRST */
+  text-align: left;
+  max-width: 62ch; /* 🔥 klíčová věc – hlídá délku řádku */
 }
 
 /* List wrapper (just rhythm between sections) */
-.benefits__list {
+.benefit__list {
   display: grid;
   gap: 1.5rem;
 }
 
 /* 768+ spacing */
 @media (min-width: 768px) {
-  .benefits__header {
+  .benefit__header {
     margin-bottom: 2rem;
   }
+  .benefit__subtitle {
+    text-align: justify;
+    text-justify: inter-word;
+    hyphens: auto;
+  }
 
-  .benefits__list {
+  .benefit__list {
     gap: 2rem;
   }
 }
 
 /* 1440+ spacing only */
 @media (min-width: 1440px) {
-  .benefits__list {
+  .benefit__list {
     gap: 2.25rem;
   }
 }
 
 /* 1920+ spacing only */
 @media (min-width: 1920px) {
-  .benefits__list {
+  .benefit__list {
     gap: 2.5rem;
   }
 }
@@ -175,7 +187,7 @@
   font-weight: 450;
   line-height: 1.55;
   font-size: clamp(1.02rem, 0.55vw + 0.9rem, 1.35rem);
-  color: var(--benefits-black);
+  color: var(--benefit-black);
   opacity: 1; /* keep requested color true (no fade) */
 }
 
@@ -199,7 +211,7 @@
   font-weight: 550;
   line-height: 1.55;
   font-size: clamp(0.98rem, 0.4vw + 0.88rem, 1.18rem);
-  color: var(--benefits-black);
+  color: var(--benefit-black);
 }
 
 /* dot (no hover effects) */
@@ -213,7 +225,7 @@
   width: 6px;
   height: 6px;
   border-radius: 999px;
-  background: var(--benefits-brand-800);
+  background: var(--benefit-brand-800);
 }
 
 /* ==================================================

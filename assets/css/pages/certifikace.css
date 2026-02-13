@@ -6,26 +6,18 @@
 ================================================== */
 
 /* -----------------------------
-   Page wrapper
------------------------------- */
-.certifications {
-}
-
-/* -----------------------------
    HERO (base)
 ------------------------------ */
 .certifications-hero {
   text-align: center;
   align-items: center;
   margin-bottom: 2rem;
-  
 }
 
 .certifications-hero .page-lead {
   margin-inline: auto;
   max-width: 72ch;
   margin-bottom: 4rem;
-  
 }
 
 .certifications-hero__badge {
@@ -201,8 +193,8 @@
   font-size: 0.98rem;
 }
 
-/*individual buttons*/
-.certifications-card__cta > button{
+/* individual buttons */
+.certifications-card__cta > button {
   border-radius: var(--r-md);
 }
 
@@ -248,7 +240,7 @@
 .certifications-important__head .section-title {
   font-weight: 700;
   font-size: clamp(1.95rem, 0.85rem + 0.6vw, 2.15rem);
-  margin-top:1rem;
+  margin-top: 1rem;
 }
 
 .certifications-important__head .section-intro {
@@ -286,6 +278,10 @@
   font-weight: 400;
 }
 
+/* ==================================================
+   MODAL (cert-modal)
+================================================== */
+
 #cert-modal .modal__dialog {
   overflow: hidden;
   width: min(75vw, 30rem);
@@ -313,16 +309,15 @@
   border-bottom: 10px solid var(--color-surface);
 }
 
-/* FIX: header nesmí shrinkovat */
+/* header nesmí shrinkovat */
 #cert-modal .modal__header {
   padding: 0;
   border: 0;
   display: block;
   width: 100%;
-  
 }
 
-/* FIX: top bar full width */
+/* top bar */
 #cert-modal .cert-modal__top {
   width: 100%;
   box-sizing: border-box;
@@ -365,7 +360,6 @@
   font-weight: 700;
   font-size: 1.1rem;
   line-height: 1.2;
-  
 }
 
 #cert-modal .cert-modal__meta {
@@ -374,21 +368,22 @@
   opacity: 0.9;
 }
 
-/* Cross vpravo */
+/* close */
 #cert-modal .cert-modal__close {
   width: 2.25rem;
   height: 2.25rem;
   font-size: 1.5rem;
+
   display: grid;
   place-items: center;
-  
 
   border-radius: 999px;
   border: 1px solid rgba(255, 255, 255, 0.35);
   background: rgba(255, 255, 255, 0.12);
   color: #fff;
-padding-bottom: 10px;
-line-height: 1;
+
+  padding-bottom: 10px;
+  line-height: 1;
   cursor: pointer;
 }
 
@@ -400,13 +395,12 @@ line-height: 1;
   padding: var(--space-5);
 }
 
-/* Info box – změna: gene-light-30 */
+/* Info box */
 #cert-modal .cert-modal__info {
   padding: var(--space-4);
   border-radius: var(--r-md);
   background: var(--gene-light-30);
   border: 1px solid rgba(0, 0, 0, 0.08);
-  
 }
 
 #cert-modal .cert-modal__infoHead {
@@ -426,37 +420,30 @@ line-height: 1;
   aspect-ratio: 1 / 1;
 }
 
+/* ✅ BEST PRACTICE ROW:
+   - mobile: stack (text + CTA)
+   - desktop: text vlevo, CTA vpravo
+*/
 #cert-modal .cert-modal__infoRow {
   display: flex;
   flex-direction: column;
-  align-items: center; /* obsah na střed */
+  align-items: stretch;
   gap: var(--space-3);
 }
 
 #cert-modal .cert-modal__infoText {
   margin: 0;
-  color: var(--brand-black);
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.6;
   text-align: center;
 }
 
+/* CTA button (safe sizing) */
 #cert-modal .cert-modal__contactLink.btn {
-  width: auto;            /* ne 100% */
-  min-width: 12.5rem;     /* volitelné, aby nebylo moc úzké */
-  max-width: 230px;
-  align-self: center;     /* tlačítko na střed */
-  margin-top: var(--space-2);
-}
-
-@media (max-width: 424px) {
-  #cert-modal .cert-modal__infoRow {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  #cert-modal .cert-modal__contactLink.btn {
-    width: 100%;
-    align-self: right;
-  }
+  width: 100%;
+  min-height: 2.75rem;
+  justify-content: center;
 }
 
 /* schovat starý render detailu */
@@ -510,6 +497,25 @@ line-height: 1;
 
   #cert-modal .cert-modal__title {
     font-size: 1.2rem;
+  }
+
+  /* ✅ desktop row layout */
+  #cert-modal .cert-modal__infoRow {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+  }
+
+  #cert-modal .cert-modal__infoText {
+    max-width: 52ch;
+  }
+
+  #cert-modal .cert-modal__contactLink.btn {
+    width: auto;
+    min-width: 12.5rem;
+    max-width: 230px;
+    flex: 0 0 auto;
   }
 }
 

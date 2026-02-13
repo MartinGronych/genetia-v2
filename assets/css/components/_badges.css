@@ -55,21 +55,23 @@
 
 /* Star / Unikát */
 .badge--star {
-  background: rgba(245, 159, 11, 0.801);
-  border-color: rgba(245, 158, 11, 0.35);
-  color: rgb(120, 68, 0);
-  animation: certBadgePulse 2.6s ease-in-out infinite;
+  background: var(--brand-800);      /* jemné brand pozadí */
+  border: 1px solid var(--color-brand-200);
+  color: var(--color-brand-800);
+
+  display: inline-flex;
+  align-items: center;
   gap: 8px;
+
   animation: badgePulse 2.6s ease-in-out infinite;
 }
 
 .badge--star::before {
   content: "★";
-  color:rgb(229, 255, 0);
-  font-size: 1.15em;
-  opacity: 0.92;
+  color: var(--color-brand-600);
+  font-size: 1.05em;
+  opacity: 0.95;
 }
-
 /* =========================================
    Animation
 ========================================= */
