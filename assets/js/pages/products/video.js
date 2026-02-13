@@ -1,5 +1,13 @@
 // assets/js/pages/products/video.js
 
+/**
+ * Helper: bezpečné pushování do dataLayer
+ */
+function pushDataLayer(eventData) {
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push(eventData);
+}
+
 function getFocusable(root) {
   if (!root) return [];
   return Array.from(
@@ -21,6 +29,17 @@ export function initVideoModal() {
     const player = document.getElementById("videoModalPlayer");
 
     let lastActive = null;
+
+    // ✅ Video tracking state
+    let videoTracking = {
+      started: false,
+      progress: {
+        25: false,
+        50: false,
+        75: false,
+        100: false,
+      },
+    };
 
     const setOpenState = (isOpen) => {
       modal.dataset.open = isOpen ? "true" : "false";
@@ -95,6 +114,113 @@ export function initVideoModal() {
         first.focus();
       }
     });
+
+    // ========================================
+    // ✅ GA4 VIDEO TRACKING
+    // ========================================
+    if (player) {
+      const getVideoData = () => ({
+        video_title: player.getAttribute("data-video-title") || "Genetia Product Video",
+        video_url: player.currentSrc || player.src || "unknown",
+        video_duration: Math.round(player.duration) || 0,
+      });
+
+      // Reset tracking state když se video restartuje
+      player.addEventListener("loadedmetadata", () => {
+        videoTracking = {
+          started: false,
+          progress: {
+            25: false,
+            50: false,
+            75: false,
+            100: false,
+          },
+        };
+      });
+
+      // Video start (první play)
+      player.addEventListener("play", () => {
+        if (!videoTracking.started) {
+          videoTracking.started = true;
+
+          pushDataLayer({
+            event: "video_start",
+            ...getVideoData(),
+            video_current_time: Math.round(player.currentTime),
+          });
+        } else {
+          // Resume po pause
+          pushDataLayer({
+            event: "video_play",
+            ...getVideoData(),
+            video_current_time: Math.round(player.currentTime),
+          });
+        }
+      });
+
+      // Video pause
+      player.addEventListener("pause", () => {
+        // Ignore pause když video skončilo
+        if (player.currentTime === player.duration) return;
+
+        pushDataLayer({
+          event: "video_pause",
+          ...getVideoData(),
+          video_current_time: Math.round(player.currentTime),
+          video_percent: Math.round((player.currentTime / player.duration) * 100),
+        });
+      });
+
+      // Video progress milestones
+      player.addEventListener("timeupdate", () => {
+        if (!player.duration) return;
+
+        const percent = (player.currentTime / player.duration) * 100;
+
+        // 25%
+        if (percent >= 25 && !videoTracking.progress[25]) {
+          videoTracking.progress[25] = true;
+          pushDataLayer({
+            event: "video_progress",
+            ...getVideoData(),
+            video_percent: 25,
+          });
+        }
+
+        // 50%
+        if (percent >= 50 && !videoTracking.progress[50]) {
+          videoTracking.progress[50] = true;
+          pushDataLayer({
+            event: "video_progress",
+            ...getVideoData(),
+            video_percent: 50,
+          });
+        }
+
+        // 75%
+        if (percent >= 75 && !videoTracking.progress[75]) {
+          videoTracking.progress[75] = true;
+          pushDataLayer({
+            event: "video_progress",
+            ...getVideoData(),
+            video_percent: 75,
+          });
+        }
+      });
+
+      // Video complete (100%)
+      player.addEventListener("ended", () => {
+        if (!videoTracking.progress[100]) {
+          videoTracking.progress[100] = true;
+
+          pushDataLayer({
+            event: "video_complete",
+            ...getVideoData(),
+            video_percent: 100,
+          });
+        }
+      });
+    }
   } catch (err) {
     // error boundary style: nesmí shodit stránku
     console.error("GENETIA video modal init failed:", err);

@@ -1,38 +1,24 @@
 <!doctype html>
 <html lang="cs" data-page="home">
   <head>
-    <!-- Google Consent Mode v2: default (before GTM loads) -->
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
+   <!-- Consent Mode MUST be first -->
+<script src="/assets/js/consent-init.js"></script>
 
-      gtag("consent", "default", {
-        ad_storage: "denied",
-        ad_user_data: "denied",
-        ad_personalization: "denied",
-        analytics_storage: "denied",
-        functionality_storage: "granted",
-        personalization_storage: "denied",
-        security_storage: "granted",
-        wait_for_update: 500,
-      });
-    </script>
-    <!-- Google Tag Manager -->
-    <script>
-      (function (w, d, s, l, i) {
-        w[l] = w[l] || [];
-        w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
-        var f = d.getElementsByTagName(s)[0],
-          j = d.createElement(s),
-          dl = l != "dataLayer" ? "&l=" + l : "";
-        j.async = true;
-        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
-        f.parentNode.insertBefore(j, f);
-      })(window, document, "script", "dataLayer", "GTM-MDLDMK5S");
-    </script>
-    <!-- End Google Tag Manager -->
+<!-- Google Tag Manager -->
+<script>
+(function(w,d,s,l,i){
+  w[l]=w[l]||[];
+  w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'});
+  var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),
+      dl=l!='dataLayer'?'&l='+l:'';
+  j.async=true;
+  j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+  f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5HH2249B');
+</script>
+<!-- End Google Tag Manager -->
+
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Genetia Production</title>
@@ -42,12 +28,10 @@
       name="description"
       content="Genetia Production se zaměřuje na analytické služby a výzkum, LC-MS analýzu, validaci metod a stabilitu extraktů."
     />
-    <link rel="canonical" href="https://martingronych.github.io/genetia-v2/" />
-
-    <!-- SEO indexace -->
+    <link rel="canonical" href="https://genetia.eu/" />
     <meta name="robots" content="index,follow,max-image-preview:large" />
 
-    <!-- Open Graph (LinkedIn) -->
+    <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Genetia Production" />
     <meta property="og:title" content="Genetia Production" />
@@ -55,18 +39,15 @@
       property="og:description"
       content="Genetia Production se zaměřuje na analytické služby a výzkum, LC-MS analýzu, validaci metod a stabilitu extraktů."
     />
-    <meta
-      property="og:url"
-      content="https://martingronych.github.io/genetia-v2/"
-    />
+    <meta property="og:url" content="https://genetia.eu/" />
     <meta
       property="og:image"
-      content="https://martingronych.github.io/genetia-v2/assets/images/og/og-home.jpg"
+      content="https://genetia.eu/assets/images/og/og-home.jpg"
     />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
 
-    <!-- Twitter Card (safe fallback) -->
+    <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Genetia Production" />
     <meta
@@ -75,7 +56,7 @@
     />
     <meta
       name="twitter:image"
-      content="https://martingronych.github.io/genetia-v2/assets/images/og/og-home.jpg"
+      content="https://genetia.eu/assets/images/og/og-home.jpg"
     />
 
     <script>
@@ -108,16 +89,16 @@
   </head>
 
   <body>
-    <!-- Google Tag Manager (noscript) -->
-    <noscript
-      ><iframe
-        src="https://www.googletagmanager.com/ns.html?id=GTM-MDLDMK5S"
-        height="0"
-        width="0"
-        style="display: none; visibility: hidden"
-      ></iframe
-    ></noscript>
-    <!-- End Google Tag Manager (noscript) -->
+   <!-- Google Tag Manager (noscript) -->
+<noscript>
+  <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5HH2249B"
+  height="0"
+  width="0"
+  style="display:none;visibility:hidden"></iframe>
+</noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+    
     <a class="skip-link" href="#main">Skip to content</a>
 
     <header class="site-header">

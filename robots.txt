@@ -3,4 +3,4 @@ Allow: /
 
 Disallow: /ui-kit/
 
-Sitemap: https://martingronych.github.io/genetia-v2/sitemap.xml
+Sitemap: https://genetia.eu/sitemap.xml

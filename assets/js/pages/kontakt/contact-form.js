@@ -6,6 +6,7 @@
  * - sjednocení na interests_* (podle aktuálního HTML)
  * - reCAPTCHA v3 přes grecaptcha.ready()
  * - robustní parsing odpovědi (JSON i plain text)
+ * + GA4 dataLayer tracking (form_submit, form_error)
  */
 
 const LOG = "[Genetia][contact-form]";
@@ -27,6 +28,14 @@ function whenRecaptchaReady() {
     }
     g.ready(() => resolve(g));
   });
+}
+
+/**
+ * Helper: bezpečné pushování do dataLayer
+ */
+function pushDataLayer(eventData) {
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push(eventData);
 }
 
 export function initContactForm(userConfig = {}) {
@@ -136,8 +145,6 @@ export function initContactForm(userConfig = {}) {
           mapped.append("email", value);
           continue;
         }
-        // ❌ už NEMAPUJEME subject -> phone (to je matoucí)
-        // Apps Script si subject může vzít jako "subject"
         mapped.append(key, value);
       }
 
@@ -155,15 +162,41 @@ export function initContactForm(userConfig = {}) {
         (res.ok && /success|ok/i.test(text));
 
       if (success) {
+        // ✅ GA4 dataLayer tracking - úspěšné odeslání
+        pushDataLayer({
+          event: "form_submit",
+          form_name: "contact_form",
+          form_id: "contactForm",
+          form_destination: config.appsScriptUrl,
+        });
+
         showMessage("Děkujeme! Vaše zpráva byla úspěšně odeslána.", "success");
         form.reset();
         updateInterestsSummary();
       } else {
         console.warn(LOG, "Submit failed", { status: res.status, body: text });
+
+        // ✅ GA4 dataLayer tracking - chyba odeslání
+        pushDataLayer({
+          event: "form_error",
+          form_name: "contact_form",
+          form_id: "contactForm",
+          error_message: `HTTP ${res.status}`,
+        });
+
         showMessage("Omlouváme se, při odesílání došlo k chybě. Zkuste to prosím znovu.", "error");
       }
     } catch (err) {
       console.error(LOG, "Submit error", err);
+
+      // ✅ GA4 dataLayer tracking - network/JS chyba
+      pushDataLayer({
+        event: "form_error",
+        form_name: "contact_form",
+        form_id: "contactForm",
+        error_message: err.message || "Unknown error",
+      });
+
       showMessage("Omlouváme se, při odesílání došlo k chybě. Zkuste to prosím znovu.", "error");
     } finally {
       if (submitBtn) {

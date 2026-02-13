@@ -1,38 +1,24 @@
 <!doctype html>
 <html lang="cs" data-page="home">
   <head>
-    <!-- Google Consent Mode v2: default (before GTM loads) -->
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
+   <!-- Consent Mode MUST be first -->
+<script src="/assets/js/consent-init.js"></script>
 
-      gtag("consent", "default", {
-        ad_storage: "denied",
-        ad_user_data: "denied",
-        ad_personalization: "denied",
-        analytics_storage: "denied",
-        functionality_storage: "granted",
-        personalization_storage: "denied",
-        security_storage: "granted",
-        wait_for_update: 500,
-      });
-    </script>
-    <!-- Google Tag Manager -->
-    <script>
-      (function (w, d, s, l, i) {
-        w[l] = w[l] || [];
-        w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
-        var f = d.getElementsByTagName(s)[0],
-          j = d.createElement(s),
-          dl = l != "dataLayer" ? "&l=" + l : "";
-        j.async = true;
-        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
-        f.parentNode.insertBefore(j, f);
-      })(window, document, "script", "dataLayer", "GTM-MDLDMK5S");
-    </script>
-    <!-- End Google Tag Manager -->
+<!-- Google Tag Manager -->
+<script>
+(function(w,d,s,l,i){
+  w[l]=w[l]||[];
+  w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'});
+  var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),
+      dl=l!='dataLayer'?'&l='+l:'';
+  j.async=true;
+  j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+  f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5HH2249B');
+</script>
+<!-- End Google Tag Manager -->
+
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>O společnosti | Genetia Production</title>
@@ -115,15 +101,15 @@
 
   <body>
     <!-- Google Tag Manager (noscript) -->
-    <noscript
-      ><iframe
-        src="https://www.googletagmanager.com/ns.html?id=GTM-MDLDMK5S"
-        height="0"
-        width="0"
-        style="display: none; visibility: hidden"
-      ></iframe
-    ></noscript>
-    <!-- End Google Tag Manager (noscript) -->
+<noscript>
+  <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5HH2249B"
+  height="0"
+  width="0"
+  style="display:none;visibility:hidden"></iframe>
+</noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+    
     <a class="skip-link" href="#main">Skip to content</a>
 
     <header class="site-header">
@@ -198,16 +184,27 @@
       <!-- ====== HERO SEKCE (kopie layoutu, ale SEO-friendly obsah) ====== -->
       <section class="section hero" aria-labelledby="hero-title">
         <div class="hero__video-wrapper" aria-hidden="true">
+          <img
+            class="hero__video"
+            src="../assets/images/Innocrystal.webp"
+            alt=""
+            loading="eager"
+            decoding="async"
+          />
+        </div>
+
+        <!-- zakomentované video - po výměně prohoditt za img nahoře
+        <div class="hero__video-wrapper" aria-hidden="true">
           <video
             class="hero__video"
-            src="../assets/video/Genetia_home.mp4"
+            src="assets/video/Genetia_home.mp4"
             autoplay
             muted
             loop
             playsinline
             preload="metadata"
           ></video>
-        </div>
+        </div>-->
 
         <div class="container">
           <div class="hero__content">

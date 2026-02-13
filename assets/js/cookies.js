@@ -1,12 +1,21 @@
 /**
  * Cookie Consent Management
  * Handles cookie banner display, user preferences, and consent tracking
+ *
+ * Production assumptions:
+ * - Consent Mode v2 "default denied" is handled in /assets/js/consent-init.js (loads BEFORE GTM)
+ * - Early consent update is also in consent-init.js (applies saved consent BEFORE GTM loads)
+ * - This file is responsible for UI + user actions only
  */
 
 /**
- * Safe Consent API wrapper (works in ES modules)
- * - In module scope, calling `gtag()` directly can throw ReferenceError.
- * - This wrapper always pushes into dataLayer.
+ * Debug switch (keep false in production)
+ */
+const CONSENT_DEBUG = false;
+
+/**
+ * Safe Consent API wrapper
+ * Always pushes into dataLayer.
  */
 function consentUpdate(payload) {
   window.dataLayer = window.dataLayer || [];
@@ -55,7 +64,6 @@ async function injectCookieMarkup() {
 
 // Initialize on page load
 document.addEventListener("DOMContentLoaded", async () => {
-  // Ensure markup exists on every page (folder routing safe)
   await injectCookieMarkup();
   initCookieConsent();
 });
@@ -69,7 +77,11 @@ function initCookieConsent() {
   if (!consent) {
     showCookieBanner();
   } else {
-    applyCookiePreferences(consent);
+    // Consent už byl aplikován v consent-init.js (před načtením GTM)
+    // Tady už jen logujeme pro debug
+    if (CONSENT_DEBUG) {
+      console.log("[cookies] Consent already applied in consent-init.js:", consent);
+    }
   }
 
   setupEventListeners();
@@ -227,7 +239,13 @@ function saveCookieConsent(consent) {
   const expiryDate = new Date();
   expiryDate.setDate(expiryDate.getDate() + COOKIE_CONFIG.consentCookieExpiry);
 
-  document.cookie = `${COOKIE_CONFIG.consentCookieName}=${consentString}; expires=${expiryDate.toUTCString()}; path=/; SameSite=Strict`;
+  const secure = window.location.protocol === "https:" ? "; Secure" : "";
+  document.cookie =
+    `${COOKIE_CONFIG.consentCookieName}=${consentString}` +
+    `; expires=${expiryDate.toUTCString()}` +
+    `; path=/` +
+    `; SameSite=Strict` +
+    secure;
 }
 
 /**
@@ -237,7 +255,8 @@ function getCookieConsent() {
   const cookies = document.cookie.split(";");
 
   for (let cookie of cookies) {
-    const [name, value] = cookie.trim().split("=");
+    const [name, ...rest] = cookie.trim().split("=");
+    const value = rest.join("=");
 
     if (name === COOKIE_CONFIG.consentCookieName) {
       try {
@@ -253,12 +272,12 @@ function getCookieConsent() {
 }
 
 /**
- * Apply cookie preferences (Consent Mode + optional local cleanup)
+ * Apply cookie preferences
+ * Sends consent update to GTM/GA4 via dataLayer
  */
 function applyCookiePreferences(consent) {
-  console.log("[cookies] Applying cookie preferences:", consent);
+  if (CONSENT_DEBUG) console.log("[cookies] Applying preferences:", consent);
 
-  // ✅ Google Consent Mode v2 – THIS is the key piece
   consentUpdate({
     analytics_storage: consent.analytics ? "granted" : "denied",
     ad_storage: consent.marketing ? "granted" : "denied",
@@ -269,7 +288,7 @@ function applyCookiePreferences(consent) {
     personalization_storage: "denied",
   });
 
-  // Optional: local cleanup of cookies on disable (helps keep things tidy)
+  // Optional: local cleanup of cookies on disable
   if (!consent.analytics) removeAnalytics();
   if (!consent.marketing) removeMarketing();
 }
@@ -278,10 +297,15 @@ function applyCookiePreferences(consent) {
  * Remove analytics scripts/cookies (optional cleanup)
  */
 function removeAnalytics() {
+  // common UA/GA cookies
   deleteCookie("_ga");
   deleteCookie("_gid");
   deleteCookie("_gat");
-  console.log("[cookies] Analytics disabled (cookies cleaned)");
+
+  // GA4 can set _ga_<containerId>
+  deleteCookieByPrefix("_ga_");
+
+  if (CONSENT_DEBUG) console.log("[cookies] Analytics disabled (cookies cleaned)");
 }
 
 /**
@@ -290,16 +314,34 @@ function removeAnalytics() {
 function removeMarketing() {
   deleteCookie("_fbp");
   deleteCookie("fr");
-  console.log("[cookies] Marketing disabled (cookies cleaned)");
+  if (CONSENT_DEBUG) console.log("[cookies] Marketing disabled (cookies cleaned)");
 }
 
 /**
- * Delete a specific cookie
+ * Delete a specific cookie (best-effort across common domain variants)
  */
 function deleteCookie(name) {
-  document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
-  document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=${window.location.hostname};`;
-  document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=.${window.location.hostname};`;
+  const expires = "Thu, 01 Jan 1970 00:00:00 GMT";
+  const path = "path=/";
+
+  // no domain
+  document.cookie = `${name}=; expires=${expires}; ${path}`;
+  // current host
+  document.cookie = `${name}=; expires=${expires}; ${path}; domain=${window.location.hostname}`;
+  // dot-host
+  document.cookie = `${name}=; expires=${expires}; ${path}; domain=.${window.location.hostname}`;
+}
+
+/**
+ * Delete cookies by prefix (best-effort)
+ */
+function deleteCookieByPrefix(prefix) {
+  const all = document.cookie.split(";").map((c) => c.trim()).filter(Boolean);
+  for (const c of all) {
+    const eq = c.indexOf("=");
+    const name = eq === -1 ? c : c.slice(0, eq);
+    if (name.startsWith(prefix)) deleteCookie(name);
+  }
 }
 
 /**
@@ -313,9 +355,4 @@ window.CookieConsent = {
 };
 
 // Export for ES modules
-export {
-  openCookieModal,
-  acceptAllCookies,
-  rejectAllCookies,
-  getCookieConsent,
-};
+export { openCookieModal, acceptAllCookies, rejectAllCookies, getCookieConsent };
