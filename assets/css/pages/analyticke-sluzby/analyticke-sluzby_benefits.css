@@ -40,10 +40,9 @@
   font-size: clamp(1.05rem, 1.1vw + 0.65rem, 1.55rem);
   line-height: 1.6;
   opacity: 0.9;
-
-  /* MOBILE FIRST */
-  text-align: left;
-  max-width: 62ch; /* 🔥 klíčová věc – hlídá délku řádku */
+  text-align: justify;
+  text-justify: inter-word;
+  max-width: none;
 }
 
 /* List wrapper (just rhythm between sections) */
