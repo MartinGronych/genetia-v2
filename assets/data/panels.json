@@ -73,7 +73,7 @@
       "subtitle": "Viroidní čistota a detekce patogenů",
       "icon": "microscope",
       "items": [
-        { "id": "hlvd-viroid", "title": "HLVd viroid", "badge": "Exkluzivně v ČR" }
+        { "id": "hlvd-viroid", "title": "HLVd viroid" }
       ]
     }
   ]

@@ -66,13 +66,11 @@ function itemCardHTML(item, groupId) {
         <span class="panel-title">${esc(title)}</span>
 
         ${
-          isViroid
-            ? `<span class="badge badge--accent badge--star">Exkluzivně v&nbsp;ČR</span>`
-            : badge
-              ? `<span class="badge badge--accent">${esc(badge)}</span>`
-              : subtitle
-                ? `<span class="panel-subtitle">${esc(subtitle)}</span>`
-                : ""
+          badge
+            ? `<span class="badge badge--accent">${esc(badge)}</span>`
+            : subtitle
+              ? `<span class="panel-subtitle">${esc(subtitle)}</span>`
+              : ""
         }
       </span>
     </div>

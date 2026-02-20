@@ -43,7 +43,7 @@
 .modal--gate .modal__dialog {
   position: relative;
   margin: 0;
-  width: min(680px, calc(100% - 2.5rem));
+  width: min(700px, calc(100% - 2.5rem));
   border: none;
   outline: none;
 
@@ -114,15 +114,30 @@
 
 /* Body */
 .modal--gate .modal__body {
-  padding: 1.25rem 1.5rem 1.1rem;
+  padding: 0.6rem 0.5rem 0.6rem;
   color: var(--gate-text);
+
+  max-width: 540px;
+  margin: 0 10%;
+
+  text-align: justify;
+  text-justify: inter-word;
+
+  hyphens: auto;                /* KLÍČOVÉ */
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+
+  line-height: 1.65;
+  font-size: 0.97rem;
 }
 
 .modal--gate .modal__body p {
-  margin: 0 0 0.95rem;
-  color: var(--gate-muted);
+  margin-bottom: 1rem;
   line-height: 1.6;
-  font-size: 0.98rem;
+  text-align: center;
+}
+.modal--gate .modal__body p:last-child {
+  margin-bottom: 0;
 }
 
 /* Actions row (centered like v1) */

@@ -283,8 +283,17 @@ export async function initHomeProductsCarousel() {
     const mod = await import("../products/gate.js");
     if (typeof mod?.createGateController === "function") {
       gate = mod.createGateController({
-        onAccept: () => redirectToProducts(),
-        onDeny: () => redirectToHome(),
+        onAccept: () => {
+          // zůstaň na homepage, jen odemkni carousel UI
+          syncLock(); // odstraní overlay + odebere is-locked
+          stage?.scrollIntoView?.({ behavior: "smooth", block: "nearest" });
+          // volitelně: fokus na carousel pro klávesnici
+          stage?.focus?.();
+        },
+        onDeny: () => {
+          // nic nemusíš dělat, jen zavřít modal (už se zavírá v gate.js)
+          // redirectToHome();  // můžeš klidně odstranit
+        },
       });
     }
   } catch (err) {

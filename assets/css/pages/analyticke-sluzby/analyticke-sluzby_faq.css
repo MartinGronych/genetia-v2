@@ -42,10 +42,18 @@
 /* text uvnitř odpovědi */
 .faq-section .accordion__panel p {
   margin: 0;
+
   font-size: clamp(0.95rem, 0.9rem + 0.25vw, 1.05rem);
-  line-height: 1.65;
+  line-height: 1.7;
   color: var(--brand-black);
 
   max-width: 60ch;
   margin-inline: 0;
+
+  text-align: justify;
+  text-justify: inter-word;
+
+  hyphens: none;
+  -webkit-hyphens: none;
+  -ms-hyphens: none;
 }

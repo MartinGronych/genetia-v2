@@ -1,14 +1,13 @@
 /* ==================================================
-   HOME – Contact CTA (nad footerem)
-   Layout: grid (mobile stacked, desktop side-by-side)
-   Theme-aware přes semantické tokeny
+   HOME – Contact CTA (centered version)
+   Layout: single column, centered
    Scope: [data-home-contact-cta]
 ================================================== */
 
 [data-home-contact-cta] {
-  
-  padding-block: clamp(3rem, 5vw, 4.5rem);
+  padding-block: clamp(2rem, 6vw, 2.5rem);
   color: var(--color-text);
+  text-align: center;
 }
 
 [data-home-contact-cta] .container {
@@ -16,164 +15,93 @@
 }
 
 /* --------------------------------------------------
-   GRID LAYOUT (override bootstrap row/cols locally)
+   CENTER WRAPPER
 -------------------------------------------------- */
 
-[data-home-contact-cta] .row {
-  /* v rámci sekce přepneme na grid, aby se to samo rovnalo */
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 2rem;
+[data-home-contact-cta] .contact-cta__center {
+  max-width: 720px;
+  margin: 0 auto;
 
-  /* bootstrap row negativní margin nechceme */
-  margin-left: 0;
-  margin-right: 0;
-}
-
-[data-home-contact-cta] .row > [class*="col-"] {
-  /* bootstrap col padding pryč (grid už má gap) */
-  padding-left: 0;
-  padding-right: 0;
-
-  /* ať se nic “nepřetlačuje” */
-  min-width: 0;
-}
-
-@media (min-width: 1024px) {
-  [data-home-contact-cta] .row {
-    grid-template-columns: 1.05fr 0.95fr;
-    align-items: start;
-    gap: 3rem;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 /* --------------------------------------------------
-   TYPO: hierarchie jako v1
+   TITLE
 -------------------------------------------------- */
 
 [data-home-contact-cta] .contact-cta__title {
   font-weight: 650;
   line-height: 1.05;
   letter-spacing: -0.02em;
-  font-size: clamp(2.25rem, 3.2vw, 3.1rem);
-  margin: 0 0 1rem;
+  font-size: clamp(2.4rem, 3.4vw, 3.2rem);
+  margin: 0 0 1.25rem;
   color: var(--color-text-strong);
 }
+
+/* --------------------------------------------------
+   SUBTITLE
+-------------------------------------------------- */
 
 [data-home-contact-cta] .contact-cta__subtitle {
-  margin: 0 0 2rem;
-  max-width: 58ch;
-  line-height: 1.55;
+  margin: 0 0 2.25rem;
+  font-size: clamp(1.15rem, 1.4vw, 1.2rem);
+  font-weight: 450;
+  max-width: 60ch;
+  line-height: 1.6;
   color: var(--color-text-muted);
 }
 
-[data-home-contact-cta] .contact-cta__subtitle strong {
+/* --------------------------------------------------
+   BUTTON
+-------------------------------------------------- */
+
+[data-home-contact-cta] .contact-cta__button {
+  margin-bottom: 2rem;
+  padding: 0.9rem 2.4rem;
   font-weight: 600;
-  color: var(--color-text);
-}
-
-/* --------------------------------------------------
-   KONTAKTY  theme-aware odkazy
--------------------------------------------------- */
-
-[data-home-contact-cta] .contact-cta__info {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-[data-home-contact-cta] .contact-cta__info li {
-  list-style: none;
-  padding-left: 0;
-}
-
-[data-home-contact-cta] .contact-cta__info li::marker {
-  content: "";
-}
-
-[data-home-contact-cta] .contact-cta__info strong {
-  font-weight: 800;
-  color: var(--color-text-strong);
-}
-
-[data-home-contact-cta] .contact-cta__info a {
-  color: var(--color-link);
-  text-decoration: none;
-}
-
-[data-home-contact-cta] .contact-cta__info a:hover,
-[data-home-contact-cta] .contact-cta__info a:focus-visible {
-  text-decoration: underline;
-  text-underline-offset: 2px;
-}
-
-/* --------------------------------------------------
-   PRAVÝ BLOK – CTA (bez card dojmu)
--------------------------------------------------- */
-
-[data-home-contact-cta] .contact-cta__card {
-  background: transparent;
-  border: 0;
-  box-shadow: none;
-  padding: 0 !important;
-
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start; /* už žádné “tlačení doprava” */
-}
-
-[data-home-contact-cta] .contact-cta__card-title {
-  margin: 0 0 0.75rem;
-  font-weight: 900;
-  letter-spacing: -0.01em;
-  font-size: clamp(1.25rem, 1.5vw, 1.6rem);
-  color: var(--color-text-strong);
-}
-
-[data-home-contact-cta] .contact-cta__card-text {
-  margin: 0 0 1.25rem;
-  max-width: 62ch;
-  line-height: 1.55;
-  color: var(--color-text-muted);
-}
-
-/* CTA tlačítko nesmí být full width */
-[data-home-contact-cta] .contact-cta__actions {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0.9rem;
-}
-
-[data-home-contact-cta] .contact-cta__actions .btn {
   display: inline-flex;
   width: fit-content;
   max-width: 100%;
   white-space: nowrap;
 }
 
-[data-home-contact-cta] .contact-cta__note {
-  margin-top: 1.25rem;
-  font-size: 0.98rem;
+/* --------------------------------------------------
+   LOWER TEXT
+-------------------------------------------------- */
+
+[data-home-contact-cta] .contact-cta__card-text {
+  max-width: 60ch;
+  line-height: 1.65;
   color: var(--color-text-muted);
+  margin: 0;
+  font-size: clamp(1.15rem, 1.4vw, 1.2rem);
+}
+
+[data-home-contact-cta] .contact-cta__card-text strong {
+  font-weight: 600;
+  color: var(--color-text);
 }
 
 /* --------------------------------------------------
-   Desktop: sladit rytmus
+   RESPONSIVE TWEAKS
 -------------------------------------------------- */
 
-
-@media (min-width: 1024px) {
+@media (max-width: 640px) {
   [data-home-contact-cta] {
-    /* výška levého H2 + jeho margin-bottom
-       (laditelné na jednom místě) */
-    --contact-cta-title-offset: calc(
-      clamp(2.25rem, 3.2vw, 3.1rem) * 1.05 + 1rem
-    );
+    padding-block: 3.5rem;
   }
 
-  [data-home-contact-cta] .contact-cta__card {
-    margin-top: var(--contact-cta-title-offset);
+  [data-home-contact-cta] .contact-cta__title {
+    font-size: clamp(2rem, 6vw, 2.4rem);
+  }
+
+  [data-home-contact-cta] .contact-cta__subtitle {
+    margin-bottom: 2rem;
+  }
+
+  [data-home-contact-cta] .contact-cta__button {
+    margin-bottom: 1.75rem;
   }
 }
-
